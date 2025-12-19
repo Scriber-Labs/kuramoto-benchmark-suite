@@ -6,6 +6,7 @@ from typing import Dict, Optional
 
 from .validation import (
     validate_positive_scalar,
+    validate_non_negative_scalar,
     validate_intrinsic_frequency_array,
     validate_adjacency,
 )
@@ -66,7 +67,7 @@ def generate_kuramoto_dataset(
     validate_positive_scalar(coupling, "coupling")
     validate_positive_scalar(dt, "dt")
     validate_positive_scalar(timesteps, "timesteps")
-    validate_positive_scalar(noise_std, "noise_std")
+    validate_non_negative_scalar(noise_std, "noise_std")
     validate_intrinsic_frequency_array(natural_frequencies, n_oscillators)
 
     rng = make_rng(seed)

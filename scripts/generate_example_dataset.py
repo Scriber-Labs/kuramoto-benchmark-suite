@@ -8,7 +8,7 @@ dt = 0.01
 omega = np.random.normal(0.0, 1.0, size=N)
 
 data = generate_kuramoto_dataset(
-    n_oscillator=N,
+    n_oscillators=N,
     natural_frequencies=omega,
     coupling=5.0,
     timesteps=T,

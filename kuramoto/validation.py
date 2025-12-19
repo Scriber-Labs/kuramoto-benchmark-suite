@@ -3,11 +3,18 @@ from __future__ import annotations
 import numpy as np
 
 def validate_positive_scalar(x: float, name: str) -> None:
-    """Validate that the input is a positive scalar."""
+    """Validate that the input is a positive scalar (strictly > 0)."""
     if not isinstance(x, (int, float)):
         raise TypeError(f"{name} must be a scalar (int or float).")
     if x <= 0:
         raise ValueError(f"{name} must be positive.")
+
+def validate_non_negative_scalar(x: float, name: str) -> None:
+    """Validate that the input is a non-negative scalar (>= 0)."""
+    if not isinstance(x, (int, float)):
+        raise TypeError(f"{name} must be a scalar (int or float).")
+    if x < 0:
+        raise ValueError(f"{name} must be non-negative.")
     
 def validate_intrinsic_frequency_array(omega: np.ndarray, expected_size: int) -> None:
     """Validate that the intrinsic frequency array is one-dimensional and of expected size."""
