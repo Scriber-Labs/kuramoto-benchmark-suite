@@ -1,0 +1,2 @@
+-e git+ssh://git@github.com/eigenscribe/kuramoto-benchmark-suite.git@8f9aee547724125c77792e6c2af9cb67c9e784dd#egg=kuramoto_benchmark_suite
+numpy==2.3.5

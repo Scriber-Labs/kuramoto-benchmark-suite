@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "kuramoto-benchmark-suite"
+version = "0.1.0"
+description = "Benchmark-grade synthetic dataset generator for Kuramoto oscillator systems"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+
+authors = [
+    { name = "Lauren Shriver" }
+]
+
+dependencies = [
+    "numpy>=1.23"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0"
+]
+
+
+[tool.setuptools]
+packages = ["kuramoto"]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
