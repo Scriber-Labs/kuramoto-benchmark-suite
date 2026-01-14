@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from kuramoto.api import generate_kuramoto_dataset
 
 N = 50
@@ -16,4 +17,8 @@ data = generate_kuramoto_dataset(
     seed=27,
 )
 
-np.savez("data/examples/small_demo.npz", **data)
+# Ensure the directory exists before saving
+output_path = "data/examples/small_demo.npz"
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+np.savez(output_path, **data)
