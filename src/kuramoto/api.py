@@ -10,9 +10,9 @@ from .validation import (
     validate_intrinsic_frequency_array,
     validate_adjacency,
 )
-from .graphs import build_adjacency, graph_stats 
-from .integrators import euler_step 
-from .utils import wrap_phase, make_rng 
+from .graphs import build_adjacency
+from .model import KuramotoModel
+from .utils import make_rng
 
 __all__ = ["generate_kuramoto_dataset"]
 
@@ -52,11 +52,18 @@ def generate_kuramoto_dataset(
     -------
     dict[str, np.ndarray]
         A dictionary containing:
-            - 'phases': Array of shape (T, N) with the phase time series.
-            - 'derivatives': Array of shape (T, N) with the phase derivatives.
-            - 'frequencies': Array of shape (N,) with the intrinsic frequencies.
-            - Metadata about the simulation parameters.
-            - Metadata about the graph structure. 
+            - 'theta': Array of shape (T, N) with the phase time series.
+            - 'dtheta': Array of shape (T, N) with the phase derivatives.
+            - 'omega': Array of shape (N,) with the intrinsic frequencies.
+            - 'time': Array of shape (T,) with the time points.
+            - 'initial_conditions': Array of shape (N,) with the starting phases.
+            - 'coupling': The global coupling strength (K).
+            - 'adjacency': The (N, N) adjacency matrix.
+            - 'graph_stats': Dictionary with network statistics.
+            - 'noise_std': Standard deviation of the noise.
+            - 'freq_pdf': Description of the frequency distribution.
+            - 'phase_pdf': Description of the initial phase distribution.
+            - 'phases', 't', 'natural_frequencies', 'derivatives': Aliases for 'theta', 'time', 'omega', 'dtheta' for legacy compatibility.
 
     Raises
     ------
@@ -70,48 +77,49 @@ def generate_kuramoto_dataset(
     validate_non_negative_scalar(noise_std, "noise_std")
     validate_intrinsic_frequency_array(natural_frequencies, n_oscillators)
 
-    rng = make_rng(seed)
-
     A = build_adjacency(n_oscillators, adjacency)
     validate_adjacency(A, n_oscillators)
 
-    # Initialize phase and derivative arrays
+    model = KuramotoModel(
+        n_oscillators=n_oscillators,
+        natural_frequencies=natural_frequencies,
+        adjacency_matrix=A,
+        coupling_strength=coupling,
+        noise_std=noise_std,
+        random_seed=seed,
+    )
 
-    theta = np.zeros((timesteps, n_oscillators), dtype=float)
-    dtheta = np.zeros_like(theta)
+    # Use RK45 integration with the provided dt to estimate t_span
+    # We want exactly 'timesteps' points to maintain compatibility
+    t_span = (timesteps - 1) * dt
+    dataset = model.simulate(
+        t_span=t_span,
+        min_time_points=timesteps,
+        max_time_points=timesteps
+    )
 
-    # Set initial phases randomly
-    theta[0] = rng.uniform(0.0, 2 * np.pi, size=n_oscillators)
-
-    # Compute phase derivatives and update phases
-    for t in range(timesteps - 1):
-        # Compute phase derivatives
-        dtheta[t] = natural_frequencies + (
-            coupling / n_oscillators
-        ) * np.sum(np.sin(theta[t] - theta[t][:,None]), axis=1)
-        
-        # Add noise to the derivatives
-        if noise_std > 0.0:
-            dtheta[t] += rng.normal(0.0, noise_std, size=n_oscillators)
-
-        # Update phases using Euler's method
-        theta[t+1] = wrap_phase(euler_step(theta[t], dtheta[t], dt))
+    # Prepare the output dictionary (preserving legacy format)
+    res = dataset.to_dict()
+    # Rename network_stats to graph_stats and ensure legacy keys are present if needed
+    # but the legacy graph_stats had num_edges, density, is_connected.
+    # Actually, let's just recompute it using the existing graph_stats function to be safe.
+    from .graphs import graph_stats
+    res["graph_stats"] = graph_stats(A)
     
-    time = dt * np.arange(timesteps)
+    # Ensure keys match exactly what was there before
+    # Legacy: omega, theta, dtheta, time, initial_conditions, coupling, adjacency, graph_stats, freq_pdf, phase_pdf, noise_std
+    # Dataset to_dict: omega, theta, dtheta, time, initial_conditions, coupling, adjacency, network_stats, noise_std, freq_pdf, phase_pdf
+    
+    # dataset.to_dict() already has most of them.
+    if "network_stats" in res:
+        del res["network_stats"]
+    
+    # Add legacy keys for backward compatibility with notebooks/scripts
+    res["phases"] = res["theta"]
+    res["t"] = res["time"]
+    res["natural_frequencies"] = res["omega"]
+    res["derivatives"] = res["dtheta"]
 
-    # Prepare the output dictionary
-    return {
-        "omega": natural_frequencies.copy(),
-        "theta": theta,
-        "dtheta": dtheta,
-        "time": time,
-        "initial_conditions": theta[0].copy(),
-        "coupling": coupling,
-        "adjacency": A.copy(),
-        "graph_stats": graph_stats(A),
-        "freq_pdf": "user-specified",
-        "phase_pdf": "uniform [0, 2*pi)",
-        "noise_std": noise_std
-    }
+    return res
 
 

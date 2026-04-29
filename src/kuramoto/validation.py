@@ -24,9 +24,11 @@ def validate_intrinsic_frequency_array(omega: np.ndarray, expected_size: int) ->
         raise ValueError(f"Intrinsic frequencies array must have shape ({expected_size},).")
 
 def validate_adjacency(A: np.ndarray, expected_size: int) -> None:
-    """Validate that the adjacency matrix is a square matrix of expected size."""
+    """Validate that the adjacency matrix is a square matrix of expected size and symmetric."""
     if not isinstance(A, np.ndarray):
         raise TypeError("Adjacency matrix must be a numpy array.")
     if A.shape != (expected_size, expected_size):
         raise ValueError(f"Adjacency matrix must have shape ({expected_size}, {expected_size}).")
+    if not np.allclose(A, A.T):
+        raise ValueError("Adjacency matrix must be symmetric for undirected graphs.")
     

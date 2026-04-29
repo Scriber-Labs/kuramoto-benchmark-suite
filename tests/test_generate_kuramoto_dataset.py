@@ -15,5 +15,5 @@ def test_immutability():
 
 def test_shapes():
     omega = np.ones(10)
-    data = generate_kuramoto_dataset(5, omega, 1.0, 20, 0.1)
-    assert data["theta"].shape == (20, 5)
+    data = generate_kuramoto_dataset(10, omega, 1.0, 20, 0.1)
+    assert data["theta"].shape == (20, 10)

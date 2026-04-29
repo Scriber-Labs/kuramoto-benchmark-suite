@@ -76,13 +76,18 @@ A standalone test harness verifies:
 
 Tests are black-box by design and do not depend on internal implementation details.
 
+### Learning More
+For a detailed breakdown of the numerical methods (Euler, RK4, RK45) and advice on using this repo for your own projects, see [NUMERICAL_METHODS.md](NUMERICAL_METHODS.md). 
+
+For a rigorous, first-principles mathematical derivation of the Kuramoto model (perfect for Zettelkasten/PreTeXt), see [MATH_STUDY_GUIDE.md](MATH_STUDY_GUIDE.md).
+
 ---
 ## Intended Scope
 This repository intentionally **does NOT** include:
 - Learning algorithms
 - Visualization pipelines
 - GPU acceleration
-- External dependenccies beyond NumPy
+- External dependencies beyond NumPy and SciPy
 
 ✨ These concerns are better handled downstream once the data is fixed.
 
