@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import numpy as np
 from typing import Dict
 
@@ -51,6 +52,7 @@ def graph_stats(A: np.ndarray) -> Dict[str, float]:
     return {
         "num_edges": int(edges),
         "density": density,
-        "is_connected": edges >= n -1,
+        "is_connected": edges >= n - 1,
+        "avg_degree": avg_degree,
     }
 
