@@ -1,3 +1,17 @@
+# New Target Structure:
+```aiignore
+kuramoto/
+  api.py                # stays (wrapper function)
+  model.py              # NEW → KuramotoModel class
+  dataset.py            # NEW → KuramotoDataset dataclass
+  solvers.py            # NEW → solve_ivp wrapper
+  order_parameter.py    # NEW → r(t)
+  graphs.py             # reuse
+  validation.py         # reuse (maybe extend)
+  utils.py              # reuse
+```
+
+# Script for Streamlit App
 ```python
 """
 Kuramoto model for coupled phase oscillators on arbitrary network topologies.

@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 license = { file = "LICENSE" }
 
 authors = [
-    { name = "Lauren Shriver" }
+    { name = "eigenscribe" }
 ]
 
 dependencies = [
