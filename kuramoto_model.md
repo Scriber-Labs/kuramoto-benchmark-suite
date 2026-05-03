@@ -7,7 +7,6 @@ kuramoto/
   solvers.py            # NEW → solve_ivp wrapper
   order_parameter.py    # NEW → r(t)
   graphs.py             # reuse
-  types.py              # resuse
   validation.py         # reuse (maybe extend)
   utils.py              # reuse
 ```
@@ -19,7 +18,6 @@ kuramoto/
 - [ ] `graphs.py`
 - [ ] `validation.py`
 - [ x ] `utils.py`
-- [  ] `types.py`
 
 # Script for Streamlit App
 ```python
