@@ -13,8 +13,8 @@ kuramoto/
 - [ ] `api.py`
 - [ ] `model.py`
 - [ x ] `dataset.py`
-- [ ] `solvers.py`
-- [ ] `order_parameter.py`
+- [ x ] `solvers.py`
+- [ x ] `order_parameter.py`
 - [ ] `graphs.py`
 - [ ] `validation.py`
 - [ ] `utils.py`
