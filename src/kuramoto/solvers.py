@@ -12,11 +12,13 @@ Date: 05-2026
 
 from __future__ import annotations
 
-from typing import Callable
+from typing import Callable, Final, Any
 
 import numpy as np
 from numpy.typing import NDArray
 from scipy.integrate import solve_ivp
+
+from validation import validate_positive_scalar, validate_non_negative_scalar, validate_intrinsic_frequency_array, validate_adjacency, validate_time_axis
 
 __all__: list[str] = [
     "solve_kuramoto",
@@ -27,21 +29,6 @@ __all__: list[str] = [
 # ------------------------------------------------------------------------------
 PhaseArray = NDArray[np.floating]
 TimeArray = NDArray[np.floating]
-
-# --------------------------------------------------------------------------- #
-# 1️⃣  Helper validators (cheap, fail-fast)
-# --------------------------------------------------------------------------- #
-def _positive(name: str, x: float) -> None:
-    if x <= 0:
-        raise ValueError(f"❌ {name} must be > 0, got {x}")
-
-def _non_negative(name: str, x: float) -> None:
-    if x < 0:
-        raise ValueError(f"❌ {name} must be >= 0, got {x}")
-
-def _check_time_axis(t: TimeArray) -> None:
-    if t.ndim != 1 or t.size == 0 or not np.all(np.diff(t) >0):
-        raise ValueError("❌ t_eval must be a 1-D strictly increasing array")
 
 # ------------------------------------------------------------------------------
 # 2️⃣ Solver Wrapper
@@ -56,7 +43,7 @@ def solve_kuramoto(
     rtol: float = 1e-6,
     atol: float = 1e-9,
     max_step: float | None = None,
-) -> OdeResult:
+) -> Any:
     """
     Integrate the Kuramoto ODE system and return SciPy's `OdeResult`.
 
@@ -82,12 +69,12 @@ def solve_kuramoto(
     """
 
     # Defensive checks
-    _positive("t_span", t_span)
-    _check_time_axis(t_eval)
-    _positive("rtol", rtol)
-    _non_negative("atol", atol)
+    validate_positive_scalar(t_span, "t_span")
+    validate_time_axis(t_eval)
+    validate_positive_scalar(rtol, "rtol")
+    validate_non_negative_scalar(atol, "atol")
     if max_step is not None:
-        _positive("max_step", max_step)
+        validate_positive_scalar(max_step, "max_step")
 
     # Call SciPy
     return solve_ivp(
@@ -102,7 +89,7 @@ def solve_kuramoto(
     )
 
 # --------------------------------------------------------------------------- #
-# 3️⃣  Smoke test
+# 3️⃣ Smoke test
 # --------------------------------------------------------------------------- #
 def _run_smoke_test() -> None:
     """Exercise both success and validation paths."""
@@ -114,15 +101,15 @@ def _run_smoke_test() -> None:
     t_ev = np.linspace(0, 1, 11)
     sol = solve_kuramoto(rhs, y0, t_span=1.0, t_eval=t_ev, max_step=0.2)
     assert sol.success and sol.y.shape == (1, t_ev.size)
-    print("✔️ Integration success")
+    print("... Integration success")
 
     # Invalid t_eval (non-monotonic)
     try:
         solve_kuramoto(rhs, y0, t_span=1.0, t_eval=np.array([0.0, 0.5, 0.4]))
     except ValueError as err:
-        print(f"✖️ Validation caught error -> {err}")
+        print(f"Validation caught error -> {err}")
 
-    print("✅ Solver smoke test passed.")
+    print("Solver smoke test passed.")
 
 if __name__ == "__main__":
     _run_smoke_test()

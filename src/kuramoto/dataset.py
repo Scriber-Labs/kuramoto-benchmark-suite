@@ -132,7 +132,7 @@ def _run_smoke_test() -> None:
     assert "theta" in d
     assert d["theta"].shape == (time_steps, num_nodes)
 
-    print("✔️ Dataset conversion test passed")
+    print("    ✔️ Dataset conversion test passed")
     print("\n✅ Dataset smoke test passed.")
 
 def main() -> None:

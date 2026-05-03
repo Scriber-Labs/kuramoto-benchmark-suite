@@ -52,9 +52,9 @@ def _validate_phase_array(theta: PhaseArray) -> None:
         If array is empty or has invalid dimensions.
     """
     if theta.size == 0:
-        raise ValueError("✖️ Phase array cannot be empty")
+        raise ValueError("Error: Phase array cannot be empty")
     if theta.ndim not in (1, 2):
-        raise ValueError(f"✖️ Phase array must be 1D or 2D, got {theta.ndim}D")
+        raise ValueError(f"Error: Phase array must be 1D or 2D, got {theta.ndim}D")
 
 # ------------------------------------------------------------------------------
 # 2️⃣ Core Computation
@@ -119,6 +119,8 @@ def compute_order_parameter(theta: PhaseArray) -> TimeSeriesArray:
 
 def _run_smoke_test() -> None:
     """Sanity check for compute_order_parameter."""
+    print("💨 Running order parameter smoke tests...")
+
     # Use dedicated RNG for test data generation (no global state pollution)
     rng = get_rng(27)
 
@@ -127,27 +129,27 @@ def _run_smoke_test() -> None:
     r_1d = compute_order_parameter(theta_1d)
     assert isinstance(r_1d, (float, np.floating))
     assert 0.0 <= r_1d <= 1.0
-    print("✔️ 1D snapshot test passed")
+    print("    ✔️ 1D snapshot test passed")
 
     # Test 2: Time series (2D)
     theta_2d = rng.uniform(0, 2*np.pi, (100, 10))  # 100 time steps, 10 oscillators
     r_2d = compute_order_parameter(theta_2d)
     assert r_2d.shape == (100,)
     assert np.all((r_2d >= 0.0) & (r_2d <= 1.0))
-    print("✔️ 2D time series test passed")
+    print("    ✔️ 2D time series test passed")
 
     # Test 3: Perfect synchronization
     theta_sync = np.ones((50, 20)) * 0.5  # All phases identical
     r_sync = compute_order_parameter(theta_sync)
     assert np.allclose(r_sync, 1.0)
-    print("✔️ Perfect synchronization test passed (r approx 1.0)")
+    print("    ✔️ Perfect synchronization test passed (r approx 1.0)")
 
     # Test 4: Complete incoherence (random phases average to ~0)
     theta_incoh = rng.uniform(0, 2*np.pi, (1000, 1000))
     r_incoh = compute_order_parameter(theta_incoh)
     # Large N should give r close to 0, but not exactly 0
     assert np.all(r_incoh < 0.1)
-    print("✔️ Incoherence test passed (r is approximately 0)")
+    print("    ✔️ Incoherence test passed (r is approximately 0)")
 
     print("\n✅ All order parameter smoke tests passed.")
 
