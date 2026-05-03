@@ -6,7 +6,7 @@ This module defines the `KuramotoDataset` dataclass, which serves as the immutab
 
 Author: Eigenscribe
 Development note: LLM assistance was used during construction; implementation has been reviewed and adapted for this project.
-Reveiw status: REviewed and maintained by Eigenscribe.
+Review status: REviewed and maintained by Eigenscribe.
 Date: 05-2026
 """
 

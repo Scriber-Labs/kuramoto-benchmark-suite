@@ -10,6 +10,14 @@ kuramoto/
   validation.py         # reuse (maybe extend)
   utils.py              # reuse
 ```
+- [ ] `api.py`
+- [ ] `model.py`
+- [ x ] `dataset.py`
+- [ ] `solvers.py`
+- [ ] `order_parameter.py`
+- [ ] `graphs.py`
+- [ ] `validation.py`
+- [ ] `utils.py`
 
 # Script for Streamlit App
 ```python
