@@ -31,6 +31,10 @@ DerivativeArray = NDArray[np.floating]
 TimeArray = NDArray[np.floating]
 AdjacencyMatrix = NDArray[np.floating]
 
+# ------------------------------------------------------------------------------
+# 1️⃣ Dataset Container
+# ------------------------------------------------------------------------------
+
 @dataclass
 class KuramotoDataset:
     """
@@ -99,3 +103,40 @@ class KuramotoDataset:
             "freq_pdf": self.freq_pdf,
             "phase_pdf": self.phase_pdf,
         }
+
+# ------------------------------------------------------------------------------
+# 2️⃣ Smoke Test
+# ------------------------------------------------------------------------------
+
+def _run_smoke_test() -> None:
+    print("💨 Running dataset smoke test...")
+
+    num_nodes = 5
+    time_steps = 10
+
+    dummy = KuramotoDataset(
+        omega=np.ones(num_nodes),
+        theta=np.zeros((time_steps, num_nodes)),
+        dtheta=np.zeros((time_steps, num_nodes)),
+        time=np.linspace(0, 1, time_steps),
+        initial_conditions=np.zeros(num_nodes),
+        coupling=1.0,
+        adjacency=np.ones((num_nodes, num_nodes)),
+        network_stats={"density": 1.0},
+        noise_std=0.0,
+        freq_pdf="test",
+        phase_pdf="test",
+    )
+
+    d = dummy.to_dict()
+    assert "theta" in d
+    assert d["theta"].shape == (time_steps, num_nodes)
+
+    print("✔️ Dataset conversion test passed")
+    print("\n✅ Dataset smoke test passed.")
+
+def main() -> None:
+    _run_smoke_test()
+
+if __name__ == "__main__":
+    main()
