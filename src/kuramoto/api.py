@@ -16,11 +16,12 @@ from __future__ import annotations
 # Imports & type aliases
 # --------------------------------------------------------------------------- #
 
-from typing import Optional, Final, Dict
+from typing import Optional, Final, Dict, Any
 import numpy as np
 from numpy.typing import NDArray
 
 from .model import KuramotoModel
+from .topologies import load_topology
 
 __all__: list[str] = [
     "generate_kuramoto_dataset",
@@ -42,6 +43,8 @@ def generate_kuramoto_dataset(
     timesteps: int,
     dt: float,
     adjacency: Optional[AdjacencyMatrix] = None,
+    topology: Optional[str] = None,
+    topology_kwargs: Optional[Dict[str, Any]] = None,
     noise_std: float = 0.0,
     seed: Optional[int] = None,
 ) -> Dict[str, Any]:
@@ -61,7 +64,13 @@ def generate_kuramoto_dataset(
     dt : float
         Time step size.
     adjacency : AdjacencyMatrix, optional
-        Network structure.
+        Network structure (adjacency matrix). If both `adjacency` and `topology` 
+        are None, a complete graph is used.
+    topology : str, optional
+        Name of a predefined topology (e.g., 'ring', 'small_world'). 
+        Overrides `adjacency` if provided.
+    topology_kwargs : Dict[str, Any], optional
+        Arguments passed to the topology generator (e.g., {'k': 4, 'p': 0.1}).
     noise_std : float
         Noise level.
     seed : int, optional
@@ -73,11 +82,19 @@ def generate_kuramoto_dataset(
         Dataset dictionary.
     """
     t_span = timesteps * dt
+    
+    # Resolve topology if requested
+    adj_matrix = adjacency
+    if topology is not None:
+        kwargs = topology_kwargs or {}
+        if "n" not in kwargs:
+            kwargs["n"] = n_oscillators
+        adj_matrix = load_topology(topology, **kwargs)
 
     model = KuramotoModel(
         n_oscillators=n_oscillators,
         natural_frequencies=natural_frequencies,
-        adjacency_matrix=adjacency,
+        adjacency_matrix=adj_matrix,
         coupling_strength=coupling,
         noise_std=noise_std,
         random_seed=seed,

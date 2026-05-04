@@ -1,119 +1,125 @@
-# Kuramoto Benchmark Suite
+# 🎭 Kuramoto Benchmark Suite
 
-A reproducible benchmark and dataset generator for coupled oscillator systems based on the Kuramoto model.
+A research-grade synthetic dataset generator and diagnostic suite for coupled oscillator systems.
 
-This repository provides:
-- A **deterministic Kuramoto simulator** with configurable coupling and network topology.
-- A **standardized dataset format** suitable for system identification, reduced-order modeling, and physics-informed learning.
-- A small set of **validation tests** ensuring reproducibility, correctness, and numerical stability.
-
-🥅 **Goal:** Supply a **high-quality synthetic dynamical dataset** that can be used downstream in:
-- SINDy / sparse system identification
-- Physics-informed neural networks (PINNs)
-- Graph-based dynamical systems analysis
-- Synchronization and phase-transition studies
+This repository provides a modular, CLI-driven framework for simulating Kuramoto dynamics and performing spectral/topological analysis. Inspired by the `satis` CFD tool and designed with a "What -> Who -> How -> Proof" flow.
 
 ---
-## Installation
 
-To install the `kuramoto-benchmark-suite` in your environment, clone the repository and use `pip`:
+## 🚀 Quick Start
 
+### Installation
 ```bash
 git clone https://github.com/your-username/kuramoto-benchmark-suite.git
 cd kuramoto-benchmark-suite
 pip install .
 ```
 
-For development (including testing and linting), install with the `dev` extras:
-
+### Beginner's Workflow
+Generate a demo dataset and start your first diagnostic:
 ```bash
-pip install -e ".[dev]"
+# 1. Generate demo dataset
+kuramoto datasetforbeginners
+
+# 2. Visualize the network structure
+kuramoto network data/examples/demo_dataset.npz --gradient gradient_4
+
+# 3. Check the temporal signal and order parameter
+kuramoto time data/examples/demo_dataset.npz -t 5.0
+
+# 4. Perform Fourier analysis
+kuramoto fouriervariability data/examples/demo_dataset.npz -f 0.16
 ```
 
 ---
-## Mathematical Model
-The **Kuramoto model** describes the phase evolution of a system of $N$ coupled phase oscillators:
 
-   $$\frac{d\theta_i}{dt}=\omega_i+\frac{1}{N}\sum_{j=1}^N{K_{ij} \sin\big(\theta_j - \theta_i\big)}$$
+## 🛠️ Command Line Interface (CLI)
 
-where:
-- $\theta_i(t)$ is the phase of the $i^\text{th}$ oscillator
-- $\omega_i$ is the intrinsic frequency of the $i^\text{th}$ oscillator
-- $K_{ij}$ encodes network structure and coupling strength between adjacent oscillators
+The `kuramoto` command provides a full suite of diagnostics:
+
+| Command | Description |
+| :--- | :--- |
+| `datasetforbeginners` | Copy/generate a demo dataset to start using the suite. |
+| `generate` | Generate a dataset from a JSON configuration file. |
+| `network` | Visualize the oscillator network (colored by degree). |
+| `distributions` | Plot histograms of natural frequencies and initial phases. |
+| `time` | Plot phase trajectories (consistent coloring) and $r(t)$. |
+| `fouriervariability` | Check Fourier coefficients (consistent coloring) at a target frequency. |
+| `fourierconvergence` | Plot convergence of Fourier amplitude over increasing signal length. |
+| `psdvariability` | Analyze Power Spectral Density (PSD) and energy distribution. |
+| `psdconvergence` | Compare PSD estimates across different time segments. |
 
 ---
-## Scientific Design Principles
-This implementation emphasizes:
-1. **Reproducibility** - All simulations are deterministic when a random seed is supplied.
-3. **Structure preservation** - Phase variables are evolved directly and wrapped modulo $2\pi$ to prevent drift.
-4. **Separation of concerns** - Data generation, validation, and storage are all clearly separated.
-5. **Black-box usability** - Downstream users do not need to inspect the implementation to use the data.
 
----
-## Public API (Data Generation)
+## 🧪 Advanced Topological Analysis
 
-The core entry point is:
-```py
-generate_kuramoto_dataset(...)
+The suite includes specialized tools for analyzing the underlying graph structures:
+
+```python
+from kuramoto.topologies import load_topology, compute_chromatic_polynomial
+
+# Load a canonical topology
+G = load_topology("tree_of_life", return_graph=True)
+
+# Compute the chromatic polynomial
+poly = compute_chromatic_polynomial(G)
+print(f"Chromatic Polynomial: {poly}")
 ```
 
-This function:
-- Generates phase trajectories $\theta_i(t)$
-- Computes instantaneous phase velocities $\dot{\theta}_i(t)$
-- Records simulation metadata and graph statistics
-- Returns data in a standardized dictionary format
+Supported topologies: `ring`, `complete`, `small_world`, `random`, and the canonical `tree_of_life` (10 nodes, 22 edges).
 
-The API is intentinoally minimal and stable to support reuse across projects.
+### Simulation via JSON
+Generate complex benchmarks using JSON configurations:
+```bash
+kuramoto generate --config my_config.json --output data/benchmark_1.npz
+```
 
-For parameter definitions and returned shapes, see function docstring.
-
----
-## Dataset Structure
-Each simulation generates:
-- Phase trajectories: `(T, N)`
-- Phase derivatives: `(T, N)`
-- Time vector: `(T,)`
-- Intrinsic frequencies: `(N,)`
-- Initial conditions: `(N,)`
-- Graph metadata (connectivity, density, etc.)
-
-These outputs are suitable for direct use in:
-- Regression-based system identification
-- Dimensionality reduction
-- Order-parameter analysis
-
----
-## Validation and Testing
-A standalone test harness verifies:
-- Deterministic behavior
-- Input immutability
-- Correct handling of network structure
-- Performance at moderate system sizes
-- Presence of complete type annotations and documentation
-
-Tests are black-box by design and do not depend on internal implementation details.
-
-### Learning More
-For a detailed breakdown of the numerical methods (Euler, RK4, RK45) and advice on using this repo for your own projects, see [NUMERICAL_METHODS.md](NUMERICAL_METHODS.md). 
-
-For a rigorous, first-principles mathematical derivation of the Kuramoto model (perfect for Zettelkasten/PreTeXt), see [MATH_STUDY_GUIDE.md](MATH_STUDY_GUIDE.md).
+Example `my_config.json`:
+```json
+{
+    "n_oscillators": 25,
+    "coupling_strength": 1.2,
+    "topology": "small_world",
+    "timesteps": 1000,
+    "dt": 0.05,
+    "seed": 42,
+    "frequency_distribution": {
+        "type": "normal",
+        "mean": 0.0,
+        "std": 1.0
+    }
+}
+```
 
 ---
-## Intended Scope
-This repository intentionally **does NOT** include:
-- Learning algorithms
-- Visualization pipelines
-- GPU acceleration
-- External dependencies beyond NumPy, SciPy, and NetworkX
 
-✨ These concerns are better handled downstream once the data is fixed.
+## 🎨 Visual Identity & Style
+
+The project uses a standard 'house style' for all code and visualizations:
+- **Gradient Themes**: 8 custom gradients (`gradient_0` to `gradient_7`) for consistent data coloring.
+- **Consistent Coloring**: Oscillators are colored by their degree in the network plot, and this coloring is preserved across time-series and spectral diagnostics.
+- **Seaborn Integration**: Publication-ready plots with high-density markers.
+- **House Rules**: Code follows strict emoji-numbered sectioning and NumPy-style documentation (see `templates/HOUSE_RULES.md`).
 
 ---
-## Scientific Motivation
-Coupled oscillator systems appear across:
-- Neuroscience (rhythms, synchronization)
-- Physics (phase transitions, collective behavior)
-- Chemistry (reaction networks)
-- Network science
 
-This benchmark suite is meant to provide a clean experimental substrate for studying these phenomena in a controlled and reproducible way.
+## 🧬 Mathematical Model
+
+The evolution of $N$ phase oscillators is governed by:
+
+$$\frac{d\theta_i}{dt} = \omega_i + \frac{K}{N} \sum_{j=1}^{N} A_{ij} \sin(\theta_j - \theta_i)$$
+
+where $A_{ij}$ is the adjacency matrix and $K$ is the coupling strength.
+
+---
+
+## 🏅 Rule of Thumb
+
+If someone scrolls a file top-to-bottom, the conceptual story should flow:
+
+> [!summary] **What exists** -> **What you're allowed to call** -> **How it works** -> **Proof it works**
+
+---
+
+## 📄 License
+MIT License. See `LICENSE` for details.
