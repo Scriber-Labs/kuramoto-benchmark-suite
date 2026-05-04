@@ -15,6 +15,8 @@ import numpy as np
 from typing import Dict, Any, Final
 from numpy.typing import NDArray
 
+from sympy import symbols
+
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ Type aliases
 # -----------------------------------------------------------------------------------------------------------
@@ -43,14 +45,24 @@ def compute_chromatic_polynomial(G: nx.Graph) -> Dict[int, int]:
         Dictionary where keys are exponents and values are coefficients 
         of the chromatic polynomial.
     """
-    poly = nx.chromatic_polynomial(G)
-    # NetworkX returns a SymPy-like polynomial object if sympy is installed, 
-    # or a custom internal object. Let's convert it to a standard dict of coefficients.
-    
-    # Actually, nx.chromatic_polynomial returns a sympy polynomial if available, 
-    # otherwise it might fail or return something else.
-    # Let's check what it returns in this environment.
-    return poly
+    # Base case: If the graph has no edges, the chromatic polynomial is k^n
+    if G.number_of_edges() == 0:
+        k = symbols('k')
+        return k ** G.number_of_nodes()
+
+    # Pick an edge (u, v)
+    u, v = list(G.edges())[0]
+
+    # Deletion: Remove the edge (u, v)
+    G_deletion = G.copy()
+    G_deletion.remove_edge(u, v)
+
+    # Contraction: Merge u and v into a single vertex
+    G_contraction = nx.contracted_nodes(G, u, v, self_loops=False)
+
+    # Recursive computation
+    return compute_chromatic_polynomial(G_deletion) - compute_chromatic_polynomial(G_contraction)
+
 
 def get_graph_metadata(G: nx.Graph) -> Dict[str, Any]:
     """
