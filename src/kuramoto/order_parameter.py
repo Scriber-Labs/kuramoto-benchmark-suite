@@ -20,7 +20,7 @@ from numpy.typing import NDArray
 import numpy as np
 
 # Import RNG utilities from the central utils module
-from utils import get_rng
+from .utils import get_rng
 
 __all__: list[str] = [
     "compute_order_parameter",

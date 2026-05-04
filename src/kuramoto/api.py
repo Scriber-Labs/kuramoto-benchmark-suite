@@ -20,7 +20,7 @@ from typing import Optional, Final, Dict
 import numpy as np
 from numpy.typing import NDArray
 
-from model import KuramotoModel
+from .model import KuramotoModel
 
 __all__: list[str] = [
     "generate_kuramoto_dataset",
@@ -83,7 +83,7 @@ def generate_kuramoto_dataset(
         random_seed=seed,
     )
 
-    dataset = model.simulate(t_span=t_span)
+    dataset = model.simulate(t_span=t_span, n_points=timesteps)
 
     return dataset.to_dict()
 

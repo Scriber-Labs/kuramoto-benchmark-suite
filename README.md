@@ -14,6 +14,23 @@ This repository provides:
 - Synchronization and phase-transition studies
 
 ---
+## Installation
+
+To install the `kuramoto-benchmark-suite` in your environment, clone the repository and use `pip`:
+
+```bash
+git clone https://github.com/your-username/kuramoto-benchmark-suite.git
+cd kuramoto-benchmark-suite
+pip install .
+```
+
+For development (including testing and linting), install with the `dev` extras:
+
+```bash
+pip install -e ".[dev]"
+```
+
+---
 ## Mathematical Model
 The **Kuramoto model** describes the phase evolution of a system of $N$ coupled phase oscillators:
 
@@ -87,7 +104,7 @@ This repository intentionally **does NOT** include:
 - Learning algorithms
 - Visualization pipelines
 - GPU acceleration
-- External dependencies beyond NumPy and SciPy
+- External dependencies beyond NumPy, SciPy, and NetworkX
 
 ✨ These concerns are better handled downstream once the data is fixed.
 

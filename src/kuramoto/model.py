@@ -21,13 +21,13 @@ from typing import Optional, Final, Dict
 import numpy as np
 from numpy.typing import NDArray
 
-from validation import *
+from .validation import *
 
-from graphs import graph_stats
-from dataset import KuramotoDataset
-from solvers import solve_kuramoto
-from order_parameter import compute_order_parameter as order_parameter
-from utils import get_rng
+from .graphs import graph_stats
+from .dataset import KuramotoDataset
+from .solvers import solve_kuramoto
+from .order_parameter import compute_order_parameter as order_parameter
+from .utils import get_rng
 
 __all__: list[str] = [
     "KuramotoModel",
@@ -146,7 +146,7 @@ class KuramotoModel:
     # ------------------------------------------------------------------ #
     # 🌐 Public API
     # ------------------------------------------------------------------ #
-    def simulate(self, t_span: float) -> KuramotoDataset:
+    def simulate(self, t_span: float, n_points: Optional[int] = None) -> KuramotoDataset:
         """
         Integrate up to `t_span` seconds and return a `KuramotoDataset`.
 
@@ -154,6 +154,8 @@ class KuramotoModel:
         ----------
         t_span : float
             Total simulation time (must be > 0).
+        n_points : int, optional
+            Number of time points to output. If None, uses `_MIN_OUTPUT_POINTS`.
 
         Returns
         -------
@@ -164,7 +166,8 @@ class KuramotoModel:
 
         # ---- prepare solver args -------------------------------------- #
         max_step = self._max_step()
-        t_eval   = np.linspace(0.0, t_span, self._MIN_OUTPUT_POINTS)
+        points = n_points if n_points is not None else self._MIN_OUTPUT_POINTS
+        t_eval   = np.linspace(0.0, t_span, points)
 
         sol = solve_kuramoto(
             rhs=self._rhs,

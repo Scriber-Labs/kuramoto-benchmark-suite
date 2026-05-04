@@ -18,7 +18,7 @@ import numpy as np
 from numpy.typing import NDArray
 from scipy.integrate import solve_ivp
 
-from validation import validate_positive_scalar, validate_non_negative_scalar, validate_intrinsic_frequency_array, validate_adjacency, validate_time_axis
+from .validation import validate_positive_scalar, validate_non_negative_scalar, validate_intrinsic_frequency_array, validate_adjacency, validate_time_axis
 
 __all__: list[str] = [
     "solve_kuramoto",
