@@ -30,6 +30,7 @@ from ..analysis.viz import (
 )
 from ..config import parse_simulation_config
 from ..order_parameter import compute_order_parameter
+from ..topologies.tree_of_life import tree_of_life_positions
 from .utils import ensure_plot_dir, print_table, DEFAULT_DEMO_PATH, PLOT_DIR
 
 # -----------------------------------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ def datasetforbeginners(output: str) -> None:
         "dt": 0.05,
         "coupling": 2.0,
         "seed": 42,
-        "topology": "ring"
+        "topology": "small_world"
     }
     
     rng = np.random.default_rng(params["seed"])
@@ -120,7 +121,8 @@ def time(dataset_path: str, start_time: float, gradient: str) -> None:
     theta_filtered = theta[mask]
     
     r = compute_order_parameter(theta_filtered)
-    colors = get_node_colors(adj, cmap_name=gradient)
+    omega = data["omega"]
+    colors = get_node_colors(adj, values=omega, cmap_name=gradient)
     
     ensure_plot_dir()
     plt.figure(figsize=(10, 6))
@@ -131,7 +133,7 @@ def time(dataset_path: str, start_time: float, gradient: str) -> None:
     for i in range(n_plot):
         plt.plot(t_filtered, np.sin(theta_filtered[:, i]), alpha=0.6, color=colors[i], label=f"Node {i}")
     
-    plt.title(f"Phases (first {n_plot} oscillators, colored by degree)")
+    plt.title(f"Phases (first {n_plot} oscillators, colored by frequency)")
     plt.ylabel("sin(theta)")
     
     plt.subplot(2, 1, 2)
@@ -174,7 +176,8 @@ def fouriervariability(dataset_path: str, start_time: float, freq: float, gradie
     
     coeffs = compute_fourier_coefficients(t_filtered, signals, freq)
     amplitudes = np.abs(coeffs)
-    colors = get_node_colors(adj, cmap_name=gradient)
+    omega = data["omega"]
+    colors = get_node_colors(adj, values=omega, cmap_name=gradient)
     
     ensure_plot_dir()
     plt.figure(figsize=(10, 5))
@@ -182,7 +185,7 @@ def fouriervariability(dataset_path: str, start_time: float, freq: float, gradie
     plt.axhline(np.mean(amplitudes), color="black", linestyle='--', alpha=0.5, label="Mean")
     plt.xlabel("Oscillator Index")
     plt.ylabel(f"Fourier Amplitude at {freq} Hz")
-    plt.title(f"Fourier Variability (colored by degree)")
+    plt.title(f"Fourier Variability (colored by frequency)")
     plt.legend()
     
     plot_path = os.path.join(PLOT_DIR, "fourier_variability.png")
@@ -338,12 +341,25 @@ def network(dataset_path: str, gradient: str) -> None:
     """Visualize the oscillator network structure."""
     data = np.load(dataset_path)
     adj = data["adjacency"]
+    omega = data["omega"]
     
     ensure_plot_dir()
     plot_path = os.path.join(PLOT_DIR, "network.png")
     
-    click.echo(f"🕸️ Visualizing network with {gradient} theme (colored by degree)...")
-    plot_network(adj, node_colors=None, cmap_name=gradient, save_path=plot_path)
+    # Determine if we should use the Tree of Life layout
+    pos = None
+    if adj.shape == (10, 10):
+        # Check if it's the Tree of Life
+        from ..topologies.tree_of_life import sefirot_labels
+        pos_dict = tree_of_life_positions()
+        # Map labels to indices for plot_network which expects index-based pos or uses G nodes
+        # Actually plot_network uses G = nx.from_numpy_array(adj), so nodes are 0..9
+        labels = sefirot_labels()
+        pos = {i: pos_dict[labels[i]] for i in range(10)}
+        click.echo("🌳 Using canonical Tree of Life layout.")
+
+    click.echo(f"🕸️ Visualizing network with {gradient} theme (colored by frequency)...")
+    plot_network(adj, node_values=omega, pos=pos, cmap_name=gradient, save_path=plot_path)
     click.echo(f"📈 Plot saved to {plot_path}")
     
     import networkx as nx

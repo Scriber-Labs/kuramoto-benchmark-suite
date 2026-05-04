@@ -103,6 +103,28 @@ def build_tree_of_life() -> nx.Graph:
 
     return G
 
+def tree_of_life_positions() -> Dict[str, Tuple[float, float]]:
+    """
+    Canonical positions for the Tree of Life nodes for visualization.
+    
+    Returns
+    -------
+    Dict[str, Tuple[float, float]]
+        Mapping from sefirot name to (x, y) coordinates.
+    """
+    return {
+        "Keter": (0.0, 1.0),
+        "Chokhmah": (0.5, 0.8),
+        "Binah": (-0.5, 0.8),
+        "Chesed": (0.5, 0.4),
+        "Gevurah": (-0.5, 0.4),
+        "Tiferet": (0.0, 0.4),
+        "Netzach": (0.5, 0.0),
+        "Hod": (-0.5, 0.0),
+        "Yesod": (0.0, -0.4),
+        "Malkhut": (0.0, -1.0),
+    }
+
 # -----------------------------------------------------------------------------------------------------------
 # 4️⃣ Smoke tests / example usage
 # -----------------------------------------------------------------------------------------------------------

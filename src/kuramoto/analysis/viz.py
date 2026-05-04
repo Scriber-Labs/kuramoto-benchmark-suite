@@ -32,6 +32,7 @@ GRADIENTS: Dict[str, List[str]] = {
     "gradient_5": ["#00E8FF", "#3A98FF", "#0A95EB", "#7952F5", "#5E17EB"],
     "gradient_6": ["#00E8FF", "#14B5FF", "#5280FF", "#7952F5", "#FF66B3"],
     "gradient_7": ["#00E8FF", "#14B5FF", "#5280FF", "#7952F5", "#FF66B3", "#F78166"],
+    "vibrant": ["#8A2BE2", "#FF00FF", "#FFA500", "#50C878"],
 }
 
 def get_colormap(name: str = "gradient_4") -> LinearSegmentedColormap:
@@ -80,7 +81,8 @@ def get_node_colors(
     
     # Normalize values to [0, 1] for colormap
     if np.max(values) == np.min(values):
-        norm_values = np.zeros_like(values)
+        # Fallback to linear distribution if all values are identical
+        norm_values = np.linspace(0, 1, len(values))
     else:
         norm_values = (values - np.min(values)) / (np.max(values) - np.min(values))
     
@@ -101,6 +103,7 @@ def plot_network(
     adjacency: NDArray[np.floating],
     node_colors: Optional[NDArray[Any]] = None,
     node_values: Optional[NDArray[np.floating]] = None,
+    pos: Optional[Dict[Any, NDArray[np.floating]]] = None,
     cmap_name: str = "gradient_4",
     title: str = "Network Topology",
     save_path: Optional[str] = None
@@ -117,6 +120,8 @@ def plot_network(
     node_values : NDArray, optional
         Values to color nodes by (mapped via cmap_name). If both node_colors 
         and node_values are None, colors by degree.
+    pos : Dict, optional
+        Node positions. If None, uses spring layout.
     cmap_name : str
         Name of the gradient theme to use.
     title : str
@@ -126,7 +131,9 @@ def plot_network(
     """
     set_style()
     G = nx.from_numpy_array(adjacency)
-    pos = nx.spring_layout(G, seed=42)
+    
+    if pos is None:
+        pos = nx.spring_layout(G, seed=42)
     
     plt.figure(figsize=(10, 8))
     
