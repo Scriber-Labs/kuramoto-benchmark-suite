@@ -1,5 +1,0 @@
-- [ ] complete.py
-- [ ] random.py
-- [ ] ring.py
-- [ ] small_world.py
-- [ ] tree_of_life.py
