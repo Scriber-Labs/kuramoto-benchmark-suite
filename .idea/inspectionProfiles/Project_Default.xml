@@ -1,0 +1,36 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="INFORMATION" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="black" />
+          <option value="click" />
+          <option value="lf-pinn-harmonic-oscillator" />
+          <option value="mypy_extensions" />
+          <option value="nvidia-cublas-cu12" />
+          <option value="nvidia-cuda-cupti-cu12" />
+          <option value="nvidia-cuda-nvrtc-cu12" />
+          <option value="nvidia-cuda-runtime-cu12" />
+          <option value="nvidia-cudnn-cu12" />
+          <option value="nvidia-cufft-cu12" />
+          <option value="nvidia-cufile-cu12" />
+          <option value="nvidia-curand-cu12" />
+          <option value="nvidia-cusolver-cu12" />
+          <option value="nvidia-cusparse-cu12" />
+          <option value="nvidia-cusparselt-cu12" />
+          <option value="nvidia-nccl-cu12" />
+          <option value="nvidia-nvjitlink-cu12" />
+          <option value="nvidia-nvshmem-cu12" />
+          <option value="nvidia-nvtx-cu12" />
+          <option value="pathspec" />
+          <option value="pexpect" />
+          <option value="ptyprocess" />
+          <option value="pytokens" />
+          <option value="ruff" />
+          <option value="triton" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
