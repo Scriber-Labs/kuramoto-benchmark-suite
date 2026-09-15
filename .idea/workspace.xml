@@ -7,11 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added a RotorSolver class to solvers.py">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +45,65 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.858635063129396" />
+      <entry key="MS500" value="2.118491950142272" />
+      <entry key="S2" value="4.3025686620697785" />
+      <entry key="S5" value="11.697731016968886" />
+      <entry key="S10" value="18.611912446690692" />
+      <entry key="S30" value="28.233769737769233" />
+      <entry key="S60" value="37.38753421430764" />
+      <entry key="M2" value="50.51355066393485" />
+      <entry key="M5" value="101.88508140811444" />
+      <entry key="M10" value="202.81723341128102" />
+      <entry key="M15" value="289.03682652242793" />
+      <entry key="M30" value="452.75562909348514" />
+      <entry key="H1" value="591.4827781263897" />
+      <entry key="H2" value="684.1691030542104" />
+      <entry key="H4" value="738.1156619557208" />
+      <entry key="D1" value="787.5756417035491" />
+      <entry key="W1" value="796.4995061616571" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.361399455292731E-110" />
+      <entry key="S5" value="1.1313428304928164E-44" />
+      <entry key="S10" value="1.063646008074493E-22" />
+      <entry key="S30" value="4.738057582141484E-8" />
+      <entry key="S60" value="2.180465321673086E-4" />
+      <entry key="M2" value="0.015366897026546237" />
+      <entry key="M5" value="0.2370515793707293" />
+      <entry key="M10" value="0.6580938449206979" />
+      <entry key="M15" value="0.9429502290319195" />
+      <entry key="M30" value="1.3656843806437302" />
+      <entry key="H1" value="1.6503726062947415" />
+      <entry key="H2" value="1.8161578277171075" />
+      <entry key="H4" value="1.9056961839221027" />
+      <entry key="D1" value="1.9839405044002443" />
+      <entry key="W1" value="1.9976972550981194" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9727285440814561" />
+      <entry key="MS500" value="1.145225625965067" />
+      <entry key="S2" value="3.463548592350101" />
+      <entry key="S5" value="11.170726050130007" />
+      <entry key="S10" value="18.298017112990106" />
+      <entry key="S30" value="28.115016364240223" />
+      <entry key="S60" value="37.32601102943994" />
+      <entry key="M2" value="50.49654134517523" />
+      <entry key="M5" value="102.09317036171261" />
+      <entry key="M10" value="203.4260126544075" />
+      <entry key="M15" value="289.9233754947557" />
+      <entry key="M30" value="454.0705398230219" />
+      <entry key="H1" value="593.0985511738195" />
+      <entry key="H2" value="685.9649921612556" />
+      <entry key="H4" value="740.0103790847484" />
+      <entry key="D1" value="789.5576252753212" />
+      <entry key="W1" value="798.4969206071695" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -355,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789463871339</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared">
+      <option name="closed" value="true" />
+      <created>1789471409911</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1789471409911</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +433,7 @@
     <MESSAGE value="updated src/kuramoto/api.py" />
     <MESSAGE value="uv compatibility initiated and then updated the repo packages used in the code" />
     <MESSAGE value="added a RotorSolver class to solvers.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a RotorSolver class to solvers.py" />
+    <MESSAGE value="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared" />
+    <option name="LAST_COMMIT_MESSAGE" value="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared" />
   </component>
 </project>

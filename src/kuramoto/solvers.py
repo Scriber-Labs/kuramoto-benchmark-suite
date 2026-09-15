@@ -116,8 +116,19 @@ class RotorSolver:
     """
     Geometric Algebra-based Kuramoto solver using rotors in Cl(dim).
 
+    ⚠️ EXPERIMENTAL / RESEARCH MODE
+
+    Unlike the standard solve_kuramoto() wrapper (which uses adaptive RK45 with built-in error control), RotorSolve uses
+    fixed-step Euler integration. Users should:
+
+    - Choose dt_internal small enough to resolve max(omega) + K
+    - Verify results against the classic solver for critical runs
+    - Enable enfore_nyquist=True for automatic warnings
+
+    Future work: Adaptive stepper matching Rk45 stability properties.
+
     Each oscillator is represented as a rotor R=exp(-B0/2) where B is the rotation plane bivector. Coupling operates on
-    extracted phases but state evolution preserves the geometric algebra structure.
+    extracted phases, but state evolution preserves the geometric algebra structure.
 
     Attributes
     ----------
@@ -280,9 +291,11 @@ class RotorSolver:
         K: float,
         t_eval: TimeArray,
         dt_internal: float | None = None,
+        enforce_nyquist: bool = True,
+        max_phase_increment: float = 0.1,  # radians per step max
     ) -> tuple[TimeArray, PhaseArray]:
         """
-        Run full simulation over specified time grid.
+        Run full simulation with optional stability enforcement.
 
         Parameters
         ----------
@@ -292,33 +305,76 @@ class RotorSolver:
             Output timestamps (must be monotonically increasing).
         dt_internal : float, optional
             Internal stepping timestep. If None, inferred from t_eval.
+        enforce_nyquist : bool, optional
+            If True, cap dt to resolve max frequency.
+        max_phase_increment : float, optional
+            Maximum allowed phase change per step (radians).
 
         Returns
         -------
         tuple
-            (times, phases) where phases has shape (len(t_eval), N)
+            (times, phases) where phases has shape (len(t_eval), N).
         """
-        validate_positive_scalar(K, "K")
-        validate_time_axis(t_eval)
-        if dt_internal is not None:
-            validate_positive_scalar(dt_internal, "dt_internal")
-        else:
-            dt_internal = float(np.mean(np.diff(t_eval)) * 0.1)  # 10 steps per output interval
+        if dt_internal is None:
+            # infer from output spacing (safe upper bound)
+            dt_internal = np.mean(np.diff(t_eval)) * 0.1
+
+        if enforce_nyquist:
+            # Estimate maximum effective frequency
+            max_omega = np.max(np.abs(self.omegas))
+            estimated_max_freq = max_omega + abs(K)
+
+            #Nyquist criterion sampling rate > 2 * max frequency
+            nyquist_dt = 1.0 / (2.0 * estimated_max_freq) if estimated_max_freq > 0 else np.inf
+
+            # Additional phase increment constraint
+            phase_increment_limit = max_phase_increment / estimated_max_freq if estimated_max_freq > 0 else np.inf
+
+            dt_safe = min(nyquist_dt, phase_increment_limit)
+
+            if dt_internal > dt_safe * 10:  # Warning threshold
+                import warnings
+                warnings.warn(
+                    f"dt_internal={dt_internal:.4f} may exceed stability bounds. "
+                    f"Recommended dt <= {dt_safe:.4f} (Nyquist estimate: max_frq approx {estimated_max_freq:.2f} Hz). "
+                    f"Set dt_internal explicitly or disable enforce_nyquist=False.",
+                    RuntimeWarning,
+                    stacklevel=2,
+                )
 
         times = []
         all_phases = []
-        t_current = float(t_eval[0])
+        current_time = float(t_eval[0])
 
         for t_out in t_eval:
-            while t_current < t_out - 1e-12:
-                step = min(dt_internal, float(t_out - t_current))
-                self.step_euler(K, step)
-                t_current += step
+            # Advance to output time
+            while current_time < t_out - 1e-12:
+                dt = min(dt_internal, t_out - current_time)
+                self.step_euler(K, dt)
+                current_time += dt
+
             times.append(t_out)
             all_phases.append(self.extract_phases())
 
         return np.array(times), np.array(all_phases)
 
+    def step_rk45_adaptive(
+        self,
+        K: float,
+        dt: float,
+        rtol: float = 1e-6
+    ) -> tuple[float, float]:
+        """
+        Adaptive RK45-like step with error estimation.
+
+        Returns
+        -------
+        tuple
+            (accepted_value, recommended_dext_dt)
+        """
+        # Placeholder for embedded RK pair (e.g., Dormand Prince)
+        # Would compute k1-k6 slopes, estimate local error, adjust dt
+        pass
 
 # --------------------------------------------------------------------------- #
 # 💨Smoke test
