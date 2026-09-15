@@ -7,7 +7,7 @@ Provides a thin abstraction over SciPy integrators to allow future solver swappi
 Author: Eigenscribe
 Review status: Reviewed and maintained by Eigenscribe.
 Date: 05-2026
-Last Updated: 09=2026
+Last Updated: 09-2026
 """
 
 from __future__ import annotations
