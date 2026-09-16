@@ -7,10 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Enhanced RotorSolver with Nyquist stability enforcement, phase increment limits, and experimental adaptive stepping placeholder. Updated documentation and warnings for safer integration handling.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,61 +49,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000173208730236" />
-      <entry key="S2" value="1.6066264272624706" />
-      <entry key="S5" value="8.140426304545242" />
-      <entry key="S10" value="19.798478210187117" />
-      <entry key="S30" value="39.57964328071278" />
-      <entry key="S60" value="50.8555761271088" />
-      <entry key="M2" value="71.50092171174747" />
-      <entry key="M5" value="141.36240923643388" />
-      <entry key="M10" value="261.2712430193982" />
-      <entry key="M15" value="377.13188429446933" />
-      <entry key="M30" value="667.0058710045196" />
-      <entry key="H1" value="1012.4743294250908" />
-      <entry key="H2" value="1305.9432738068447" />
-      <entry key="H4" value="1502.4083476698793" />
-      <entry key="D1" value="1700.1181601003877" />
-      <entry key="W1" value="1737.6354609612658" />
+      <entry key="MS100" value="1.0000000000117133" />
+      <entry key="MS500" value="1.0095952752788526" />
+      <entry key="S2" value="1.8846727676625852" />
+      <entry key="S5" value="4.142813677632499" />
+      <entry key="S10" value="7.124956174591082" />
+      <entry key="S30" value="17.669029920337753" />
+      <entry key="S60" value="31.566872416582303" />
+      <entry key="M2" value="55.32647565826349" />
+      <entry key="M5" value="119.86520200172069" />
+      <entry key="M10" value="218.36342223004453" />
+      <entry key="M15" value="303.75459087944614" />
+      <entry key="M30" value="535.1622568194358" />
+      <entry key="H1" value="973.0632826704385" />
+      <entry key="H2" value="1582.4844877014218" />
+      <entry key="H4" value="2148.5183806950463" />
+      <entry key="D1" value="2866.742951995352" />
+      <entry key="W1" value="3021.1999846909152" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.742692484378629E-232" />
-      <entry key="S2" value="1.148960741230257E-58" />
-      <entry key="S5" value="6.669942282553033E-24" />
-      <entry key="S10" value="2.5826231537160693E-12" />
-      <entry key="S30" value="1.3744003473205828E-4" />
-      <entry key="S60" value="0.01220330722135928" />
-      <entry key="M2" value="0.13036531057286063" />
-      <entry key="M5" value="0.6297247736055697" />
-      <entry key="M10" value="1.1505812693890896" />
-      <entry key="M15" value="1.5089736005514227" />
-      <entry key="M30" value="2.31162282894168" />
-      <entry key="H1" value="3.216813997222661" />
-      <entry key="H2" value="3.9519198378772553" />
-      <entry key="H4" value="4.428692567852537" />
-      <entry key="D1" value="4.897380072228368" />
-      <entry key="W1" value="4.985146668320388" />
+      <entry key="MS500" value="3.3362658348911576E-108" />
+      <entry key="S2" value="1.3514972365577277E-27" />
+      <entry key="S5" value="1.7878293590120324E-11" />
+      <entry key="S10" value="4.228273121514311E-6" />
+      <entry key="S30" value="0.016170409226987214" />
+      <entry key="S60" value="0.1271629389692135" />
+      <entry key="M2" value="0.3567216695165374" />
+      <entry key="M5" value="0.6892811562574126" />
+      <entry key="M10" value="0.9846826224710014" />
+      <entry key="M15" value="1.2255867699849081" />
+      <entry key="M30" value="2.0325066914934715" />
+      <entry key="H1" value="3.7383104782493426" />
+      <entry key="H2" value="6.00096381581092" />
+      <entry key="H4" value="7.9896150523075145" />
+      <entry key="D1" value="10.4051613910692" />
+      <entry key="W1" value="10.91237692655083" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.929934809255572E-6" />
-      <entry key="MS500" value="0.08682688160706334" />
-      <entry key="S2" value="1.1483089905225141" />
-      <entry key="S5" value="7.918432441595086" />
-      <entry key="S10" value="19.67666783120374" />
-      <entry key="S30" value="39.5301810878837" />
-      <entry key="S60" value="50.80924615535779" />
-      <entry key="M2" value="71.52360014725924" />
-      <entry key="M5" value="141.83157039901266" />
-      <entry key="M10" value="262.2614314569812" />
-      <entry key="M15" value="378.4938140473829" />
-      <entry key="M30" value="669.2024383759525" />
-      <entry key="H1" value="1015.6112357140358" />
-      <entry key="H2" value="1309.8460664782863" />
-      <entry key="H4" value="1506.8094525921806" />
-      <entry key="D1" value="1705.0104396100876" />
-      <entry key="W1" value="1742.619865416272" />
+      <entry key="MS100" value="3.8309771475479294E-4" />
+      <entry key="MS500" value="0.21675304611779828" />
+      <entry key="S2" value="1.5554095748020051" />
+      <entry key="S5" value="3.984051680340109" />
+      <entry key="S10" value="6.99965520897798" />
+      <entry key="S30" value="17.494449366904085" />
+      <entry key="S60" value="31.481070197518378" />
+      <entry key="M2" value="55.47406279695933" />
+      <entry key="M5" value="120.36797173370583" />
+      <entry key="M10" value="219.1849165178124" />
+      <entry key="M15" value="304.83464062722146" />
+      <entry key="M30" value="537.0777686446681" />
+      <entry key="H1" value="976.7064109654076" />
+      <entry key="H2" value="1588.4143438167655" />
+      <entry key="H4" value="2156.461980358587" />
+      <entry key="D1" value="2877.138290610521" />
+      <entry key="W1" value="3032.11089308479" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -126,6 +126,7 @@
     "Python.model.executor": "Run",
     "Python.order_parameter.executor": "Run",
     "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
     "Python.test_generate_kuramoto_dataset.executor": "Run",
     "Python.utils.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -163,36 +164,12 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Doctests in order_parameter">
+  <component name="RunManager" selected="Python.spectral">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
         <pdfViewer id="5f42ea7e-fb34-4de0-b8dd-06fa7843c20b" />
       </steps>
-      <method v="2" />
-    </configuration>
-    <configuration name="generate_example_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/generate_example_dataset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="solvers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -211,6 +188,30 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="spectral" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -287,11 +288,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.spectral" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python tests.Doctests in order_parameter (1)" />
         <item itemvalue="Python.solvers" />
-        <item itemvalue="Python.generate_example_dataset" />
       </list>
     </recent_temporary>
   </component>
@@ -424,7 +425,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789492373088</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification.">
+      <option name="closed" value="true" />
+      <created>1789511750584</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1789511750584</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,6 +448,7 @@
     <MESSAGE value="added a RotorSolver class to solvers.py" />
     <MESSAGE value="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared" />
     <MESSAGE value="Enhanced RotorSolver with Nyquist stability enforcement, phase increment limits, and experimental adaptive stepping placeholder. Updated documentation and warnings for safer integration handling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhanced RotorSolver with Nyquist stability enforcement, phase increment limits, and experimental adaptive stepping placeholder. Updated documentation and warnings for safer integration handling." />
+    <MESSAGE value="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification." />
   </component>
 </project>
