@@ -5,9 +5,18 @@ Individual command implementations for the Kuramoto CLI.
 
 Author: Eigenscribe
 Date: May 2026
+Last Updated: September 2026
 """
 
 from __future__ import annotations
+
+# Prevent direct execution -- must be loaded as part of the package
+if __name__ == "__main__":
+    raise RuntimeError(
+        "commands.py cannot be run directly. "
+        "Use: python -m kuramoto.cli.main\n"
+        "Or: kuramoto --help (if installed)"
+    )
 
 import os
 import click
@@ -19,7 +28,7 @@ from ..api import generate_kuramoto_dataset
 from ..analysis.spectral import (
     compute_fourier_coefficients,
     compute_psd,
-    compute_spectral_distribution
+    compute_spectral_decomposition
 )
 from ..analysis.viz import (
     plot_network,
@@ -75,7 +84,10 @@ def datasetforbeginners(output: str) -> None:
 @click.command()
 @click.option("--config", "-c", type=click.Path(exists=True), help="Path to JSON config file.")
 @click.option("--output", "-o", default="data/output.npz", help="Output path for the dataset.")
-def generate(config: str, output: str) -> None:
+@click.option("--solver", "-s", default="euler", type=click.Choice(["euler", "rk45", "rotor"]),
+              help="Integration method (euler, rk45, or GA rotor).")
+@click.option("--track-symmetries", is_flag=True, help="Enable LIe symmetry tracking.")
+def generate(config: str, output: str, solver: str, track_symmetries: bool) -> None:
     """Generate a dataset from a JSON configuration file."""
     if config is None:
         click.secho("❌ Error: Please provide a configuration file with --config", fg="red")
@@ -86,13 +98,25 @@ def generate(config: str, output: str) -> None:
     
     click.secho(f"🚀 Parsing configuration from {config}...", fg="cyan")
     params = parse_simulation_config(json_str)
-    
-    click.secho(f"🏃 Running simulation...", fg="green")
+
+    # Override solver if explicitly specified
+    if solver != "euler":
+        params["solver"] = solver
+
+    click.secho(f"👟 Running simulation with {solver} solve...", fg="green")
+
+    # Conditional Lie symmetry tracking
+    if track_symmetries and solver == "rotor":
+        click.secho(" ↪️ Tracking U(1) phase invariance and NOether charges...", fg="yellow")
+        params["symmetry_metrics"] = True
+    elif track_symmetries and solver != "rotor":
+        click.echo("  ⚠️ Warning: Lie symmetry tracking requires --solver rotor")
+
     data = generate_kuramoto_dataset(**params)
-    
+
     os.makedirs(os.path.dirname(output), exist_ok=True)
     np.savez(output, **data)
-    
+
     click.secho(f"✅ Success: Dataset saved to '{output}'", fg="bright_green")
     
     # Summary table
@@ -100,7 +124,9 @@ def generate(config: str, output: str) -> None:
         "N": params["n_oscillators"],
         "K": params["coupling"],
         "T": params["timesteps"],
-        "dt": params["dt"]
+        "dt": params["dt"],
+        "solver": solver.upper(),
+        "symmetry_tracking": "Yes" if track_symmetries else "No"
     }
     print_table([summary], title="Simulation Summary")
 

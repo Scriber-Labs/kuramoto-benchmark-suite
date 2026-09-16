@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refined output messages in **spectral.py** smoke tests for consistent formatting.">
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refined output messages in **order_parameter.py** smoke tests for consistent formatting.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,61 +48,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.5511263936599364" />
-      <entry key="MS500" value="2.5226987999165487" />
-      <entry key="S2" value="3.0589237493998547" />
-      <entry key="S5" value="4.057702238773187" />
-      <entry key="S10" value="5.558637667772818" />
-      <entry key="S30" value="10.401679255753868" />
-      <entry key="S60" value="14.62786028694195" />
-      <entry key="M2" value="22.064824292883912" />
-      <entry key="M5" value="61.93011056726737" />
-      <entry key="M10" value="149.3833804900319" />
-      <entry key="M15" value="234.77050549252223" />
-      <entry key="M30" value="471.2560314478765" />
-      <entry key="H1" value="914.7133490237682" />
-      <entry key="H2" value="1540.5267299436168" />
-      <entry key="H4" value="2131.6568643116893" />
-      <entry key="D1" value="2892.4296832196414" />
-      <entry key="W1" value="3057.343178223323" />
+      <entry key="MS100" value="1.95138279994895" />
+      <entry key="MS500" value="3.869711526439439" />
+      <entry key="S2" value="10.405131478555678" />
+      <entry key="S5" value="21.79210671833948" />
+      <entry key="S10" value="38.40541310791161" />
+      <entry key="S30" value="71.47590107248368" />
+      <entry key="S60" value="89.75645973856375" />
+      <entry key="M2" value="111.20406376518494" />
+      <entry key="M5" value="162.44640586937928" />
+      <entry key="M10" value="236.93063181842214" />
+      <entry key="M15" value="310.8437180477648" />
+      <entry key="M30" value="535.4283299304424" />
+      <entry key="H1" value="977.3444162459916" />
+      <entry key="H2" value="1641.0387487884682" />
+      <entry key="H4" value="2304.676369530563" />
+      <entry key="D1" value="3199.2866232396727" />
+      <entry key="W1" value="3398.258663232778" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="5.253337407530269E-108" />
-      <entry key="S5" value="1.2251072729573294E-43" />
-      <entry key="S10" value="3.5001532437270993E-22" />
-      <entry key="S30" value="7.047401583356646E-8" />
-      <entry key="S60" value="2.654694567803112E-4" />
-      <entry key="M2" value="0.016298832407014595" />
-      <entry key="M5" value="0.20059828082452186" />
-      <entry key="M10" value="0.5312044127261775" />
-      <entry key="M15" value="0.8121838157670188" />
-      <entry key="M30" value="1.6545775126940439" />
-      <entry key="H1" value="3.372895879140065" />
-      <entry key="H2" value="5.700130406149402" />
-      <entry key="H4" value="7.786777167399266" />
-      <entry key="D1" value="10.360661132632856" />
-      <entry key="W1" value="10.905697603832165" />
+      <entry key="S2" value="4.83938824454298E-218" />
+      <entry key="S5" value="1.1855399302941645E-87" />
+      <entry key="S10" value="3.4431670454599807E-44" />
+      <entry key="S30" value="3.2532644276220355E-15" />
+      <entry key="S60" value="5.703838652085609E-8" />
+      <entry key="M2" value="2.398211313351516E-4" />
+      <entry key="M5" value="0.039720086859814714" />
+      <entry key="M10" value="0.26492638113947775" />
+      <entry key="M15" value="0.5516548187184566" />
+      <entry key="M30" value="1.4399969699200126" />
+      <entry key="H1" value="3.1981528239751746" />
+      <entry key="H2" value="5.719250477690632" />
+      <entry key="H4" value="8.114810654731917" />
+      <entry key="D1" value="11.210460712651097" />
+      <entry key="W1" value="11.883069348595074" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.408540183137149" />
-      <entry key="MS500" value="2.4691849795356027" />
-      <entry key="S2" value="3.042129264556304" />
-      <entry key="S5" value="4.048753227151888" />
-      <entry key="S10" value="5.55258752336247" />
-      <entry key="S30" value="10.397990508532157" />
-      <entry key="S60" value="14.624547498086988" />
-      <entry key="M2" value="22.06659989881467" />
-      <entry key="M5" value="62.069862554705026" />
-      <entry key="M10" value="149.82142094521737" />
-      <entry key="M15" value="235.48226321637898" />
-      <entry key="M30" value="472.81304895584117" />
-      <entry key="H1" value="917.9991140890537" />
-      <entry key="H2" value="1546.1586664122485" />
-      <entry key="H4" value="2139.398462500689" />
-      <entry key="D1" value="2902.780507385047" />
-      <entry key="W1" value="3068.2474001424307" />
+      <entry key="MS100" value="1.873840820986948" />
+      <entry key="MS500" value="3.8379350005177635" />
+      <entry key="S2" value="10.384005481768137" />
+      <entry key="S5" value="21.774675506815043" />
+      <entry key="S10" value="38.39070099381954" />
+      <entry key="S30" value="71.46677573133958" />
+      <entry key="S60" value="89.74655055924373" />
+      <entry key="M2" value="111.18451817810345" />
+      <entry key="M5" value="162.44360066847017" />
+      <entry key="M10" value="237.13760955258746" />
+      <entry key="M15" value="311.32821077248263" />
+      <entry key="M30" value="536.7903664560549" />
+      <entry key="H1" value="980.4637653288114" />
+      <entry key="H2" value="1646.69144640483" />
+      <entry key="H4" value="2312.7450609247" />
+      <entry key="D1" value="3210.4866111115634" />
+      <entry key="W1" value="3410.140149434177" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -120,6 +121,7 @@
     "Python tests.Doctests in order_parameter (2).executor": "Run",
     "Python tests.Doctests in order_parameter.executor": "Run",
     "Python.api.executor": "Run",
+    "Python.commands.executor": "Run",
     "Python.dataset.executor": "Run",
     "Python.generate_example_dataset.executor": "Run",
     "Python.model.executor": "Run",
@@ -163,12 +165,36 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Doctests in order_parameter (2)">
+  <component name="RunManager" selected="Python.commands">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
         <pdfViewer id="5f42ea7e-fb34-4de0-b8dd-06fa7843c20b" />
       </steps>
+      <method v="2" />
+    </configuration>
+    <configuration name="commands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/commands.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="spectral" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -219,27 +245,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Doctests in order_parameter (1)" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/order_parameter.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
     <configuration name="Doctests in order_parameter (2)" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
@@ -284,11 +289,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.commands" />
         <item itemvalue="Python tests.Doctests in order_parameter (2)" />
         <item itemvalue="Python.spectral" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
         <item itemvalue="Python.utils" />
-        <item itemvalue="Python tests.Doctests in order_parameter (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -445,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789542300856</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Refined output messages in **order_parameter.py** smoke tests for consistent formatting.">
+      <option name="closed" value="true" />
+      <created>1789542589034</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1789542589034</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,6 +476,7 @@
     <MESSAGE value="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification." />
     <MESSAGE value="Expanded **spectral.py** with harmonic analysis, synchronization transition detection, and advanced spectral functions. Updated smoke tests to validate new utilities and corrected minor documentation inconsistencies." />
     <MESSAGE value="Refined output messages in **spectral.py** smoke tests for consistent formatting." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refined output messages in **spectral.py** smoke tests for consistent formatting." />
+    <MESSAGE value="Refined output messages in **order_parameter.py** smoke tests for consistent formatting." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refined output messages in **order_parameter.py** smoke tests for consistent formatting." />
   </component>
 </project>
