@@ -270,7 +270,7 @@ def _run_smoke_test() -> None:
     assert isinstance(r_1d, (float, np.floating))
     assert 0.0 <= r_1d <= 1.0
 
-    print("    ✔️ 1D snapshot test passed")
+    print(" ... 1D snapshot test passed ✔️")
 
     # ------------------------------------------------------------------
     # Test 2: Time series (2D)
@@ -281,7 +281,7 @@ def _run_smoke_test() -> None:
     assert r_2d.shape == (100,)
     assert np.all((r_2d >= 0.0) & (r_2d <= 1.0))
 
-    print("    ✔️ 2D time series test passed")
+    print(" ...️ 2D time series test passed ✔️")
 
     # ------------------------------------------------------------------
     # Test 3: Perfect synchronization
@@ -291,7 +291,7 @@ def _run_smoke_test() -> None:
 
     assert np.allclose(r_sync, 1.0)
 
-    print("    ✔️ Perfect synchronization test passed (r approx 1.0)")
+    print(" ... Perfect synchronization test passed (r approx 1.0) ✔️")
 
     # ------------------------------------------------------------------
     # Test 4: Complete incoherence
@@ -301,7 +301,7 @@ def _run_smoke_test() -> None:
 
     assert np.all(r_incoh < 0.1)
 
-    print("    ✔️ Incoherence test passed (r is approximately 0)")
+    print(" ... Incoherence test passed (r is approximately 0) ✔️")
 
     # ------------------------------------------------------------------
     # Test 5: U(1) global phase-shift invariance
@@ -325,7 +325,7 @@ def _run_smoke_test() -> None:
     # This assertion establishes/enforces the U(1) symmetry requirement.
     assert metrics.global_phase_invariant is True
 
-    print("    ✔️ U(1) gloabal phase invariance test passed")
+    print("  ...️ U(1) gloabal phase invariance test passed ✔️")
 
     # ------------------------------------------------------------------
     # Test 6: Symmetry must preserve synchronization strength
@@ -338,7 +338,7 @@ def _run_smoke_test() -> None:
 
     assert np.allclose(r_original, r_shifted, rtol=1e-6, atol=1e-10)
 
-    print("    ✔️ Lie symmetry metrics contract test passed.")
+    print(" ... Lie symmetry metrics contract test passed. ✔️")
 
     # ------------------------------------------------------------------
     # Test 7: Lie symmetry diagnostic output contract
@@ -348,7 +348,7 @@ def _run_smoke_test() -> None:
     assert np.isfinite(metrics.energy_conserved).all()
     assert 0.0 <= metrics.synchronization_strength <= 1.0
 
-    print("    ✔️ Lie symmetry metrics contract test passed")
+    print(" ... ️ Lie symmetry metrics contract test passed ✔️")
 
     print("\n ✅ All order parameter smoke tests passed.")
 
