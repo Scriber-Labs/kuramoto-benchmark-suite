@@ -245,17 +245,17 @@ def _run_smoke_test() -> None:
     # Fourier
     coeffs = compute_fourier_coefficients(t, sig, freq)
     assert np.abs(coeffs[0]) > 0.4  # Ideal is 0.5 for real sine
-    print(" ... Fourier coefficients computed ✔️")
+    print(" ... ✔️  Fourier coefficients computed.")
 
     # PSD
     f, pxx = compute_psd(sig, fs, nperseg=256)
     peak_freq = f[np.argmax(pxx)]
     assert np.abs(peak_freq - freq) < 1.0  # Loose check for binning
-    print(" ... PSD peak detected ✔️")
+    print(" ... ✔️  PSD peak detected.")
 
     # Distribution
     dist = compute_spectral_decomposition(f, pxx, freq, bandwidth=1.0)
-    print(f" ... Distribution: {dist} ✔️")
+    print(f" ... ✔️  Distribution: {dist}.")
     assert dist["fundamental"] > 0.8
 
     # Test harmonic_analysis
@@ -263,7 +263,7 @@ def _run_smoke_test() -> None:
     harm = harmonic_analysis(order_param, dt=0.01)
     assert harm["h1_power_ratio"] > 0.5
     assert "rest_ratio" in harm
-    print(" ... Harmonic analysis test passed ✔️")
+    print(" ... ✔️  Harmonic analysis test passed.")
 
     # Test detect_sync_transition
     K_range = np.linspace(0.5, 2.0, 10)
@@ -271,7 +271,7 @@ def _run_smoke_test() -> None:
     fake_psd[5:] += 5  # Simulate transition at K_index 5
     K_c = detect_sync_transition(f, fake_psd, K_range)
     assert K_c in K_range
-    print(" ...  Sync transition detection passed ✔️")
+    print(" ... ✔️  Sync transition detection passed.")
 
     print("✅ All spectral analysis smoke test passed.")
 

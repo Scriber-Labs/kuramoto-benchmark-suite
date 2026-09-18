@@ -86,7 +86,7 @@ def datasetforbeginners(output: str) -> None:
 @click.option("--output", "-o", default="data/output.npz", help="Output path for the dataset.")
 @click.option("--solver", "-s", default="euler", type=click.Choice(["euler", "rk45", "rotor"]),
               help="Integration method (euler, rk45, or GA rotor).")
-@click.option("--track-symmetries", is_flag=True, help="Enable LIe symmetry tracking.")
+@click.option("--track-symmetries", is_flag=True, help="Enable Lie symmetry tracking.")
 def generate(config: str, output: str, solver: str, track_symmetries: bool) -> None:
     """Generate a dataset from a JSON configuration file."""
     if config is None:
