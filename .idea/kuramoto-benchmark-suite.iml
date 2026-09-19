@@ -8,4 +8,10 @@
     <orderEntry type="jdk" jdkName="Python 3.12 (kuramoto-benchmark-suite)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings" />
+  <component name="PyDocumentationSettings">
+    <option name="format" value="NUMPY" />
+  </component>
+  <component name="ReSTService" />
+  <component name="TestRunnerService" />
 </module>
