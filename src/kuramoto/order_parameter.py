@@ -325,7 +325,7 @@ def _run_smoke_test() -> None:
     # This assertion establishes/enforces the U(1) symmetry requirement.
     assert metrics.global_phase_invariant is True
 
-    print(" ... ✔️  U(1) gloabal phase invariance test passed.")
+    print(" ... ✔️  U(1) global phase invariance test passed.")
 
     # ------------------------------------------------------------------
     # Test 6: Symmetry must preserve synchronization strength

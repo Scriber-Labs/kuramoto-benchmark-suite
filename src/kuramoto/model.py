@@ -21,13 +21,13 @@ from typing import Optional, Final, Dict
 import numpy as np
 from numpy.typing import NDArray
 
-from .validation import *
+from kuramoto.validation import *
 
-from .graphs import graph_stats
-from .dataset import KuramotoDataset
-from .solvers import solve_kuramoto
-from .order_parameter import compute_order_parameter as order_parameter
-from .utils import get_rng
+from kuramoto.graphs import graph_stats
+from kuramoto.dataset import KuramotoDataset
+from kuramoto.solvers import solve_kuramoto
+from kuramoto.order_parameter import compute_order_parameter as order_parameter
+from kuramoto.utils import get_rng
 
 __all__: list[str] = [
     "KuramotoModel",
@@ -219,18 +219,52 @@ def _run_smoke_test() -> None:
     """Sanity check: basic simulation and shape assertations."""
     print("💨 Kuramoto smoke test")
 
-    mdl = KuramotoModel(n_oscillators=8, coupling_strength=1.8, random_seed=27)
-    ds  = mdl.simulate(t_span=4.0)
+    # ------------------------------------------------------------------ #
+    # 1. Two-oscillator coupling: independently known RHS
+    # ------------------------------------------------------------------ #
+    model = KuramotoModel(
+        n_oscillators=2,
+        natural_frequencies=np.zeros(2),
+        coupling_strength=1.0,
+        random_seed=27,
+    )
 
-    assert ds.theta.shape == (KuramotoModel._MIN_OUTPUT_POINTS, 8)
+    theta = np.array([0.0, np.pi / 2])
+    dtheta = model._rhs(0.0, theta)
+
+    expected = np.array([0.5, -0.5])
+
+    assert np.allclose(dtheta, expected)
+    print(" ... ✔️ two-oscillator coupling test passed")
+
+    # ------------------------------------------------------------------ #
+    # 2. Basic Simulation
+    # ------------------------------------------------------------------ #
+    mdl = KuramotoModel(
+        n_oscillators=10,
+        coupling_strength=1.8,
+        random_seed=27,
+    )
+    ds = mdl.simulate(t_span=4.0)
+
+    assert ds.theta.shape == (KuramotoModel._MIN_OUTPUT_POINTS, 10)
     assert ds.dtheta.shape == ds.theta.shape
-    print("    ✔️ shapes OK")
+    print(" ... ✔️ shapes OK")
 
-    # quick numeric check: r(t) in [0,1]
+    # ------------------------------------------------------------------ #
+    # 3. Order parameter bounds
+    # ------------------------------------------------------------------ #
     assert np.all((mdl.order_param >= 0) & (mdl.order_param <= 1))
-    print("    ✔️ order parameter bounds OK")
+    print(" ... ✔️ order parameter bounds OK")
 
-    print("✅ KuramotoModel smoke test passed")
+    print("\n✅ KuramotoModel smoke test passed")
+
+# ------------------------------------------------------------------------------
+# 🔥 Entry point
+# ------------------------------------------------------------------------------
+
+def main() -> None:
+    _run_smoke_test()
 
 if __name__ == "__main__":
-    _run_smoke_test()
+    main()
