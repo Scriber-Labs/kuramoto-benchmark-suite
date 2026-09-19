@@ -213,11 +213,12 @@ class KuramotoModel:
         return f"KuramotoModel(N={self.n}, K={self.K:g}, sigma={self.noise_std:g}, {sim})"
 
 # --------------------------------------------------------------------------- #
-# 2️⃣ Smoke test
+# 💨 Smoke test
 # --------------------------------------------------------------------------- #
 def _run_smoke_test() -> None:
     """Sanity check: basic simulation and shape assertations."""
     print("💨 Kuramoto smoke test")
+
     mdl = KuramotoModel(n_oscillators=8, coupling_strength=1.8, random_seed=27)
     ds  = mdl.simulate(t_span=4.0)
 
