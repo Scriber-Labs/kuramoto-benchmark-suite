@@ -13,15 +13,15 @@ Date: May 2026
 from __future__ import annotations
 
 # --------------------------------------------------------------------------- #
-# Imports & type aliases
+# Package / direct-script imports
 # --------------------------------------------------------------------------- #
 
 from typing import Optional, Final, Dict, Any
 import numpy as np
 from numpy.typing import NDArray
 
-from .model import KuramotoModel
-from .topologies import load_topology
+from kuramoto.model import KuramotoModel
+from kuramoto.topologies import load_topology
 
 __all__: list[str] = [
     "generate_kuramoto_dataset",
@@ -105,7 +105,7 @@ def generate_kuramoto_dataset(
     return dataset.to_dict()
 
 # ------------------------------------------------------------------------------ #
-# 2️⃣ Smoke Test
+# 💨 Smoke Test
 # ------------------------------------------------------------------------------ #
 
 def _run_smoke_test() -> None:
@@ -134,8 +134,12 @@ def _run_smoke_test() -> None:
     assert "theta" in data
     assert data["theta"].shape[1] == num_oscillators
 
-    print("✔️ API test passed")
+    print(" ... ✔️ API test passed")
     print("\n✅ API smoke test passed.")
+
+# ------------------------------------------------------------------------------
+# 🔥 Entry point
+# ------------------------------------------------------------------------------
 
 def main() -> None:
     """

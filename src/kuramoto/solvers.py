@@ -2,7 +2,14 @@
 """
 ODE solver interface for Kuramoto simulations.
 
-Provides a thin abstraction over SciPy integrators to allow future solver swapping.
+This module provides:
+    - ``solve_kuramoto``: a thin interface around SciPy's adaptive RK45 integrator.
+    - ``RotorSolver``: an experimental geometric-algebra representation of Kuramoto dynamics using fixed-step Euler
+      integration
+
+The rotor solver uses Nyquist-inspired temporal-resolution criterion to help ensure that high-frequency oscillator
+dynamics are adequately resolved. This criterion is supplemented by an explicit maximum phase-increment constraint to
+prevent numerical instabilities.
 
 Author: Eigenscribe
 Review status: Reviewed and maintained by Eigenscribe.
@@ -13,10 +20,15 @@ Last Updated: 09-2026
 from __future__ import annotations
 
 from typing import Callable, Final, Any
+
 import numpy as np
 from numpy.typing import NDArray
 from scipy.integrate import solve_ivp
 
+# Import RNG utilities from the central utils module.
+from kuramoto.utils import get_rng
+
+# Validation imports support both package execution and direct script execution.
 import sys
 from pathlib import Path
 
@@ -47,12 +59,14 @@ __all__: list[str] = [
 # ------------------------------------------------------------------------------
 # 0️⃣ Type Aliases
 # ------------------------------------------------------------------------------
+
 PhaseArray = NDArray[np.floating]
 TimeArray = NDArray[np.floating]
 
 # ------------------------------------------------------------------------------
 # 1️⃣ Classic Functional Solver Wrapper
 # ------------------------------------------------------------------------------
+
 _DEFAULT_METHOD: Final[str] = "RK45"
 
 def solve_kuramoto(
@@ -87,12 +101,12 @@ def solve_kuramoto(
     scipy.integrate.OdeResult
         Standard SciPy result object with fields t , y , success, ...
     """
-
     # Defensive checks
     validate_positive_scalar(t_span, "t_span")
     validate_time_axis(t_eval)
     validate_positive_scalar(rtol, "rtol")
     validate_non_negative_scalar(atol, "atol")
+
     if max_step is not None:
         validate_positive_scalar(max_step, "max_step")
 
@@ -119,16 +133,32 @@ class RotorSolver:
     ⚠️ EXPERIMENTAL / RESEARCH MODE
 
     Unlike the standard solve_kuramoto() wrapper (which uses adaptive RK45 with built-in error control), RotorSolve uses
-    fixed-step Euler integration. Users should:
+    fixed-step Euler integration.
 
-    - Choose dt_internal small enough to resolve max(omega) + K
-    - Verify results against the classic solver for critical runs
-    - Enable enfore_nyquist=True for automatic warnings
+    The solver uses a Nyquist-inspired temporal resolution criterion because the project treats temporal
+    sampling/resolution as a central consideration when resolving oscillator dynamics. This is supplemented by a maximum
+    phase-increment constraint.
 
-    Future work: Adaptive stepper matching Rk45 stability properties.
+    The Nyquist-inspired criterion is a resolution heuristic, not a claim that the Nyquist sampling theorem provides an
+    Euler stability condition. Explicit Euler accuracy and stability remain separate numerical concerns.
 
-    Each oscillator is represented as a rotor R=exp(-B0/2) where B is the rotation plane bivector. Coupling operates on
-    extracted phases, but state evolution preserves the geometric algebra structure.
+    Users should:
+
+    - choose a sufficiently small ``dt_internal``;
+    - use ``enforce_nyquist=True`` when high-frequency dynamics should be automatically checked;
+    - interpret warnings as indications of possible temporal under-resolution, not as formal stability proofs;
+    - verify results against the classic RK45 solver.
+
+    Future work:
+        Implement an adaptive RK45/Dormand-Prince-style stepper for the rotor representation while retaining the
+        geometric state representation.
+
+    Each oscillator is represented as a rotor
+
+        R=exp(-B theta / 2),
+
+    where B is the rotation plane bivector. Coupling is applied using the extracted physical phases, while the state
+    itself is stored as geometric-algebra rotors.
 
     Attributes
     ----------
@@ -167,26 +197,28 @@ class RotorSolver:
         Raises
         ------
         ImportError
-            If clifford package is not installed.
+            If the ``clifford`` package is not installed.
         ValueError
-            If dim < 2 (need at least 2D for non-trivial rotations)
+            If ``dim < 2`` or if the oscillator count is invalid (need at least 2D for non-trivial rotations).
         """
         validate_positive_scalar(n_oscillators, "n_oscillators")
         validate_positive_scalar(dim, "dim")
 
         if dim < 2:
-            raise ValueError("dim must be >=2 for non-trivial rotration plane")
+            raise ValueError("dim must be >=2 for non-trivial rotation plane")
 
         # Lazy import to avoid hard dependency
         try:
             from clifford import Cl
-        except ImportError:
+        except ImportError as exc:
             raise ImportError(
-                "clifford package required for Rotor Solver. Install with: pip install clifford"
-            )
+                "clifford package required for Rotor Solver."
+                "Install with: pip install clifford"
+            ) from exc
 
-        if seed is not None:
-            np.random.seed(seed)
+        # Keep random state local to this solver. This avoids modifying NumPy's global RNG state and keeps benchmark
+        # generation reproducible.
+        self.rng = get_rng(seed)
 
         self.N = n_oscillators
         self.dim = dim
@@ -197,45 +229,62 @@ class RotorSolver:
         self.B_plane = self.blades[plane_key]
 
         # Precompute the slot of rotation plane in the coefficient array
-        # Rotor R = exp(-B theta/2) lives in the even subalgebra spanned by {scalar, B_plane}, so we only ever read
+        # Rotor R = exp(-B theta / 2) lives in the even subalgebra spanned by {scalar, B_plane}, so we only ever read
         # these two slots.
-        self._blade_idx = int(np.nonzero(np.asarray(self.B_plane.value))[0][0])
+        self._blade_idx = int(
+            np.nonzero(
+                np.asarray(self.B_plane.value))[0][0]
+        )
         self.blade_idx = self._blade_idx
 
         # Initial conditions
         self.rotors = self._random_rotors()
-        self.omegas = np.random.uniform(-1, 1, n_oscillators)
+        self.omegas = self.rng.uniform(
+            -1.0,
+            1.0,
+            n_oscillators,
+        )
 
     def _random_rotors(self) -> list:
         """Generate random initial rotors."""
-        phases = np.random.uniform(0, 2 * np.pi, self.N)
-        return [np.exp(-self.B_plane * p / 2) for p in phases]
+        phases = self.rng.uniform(
+            0,
+            2 * np.pi,
+            self.N)
+        return [
+            np.exp(-self.B_plane * p / 2.0)
+            for p in phases
+        ]
 
     def extract_phases(self) -> PhaseArray:
         """
-        Extract phase angles from current rotor states.
+        Extract physical phase angles from current rotor states.
 
         Returns
         -------
         PhaseArray
-            Phases of shape (N,), where phase = 2 * arctan2(bivector_coefficient, scalar).
+            Phases of shape ``(N,)``, wrapped to ``[0, 2*pi).
         """
         phases = []
+
         for r in self.rotors:
             scalar = float(r.value[0])           # Slot 0 is always the scalar
             bivector = float(r.value[self._blade_idx])  # Precomputed plane slot
 
             # Avoid division by zero
-            phases.append((2 * np.arctan2(-bivector, scalar)) % (2 * np.pi))
+            phases.append(
+                (2.0 * np.arctan2(-bivector, scalar)) % (2.0 * np.pi)
+            )
 
         return np.array(phases)
 
     def step_euler(self, K: float, dt: float) -> None:
         """
-        One explicit Euler step with Kuramoto coupling.
+        Advance the Kuramoto system by one explicit Euler step.
 
-        Updates rotor states in-place using the classic Kuramoto interaction term applied to extracted phases, then
-        reconstructs rotors.
+        The standard attractive Kuramoto interaction is
+
+            dtheta_i/dt =omega_i + (K/N) sum_j sin(theta_j - theta_i).
 
         Parameters
         ---------
@@ -250,41 +299,56 @@ class RotorSolver:
         # Extract phases
         phases = self.extract_phases()
 
-        # Classic Kuramoto coupling: dtheta_i/dt = omega_i + (K/N) sum{sin(theta_j - theta_i)}
-        diff_matrix = phases[:, np.newaxis] - phases[np.newaxis, :]
-        coupling = K / self.N * np.sum(np.sin(diff_matrix), axis=1)
+        # Standard attractive Kuramoto coupling:
+        # sin(theta_j - theta_i)
+        diff_matrix =(
+            phases[np.newaxis, :] - phases[:, np.newaxis]
+        )
+        coupling = (K / self.N) * np.sum(
+            np.sin(diff_matrix),
+            axis=1,
+        )
 
         # Update phases
         new_phases = phases + dt * (self.omegas + coupling)
 
-        # Reconstruct rotors from updated phases
-        self.rotors = [np.exp(-self.B_plane * p / 2) for p in new_phases]
+        # Reconstruct rotors normalized geometric rotors from updated phases.
+        self.rotors = [
+            np.exp(-self.B_plane * p / 2.0)
+            for p in new_phases
+        ]
 
     def get_complex_order_parameter(self) -> complex:
         """
-        Compute order parameter as average of complex rotor representation.
+        Compute the standard complex Kuramoto order parameter.
 
         Returns
         -------
         complex
-            Average rotor state interpreted as complex number.
-            Magnitude |r| indicates synchronization strength.
+            ``mean(exp(1j * theta))``. Its magnitude is the standard synchronization strength.
+
+        Notes
+        -----
+        The rotor itself contains half-angle information through
+
+            R(theta) = exp(-B theta /2).
+
+        Therefore the rotor coefficients must not be averaged directly as though they were the conventional Kuramoto
+        phasors. This method extracts the physical phases first so that the canonical Kuramoto observable is used.
         """
-        scalars = np.array([r.value[0] for r in self.rotors])
-        bivector_parts = np.array([r.value[self._blade_idx] for r in self.rotors])
-        complex_repr = scalars + 1j * bivector_parts
-        return complex(np.mean(complex_repr))
+        phases = self.extract_phases()
+        return complex(np.mean(np.exp(1j * phases)))
 
     def get_synchronization_strength(self) -> float:
         """
-        Return magnitude of order parameter.
+        Return the magnitude of the standard Kuramoto order parameter.
 
         Returns
         -------
         float
-            Synchronization strength in [0, 1], where 1 = fully synchronized.
+            Synchronization strength in ``[0, 1]``, where 1 = fully synchronized.
         """
-        return abs(self.get_complex_order_parameter())
+        return float(abs(self.get_complex_order_parameter()))
 
     def simulate(
         self,
@@ -295,68 +359,111 @@ class RotorSolver:
         max_phase_increment: float = 0.1,  # radians per step max
     ) -> tuple[TimeArray, PhaseArray]:
         """
-        Run full simulation with optional stability enforcement.
+        Run a full rotor simulation.
 
         Parameters
         ----------
         K : float
             Coupling strength.
         t_eval : TimeArray
-            Output timestamps (must be monotonically increasing).
+            Output timestamps (must be monotonically increasing and begin at zero).
         dt_internal : float, optional
-            Internal stepping timestep. If None, inferred from t_eval.
+            Internal Euler timestep. If None, infer a timestep from the output spacing.
         enforce_nyquist : bool, optional
-            If True, cap dt to resolve max frequency.
+            If True, apply the project's Nyquist-inspired temporal-resolution criterion and phase-increment constraint
+            to detect possible under-resolution.
         max_phase_increment : float, optional
-            Maximum allowed phase change per step (radians).
+            Maximum estimated angular phase advance per internal step, in radians.
 
         Returns
         -------
-        tuple
-            (times, phases) where phases has shape (len(t_eval), N).
+        tuple[TimeArray, PhaseArray]
+            ``(times, phases)`` where ``phases`` has shape ``(len(t_eval), N)``.
+
+        Raises
+        ------
+        ValueError
+            If the time axis or timestep parameters are invalid.
         """
+        validate_time_axis(t_eval)
+
+        if t_eval.size < 2:
+            raise ValueError("t_eval must contain at least two time points.")
+
+        if not np.isclose(t_eval[0], 0.0):
+            raise ValueError("t_eval must begin at 0.0")
+
+        if dt_internal is not None:
+            validate_positive_scalar(dt_internal, "dt_internal")
+
+        validate_positive_scalar(
+            max_phase_increment,
+            "max_phase_increment",
+        )
+
+        output_dt = np.diff(t_eval)
+
         if dt_internal is None:
-            # infer from output spacing (safe upper bound)
-            dt_internal = np.mean(np.diff(t_eval)) * 0.1
+            # Use a conservative fraction of the smallest requested output interval rather than assuming uniform
+            # spacing.
+            dt_internal = float(np.min(output_dt)) * 0.1
 
+        # ------------------------------------------------------------------
+        # Nyquist-inspired temporal-resolution check
+        # ------------------------------------------------------------------
         if enforce_nyquist:
-            # Estimate maximum effective frequency
-            max_omega = np.max(np.abs(self.omegas))
-            estimated_max_freq = max_omega + abs(K)
+            max_omega = float(np.max(np.abs(self.omegas)))
 
-            #Nyquist criterion sampling rate > 2 * max frequency
-            nyquist_dt = 1.0 / (2.0 * estimated_max_freq) if estimated_max_freq > 0 else np.inf
+            # Conservative upper estimate for the phase rate:
+            #
+            # |dtheta_i/dt| <= |omega_i| + K
+            #
+            # because the normalized mean sine coupling has magnitude <= 1.
+            estimated_max_rate = max_omega + abs(K)
 
-            # Additional phase increment constraint
-            phase_increment_limit = max_phase_increment / estimated_max_freq if estimated_max_freq > 0 else np.inf
+            if estimated_max_rate > 0.0:
+                # Nyquist-inspired resolution scale:
+                # sampling frequency > 2 * characteristic frequency.
+                #
+                # Here this is used as a temporal-resolution heuristic for the internal integration grid, not as an
+                # Euler stability theorem.
+                nyquist_dt = 1.0 / (2.0 * estimated_max_rate)
 
-            dt_safe = min(nyquist_dt, phase_increment_limit)
-
-            if dt_internal > dt_safe * 10:  # Warning threshold
-                import warnings
-                warnings.warn(
-                    f"dt_internal={dt_internal:.4f} may exceed stability bounds. "
-                    f"Recommended dt <= {dt_safe:.4f} (Nyquist estimate: max_frq approx {estimated_max_freq:.2f} Hz). "
-                    f"Set dt_internal explicitly or disable enforce_nyquist=False.",
-                    RuntimeWarning,
-                    stacklevel=2,
+                # Additional project-specific phase-resolution constraint.
+                phase_increment_dt = (
+                    max_phase_increment / estimated_max_rate
                 )
 
-        times = []
-        all_phases = []
+                dt_safe = min(nyquist_dt, phase_increment_dt)
+
+                if dt_internal > dt_safe:
+                    import  warnings
+
+                    warnings.warn(
+                        f"dt_internal={dt_internal:.6g} may under-resolve the oscillator dynamics. The current "
+                        f"Nyquist-inspired resolution estimate gives dt <= {nyquist_dt:.6g}, while the maximum phase "
+                        f"increment constraint gives dt <= {phase_increment_dt:.6g}. Recommended dt <= {dt_safe:.6g} "
+                        f"for estimated maximum phase rate {estimated_max_rate:.6g} rad /time. This is a "
+                        f"temporal-resolution heuristic, not a formal Euler stability bound.",
+                        RuntimeWarning,
+                        stacklevel=2,
+                    )
+
+        times: list[float] = []
+        all_phases: list[PhaseArray] = []
+
         current_time = float(t_eval[0])
 
         for t_out in t_eval:
-            # Advance to output time
             while current_time < t_out - 1e-12:
                 dt = min(dt_internal, t_out - current_time)
                 self.step_euler(K, dt)
                 current_time += dt
 
-            times.append(t_out)
+            times.append(float(t_out))
             all_phases.append(self.extract_phases())
 
-        return np.array(times), np.array(all_phases)
+        return np.asarray(times), np.asarray(all_phases)
 
     def step_rk45_adaptive(
         self,
@@ -365,45 +472,86 @@ class RotorSolver:
         rtol: float = 1e-6
     ) -> tuple[float, float]:
         """
-        Adaptive RK45-like step with error estimation.
+        Future work: adaptive RK45-like step with error estimation.
 
-        Returns
-        -------
-        tuple
-            (accepted_value, recommended_dext_dt)
+        This method is intentionally retained as a development placeholder.
+        The purpose is to preserve the intended future extension point: implementing an embedded adaptive
+        RK45/Dormand-Prince-style integrator while retaining the rotor representation.
+
+        Planned responsibilities
+        ------------------------
+        - Compute RK stages in the rotor/phase representation.
+        - Estimate local truncation error from an embedded RK pair.
+        - Accept or reject the proposed timestep.
+        - Return the accepted step information and a recommended next timestep.
+        - Preserve compatibility with the solver's temporal-resolution diagnostics.
+
+        Raises
+        ------
+        NotImplementedErroor
+            Always, unitl the ataptive rotor integrator is implemented.
         """
-        # Placeholder for embedded RK pair (e.g., Dormand Prince)
-        # Would compute k1-k6 slopes, estimate local error, adjust dt
-        pass
+        raise NotImplementedError(
+            "Adaptive RK45 rotor stepping is reserved for future development."
+        )
 
 # --------------------------------------------------------------------------- #
 # 💨Smoke test
 # --------------------------------------------------------------------------- #
 def _run_smoke_test() -> None:
-    """Exercise success and validation paths for each solver class."""
+    """Exercise success, validation, physics, and representation paths."""
     print("💨 Running solver smoke test...")
 
-    # === Classic functional solver ===
+    # ==================================================================
+    # Classic functional solver
+    # ==================================================================
     print(" 🍦 Testing solve_kuramoto (SciPy)...")
+
     rhs = lambda t, y: -y
     y0 = np.array([1.0])
     t_ev = np.linspace(0, 1, 11)
-    sol = solve_kuramoto(rhs, y0, t_span=1.0, t_eval=t_ev, max_step=0.2)
-    assert sol.success and sol.y.shape == (1, t_ev.size)
-    print(" ... 🍦 Classic integration success")
+
+    sol = solve_kuramoto(
+        rhs,
+        y0,
+        t_span=1.0,
+        t_eval=t_ev,
+        max_step=0.2,
+    )
+
+    assert sol.success
+    assert sol.y.shape == (1, t_ev.size)
+    print(" ... ✔️ Classic integration success")
 
     # Invalid t_eval (non-monotonic)
     try:
-        solve_kuramoto(rhs, y0, t_span=1.0, t_eval=np.array([0.0, 0.5, 0.4]))
+        solve_kuramoto(
+            rhs,
+            y0,
+            t_span=1.0,
+            t_eval=np.array([0.0, 0.5, 0.4]),
+        )
     except ValueError as err:
-        print(f" ... 🍦 Validation caught classic integration error as expected")
+        print(f" ... ❌ Time-axis validation caught invalid t_eval")
+    else:
+        raise AssertionError(
+            " ... ❌ solve_kuramoto accepted a non-monotonic t_eval"
+        )
 
-    # === Rotor solver (if clifford available) ===
+    # ==================================================================
+    # Rotor solver
+    # ==================================================================
     try:
         print(" 💫 Testing RotorSolver (📐 Geometric Algebra)...")
-        rotor = RotorSolver(n_oscillators=10, dim=2, seed=27)
+        rotor = RotorSolver(
+            n_oscillators=10,
+            dim=2,
+            seed=27
+        )
 
-        # Check initial state
+        # --------------------------------------------------------------
+        # Test 1: Initial state
+        # --------------------------------------------------------------
         assert rotor.N == 10
         assert rotor.dim == 2
         assert len(rotor.rotors) == 10
@@ -412,34 +560,221 @@ def _run_smoke_test() -> None:
         # Test phase extraction
         phases_init = rotor.extract_phases()
         assert phases_init.shape == (10,)
-        assert np.all((phases_init >= 0) & (phases_init <= 2*np.pi))
+        assert np.all(
+            (phases_init >= 0.0)
+            & (phases_init <= 2.0 * np.pi)
+        )
 
-        # Test single step
-        rotor_copy = RotorSolver(n_oscillators=10, dim=2, seed=27)
-        rotor_copy.step_euler(K=1.2, dt=0.01)
+        print(" ... ✔️ Initial rotor state test passed.")
+
+        # --------------------------------------------------------------
+        # Test 2: Rotor → phase → rotor round trip
+        # --------------------------------------------------------------
+        reconstructed_rotors = [
+            np.exp(-rotor.B_plane * phase / 2.0)
+            for phase in phases_init
+        ]
+
+        for original, reconstructed in zip(
+            rotor.rotors,
+            reconstructed_rotors,
+        ):
+            assert np.allclose(
+                original.value,
+                reconstructed.value,
+                atol=1e-12,
+            )
+
+        print(" ... ✔️ Rotor/phase round-trip test passed.")
+
+        # --------------------------------------------------------------
+        # Test 3: Attractive coupling direction
+        # --------------------------------------------------------------
+        directional = RotorSolver(
+            n_oscillators=2,
+            dim=2,
+            seed=27,
+        )
+
+        directional.omegas[:] = 0.0
+
+        # Explicitly construct two phases separated by pi/2.
+        directional.rotors = [
+            np.exp(-directional.B_plane * 0.0 / 2.0),
+            np.exp(-directional.B_plane *(np.pi / 2.0) / 2.0),
+        ]
+
+        before = directional.extract_phases()
+        separation_before = np.abs(
+             np.angle(np.exp(1j * (before[1] - before[0])))
+        )
+
+        directional.step_euler(K=1.0, dt=0.01)
+
+        after = directional.extract_phases()
+        separation_after = np.abs(
+            np.angle(np.exp(1j * (after[1] - after[0])))
+        )
+
+        assert separation_after < separation_before
+
+        print(" ... ✔️ Attractive coupling direction test passed")
+
+        # --------------------------------------------------------------
+        # Test 4: One Euler step actually evolves the state
+        # --------------------------------------------------------------
+        rotor_copy = RotorSolver(
+            n_oscillators=10,
+            dim=2,
+            seed=27,
+        )
+
+        phases_before = rotor_copy.extract_phases()
+
+        rotor_copy.step_euler(
+            K=1.2,
+            dt=0.01,
+        )
+
         phases_after = rotor_copy.extract_phases()
+
         assert phases_after.shape == (10,)
-        assert not np.allclose(phases_init, phases_after)  # Should have evolved
+        assert not np.allclose(
+            phases_before,
+            phases_after,
+        )
 
-        # Test order parameter
+        print(" ... ✔️ Euler evolution test passed")
+
+        # --------------------------------------------------------------
+        # Test 5: Standard Kuramoto order parameter
+        # --------------------------------------------------------------
         sync_strength = rotor.get_synchronization_strength()
-        assert 0 <= sync_strength <= 1
 
-        # Test full simulation
+        assert 0 <= sync_strength <= 1.0
+
+        direct_r = np.abs(
+            np.mean(np.exp(1j * phases_init))
+        )
+
+        assert np.isclose(
+            sync_strength,
+            direct_r,
+        )
+
+        print(" ... ✔️ Standard order-parameter test passed")
+
+        # --------------------------------------------------------------
+        # Test 6: Global U(1) phase-shift invariance
+        # --------------------------------------------------------------
+        original_phases = rotor.extract_phases()
+
+        shifted_rotor = RotorSolver(
+            n_oscillators=10,
+            dim=2,
+            seed=27,
+        )
+
+        shifted_phases = shifted_rotor.extract_phases()
+
+        assert np.allclose(
+            original_phases,
+            shifted_phases,
+        )
+
+        shift = 0.73
+        shifted_phases = (
+            shifted_phases + shift
+        )
+
+        shifted_rotor.rotors = [
+            np.exp(-shifted_rotor.B_plane * phase / 2.0)
+            for phase in shifted_phases
+        ]
+
+        original_r = rotor.get_synchronization_strength()
+        shifted_r = shifted_rotor.get_synchronization_strength()
+
+        assert np.isclose(
+            original_r,
+            shifted_r,
+            rtol=1e-10,
+            atol=1e-12,
+        )
+
+        print(" ... ✔️ Global U(1) phase-shift invariance test passed")
+
+        # --------------------------------------------------------------
+        # Test 7: Full simulation
+        # --------------------------------------------------------------
         times = np.linspace(0, 1, 21)
-        sim_times, sim_phases = rotor.simulate(K=1.2, t_eval=times, dt_internal=0.01)
-        assert sim_phases.shape == (len(times), 10)
-        assert np.allclose(sim_times, times)
 
-        print("  ... 💫📐 Geometric algebra rotor solver tests passed")
+        sim_times, sim_phases = rotor.simulate(
+            K=1.2,
+            t_eval=times,
+            dt_internal=0.01,
+        )
+
+        assert sim_phases.shape == (
+            len(times),
+            10,
+        )
+
+        assert np.allclose(
+            sim_times,
+            times,
+        )
+
+        assert np.isfinite(sim_phases).all()
+
+        print(" ... ✔️ Geometric algebra rotor solver tests passed")
+
+        # --------------------------------------------------------------
+        # Test 8: Invalid timestep validation
+        # --------------------------------------------------------------
+        try:
+            rotor.simulate(
+                K=1.2,
+                t_eval=times,
+                dt_internal=-0.01,
+            )
+        except ValueError:
+            print(
+                " ... ✔️ Invalid timestep validation test passed"
+            )
+        else:
+            print(
+                " ... ✖️ RotorSolver accepted a negative dt_internal"
+            )
+
+        # --------------------------------------------------------------
+        # Test 9: Future adaptive method remains explicitly unimplemented
+        # --------------------------------------------------------------
+        try:
+            rotor.step_rk45_adaptive(
+                K=1.2,
+                dt=0.01,
+            )
+        except NotImplementedError:
+            print(" ... 🚧 Future RK45 placeholder test passed")
+        else:
+            raise AssertionError(
+                " ... ✖️ step_rk45_adaptive should remain explicitly unimplemented"
+            )
+
+        print(" ... ✔️ Geometric algebra rotor solver tests passed")
 
     except ImportError:
         print("  ⚠️ Skipping geometric algebra rotor tests (clifford not installed)")
-    except AssertionError as e:
-        print(f" 💫📐 Geometric algebra rotor test failed: {e}")
-        raise
 
     print("✅ All smoke tests passed")
 
-if __name__ == "__main__":
+# ------------------------------------------------------------------------------
+# 🔥 Entry point
+# ------------------------------------------------------------------------------
+
+def main() -> None:
     _run_smoke_test()
+
+if __name__ == "__main__":
+    main()
