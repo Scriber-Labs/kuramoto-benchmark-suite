@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="minor updates">
-      <change afterPath="$PROJECT_DIR$/examples/demo_2.ipynb" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="demo.ipynb needs to be updated">
       <change beforePath="$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,61 +50,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000335293557" />
-      <entry key="MS500" value="1.0324438957720334" />
-      <entry key="S2" value="1.7327819024481617" />
-      <entry key="S5" value="3.5791419832733795" />
-      <entry key="S10" value="5.874481101160544" />
-      <entry key="S30" value="10.361114094507885" />
-      <entry key="S60" value="19.382367660146677" />
-      <entry key="M2" value="38.900099566151965" />
-      <entry key="M5" value="72.42916045111873" />
-      <entry key="M10" value="94.41720830040933" />
-      <entry key="M15" value="104.14114562712054" />
-      <entry key="M30" value="115.57203492172825" />
-      <entry key="H1" value="129.39926320845237" />
-      <entry key="H2" value="279.9994288752521" />
-      <entry key="H4" value="1072.2413598412568" />
-      <entry key="D1" value="5722.693812559305" />
-      <entry key="W1" value="7937.749119429872" />
+      <entry key="MS100" value="1.00000026823644" />
+      <entry key="MS500" value="1.052867045543673" />
+      <entry key="S2" value="1.7730033721417895" />
+      <entry key="S5" value="3.0313597145626496" />
+      <entry key="S10" value="5.358290390031601" />
+      <entry key="S30" value="12.582389088487504" />
+      <entry key="S60" value="17.233768138691882" />
+      <entry key="M2" value="20.992114912258657" />
+      <entry key="M5" value="41.11541356546809" />
+      <entry key="M10" value="114.51408527838842" />
+      <entry key="M15" value="197.38399084794085" />
+      <entry key="M30" value="409.4044969321239" />
+      <entry key="H1" value="676.7369311885601" />
+      <entry key="H2" value="984.1191473445535" />
+      <entry key="H4" value="1691.3807461230292" />
+      <entry key="D1" value="6466.444227178774" />
+      <entry key="W1" value="9061.412018368857" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.4125414739542947E-187" />
-      <entry key="S2" value="2.2162497366699243E-47" />
-      <entry key="S5" value="2.178951074311119E-19" />
-      <entry key="S10" value="4.667923793844357E-10" />
-      <entry key="S30" value="7.792865787355912E-4" />
-      <entry key="S60" value="0.030435125148204113" />
-      <entry key="M2" value="0.2381492937096741" />
-      <entry key="M5" value="1.0144466927224385" />
-      <entry key="M10" value="1.7241539873237575" />
-      <entry key="M15" value="2.0684825877261384" />
-      <entry key="M30" value="2.488291103027376" />
-      <entry key="H1" value="2.7808839428092615" />
-      <entry key="H2" value="3.9081709083662908" />
-      <entry key="H4" value="9.340183847828934" />
-      <entry key="D1" value="38.372238542702135" />
-      <entry key="W1" value="51.37886166537671" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="7.2867918737067545E-165" />
+      <entry key="S5" value="2.816413598992266E-66" />
+      <entry key="S10" value="2.5959995271914295E-33" />
+      <entry key="S30" value="3.169168750807126E-11" />
+      <entry key="S60" value="1.2975787028635946E-5" />
+      <entry key="M2" value="0.009466629386583181" />
+      <entry key="M5" value="0.568595316601055" />
+      <entry key="M10" value="2.727162566036685" />
+      <entry key="M15" value="5.131467360515485" />
+      <entry key="M30" value="11.013219433264382" />
+      <entry key="H1" value="17.644703133884068" />
+      <entry key="H2" value="23.64354095207325" />
+      <entry key="H4" value="31.05846993836272" />
+      <entry key="D1" value="63.75488414305675" />
+      <entry key="W1" value="79.69844285683098" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.0997854777851975E-8" />
-      <entry key="MS500" value="0.03850020421044345" />
-      <entry key="S2" value="0.899061976435543" />
-      <entry key="S5" value="2.917174492539608" />
-      <entry key="S10" value="5.368556974651815" />
-      <entry key="S30" value="10.083604100254052" />
-      <entry key="S60" value="19.203965348191478" />
-      <entry key="M2" value="38.97401059711849" />
-      <entry key="M5" value="73.33210734873852" />
-      <entry key="M10" value="96.06801154216296" />
-      <entry key="M15" value="106.15518720068106" />
-      <entry key="M30" value="118.0297387462591" />
-      <entry key="H1" value="132.16302687777318" />
-      <entry key="H2" value="283.8918104047951" />
-      <entry key="H4" value="1081.5573194024773" />
-      <entry key="D1" value="5761.047539083305" />
-      <entry key="W1" value="7989.124381060071" />
+      <entry key="MS100" value="3.2344168093559167E-7" />
+      <entry key="MS500" value="0.05729746630096848" />
+      <entry key="S2" value="0.9917807949013585" />
+      <entry key="S5" value="2.5149035121426824" />
+      <entry key="S10" value="4.979242861255181" />
+      <entry key="S30" value="12.366414408181011" />
+      <entry key="S60" value="17.09700217269576" />
+      <entry key="M2" value="20.91913044268609" />
+      <entry key="M5" value="41.62267189981443" />
+      <entry key="M10" value="117.16863735355234" />
+      <entry key="M15" value="202.4368451678671" />
+      <entry key="M30" value="420.3392590290571" />
+      <entry key="H1" value="694.3161201617366" />
+      <entry key="H2" value="1007.7141076127506" />
+      <entry key="H4" value="1722.3990413990518" />
+      <entry key="D1" value="6530.177137171626" />
+      <entry key="W1" value="9141.10618499571" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -135,6 +132,7 @@
     "Python.spectral.executor": "Run",
     "Python.test_generate_kuramoto_dataset.executor": "Run",
     "Python.utils.executor": "Run",
+    "Python.viz.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -172,7 +170,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.api">
+  <component name="RunManager" selected="Python.viz">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -204,7 +202,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="commands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -213,13 +211,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/commands.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -252,25 +250,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Doctests in order_parameter (2)" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+    <configuration name="viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/order_parameter.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Doctests in order_parameter" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
@@ -296,11 +297,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.viz" />
+        <item itemvalue="Python.model" />
         <item itemvalue="Python.api" />
         <item itemvalue="Python.solvers" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
-        <item itemvalue="Python.commands" />
-        <item itemvalue="Python tests.Doctests in order_parameter (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -481,7 +482,39 @@
       <option name="project" value="LOCAL" />
       <updated>1789818426331</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="updated @solvers.py and minor touch ups on api.py">
+      <option name="closed" value="true" />
+      <created>1789852054140</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1789852054140</updated>
+    </task>
+    <task id="LOCAL-00022" summary="updated @solvers.py and minor touch ups on api.py">
+      <option name="closed" value="true" />
+      <created>1789854810315</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1789854810315</updated>
+    </task>
+    <task id="LOCAL-00023" summary="updated model.py">
+      <option name="closed" value="true" />
+      <created>1789857191617</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1789857191617</updated>
+    </task>
+    <task id="LOCAL-00024" summary="demo.ipynb needs to be updated">
+      <option name="closed" value="true" />
+      <created>1789857481202</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1789857481202</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,6 +535,20 @@
     <MESSAGE value="Refined output messages in **order_parameter.py** smoke tests for consistent formatting." />
     <MESSAGE value="Enhanced **commands.py** with runtime checks, added new CLI options (`--solver` and `--track-symmetries`), and updated simulation logic to support Lie symmetry tracking and configurable solvers." />
     <MESSAGE value="minor updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor updates" />
+    <MESSAGE value="updated @solvers.py and minor touch ups on api.py" />
+    <MESSAGE value="updated model.py" />
+    <MESSAGE value="demo.ipynb needs to be updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="demo.ipynb needs to be updated" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/kuramoto/analysis/viz.py</url>
+          <line>197</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
