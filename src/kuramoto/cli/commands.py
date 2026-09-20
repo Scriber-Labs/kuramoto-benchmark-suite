@@ -90,24 +90,24 @@ def datasetforbeginners(output: str) -> None:
 def generate(config: str, output: str, solver: str, track_symmetries: bool) -> None:
     """Generate a dataset from a JSON configuration file."""
     if config is None:
-        click.secho("❌ Error: Please provide a configuration file with --config", fg="red")
+        click.secho("❌ Error: Please provide a configuration file with --config", fg="cyan")
         return
 
     with open(config, "r") as f:
         json_str = f.read()
     
-    click.secho(f"🚀 Parsing configuration from {config}...", fg="cyan")
+    click.secho(f"🚀 Parsing configuration from {config}...", fg="blue")
     params = parse_simulation_config(json_str)
 
     # Override solver if explicitly specified
     if solver != "euler":
         params["solver"] = solver
 
-    click.secho(f"👟 Running simulation with {solver} solve...", fg="green")
+    click.secho(f"👟 Running simulation with {solver} solve...", fg="magenta")
 
     # Conditional Lie symmetry tracking
     if track_symmetries and solver == "rotor":
-        click.secho(" ↪️ Tracking U(1) phase invariance and NOether charges...", fg="yellow")
+        click.secho(" ↪️ Tracking U(1) phase invariance and Noether charges...", fg="orange")
         params["symmetry_metrics"] = True
     elif track_symmetries and solver != "rotor":
         click.echo("  ⚠️ Warning: Lie symmetry tracking requires --solver rotor")

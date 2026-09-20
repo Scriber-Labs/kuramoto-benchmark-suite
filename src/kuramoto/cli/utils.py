@@ -13,6 +13,7 @@ import os
 from typing import Any, Dict, List
 from tabulate import tabulate
 import click
+import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ Constants
@@ -43,7 +44,7 @@ def print_table(data: List[Dict[str, Any]] | List[List[Any]], headers: List[str]
         Optional title to print above the table.
     """
     if title:
-        click.secho(f"\n--- {title} ---", fg="cyan", bold=True)
+        click.secho(f"\n--- {title} ---", fg="#14B5FF", bold=True)
     
     table = tabulate(data, headers=headers, tablefmt="rounded_grid")
     click.echo(table)
