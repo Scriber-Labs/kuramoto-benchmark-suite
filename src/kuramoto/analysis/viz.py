@@ -484,7 +484,10 @@ def _run_smoke_test() -> None:
     plot_order_parameter(times, r_values, save_path="plots/tests/test_order_param.png")
     assert os.path.exists("plots/tests/test_order_param.png")
     
-    print("\n✅ Visualization smoke tests passed.")
+    print(f"\n✅ Visualization smoke tests passed.")
+    print(f"\n📁 Saved plots to plots/tests/")
+    for fn in os.listdir("plots/tests"):
+        print(f"   └─ {fn}")
 
 # -----------------------------------------------------------------------------------------------------------
 # 🔥 Entry point
