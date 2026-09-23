@@ -259,7 +259,7 @@ def plot_network(
         G, pos, ax=ax,
         node_color=node_colors, 
         node_size=500,
-        edgecolors=SCRIBER_PALETTE["accent_purple"],
+        edgecolors=node_colors,
         linewidths=1.5
     )
     
