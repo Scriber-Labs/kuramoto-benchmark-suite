@@ -44,7 +44,7 @@ def print_table(data: List[Dict[str, Any]] | List[List[Any]], headers: List[str]
         Optional title to print above the table.
     """
     if title:
-        click.secho(f"\n--- {title} ---", fg="#14B5FF", bold=True)
+        click.secho(f"\n--- {title} ---", fg="blue", bold=True)
     
     table = tabulate(data, headers=headers, tablefmt="rounded_grid")
     click.echo(table)
