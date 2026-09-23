@@ -7,10 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="edited a bug in the cli">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="evaluating demo.ipynb tests">
+      <change afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/validation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -50,61 +55,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000155964" />
-      <entry key="MS500" value="1.0075724401409967" />
-      <entry key="S2" value="1.4494359983339486" />
-      <entry key="S5" value="2.08990454546187" />
-      <entry key="S10" value="2.473941764612971" />
-      <entry key="S30" value="2.8058608723433114" />
-      <entry key="S60" value="2.9003640986445305" />
-      <entry key="M2" value="2.949522837937737" />
-      <entry key="M5" value="2.980608162690584" />
-      <entry key="M10" value="3.0337249216652156" />
-      <entry key="M15" value="3.1531971275383515" />
-      <entry key="M30" value="3.8380830736953273" />
-      <entry key="H1" value="14.463705230110149" />
-      <entry key="H2" value="105.94563244589972" />
-      <entry key="H4" value="510.01142207487237" />
-      <entry key="D1" value="5317.555665833592" />
-      <entry key="W1" value="9088.894418800272" />
+      <entry key="MS100" value="1.0017728997963318" />
+      <entry key="MS500" value="1.3485819479276995" />
+      <entry key="S2" value="2.8278927679035633" />
+      <entry key="S5" value="5.0173218785906775" />
+      <entry key="S10" value="8.410835962198345" />
+      <entry key="S30" value="21.150712852692692" />
+      <entry key="S60" value="36.93509008311694" />
+      <entry key="M2" value="63.97039432795074" />
+      <entry key="M5" value="124.80644135857045" />
+      <entry key="M10" value="229.2984553786311" />
+      <entry key="M15" value="357.0130473862573" />
+      <entry key="M30" value="746.8172155218557" />
+      <entry key="H1" value="1290.7095485311156" />
+      <entry key="H2" value="1833.0396282928737" />
+      <entry key="H4" value="2446.6932946508095" />
+      <entry key="D1" value="7363.6110478033925" />
+      <entry key="W1" value="11587.915446796826" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="7.535919905399907E-191" />
-      <entry key="S60" value="1.1481790707925464E-95" />
-      <entry key="M2" value="5.622823997451857E-48" />
-      <entry key="M5" value="3.0575674981576315E-19" />
-      <entry key="M10" value="1.2956468066484968E-9" />
-      <entry key="M15" value="2.1363502201774422E-6" />
-      <entry key="M30" value="0.0036120177530847694" />
-      <entry key="H1" value="0.18431986743946965" />
-      <entry key="H2" value="2.038157139166717" />
-      <entry key="H4" value="9.076381223665182" />
-      <entry key="D1" value="54.521969029496994" />
-      <entry key="W1" value="82.71124130174151" />
+      <entry key="S2" value="4.780519922103724E-248" />
+      <entry key="S5" value="1.179750181844332E-99" />
+      <entry key="S10" value="3.43474916383228E-50" />
+      <entry key="S30" value="3.2507778461163747E-17" />
+      <entry key="S60" value="5.742252363179023E-9" />
+      <entry key="M2" value="8.189984556442846E-5" />
+      <entry key="M5" value="0.031328673017341886" />
+      <entry key="M10" value="0.28005938279722953" />
+      <entry key="M15" value="0.656196094592962" />
+      <entry key="M30" value="1.832413184226383" />
+      <entry key="H1" value="3.5368352719440392" />
+      <entry key="H2" value="5.788221124012601" />
+      <entry key="H4" value="11.367404681958085" />
+      <entry key="D1" value="57.02288254738522" />
+      <entry key="W1" value="89.4918796260767" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.763129604491308" />
-      <entry key="MS500" value="0.9544063540962134" />
-      <entry key="S2" value="1.4264328690476504" />
-      <entry key="S5" value="2.074733372244943" />
-      <entry key="S10" value="2.4645141618451984" />
-      <entry key="S30" value="2.8021806666568487" />
-      <entry key="S60" value="2.8984469591202044" />
-      <entry key="M2" value="2.9485441890406454" />
-      <entry key="M5" value="2.979960927012023" />
-      <entry key="M10" value="3.0259998429401462" />
-      <entry key="M15" value="3.1333444993950272" />
-      <entry key="M30" value="3.80272181748091" />
-      <entry key="H1" value="14.608279405724657" />
-      <entry key="H2" value="107.95126925519506" />
-      <entry key="H4" value="519.0591665464266" />
-      <entry key="D1" value="5372.056142111734" />
-      <entry key="W1" value="9171.600859772556" />
+      <entry key="MS100" value="0.9282081934057185" />
+      <entry key="MS500" value="1.3267059799431429" />
+      <entry key="S2" value="2.8086320050178957" />
+      <entry key="S5" value="4.97491959510607" />
+      <entry key="S10" value="8.310674285022856" />
+      <entry key="S30" value="20.9115672464954" />
+      <entry key="S60" value="36.658759550112386" />
+      <entry key="M2" value="63.70709690389169" />
+      <entry key="M5" value="124.64128951919834" />
+      <entry key="M10" value="229.42078672514575" />
+      <entry key="M15" value="357.52215981429043" />
+      <entry key="M30" value="748.5165155907451" />
+      <entry key="H1" value="1294.1354230869197" />
+      <entry key="H2" value="1838.7447237116937" />
+      <entry key="H4" value="2458.00120654817" />
+      <entry key="D1" value="7420.605926537018" />
+      <entry key="W1" value="11677.40133621126" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -115,55 +120,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in order_parameter (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (2).executor": "Run",
+    "Python tests.Doctests in order_parameter.executor": "Run",
+    "Python.api.executor": "Run",
+    "Python.commands.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.dataset.executor": "Run",
+    "Python.generate_example_dataset.executor": "Run",
+    "Python.graphs.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.order_parameter.executor": "Run",
+    "Python.rk45.executor": "Run",
+    "Python.rotor.executor": "Run",
+    "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
+    "Python.test_generate_kuramoto_dataset.executor": "Run",
+    "Python.utils.executor": "Run",
+    "Python.validation.executor": "Run",
+    "Python.viz.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
@@ -175,7 +182,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python.rotor">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -183,31 +190,7 @@
       </steps>
       <method v="2" />
     </configuration>
-    <configuration name="commands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/commands.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="order_parameter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -222,7 +205,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/order_parameter.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -231,7 +214,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="spectral" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="rk45" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -240,13 +223,61 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/solvers" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rotor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/solvers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="solvers.py.bak" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto\solvers.py.bak" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -279,37 +310,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rotor" />
+        <item itemvalue="Python.model" />
+        <item itemvalue="Python.rk45" />
+        <item itemvalue="Python.solvers.py.bak" />
         <item itemvalue="Python.utils" />
-        <item itemvalue="Python.spectral" />
-        <item itemvalue="Python.viz" />
-        <item itemvalue="Python.commands" />
-        <item itemvalue="Python.order_parameter" />
       </list>
     </recent_temporary>
   </component>
@@ -546,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790149703215</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="evaluating demo.ipynb tests">
+      <option name="closed" value="true" />
+      <created>1790167161913</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1790167161913</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,6 +589,7 @@
     <MESSAGE value="updated viz.py" />
     <MESSAGE value="updated the notebooks (demo-2.ipynb) and moved the other workbook (demo-1.ipynb) into the notebooks folder inside the examples folder. also made some minor changes to source code" />
     <MESSAGE value="edited a bug in the cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited a bug in the cli" />
+    <MESSAGE value="evaluating demo.ipynb tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="evaluating demo.ipynb tests" />
   </component>
 </project>
