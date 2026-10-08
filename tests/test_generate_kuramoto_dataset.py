@@ -17,3 +17,14 @@ def test_shapes():
     omega = np.ones(10)
     data = generate_kuramoto_dataset(10, omega, 1.0, 20, 0.1)
     assert data["theta"].shape == (20, 10)
+
+def test_solvers_and_symmetry():
+    omega = np.ones(5)
+    for solver in ["rk45", "euler", "rotor"]:
+        data = generate_kuramoto_dataset(
+            5, omega, 1.0, 20, 0.05, solver=solver, symmetry_metrics=True, seed=42
+        )
+        assert data["theta"].shape == (20, 5)
+        if solver == "rotor":
+            assert "global_phase_invariant" in data
+            assert data["global_phase_invariant"] is True

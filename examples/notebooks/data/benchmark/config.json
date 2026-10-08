@@ -1,0 +1,13 @@
+{
+  "n_oscillators": 50,
+  "coupling_strength": 1.5,
+  "topology": "complete",
+  "timesteps": 2000,
+  "dt": 0.05,
+  "seed": 27,
+  "frequency_distribution": {
+    "type": "normal",
+    "mean": 0.0,
+    "std": 1.0
+  }
+}

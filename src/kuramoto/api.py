@@ -47,6 +47,9 @@ def generate_kuramoto_dataset(
     topology_kwargs: Optional[Dict[str, Any]] = None,
     noise_std: float = 0.0,
     seed: Optional[int] = None,
+    solver: str = "rk45",
+    symmetry_metrics: bool = False,
+    **kwargs: Any,
 ) -> Dict[str, Any]:
     """
     Generate Kuramoto dataset.
@@ -75,6 +78,12 @@ def generate_kuramoto_dataset(
         Noise level.
     seed : int, optional
         Random seed.
+    solver : str, default='rk45'
+        Integration solver method ('rk45', 'rotor', or 'euler').
+    symmetry_metrics : bool, default=False
+        Whether to calculate Lie symmetry metrics (U(1) invariance, energy).
+    **kwargs : Any
+        Additional parameters.
 
     Returns
     -------
@@ -86,10 +95,12 @@ def generate_kuramoto_dataset(
     # Resolve topology if requested
     adj_matrix = adjacency
     if topology is not None:
-        kwargs = topology_kwargs or {}
-        if "n" not in kwargs:
-            kwargs["n"] = n_oscillators
-        adj_matrix = load_topology(topology, **kwargs)
+        kwargs_top = topology_kwargs or {}
+        if "n" not in kwargs_top:
+            kwargs_top["n"] = n_oscillators
+        adj_matrix = load_topology(topology, **kwargs_top)
+
+    solver_type = "rotor" if solver == "rotor" else "rk45"
 
     model = KuramotoModel(
         n_oscillators=n_oscillators,
@@ -98,11 +109,21 @@ def generate_kuramoto_dataset(
         coupling_strength=coupling,
         noise_std=noise_std,
         random_seed=seed,
+        solver_type=solver_type,
     )
 
     dataset = model.simulate(t_span=t_span, n_points=timesteps)
 
-    return dataset.to_dict()
+    result = dataset.to_dict()
+    if symmetry_metrics and solver == "rotor":
+        from kuramoto.order_parameter import track_lie_symmetries
+        states = {f"node_{i}": result["theta"][:, i] for i in range(n_oscillators)}
+        metrics = track_lie_symmetries(states, result["time"])
+        result["global_phase_invariant"] = metrics.global_phase_invariant
+        result["energy_conserved"] = metrics.energy_conserved
+        result["synchronization_strength"] = metrics.synchronization_strength
+
+    return result
 
 # ------------------------------------------------------------------------------ #
 # 💨 Smoke Test

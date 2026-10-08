@@ -55,7 +55,7 @@ def load_topology(
     if name == "ring":
         G = nx.cycle_graph(kwargs.get("n", 20))
 
-    elif name == "complete":
+    elif name in ("complete", "fully_connected"):
         G = nx.complete_graph(kwargs.get("n", 20))
 
     elif name == "small_world":

@@ -107,7 +107,7 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
 
     # Conditional Lie symmetry tracking
     if track_symmetries and solver == "rotor":
-        click.secho(" ↪️ Tracking U(1) phase invariance and Noether charges...", fg="orange")
+        click.secho(" ↪️ Tracking U(1) phase invariance and Noether charges...", fg="yellow")
         params["symmetry_metrics"] = True
     elif track_symmetries and solver != "rotor":
         click.echo("  ⚠️ Warning: Lie symmetry tracking requires --solver rotor")
