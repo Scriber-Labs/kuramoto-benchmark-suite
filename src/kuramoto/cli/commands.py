@@ -19,28 +19,29 @@ if __name__ == "__main__":
     )
 
 import os
-import click
-import numpy as np
-import matplotlib.pyplot as plt
-from typing import Dict, Any
 
-from ..api import generate_kuramoto_dataset
+import click
+import matplotlib.pyplot as plt
+import numpy as np
+
 from ..analysis.spectral import (
     compute_fourier_coefficients,
     compute_psd,
-    compute_spectral_decomposition
+    compute_spectral_decomposition,
 )
 from ..analysis.viz import (
-    plot_network,
-    plot_distributions,
+    GRADIENTS,
+    PROJECT_COLORS,
     get_node_colors,
+    plot_distributions,
+    plot_network,
     set_style,
-    GRADIENTS
 )
+from ..api import generate_kuramoto_dataset
 from ..config import parse_simulation_config
 from ..order_parameter import compute_order_parameter
 from ..topologies.tree_of_life import tree_of_life_positions
-from .utils import ensure_plot_dir, print_table, DEFAULT_DEMO_PATH, PLOT_DIR
+from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
 # -----------------------------------------------------------------------------------------------------------
 # 1️⃣ Dataset Commands
@@ -50,8 +51,8 @@ from .utils import ensure_plot_dir, print_table, DEFAULT_DEMO_PATH, PLOT_DIR
 @click.option("--output", "-o", default=DEFAULT_DEMO_PATH, help="Output path for the dataset.")
 def datasetforbeginners(output: str) -> None:
     """Copy a set of signals to train using the suite."""
-    click.secho(f"🚀 Generating demo dataset...", fg="green")
-    
+    click.secho("🚀 Generating demo dataset...", fg="green")
+
     params = {
         "n_oscillators": 50,
         "timesteps": 1000,
@@ -60,20 +61,20 @@ def datasetforbeginners(output: str) -> None:
         "seed": 42,
         "topology": "small_world"
     }
-    
+
     rng = np.random.default_rng(params["seed"])
     omega = rng.normal(0, 1.0, params["n_oscillators"])
-    
+
     data = generate_kuramoto_dataset(
         natural_frequencies=omega,
         **params
     )
-    
+
     os.makedirs(os.path.dirname(output), exist_ok=True)
     np.savez(output, **data)
-    
+
     click.secho(f"✅ Success: Dataset saved to '{output}'", fg="bright_green")
-    
+
     # Table output
     print_table([params], title="Simulation Parameters")
 
@@ -113,7 +114,7 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
 
     with open(config, "r") as f:
         json_str = f.read()
-    
+
     click.secho(f"🚀 Parsing configuration from {config}...", fg="blue")
     params = parse_simulation_config(json_str)
 
@@ -146,7 +147,7 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
     np.savez(output, **data)
 
     click.secho(f"✅ Success: Dataset saved to '{output}'", fg="bright_green")
-    
+
     # Summary table
     summary = {
         "N": params["n_oscillators"],
@@ -169,40 +170,40 @@ def time(dataset_path: str, start_time: float, gradient: str) -> None:
     t = data["time"]
     theta = data["theta"]
     adj = data["adjacency"]
-    
+
     mask = t >= start_time
     t_filtered = t[mask]
     theta_filtered = theta[mask]
-    
+
     r = compute_order_parameter(theta_filtered)
     omega = data["omega"]
     colors = get_node_colors(adj, values=omega, cmap_name=gradient)
-    
+
     ensure_plot_dir()
     plt.figure(figsize=(10, 6))
     plt.subplot(2, 1, 1)
-    
+
     # Plot first 10 oscillators with consistent colors
     n_plot = min(10, theta_filtered.shape[1])
     for i in range(n_plot):
         plt.plot(t_filtered, np.sin(theta_filtered[:, i]), alpha=0.6, color=colors[i], label=f"Node {i}")
-    
+
     plt.title(f"Phases (first {n_plot} oscillators, colored by frequency)")
     plt.ylabel("sin(theta)")
-    
+
     plt.subplot(2, 1, 2)
     plt.plot(t_filtered, r, 'k-', linewidth=2, label="Order Parameter r(t)")
-    plt.axhline(np.mean(r), color=GRADIENTS["gradient_7"][-1], linestyle='--', label=f"Avg: {np.mean(r):.3f}")
+    plt.axhline(np.mean(r), color=PROJECT_COLORS["pink_pink"], linestyle='--', label=f"Avg: {np.mean(r):.3f}")
     plt.xlabel("Time")
     plt.ylabel("Coherence r")
     plt.legend(loc='upper right', fontsize='small', ncol=2)
-    
+
     plot_path = os.path.join(PLOT_DIR, "time_series.png")
     plt.savefig(plot_path)
     plt.close()
-    
+
     click.echo(f"📈 Plot saved to {plot_path}")
-    
+
     stats = [
         {"Metric": "Mean Order Parameter", "Value": f"{np.mean(r):.4f}"},
         {"Metric": "Std Order Parameter", "Value": f"{np.std(r):.4f}"},
@@ -223,31 +224,31 @@ def fouriervariability(dataset_path: str, start_time: float, freq: float, gradie
     t = data["time"]
     theta = data["theta"]
     adj = data["adjacency"]
-    
+
     mask = t >= start_time
     t_filtered = t[mask]
     signals = np.sin(theta[mask])
-    
+
     coeffs = compute_fourier_coefficients(t_filtered, signals, freq)
     amplitudes = np.abs(coeffs)
     omega = data["omega"]
     colors = get_node_colors(adj, values=omega, cmap_name=gradient)
-    
+
     ensure_plot_dir()
     plt.figure(figsize=(10, 5))
     plt.bar(range(len(amplitudes)), amplitudes, color=colors, edgecolor="white", linewidth=0.5)
     plt.axhline(np.mean(amplitudes), color="black", linestyle='--', alpha=0.5, label="Mean")
     plt.xlabel("Oscillator Index")
     plt.ylabel(f"Fourier Amplitude at {freq} Hz")
-    plt.title(f"Fourier Variability (colored by frequency)")
+    plt.title("Fourier Variability (colored by frequency)")
     plt.legend()
-    
+
     plot_path = os.path.join(PLOT_DIR, "fourier_variability.png")
     plt.savefig(plot_path)
     plt.close()
-    
+
     click.echo(f"📈 Plot saved to {plot_path}")
-    
+
     top_5_idx = np.argsort(amplitudes)[-5:][::-1]
     top_5_vals = [
         {"Index": i, "Amplitude": f"{amplitudes[i]:.4f}"} for i in top_5_idx
@@ -264,11 +265,11 @@ def fourierconvergence(dataset_path: str, start_time: float, freq: float) -> Non
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
-    
+
     mask = t >= start_time
     t_filtered = t[mask]
     r = compute_order_parameter(theta[mask])
-    
+
     steps = np.linspace(len(r)//10, len(r), 10, dtype=int)
     conv_results = []
     for step in steps:
@@ -277,18 +278,18 @@ def fourierconvergence(dataset_path: str, start_time: float, freq: float) -> Non
             "Duration": f"{t_filtered[step-1]:.2f}",
             "Amplitude": np.abs(c[0])
         })
-        
+
     ensure_plot_dir()
     plt.figure(figsize=(8, 5))
     plt.plot([float(d["Duration"]) for d in conv_results], [d["Amplitude"] for d in conv_results], 'o-', color=GRADIENTS["gradient_5"][2])
     plt.xlabel("Signal Duration")
     plt.ylabel(f"Fourier Amplitude of r(t) at {freq} Hz")
     plt.title("Fourier Convergence")
-    
+
     plot_path = os.path.join(PLOT_DIR, "fourier_convergence.png")
     plt.savefig(plot_path)
     plt.close()
-    
+
     click.echo(f"📈 Plot saved to {plot_path}")
     print_table(conv_results, title=f"Convergence of r(t) at {freq} Hz")
 
@@ -304,28 +305,28 @@ def psdvariability(dataset_path: str, start_time: float, freq: float) -> None:
     theta = data["theta"]
     dt = t[1] - t[0]
     fs = 1.0 / dt
-    
+
     mask = t >= start_time
     r = compute_order_parameter(theta[mask])
-    
+
     f, pxx = compute_psd(r[:, np.newaxis], fs, nperseg=min(len(r), 1024))
-    dist = compute_spectral_distribution(f, pxx, freq, bandwidth=freq*0.1)
-    
+    dist = compute_spectral_decomposition(f, pxx, freq, bandwidth=freq*0.1)
+
     ensure_plot_dir()
     plt.figure(figsize=(8, 5))
     plt.semilogy(f, pxx, color=GRADIENTS["gradient_1"][1])
     plt.axvline(freq, color='r', linestyle='--', label='Target')
     plt.xlabel("Frequency (Hz)")
     plt.ylabel("PSD")
-    plt.title(f"PSD Variability")
+    plt.title("PSD Variability")
     plt.legend()
-    
+
     plot_path = os.path.join(PLOT_DIR, "psd_variability.png")
     plt.savefig(plot_path)
     plt.close()
-    
+
     click.echo(f"📈 Plot saved to {plot_path}")
-    
+
     dist_table = [
         {"Component": k.capitalize(), "Energy Fraction": f"{v:.2%}"} for k, v in dist.items()
     ]
@@ -343,24 +344,24 @@ def psdconvergence(dataset_path: str, start_time: float, freq: float) -> None:
     theta = data["theta"]
     dt = t[1] - t[0]
     fs = 1.0 / dt
-    
+
     mask = t >= start_time
     r = compute_order_parameter(theta[mask])
-    
+
     n = len(r)
     signals = {
         "Full": r,
         "Last Half": r[n//2:],
         "Last Quarter": r[3*n//4:]
     }
-    
+
     ensure_plot_dir()
     plt.figure(figsize=(10, 6))
     conv_stats = []
     for label, sig in signals.items():
         f, pxx = compute_psd(sig[:, np.newaxis], fs, nperseg=min(len(sig), 512))
         plt.loglog(f, pxx, label=label)
-        
+
         # Find peak near target frequency
         idx_target = np.argmin(np.abs(f - freq))
         peak_idx = idx_target - 10 + np.argmax(pxx[max(0, idx_target-10):idx_target+10, 0])
@@ -370,17 +371,17 @@ def psdconvergence(dataset_path: str, start_time: float, freq: float) -> None:
             "Peak Freq": f"{f[peak_idx]:.4f}",
             "Peak PSD": f"{pxx[peak_idx, 0]:.4e}"
         })
-        
+
     plt.axvline(freq, color='k', linestyle=':')
     plt.xlabel("Frequency (Hz)")
     plt.ylabel("PSD")
     plt.title("PSD Convergence")
     plt.legend()
-    
+
     plot_path = os.path.join(PLOT_DIR, "psd_convergence.png")
     plt.savefig(plot_path)
     plt.close()
-    
+
     click.echo(f"📈 Plot saved to {plot_path}")
     print_table(conv_stats, title="PSD Convergence Statistics")
 
@@ -396,10 +397,10 @@ def network(dataset_path: str, gradient: str) -> None:
     data = np.load(dataset_path)
     adj = data["adjacency"]
     omega = data["omega"]
-    
+
     ensure_plot_dir()
     plot_path = os.path.join(PLOT_DIR, "network.png")
-    
+
     # Determine if we should use the Tree of Life layout
     pos = None
     if adj.shape == (10, 10):
@@ -415,10 +416,10 @@ def network(dataset_path: str, gradient: str) -> None:
     click.echo(f"🕸️ Visualizing network with {gradient} theme (colored by frequency)...")
     plot_network(adj, node_values=omega, pos=pos, cmap_name=gradient, save_path=plot_path)
     click.echo(f"📈 Plot saved to {plot_path}")
-    
+
     import networkx as nx
     G = nx.from_numpy_array(adj)
-    
+
     stats = [
         {"Metric": "Nodes", "Value": G.number_of_nodes()},
         {"Metric": "Edges", "Value": G.number_of_edges()},
@@ -435,14 +436,14 @@ def distributions(dataset_path: str, gradient: str) -> None:
     data = np.load(dataset_path)
     omega = data["omega"]
     theta_0 = data["initial_conditions"]
-    
+
     ensure_plot_dir()
     plot_path = os.path.join(PLOT_DIR, "distributions.png")
-    
+
     click.echo(f"📊 Visualizing distributions with {gradient} theme...")
     plot_distributions(omega, theta_0, cmap_name=gradient, save_path=plot_path)
     click.echo(f"📈 Plot saved to {plot_path}")
-    
+
     stats = [
         {"Variable": "Natural Frequencies (omega)", "Mean": f"{np.mean(omega):.4f}", "Std": f"{np.std(omega):.4f}"},
         {"Variable": "Initial Phases (theta_0)", "Mean": f"{np.mean(theta_0):.4f}", "Std": f"{np.std(theta_0):.4f}"}

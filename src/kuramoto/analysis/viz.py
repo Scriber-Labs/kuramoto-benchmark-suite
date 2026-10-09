@@ -713,6 +713,88 @@ def plot_order_parameter(
         plt.show()
 
 
+def plot_autocorrelation(
+    series: Dict[str, Tuple[NDArray[np.integer], NDArray[np.floating]]],
+    title: str = "Order Parameter Autocorrelation",
+    save_path: Optional[str] = None,
+    apply_aclonica: bool = True,
+    ax: Optional[plt.Axes] = None,
+) -> plt.Axes:
+    """
+    Plot normalized autocorrelation curves with The Scriber Experience styling.
+
+    Parameters
+    ----------
+    series : Dict[str, Tuple[NDArray, NDArray]]
+        Mapping from label to ``(lags, autocorr)`` pairs. Each ``autocorr`` should
+        start at lag 0 with value 1.0 (see
+        ``kuramoto.order_parameter.compute_order_parameter_autocorrelation``).
+    title : str, default='Order Parameter Autocorrelation'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path. Ignored when ``ax`` is given.
+    apply_aclonica : bool, default=True
+        Whether to attempt applying the Aclonica font.
+    ax : plt.Axes, optional
+        Existing axes to draw on. If None, a new figure/axes is created.
+
+    Returns
+    -------
+    plt.Axes
+        The axes the curves were drawn on.
+    """
+    set_style()
+
+    created_fig = False
+    fig = None
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(9, 5), facecolor=THEME_BG)
+        created_fig = True
+
+    palette = [
+        PROJECT_COLORS["cyan_light"],
+        PROJECT_COLORS["purple_light"],
+        PROJECT_COLORS["pink_pink"],
+        PROJECT_COLORS["green_neon"],
+        PROJECT_COLORS["yellow_orange"],
+    ]
+
+    for idx, (label, (lags, autocorr)) in enumerate(series.items()):
+        ax.plot(
+            lags,
+            autocorr,
+            color=palette[idx % len(palette)],
+            linewidth=2.5,
+            label=label,
+        )
+
+    ax.axhline(0.0, color=TEXT_MUTED, linestyle=":", linewidth=1.0, alpha=0.7)
+    ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax.set_xlabel("Lag", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_ylabel("Normalized Autocorrelation", fontsize=11, color=TEXT_PRIMARY)
+    ax.legend()
+
+    if apply_aclonica:
+        _apply_aclonica_font(ax)
+
+    if created_fig and save_path:
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
+        plt.savefig(
+            save_path,
+            dpi=200,
+            bbox_inches="tight",
+            facecolor=THEME_BG,
+        )
+        plt.close(fig)
+    elif created_fig:
+        plt.show()
+
+    return ax
+
+
 def plot_semantic_colormaps(
     *,
     out_path: Optional[str | Path] = None,

@@ -17,7 +17,7 @@ Last Updated: 09-2026
 
 from __future__ import annotations
 
-from typing import Final, NamedTuple
+from typing import NamedTuple
 
 import numpy as np
 from numpy.typing import NDArray
@@ -37,6 +37,7 @@ except (ImportError, ValueError):
 
 __all__: list[str] = [
     "compute_order_parameter",
+    "compute_order_parameter_autocorrelation",
     "LieSymmetryMetrics",
     "track_lie_symmetries",
 ]
@@ -250,6 +251,77 @@ def compute_order_parameter(theta: PhaseArray) -> TimeSeriesArray:
         r = np.abs(np.mean(phase_complex))
 
     return r
+
+# ------------------------------------------------------------------------------
+# 3️⃣ Temporal Correlation Diagnostics
+# ------------------------------------------------------------------------------
+def compute_order_parameter_autocorrelation(
+    r_values: TimeSeriesArray,
+    max_lag: int | None = None,
+) -> tuple[NDArray[np.int_], TimeSeriesArray]:
+    """
+    Compute the normalized autocorrelation of the order parameter r(t).
+
+    The autocorrelation measures how long the synchronization signal "remembers"
+    its past. It is normalized so that the value at lag 0 is exactly 1.0, and it
+    decays toward 0 as the signal decorrelates. Only non-negative lags (starting
+    at lag 0) are returned.
+
+    Parameters
+    ----------
+    r_values : TimeSeriesArray
+        Order parameter time series |r(t)|, shape (T,).
+    max_lag : int, optional
+        Maximum (non-negative) lag to return. If None, returns lags from 0 up to
+        ``T - 1``. The returned arrays always start at lag 0.
+
+    Returns
+    -------
+    tuple[NDArray[np.int_], TimeSeriesArray]
+        ``(lags, autocorr)`` where ``lags`` are non-negative integer lags starting
+        at 0 and ``autocorr[0] == 1.0`` (unless the signal has zero variance).
+
+    Raises
+    ------
+    ValueError
+        If ``r_values`` is empty, not 1D, or ``max_lag`` is non-positive.
+
+    Notes
+    -----
+    This uses a full cross-correlation of the mean-subtracted signal with itself
+    and keeps only the non-negative lags centered on lag 0. Normalizing by the
+    zero-lag term guarantees ``autocorr[0] == 1.0`` for a non-constant signal.
+    """
+    from scipy.signal import correlate
+
+    r = np.asarray(r_values, dtype=float)
+
+    if r.ndim != 1:
+        raise ValueError(f"Error: r_values must be 1D, got {r.ndim}D")
+    if r.size == 0:
+        raise ValueError("Error: r_values cannot be empty")
+    if max_lag is not None and max_lag <= 0:
+        raise ValueError(f"Error: max_lag must be positive, got {max_lag}")
+
+    centered = r - np.mean(r)
+    full = correlate(centered, centered, mode="full")
+
+    # The center index corresponds to lag 0; keep only non-negative lags.
+    center = full.size // 2
+    autocorr = full[center:]
+
+    zero_lag = autocorr[0]
+    if zero_lag != 0:
+        autocorr = autocorr / zero_lag
+
+    lags = np.arange(autocorr.size)
+
+    if max_lag is not None:
+        upper = min(max_lag + 1, autocorr.size)
+        lags = lags[:upper]
+        autocorr = autocorr[:upper]
+
+    return lags, autocorr
 
 # ------------------------------------------------------------------------------
 # 💨 Smoke Test
