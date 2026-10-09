@@ -40,7 +40,6 @@ Last updated: 09-2026
 from __future__ import annotations
 
 import warnings
-from typing import Final
 
 import numpy as np
 from numpy.typing import NDArray
@@ -200,6 +199,88 @@ class RotorSolver:
         # Reconstruct rotors from updated phases
         self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in new_phases]
 
+    def step_euler_geometric(
+        self,
+        K: float,
+        dt: float,
+    ) -> None:
+        """
+        Advance the rotor solver one step using pure geometric algebra bivector torque.
+
+        This method leverages the bivector torque formulation in Cl(2,0),
+        computing collective mean-field polarization and wedge-product torques
+        without extracting phase angles at every step.
+
+        Parameters
+        ----------
+        K : float
+            Coupling strength (positive for attraction).
+        dt : float
+            Timestep size.
+        """
+        validate_positive_scalar(K, "K")
+        validate_positive_scalar(dt, "dt")
+
+        e1 = self.layout.basis_vectors["e1"]
+
+        # 1. Transform reference vector e1 under each rotor to get orientation vectors O(N)
+        v_i = [r_i * e1 * r_i.conjugate() for r_i in self.rotors]
+
+        # 2. Compute the collective average vector state O(N)
+        v_mean = sum(v_i) / self.N
+
+        new_rotors = []
+        for i, (r_i, vi) in enumerate(zip(self.rotors, v_i, strict=True)):
+            # 3. Project out bivector torque magnitude: (v_mean ^ v_i) * B_plane
+            torque_scalar = float(((v_mean ^ vi) * self.B_plane).value[0])
+
+            # 4. Synthesize total bivector velocity generator
+            omega_total = (self.omegas[i] + K * torque_scalar) * self.B_plane
+
+            # 5. Advance the rotor state explicitly using rotor exponential update
+            d_rotor = np.exp(-omega_total * dt / 2.0)
+            new_rotors.append(d_rotor * r_i)
+
+        self.rotors = new_rotors
+
+    def step_euler_fast(
+        self,
+        K: float,
+        dt: float,
+    ) -> None:
+        """
+        Fast Euler step for the Kuramoto model.
+
+        Parameters
+        ----------
+        K : float
+            Coupling strength (for positive attractions).
+        dt : float
+            Time step size.
+        """
+        validate_positive_scalar(K, "K")
+        validate_positive_scalar(dt, "dt")
+
+        phases = self.extract_phases()
+
+        # 1. Compute global order parameter in O(N)
+        order_param = np.mean(np.exp(1j * phases))
+        R = np.abs(order_param)
+        psi = np.angle(order_param)
+
+        # 2. Compute coupling vector in O(N) without a distance matrix
+        coupling = K * R * np.sin(psi - phases)
+
+        # 3. Update state
+        new_phases = phases + dt * (self.omegas + coupling)
+        half = new_phases * 0.5
+        cos_half = np.cos(half)
+        sin_half = -np.sin(half)
+        blade_idx = self._blade_idx
+        for i, rot in enumerate(self.rotors):
+            rot.value[0] = cos_half[i]
+            rot.value[blade_idx] = sin_half[i]
+
     def get_complex_order_parameter(self) -> complex:
         """
         Compute the standard complex Kuramoto order parameter.
@@ -289,7 +370,7 @@ class RotorSolver:
                     warnings.warn(
                         f"dt_internal={dt_internal:.6g} may under-resolve the oscillator dynamics. "
                         f"The current Nyquist-inspired resolution estimate gives dt <= {nyquist_dt:.6g}, "
-                        f"while the maximum phase increment constraint gives dt <= {phase_increment_dt:.6h}. "
+                        f"while the maximum phase increment constraint gives dt <= {phase_increment_dt:.6g}. "
                         f"Recommended dt <= {dt_safe:.6g} for estimated maximum phase rate {estimated_max_rate:.6g} "
                         f"rad/time. This is a temporal-resolution heuristic, not a formal Euler stability bound.",
                         RuntimeWarning,
@@ -300,15 +381,34 @@ class RotorSolver:
         all_phases: list[PhaseArray] = []
 
         current_time = float(t_eval[0])
+        current_phases = self.extract_phases()
+        times.append(current_time)
+        all_phases.append(current_phases.copy())
 
-        for t_out in t_eval:
+        blade_idx = self._blade_idx
+        omegas = self.omegas
+
+        for t_out in t_eval[1:]:
             while current_time < t_out - 1e-12:
                 dt = min(dt_internal, t_out - current_time)
-                self.step_euler(K, dt)
+                # In-place vectorized fast Euler step
+                order_param = np.mean(np.exp(1j * current_phases))
+                R = np.abs(order_param)
+                psi = np.angle(order_param)
+                coupling = K * R * np.sin(psi - current_phases)
+                current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
                 current_time += dt
 
             times.append(float(t_out))
-            all_phases.append(self.extract_phases())
+            all_phases.append(current_phases.copy())
+
+        # Sync final rotor states with final phases
+        half = current_phases * 0.5
+        cos_half = np.cos(half)
+        sin_half = -np.sin(half)
+        for i, rot in enumerate(self.rotors):
+            rot.value[0] = cos_half[i]
+            rot.value[blade_idx] = sin_half[i]
 
         return np.asarray(times), np.asarray(all_phases)
 
@@ -380,6 +480,7 @@ def _run_smoke_test() -> None:
         for original, reconstructed in zip(
             rotor.rotors,
             reconstructed_rotors,
+            strict=True,
         ):
             assert np.allclose(
                 original.value,
@@ -487,6 +588,81 @@ def _run_smoke_test() -> None:
         )
 
         print(" ... ✔️ Euler evolution test passed")
+
+        # --------------------------------------------------------------
+        # Test 5b: Fast Euler step consistency with standard Euler step
+        # --------------------------------------------------------------
+        rotor_standard = RotorSolver(
+            n_oscillators=15,
+            dim=2,
+            seed=42,
+        )
+        rotor_fast = RotorSolver(
+            n_oscillators=15,
+            dim=2,
+            seed=42,
+        )
+
+        # Confirm initial states match
+        assert np.allclose(
+            rotor_standard.extract_phases(),
+            rotor_fast.extract_phases(),
+            rtol=1e-12,
+            atol=1e-12,
+        )
+
+        # Step both solvers multiple times with identical parameters
+        for _ in range(5):
+            rotor_standard.step_euler(K=1.5, dt=0.02)
+            rotor_fast.step_euler_fast(K=1.5, dt=0.02)
+
+        standard_phases = rotor_standard.extract_phases()
+        fast_phases = rotor_fast.extract_phases()
+
+        assert fast_phases.shape == (15,)
+        assert np.all(np.isfinite(fast_phases))
+
+        assert np.allclose(
+            standard_phases,
+            fast_phases,
+            rtol=1e-10,
+            atol=1e-12,
+        )
+
+        assert np.isclose(
+            rotor_standard.get_synchronization_strength(),
+            rotor_fast.get_synchronization_strength(),
+            rtol=1e-10,
+            atol=1e-12,
+        )
+
+        print(" ... ✔️ Fast Euler consistency test passed")
+
+        # --------------------------------------------------------------
+        # Test 5c: Geometric Euler step consistency with standard Euler step
+        # --------------------------------------------------------------
+        rotor_geom = RotorSolver(
+            n_oscillators=15,
+            dim=2,
+            seed=42,
+        )
+
+        for _ in range(5):
+            rotor_geom.step_euler_geometric(K=1.5, dt=0.02)
+
+        geom_phases = rotor_geom.extract_phases()
+
+        assert geom_phases.shape == (15,)
+        assert np.all(np.isfinite(geom_phases))
+
+        assert np.allclose(
+            fast_phases,
+            geom_phases,
+            rtol=1e-10,
+            atol=1e-12,
+        )
+
+        print(" ... ✔️ Geometric Euler consistency test passed")
 
         # --------------------------------------------------------------
         # Test 6: Global U(1) phase-shift invariance
@@ -614,7 +790,7 @@ def _run_smoke_test() -> None:
                 dt=0.01,
             )
         except NotImplementedError:
-            print(" ... 🚧 Future KR45 placeholder test passed")
+            print(" ... 🚧 Future RK45 placeholder test passed")
         else:
             raise AssertionError(
                 " ... ❌ step_rk45_adaptive should remain explicitly unimplemented until appropriate updates are "

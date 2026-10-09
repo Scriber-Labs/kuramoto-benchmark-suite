@@ -7,13 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="split the solver into separate modules (one for each integration scheme)">
-      <change afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added benchmark configuration and sample data">
+      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/ABOUT.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/quantum_rk45.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/quantum_rotor_bridge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -54,60 +55,60 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000000450897" />
-      <entry key="S2" value="1.0060302376002002" />
-      <entry key="S5" value="1.4545450400144502" />
-      <entry key="S10" value="3.7291053815716215" />
-      <entry key="S30" value="17.381568199450633" />
-      <entry key="S60" value="37.49070906848849" />
-      <entry key="M2" value="69.5057941082725" />
-      <entry key="M5" value="133.65179179752477" />
-      <entry key="M10" value="208.2110129313593" />
-      <entry key="M15" value="289.0347609407882" />
-      <entry key="M30" value="593.3199796761454" />
-      <entry key="H1" value="1193.6067484603839" />
-      <entry key="H2" value="1954.477683360959" />
-      <entry key="H4" value="2787.1748130430838" />
-      <entry key="D1" value="7954.035271832228" />
-      <entry key="W1" value="12359.087020287778" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000000255" />
+      <entry key="S30" value="1.0001260933491836" />
+      <entry key="S60" value="1.0917951182415713" />
+      <entry key="M2" value="4.02749166588964" />
+      <entry key="M5" value="28.134384862347844" />
+      <entry key="M10" value="64.3977684687228" />
+      <entry key="M15" value="96.48426029832693" />
+      <entry key="M30" value="208.22508270174157" />
+      <entry key="H1" value="559.2770143709099" />
+      <entry key="H2" value="1311.2081555058055" />
+      <entry key="H4" value="2349.086401169748" />
+      <entry key="D1" value="7924.56527757821" />
+      <entry key="W1" value="12676.125452890787" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="5.893609085404327E-162" />
-      <entry key="S10" value="2.427675654902094E-81" />
-      <entry key="S30" value="1.343992930436276E-27" />
-      <entry key="S60" value="3.668607838094906E-14" />
-      <entry key="M2" value="1.9998329161468026E-7" />
-      <entry key="M5" value="0.003339857350447547" />
-      <entry key="M10" value="0.11969572008260458" />
-      <entry key="M15" value="0.4341327546043646" />
-      <entry key="M30" value="1.8262885035442495" />
-      <entry key="H1" value="4.349391090800417" />
-      <entry key="H2" value="7.65721358436393" />
-      <entry key="H4" value="13.742664270943612" />
-      <entry key="D1" value="60.19513872797624" />
-      <entry key="W1" value="94.0876880903856" />
+      <entry key="S2" value="1.0816014676392738E-95" />
+      <entry key="S5" value="1.0319401919645492E-38" />
+      <entry key="S10" value="1.0239133696706424E-19" />
+      <entry key="S30" value="5.598137694898798E-7" />
+      <entry key="S60" value="9.883972859433764E-4" />
+      <entry key="M2" value="0.043609948233410405" />
+      <entry key="M5" value="0.4398303094202265" />
+      <entry key="M10" value="1.1601252835585956" />
+      <entry key="M15" value="1.9098482473875853" />
+      <entry key="M30" value="3.8755270603582446" />
+      <entry key="H1" value="6.79749900290431" />
+      <entry key="H2" value="10.99243307993848" />
+      <entry key="H4" value="17.77372520366757" />
+      <entry key="D1" value="65.70286994296792" />
+      <entry key="W1" value="102.30390624509197" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.339151081861918" />
-      <entry key="MS500" value="0.8055242910788869" />
-      <entry key="S2" value="0.95222449748629" />
-      <entry key="S5" value="1.3925793956345431" />
-      <entry key="S10" value="3.598376407276303" />
-      <entry key="S30" value="17.161869437189416" />
-      <entry key="S60" value="37.27664080377593" />
-      <entry key="M2" value="69.32123054370999" />
-      <entry key="M5" value="133.51482073889346" />
-      <entry key="M10" value="208.22854984877534" />
-      <entry key="M15" value="289.3810673895685" />
-      <entry key="M30" value="595.0626780940723" />
-      <entry key="H1" value="1197.8703663817782" />
-      <entry key="H2" value="1962.0589266699997" />
-      <entry key="H4" value="2800.8581490983747" />
-      <entry key="D1" value="8014.201523921245" />
-      <entry key="W1" value="12453.168496240767" />
+      <entry key="MS100" value="0.8585654364377537" />
+      <entry key="MS500" value="0.9699619103417348" />
+      <entry key="S2" value="0.9924043746858185" />
+      <entry key="S5" value="0.9969547984662518" />
+      <entry key="S10" value="0.9984762383083037" />
+      <entry key="S30" value="0.9996168039756663" />
+      <entry key="S60" value="1.091996605474165" />
+      <entry key="M2" value="4.0624878073880355" />
+      <entry key="M5" value="28.543269854118382" />
+      <entry key="M10" value="65.51996619407853" />
+      <entry key="M15" value="98.35463998159702" />
+      <entry key="M30" value="212.0591407795942" />
+      <entry key="H1" value="566.0258303571577" />
+      <entry key="H2" value="1322.1454505777212" />
+      <entry key="H4" value="2366.8085377599937" />
+      <entry key="D1" value="7990.239127228203" />
+      <entry key="W1" value="12778.422946398241" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -567,7 +568,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790185276443</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="added benchmark configuration and sample data">
+      <option name="closed" value="true" />
+      <created>1791499360317</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1791499360317</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,6 +606,7 @@
     <MESSAGE value="edited a bug in the cli" />
     <MESSAGE value="evaluating demo.ipynb tests" />
     <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
-    <option name="LAST_COMMIT_MESSAGE" value="split the solver into separate modules (one for each integration scheme)" />
+    <MESSAGE value="added benchmark configuration and sample data" />
+    <option name="LAST_COMMIT_MESSAGE" value="added benchmark configuration and sample data" />
   </component>
 </project>
