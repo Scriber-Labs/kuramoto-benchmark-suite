@@ -4,7 +4,7 @@ Overall structure (with numbered emoji sections)
 """
 example.py
 
-Script descriptiion
+Script description
 
 Author:
 Date:

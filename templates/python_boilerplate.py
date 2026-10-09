@@ -26,7 +26,7 @@ import numpy as np
 # This section defines the "world" of the script.
 # Use this for constants, type aliases, and static configuration.
 
-DEFAULT_SEED: Final[int] = 42
+DEFAULT_SEED: Final[int] = 27
 
 # ------------------------------------------------------------------------------ #
 # 1️⃣ What You're Allowed to Call (Public API)

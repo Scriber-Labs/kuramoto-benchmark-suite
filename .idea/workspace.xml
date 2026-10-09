@@ -7,14 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added benchmark configuration and sample data">
-      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/ABOUT.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/quantum_rk45.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/quantum_rotor_bridge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="updated execution timestamps in demo.ipynb">
+      <change beforePath="$PROJECT_DIR$/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/data/benchmark/rotor.npz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/HOUSE_RULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/templates/HOUSE_RULES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/python_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/templates/python_boilerplate.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -576,14 +573,21 @@
       <option name="project" value="LOCAL" />
       <updated>1791499360317</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="updated execution timestamps in demo.ipynb">
+      <option name="closed" value="true" />
+      <created>1791507303669</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1791507303669</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder." />
     <MESSAGE value="finished writing solver.py" />
     <MESSAGE value="finished writing src/kuramoto/model.py" />
     <MESSAGE value="updated src/kuramoto/api.py" />
@@ -607,6 +611,8 @@
     <MESSAGE value="evaluating demo.ipynb tests" />
     <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
     <MESSAGE value="added benchmark configuration and sample data" />
-    <option name="LAST_COMMIT_MESSAGE" value="added benchmark configuration and sample data" />
+    <MESSAGE value="added quantum solvers and stabilization benchmarks" />
+    <MESSAGE value="updated execution timestamps in demo.ipynb" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated execution timestamps in demo.ipynb" />
   </component>
 </project>
