@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added rotor_dt_0.01.npz benchmark data">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added comprehensive diagnostics module with structural invariants and spectral metrics computations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,61 +50,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000000004352" />
-      <entry key="S2" value="1.00115525849298" />
-      <entry key="S5" value="1.1826792976736105" />
-      <entry key="S10" value="2.450874011901167" />
-      <entry key="S30" value="10.092164153242342" />
-      <entry key="S60" value="20.338634340149643" />
-      <entry key="M2" value="35.58978702531493" />
-      <entry key="M5" value="60.705777837549405" />
-      <entry key="M10" value="85.58906604980079" />
-      <entry key="M15" value="110.28099207838433" />
-      <entry key="M30" value="202.43980258973357" />
-      <entry key="H1" value="505.7379383630965" />
-      <entry key="H2" value="1221.443532730513" />
-      <entry key="H4" value="2273.4608122379777" />
-      <entry key="D1" value="7922.296677123046" />
-      <entry key="W1" value="12751.10460934851" />
+      <entry key="MS100" value="1.0009367813665955" />
+      <entry key="MS500" value="1.2511468102763952" />
+      <entry key="S2" value="2.216896259661422" />
+      <entry key="S5" value="4.606651386454864" />
+      <entry key="S10" value="8.587126609546289" />
+      <entry key="S30" value="17.93180489787923" />
+      <entry key="S60" value="27.415502060515713" />
+      <entry key="M2" value="47.92818528314079" />
+      <entry key="M5" value="108.30408577857101" />
+      <entry key="M10" value="185.66805965385726" />
+      <entry key="M15" value="242.18388198722334" />
+      <entry key="M30" value="372.14044541671734" />
+      <entry key="H1" value="671.9722551660366" />
+      <entry key="H2" value="1371.2048844209505" />
+      <entry key="H4" value="2438.6521608614653" />
+      <entry key="D1" value="8155.336814165619" />
+      <entry key="W1" value="13053.469623813098" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="4.367042187582102E-134" />
-      <entry key="S10" value="2.1063456671190935E-67" />
-      <entry key="S30" value="7.119765991159876E-23" />
-      <entry key="S60" value="1.1146605114126576E-11" />
-      <entry key="M2" value="4.6311740916265265E-6" />
-      <entry key="M5" value="0.011316897133415554" />
-      <entry key="M10" value="0.18609126966179826" />
-      <entry key="M15" value="0.5638275142966324" />
-      <entry key="M30" value="2.1057386864589325" />
-      <entry key="H1" value="5.010556962248519" />
-      <entry key="H2" value="9.437614985130594" />
-      <entry key="H4" value="16.468827253822337" />
-      <entry key="D1" value="64.87315839354369" />
-      <entry key="W1" value="102.11833976831566" />
+      <entry key="S5" value="3.6629764832585996E-218" />
+      <entry key="S10" value="1.929092333997168E-109" />
+      <entry key="S30" value="6.9141719654720005E-37" />
+      <entry key="S60" value="1.0984488649500389E-18" />
+      <entry key="M2" value="1.453816927544468E-9" />
+      <entry key="M5" value="4.492155838197057E-4" />
+      <entry key="M10" value="0.03707573094403883" />
+      <entry key="M15" value="0.19233371215296952" />
+      <entry key="M30" value="1.229869553535203" />
+      <entry key="H1" value="3.8292462074055194" />
+      <entry key="H2" value="8.250416999056778" />
+      <entry key="H4" value="15.398183681308643" />
+      <entry key="D1" value="64.15042126557331" />
+      <entry key="W1" value="101.9550330578477" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9075191553171609" />
-      <entry key="MS500" value="0.9807790039889812" />
-      <entry key="S2" value="0.99631110861021" />
-      <entry key="S5" value="1.180450348734544" />
-      <entry key="S10" value="2.4484650060912925" />
-      <entry key="S30" value="10.087577531314167" />
-      <entry key="S60" value="20.33345306414706" />
-      <entry key="M2" value="35.58522173367606" />
-      <entry key="M5" value="60.71335839209655" />
-      <entry key="M10" value="85.7672670243021" />
-      <entry key="M15" value="110.83186440738015" />
-      <entry key="M30" value="204.52229862328358" />
-      <entry key="H1" value="510.71223756904374" />
-      <entry key="H2" value="1230.8336176532741" />
-      <entry key="H4" value="2289.881741635823" />
-      <entry key="D1" value="7987.141165400578" />
-      <entry key="W1" value="12853.216545678419" />
+      <entry key="MS100" value="0.914608341326874" />
+      <entry key="MS500" value="1.224088597184321" />
+      <entry key="S2" value="2.2028940170779863" />
+      <entry key="S5" value="4.594020700873538" />
+      <entry key="S10" value="8.5705874800316" />
+      <entry key="S30" value="17.915705663333906" />
+      <entry key="S60" value="27.402476708572454" />
+      <entry key="M2" value="47.91727008340554" />
+      <entry key="M5" value="108.29536701228774" />
+      <entry key="M10" value="185.69638798561755" />
+      <entry key="M15" value="242.3659548142346" />
+      <entry key="M30" value="373.35307673260616" />
+      <entry key="H1" value="675.7717189426788" />
+      <entry key="H2" value="1379.4126447373985" />
+      <entry key="H4" value="2454.0049891961476" />
+      <entry key="D1" value="8219.458786811867" />
+      <entry key="W1" value="13155.418249618317" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -588,15 +589,21 @@
       <option name="project" value="LOCAL" />
       <updated>1791508431374</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="added comprehensive diagnostics module with structural invariants and spectral metrics computations">
+      <option name="closed" value="true" />
+      <created>1791513169305</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1791513169305</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished writing src/kuramoto/model.py" />
-    <MESSAGE value="updated src/kuramoto/api.py" />
     <MESSAGE value="uv compatibility initiated and then updated the repo packages used in the code" />
     <MESSAGE value="added a RotorSolver class to solvers.py" />
     <MESSAGE value="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared" />
@@ -620,6 +627,8 @@
     <MESSAGE value="added quantum solvers and stabilization benchmarks" />
     <MESSAGE value="updated execution timestamps in demo.ipynb" />
     <MESSAGE value="added rotor_dt_0.01.npz benchmark data" />
-    <option name="LAST_COMMIT_MESSAGE" value="added rotor_dt_0.01.npz benchmark data" />
+    <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
+    <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
+    <option name="LAST_COMMIT_MESSAGE" value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
   </component>
 </project>
