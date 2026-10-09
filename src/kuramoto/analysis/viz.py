@@ -100,60 +100,61 @@ SCRIBER_PALETTE: Final[Dict[str, str]] = {
     "grid": GRID_COLOR,
 }
 
+# Solver Color Tokens
+SOLVER_COLORS: Final[Dict[str, str]] = {
+    "rk45": PROJECT_COLORS["cyan_light"],
+    "euler": PROJECT_COLORS["purple_light"],
+    "rotor": PROJECT_COLORS["cyan_blue"],
+    "euler_fast": PROJECT_COLORS["indigo"],
+    "ground_truth": PROJECT_COLORS["cyan_light"],
+}
+
 # Quantity-Specific Comparison Palette
 COMPARISON_PALETTE: Final[Dict[str, Dict[str, str]]] = {
-    "potential": {
-        "true": "#F72585",  # Vibrant Neon Magenta/Pink (Ground Truth)
-        "learned": "#31FF48",  # Luminous Vibrant Green (Learned PINN)
+    "order_parameter": {
+        "ground_truth": PROJECT_COLORS["cyan_light"],
+        "euler": PROJECT_COLORS["purple_light"],
+        "rotor": PROJECT_COLORS["cyan_blue"],
+        "reference": PROJECT_COLORS["cyan_light"],
+        "simulated": PROJECT_COLORS["purple_light"],
     },
-    "wavefunctions": {
-        "true": "#F72585",  # Vibrant Eigenscribe Neon Magenta/Pink (Ground Truth)
-        "learned": "#31FF48",  # Luminous Vibrant Green (Learned PINN)
+    "solvers": {
+        "rk45": PROJECT_COLORS["cyan_light"],
+        "euler": PROJECT_COLORS["purple_light"],
+        "rotor": PROJECT_COLORS["cyan_blue"],
+    },
+    "phases": {
+        "initial": PROJECT_COLORS["purple_light"],
+        "final": PROJECT_COLORS["cyan_light"],
+        "reference": PROJECT_COLORS["cyan_light"],
+        "simulated": PROJECT_COLORS["purple_light"],
+    },
+    "frequencies": {
+        "natural": PROJECT_COLORS["blue_light"],
+        "effective": PROJECT_COLORS["pink_vibrant"],
     },
     "energy": {
-        "true": "#0070EB",  # Deep Royal Blue (Ground Truth)
-        "learned": "#00E8FF",  # Light Vivid Sky / Cyan Blue (Learned PINN)
+        "conserved": PROJECT_COLORS["blue_deep"],
+        "drift": PROJECT_COLORS["pink_pink"],
+        "reference": PROJECT_COLORS["cyan_light"],
+        "simulated": PROJECT_COLORS["purple_light"],
     },
-    "density": {
-        "true": "#F72585",  # Vibrant Neon Magenta/Pink (Ground Truth)
-        "observed": "#7C5CFF",  # Electric Purple (Observed data alias)
-        "learned": "#31FF48",  # Luminous Vibrant Green (Learned PINN)
-    },
-    "order_parameter": {
-        "ground_truth": "#00FFEE",  # Bright Electric Cyan
-        "euler": "#7952F5",  # Electric Purple
-        "rotor": "#00E8FF",  # Cyan Blue
+    "symmetries": {
+        "u1_charge": PROJECT_COLORS["purple_deep"],
+        "noether_drift": PROJECT_COLORS["pink_pink"],
     },
 }
 
-COLOR_POTENTIAL_TRUE: Final[str] = COMPARISON_PALETTE["potential"]["true"]
-COLOR_POTENTIAL_LEARNED: Final[str] = COMPARISON_PALETTE["potential"]["learned"]
-COLOR_WAVEFUNCTION_TRUE: Final[str] = COMPARISON_PALETTE["wavefunctions"]["true"]
-COLOR_WAVEFUNCTION_LEARNED: Final[str] = COMPARISON_PALETTE["wavefunctions"]["learned"]
-COLOR_ENERGY_TRUE: Final[str] = COMPARISON_PALETTE["energy"]["true"]
-COLOR_ENERGY_LEARNED: Final[str] = COMPARISON_PALETTE["energy"]["learned"]
-COLOR_DENSITY_TRUE: Final[str] = COMPARISON_PALETTE["density"]["true"]
-COLOR_DENSITY_OBSERVED: Final[str] = COMPARISON_PALETTE["density"]["observed"]
-COLOR_DENSITY_LEARNED: Final[str] = COMPARISON_PALETTE["density"]["learned"]
+COLOR_RK45: Final[str] = SOLVER_COLORS["rk45"]
+COLOR_EULER: Final[str] = SOLVER_COLORS["euler"]
+COLOR_ROTOR: Final[str] = SOLVER_COLORS["rotor"]
+COLOR_GROUND_TRUTH: Final[str] = SOLVER_COLORS["ground_truth"]
+COLOR_REFERENCE: Final[str] = PROJECT_COLORS["cyan_light"]
+COLOR_SIMULATED: Final[str] = PROJECT_COLORS["purple_light"]
 
-COLOR_TRUE: Final[str] = "#F72585"
-COLOR_LEARNED: Final[str] = "#31FF48"
-COLOR_OBSERVED: Final[str] = "#7C5CFF"
-COLOR_POD_MODE: Final[str] = "#0A95EB"
-COLOR_POD_ALT: Final[str] = "#FFD166"
-
-LOSS_COLORS: Final[Dict[str, str]] = {
-    "Total": PROJECT_COLORS["purple_deep"],
-    "Physics": PROJECT_COLORS["blue_light"],
-    "Data-fit": PROJECT_COLORS["pink_vibrant"],
-    "Smoothness": PROJECT_COLORS["green_jade"],
-    "Ordered": PROJECT_COLORS["orange_warm"],
-}
-
-FIGURE_2: Final[Dict[str, str]] = {
-    "Ground_Truth_Potential": COLOR_POTENTIAL_TRUE,
-    "Learned_Potential": COLOR_POTENTIAL_LEARNED,
-}
+COLOR_TRUE: Final[str] = PROJECT_COLORS["cyan_light"]
+COLOR_LEARNED: Final[str] = PROJECT_COLORS["purple_light"]
+COLOR_OBSERVED: Final[str] = PROJECT_COLORS["purple_dark"]
 
 # Golden Ratio Constants
 GOLDEN_RATIO: Final[float] = (1.0 + 5.0**0.5) / 2.0  # φ ≈ 1.6180339887
@@ -163,49 +164,51 @@ INV_PHI2: Final[float] = INV_PHI**2  # φ⁻² ≈ 0.3819660113
 INV_PHI3: Final[float] = INV_PHI**3  # φ⁻³ ≈ 0.2360679775
 INV_PHI4: Final[float] = INV_PHI**4  # φ⁻⁴ ≈ 0.1458980338
 
-# Semantic Colormaps
-temporal_pod_cmap = LinearSegmentedColormap.from_list(
-    "temporal_pod_gradient",
+# Semantic Colormaps (Kuramoto Benchmark Suite)
+phase_cmap = LinearSegmentedColormap.from_list(
+    "phase_cyclic_gradient",
     [
-        (0.00, "#032B14"),
-        (0.25, "#059669"),
-        (0.50, "#00FF7F"),
-        (0.75, "#31FF48"),
-        (1.00, "#CCFFBD"),
+        (0.00, "#00FFEE"),  # -pi : Electric Cyan
+        (0.20, "#14B5FF"),  # Light Blue
+        (0.40, "#5280FF"),  # Indigo
+        (0.60, "#7952F5"),  # Purple
+        (0.75, "#FF66B3"),  # Vibrant Rose Pink
+        (0.90, "#FF9D57"),  # Orange Warm
+        (1.00, "#00FFEE"),  # +pi : Electric Cyan (cyclic wrap)
     ],
 )
 
-spatial_pod_cmap = LinearSegmentedColormap.from_list(
-    "spatial_pod_gradient",
+order_parameter_cmap = LinearSegmentedColormap.from_list(
+    "order_parameter_gradient",
     [
-        (0.00, "#3B022D"),
-        (0.25, "#7952F5"),
-        (0.50, "#AD1457"),
-        (0.75, "#F72585"),
-        (0.90, "#FF66B3"),
-        (1.00, "#FFD4F0"),
+        (0.00, "#0d1117"),  # 0.0 : Dark slate (incoherent / desynchronized)
+        (0.20, "#1c1445"),  # Deep navy-violet
+        (0.45, "#4361EE"),  # Royal Indigo
+        (0.70, "#7952F5"),  # Electric Purple
+        (0.88, "#FF66B3"),  # Vibrant Rose Pink
+        (1.00, "#00FFEE"),  # 1.0 : Glowing Electric Cyan (phase-locked synchronization)
     ],
 )
 
-wavefunction_cmap = LinearSegmentedColormap.from_list(
-    "wavefunction_gradient",
+spectral_density_cmap = LinearSegmentedColormap.from_list(
+    "spectral_density_gradient",
     [
-        (0.00, "#031B4E"),
-        (0.25, "#0050C8"),
-        (0.50, "#0070EB"),
-        (0.75, "#14B5FF"),
-        (1.00, "#A6FAFF"),
+        (0.00, "#031B4E"),  # Dark Blue
+        (0.25, "#0050C8"),  # Mid Blue
+        (0.50, "#0070EB"),  # Deep Royal Blue
+        (0.75, "#14B5FF"),  # Light Blue
+        (1.00, "#A6FAFF"),  # Bright Cyan
     ],
 )
 
 hamiltonian_cmap = LinearSegmentedColormap.from_list(
     "hamiltonian_gradient",
     [
-        (0.00, "#1E0438"),
-        (0.25, "#4361EE"),
-        (0.50, "#7C3AED"),
-        (0.75, "#A855F7"),
-        (1.00, "#F3E8FF"),
+        (0.00, "#1E0438"),  # Dark Violet
+        (0.25, "#4361EE"),  # Royal Indigo
+        (0.50, "#7C3AED"),  # Violet
+        (0.75, "#A855F7"),  # Purple Deep
+        (1.00, "#F3E8FF"),  # Light Lavender
     ],
 )
 
@@ -222,8 +225,6 @@ spatial_overlap_cmap = LinearSegmentedColormap.from_list(
 )
 
 temporal_overlap_cmap = spatial_overlap_cmap
-wavefunction_overlap_cmap = spatial_overlap_cmap
-hamiltonian_density_cmap = spatial_overlap_cmap
 
 cross_overlap_cmap = LinearSegmentedColormap.from_list(
     "cross_overlap_diverging",
@@ -239,17 +240,27 @@ cross_overlap_cmap = LinearSegmentedColormap.from_list(
 temporal_cmap = cross_overlap_cmap
 
 # Semantic Colormap Aliases (Uppercase Constants)
-TEMPORAL_POD_CMAP: Final[LinearSegmentedColormap] = temporal_pod_cmap
-SPATIAL_POD_CMAP: Final[LinearSegmentedColormap] = spatial_pod_cmap
-WAVEFUNCTION_CMAP: Final[LinearSegmentedColormap] = wavefunction_cmap
+PHASE_CMAP: Final[LinearSegmentedColormap] = phase_cmap
+ORDER_PARAMETER_CMAP: Final[LinearSegmentedColormap] = order_parameter_cmap
+SPECTRAL_DENSITY_CMAP: Final[LinearSegmentedColormap] = spectral_density_cmap
 HAMILTONIAN_CMAP: Final[LinearSegmentedColormap] = hamiltonian_cmap
 SPATIAL_OVERLAP_CMAP: Final[LinearSegmentedColormap] = spatial_overlap_cmap
 TEMPORAL_OVERLAP_CMAP: Final[LinearSegmentedColormap] = temporal_overlap_cmap
-WAVEFUNCTION_OVERLAP_CMAP: Final[LinearSegmentedColormap] = wavefunction_overlap_cmap
-HAMILTONIAN_DENSITY_CMAP: Final[LinearSegmentedColormap] = hamiltonian_density_cmap
 CROSS_OVERLAP_CMAP: Final[LinearSegmentedColormap] = cross_overlap_cmap
 TEMPORAL_CMAP: Final[LinearSegmentedColormap] = temporal_cmap
 BLUE_TO_PINK: Final[LinearSegmentedColormap] = cross_overlap_cmap
+
+# Backwards compatibility colormap aliases
+TEMPORAL_POD_CMAP: Final[LinearSegmentedColormap] = order_parameter_cmap
+SPATIAL_POD_CMAP: Final[LinearSegmentedColormap] = phase_cmap
+WAVEFUNCTION_CMAP: Final[LinearSegmentedColormap] = spectral_density_cmap
+WAVEFUNCTION_OVERLAP_CMAP: Final[LinearSegmentedColormap] = spatial_overlap_cmap
+HAMILTONIAN_DENSITY_CMAP: Final[LinearSegmentedColormap] = spatial_overlap_cmap
+temporal_pod_cmap = TEMPORAL_POD_CMAP
+spatial_pod_cmap = SPATIAL_POD_CMAP
+wavefunction_cmap = WAVEFUNCTION_CMAP
+wavefunction_overlap_cmap = WAVEFUNCTION_OVERLAP_CMAP
+hamiltonian_density_cmap = HAMILTONIAN_DENSITY_CMAP
 
 GRADIENTS: Dict[str, List[str]] = {
     "gradient_0": ["#03E8BD", "#00FFFF", "#00E8FF", "#14B5FF"],
@@ -260,11 +271,34 @@ GRADIENTS: Dict[str, List[str]] = {
     "gradient_5": ["#00E8FF", "#14B5FF", "#5280FF", "#7952F5", "#FF66B3", "#F78166"],
     "gradient_6": ["#8A2BE2", "#FF00FF", "#F78166", "#FFA500", "#50C878"],
     "gradient_tse": ["#00E8FF", "#14B5FF", "#0070EB", "#7066FF", "#FF66B3"],
-    "temporal_pod": ["#032B14", "#059669", "#00FF7F", "#31FF48", "#CCFFBD"],
-    "spatial_pod": ["#3B022D", "#7952F5", "#AD1457", "#F72585", "#FF66B3", "#FFD4F0"],
-    "wavefunction": ["#031B4E", "#0050C8", "#0070EB", "#14B5FF", "#A6FAFF"],
+    "phase": [
+        "#00FFEE",
+        "#14B5FF",
+        "#5280FF",
+        "#7952F5",
+        "#FF66B3",
+        "#FF9D57",
+        "#00FFEE",
+    ],
+    "order_parameter": [
+        "#0d1117",
+        "#1c1445",
+        "#4361EE",
+        "#7952F5",
+        "#FF66B3",
+        "#00FFEE",
+    ],
+    "spectral_density": ["#031B4E", "#0050C8", "#0070EB", "#14B5FF", "#A6FAFF"],
     "hamiltonian": ["#1E0438", "#4361EE", "#7C3AED", "#A855F7", "#F3E8FF"],
     "spatial_overlap": [
+        "#0d1117",
+        "#1c1445",
+        "#4361EE",
+        "#7952F5",
+        "#FF66B3",
+        "#00FFEE",
+    ],
+    "temporal_overlap": [
         "#0d1117",
         "#1c1445",
         "#4361EE",
@@ -359,7 +393,9 @@ def get_colormap(name: str = "gradient_tse") -> LinearSegmentedColormap:
     Parameters
     ----------
     name : str, default='gradient_tse'
-        Name of the gradient (e.g., 'gradient_tse', 'spatial_overlap', 'cross_overlap').
+        Name of the gradient (e.g., 'gradient_tse', 'phase', 'order_parameter',
+        'spectral_density', 'hamiltonian', 'spatial_overlap', 'temporal_overlap',
+        'cross_overlap').
 
     Returns
     -------
@@ -367,14 +403,18 @@ def get_colormap(name: str = "gradient_tse") -> LinearSegmentedColormap:
         The requested colormap instance.
     """
     named_colormaps: Dict[str, LinearSegmentedColormap] = {
-        "temporal_pod": TEMPORAL_POD_CMAP,
-        "spatial_pod": SPATIAL_POD_CMAP,
-        "wavefunction": WAVEFUNCTION_CMAP,
+        "phase": PHASE_CMAP,
+        "order_parameter": ORDER_PARAMETER_CMAP,
+        "spectral_density": SPECTRAL_DENSITY_CMAP,
         "hamiltonian": HAMILTONIAN_CMAP,
         "spatial_overlap": SPATIAL_OVERLAP_CMAP,
         "temporal_overlap": TEMPORAL_OVERLAP_CMAP,
         "cross_overlap": CROSS_OVERLAP_CMAP,
         "temporal": TEMPORAL_CMAP,
+        # Backwards-compatible aliases
+        "temporal_pod": TEMPORAL_POD_CMAP,
+        "spatial_pod": SPATIAL_POD_CMAP,
+        "wavefunction": WAVEFUNCTION_CMAP,
     }
     if name in named_colormaps:
         return named_colormaps[name]
@@ -384,39 +424,64 @@ def get_colormap(name: str = "gradient_tse") -> LinearSegmentedColormap:
 
 def get_comparison_colors(quantity: str) -> Tuple[str, str]:
     """
-    Return (true_color, learned_color) for a given physical quantity.
+    Return (reference_color, simulated_color) for a given physical quantity or comparison.
 
     Parameters
     ----------
     quantity : str
-        Name of the physical quantity (e.g. 'potential', 'wavefunctions', 'energy',
-        'density', 'order_parameter').
+        Name of the physical quantity or comparison (e.g. 'order_parameter', 'solvers',
+        'phases', 'frequencies', 'energy', 'symmetries', 'rk45_vs_euler', 'rk45_vs_rotor').
 
     Returns
     -------
     Tuple[str, str]
-        Tuple containing (ground_truth_color, learned_color) hex codes.
+        Tuple containing (reference_color, simulated_color) hex codes.
     """
     key = quantity.lower().strip()
-    if key in ("psi", "wavefunction", "wavefunctions", "eigenfunctions"):
-        key = "wavefunctions"
-    elif key in ("energy", "energies", "eigenvalues", "energy_eigenvalues"):
-        key = "energy"
-    elif key in (
-        "density",
-        "densities",
-        "prob_density",
-        "probability_density",
-        "probability_densities",
-    ):
-        key = "density"
-    elif key in ("potential", "v"):
-        key = "potential"
+    if key in ("order_parameter", "order", "r", "sync", "synchronization"):
+        return (
+            COMPARISON_PALETTE["order_parameter"]["reference"],
+            COMPARISON_PALETTE["order_parameter"]["simulated"],
+        )
+    elif key in ("solvers", "solver", "rk45_vs_euler", "rk45_euler"):
+        return (
+            COMPARISON_PALETTE["solvers"]["rk45"],
+            COMPARISON_PALETTE["solvers"]["euler"],
+        )
+    elif key in ("rk45_vs_rotor", "rk45_rotor"):
+        return (
+            COMPARISON_PALETTE["solvers"]["rk45"],
+            COMPARISON_PALETTE["solvers"]["rotor"],
+        )
+    elif key in ("phases", "phase", "theta", "theta_0"):
+        return (
+            COMPARISON_PALETTE["phases"]["reference"],
+            COMPARISON_PALETTE["phases"]["simulated"],
+        )
+    elif key in ("frequencies", "frequency", "omega", "natural_frequencies"):
+        return (
+            COMPARISON_PALETTE["frequencies"]["natural"],
+            COMPARISON_PALETTE["frequencies"]["effective"],
+        )
+    elif key in ("energy", "hamiltonian", "invariants", "noether"):
+        return (
+            COMPARISON_PALETTE["energy"]["conserved"],
+            COMPARISON_PALETTE["energy"]["drift"],
+        )
+    elif key in ("symmetries", "lie_symmetries", "u1", "u1_charge"):
+        return (
+            COMPARISON_PALETTE["symmetries"]["u1_charge"],
+            COMPARISON_PALETTE["symmetries"]["noether_drift"],
+        )
 
-    palette = COMPARISON_PALETTE.get(
-        key, {"true": COLOR_TRUE, "learned": COLOR_LEARNED}
-    )
-    return palette["true"], palette["learned"]
+    palette = COMPARISON_PALETTE.get(key)
+    if palette:
+        if "reference" in palette and "simulated" in palette:
+            return palette["reference"], palette["simulated"]
+        vals = list(palette.values())
+        if len(vals) >= 2:
+            return vals[0], vals[1]
+    return COLOR_REFERENCE, COLOR_SIMULATED
 
 
 def get_node_colors(
@@ -815,22 +880,20 @@ def plot_semantic_colormaps(
     set_style()
 
     palettes = [
-        ("Temporal POD (Green Gradient)", TEMPORAL_POD_CMAP),
-        ("Spatial POD (Magenta Gradient)", SPATIAL_POD_CMAP),
-        ("Wavefunctions (Blue Gradient)", WAVEFUNCTION_CMAP),
-        ("Hamiltonian (Purple Gradient)", HAMILTONIAN_CMAP),
-        ("Spatial Overlap [0, 1]", SPATIAL_OVERLAP_CMAP),
+        ("Phase Cyclic [-pi, pi]", PHASE_CMAP),
+        ("Order Parameter Synchronization [0, 1]", ORDER_PARAMETER_CMAP),
+        ("Spectral Power Density", SPECTRAL_DENSITY_CMAP),
+        ("Hamiltonian Invariants / Energy", HAMILTONIAN_CMAP),
+        ("Spatial Graph Overlap [0, 1]", SPATIAL_OVERLAP_CMAP),
         ("Temporal Overlap [0, 1]", TEMPORAL_OVERLAP_CMAP),
-        ("Wavefunction Overlap [0, 1]", WAVEFUNCTION_OVERLAP_CMAP),
-        ("Hamiltonian Density [0, 1]", HAMILTONIAN_DENSITY_CMAP),
-        ("Temporal Modal V [-1, 1]", TEMPORAL_CMAP),
-        ("Cross Overlap M [-1, 1]", CROSS_OVERLAP_CMAP),
+        ("Cross-Correlation / Modal [-1, 1]", CROSS_OVERLAP_CMAP),
+        ("Diverging Modal V [-1, 1]", TEMPORAL_CMAP),
     ]
 
     fig, axes = plt.subplots(
         len(palettes),
         1,
-        figsize=(10, 7.5),
+        figsize=(10, 6.5),
         facecolor=THEME_BG,
         constrained_layout=True,
     )
@@ -853,7 +916,7 @@ def plot_semantic_colormaps(
         )
 
     fig.suptitle(
-        "Semantic & Diagnostic Color Gradients (Visual-Memory Convention)",
+        "Kuramoto Benchmark Suite - Diagnostic & Semantic Color Gradients",
         fontsize=13,
         fontweight="bold",
         color=TEXT_PRIMARY,
@@ -1003,9 +1066,9 @@ def _plot_gradient_bar(
         ax.patches[-1].set_label(label)
 
 
-def _add_lambda_row(
+def _add_parameter_row(
     fig: plt.Figure,
-    lambdas: Dict[str, float] | None,
+    parameters: Dict[str, float] | None,
     *,
     ax: plt.Axes | None = None,
     y: float | None = None,
@@ -1013,14 +1076,14 @@ def _add_lambda_row(
     fontsize: float | None = None,
 ) -> Text | None:
     """
-    Render loss-weight or parameter dictionary as a sleek glassmorphic pill badge.
+    Render simulation parameters as a sleek glassmorphic pill badge.
 
     Parameters
     ----------
     fig : plt.Figure
         Target figure.
-    lambdas : Dict[str, float], optional
-        Mapping of parameter / weight names to float values.
+    parameters : Dict[str, float], optional
+        Mapping of parameter names to float/numeric values (e.g. {'K': 1.5, 'dt': 0.05}).
     ax : plt.Axes, optional
         Reference axes for relative placement.
     y : float, optional
@@ -1033,35 +1096,53 @@ def _add_lambda_row(
     Returns
     -------
     Text or None
-        The created Matplotlib Text artist, or None if lambdas is empty.
+        The created Matplotlib Text artist, or None if parameters is empty.
     """
-    if not lambdas:
+    if not parameters:
         return None
 
-    lambda_str = "    ".join(rf"$\lambda_{{{k}}} = {v:g}$" for k, v in lambdas.items())
+    param_parts = []
+    for k, v in parameters.items():
+        k_clean = k.strip()
+        if k_clean.lower() in ("k", "coupling", "coupling_strength"):
+            param_parts.append(rf"$K = {v:g}$")
+        elif k_clean.lower() in ("dt", "time_step", "delta_t"):
+            param_parts.append(rf"$\Delta t = {v:g}$")
+        elif k_clean.lower() in ("n", "n_oscillators", "oscillators"):
+            param_parts.append(
+                rf"$N = {int(v) if isinstance(v, (int, float)) and v == int(v) else v}$"
+            )
+        elif k_clean.lower() in ("sigma", "noise", "noise_strength"):
+            param_parts.append(rf"$\sigma = {v:g}$")
+        elif k_clean.lower() in ("seed", "random_seed"):
+            param_parts.append(rf"$\mathrm{{seed}} = {int(v)}$")
+        else:
+            param_parts.append(rf"${k_clean} = {v:g}$")
+
+    param_str = "    ".join(param_parts)
 
     if ax is not None:
         bbox = ax.get_position()
-        lambda_x = x if x is not None else (bbox.x0 + bbox.x1) / 2.0
-        lambda_y = y if y is not None else (bbox.y1 - 0.03)
+        param_x = x if x is not None else (bbox.x0 + bbox.x1) / 2.0
+        param_y = y if y is not None else (bbox.y1 - 0.03)
     else:
-        lambda_x = x if x is not None else 0.5
+        param_x = x if x is not None else 0.5
         if y is not None:
-            lambda_y = y
+            param_y = y
         else:
             suptitle = getattr(fig, "_suptitle", None)
             if suptitle is not None:
                 _, title_y = suptitle.get_position()
-                lambda_y = title_y - 0.05
+                param_y = title_y - 0.05
             else:
-                lambda_y = 0.94
+                param_y = 0.94
 
     fs = fontsize if fontsize is not None else 9.5
 
     return fig.text(
-        lambda_x,
-        lambda_y,
-        lambda_str,
+        param_x,
+        param_y,
+        param_str,
         ha="center",
         va="center",
         fontsize=fs,
@@ -1077,6 +1158,10 @@ def _add_lambda_row(
     )
 
 
+# Backwards compatibility alias
+_add_lambda_row = _add_parameter_row
+
+
 def _add_spike_lines(
     ax: plt.Axes,
     spike_epochs: Sequence[int],
@@ -1085,17 +1170,17 @@ def _add_spike_lines(
     linestyle: str = "--",
     linewidth: float = 1.5,
     alpha: float = 0.75,
-    label: str = "Spike / Transition",
+    label: str = "Transition Point",
 ) -> None:
     """
-    Draw vertical dashed indicator lines at designated transition points.
+    Draw vertical dashed indicator lines at designated transition or synchronization points.
 
     Parameters
     ----------
     ax : plt.Axes
         Target axes to annotate.
     spike_epochs : Sequence[int]
-        Indices or epochs where transitions occur.
+        Indices or time points where transitions occur.
     color : str, default=TEXT_MUTED
         Line color.
     linestyle : str, default='--'
@@ -1104,7 +1189,7 @@ def _add_spike_lines(
         Line width.
     alpha : float, default=0.75
         Line opacity.
-    label : str, default='Spike / Transition'
+    label : str, default='Transition Point'
         Legend label for the indicator.
     """
     if not spike_epochs:
@@ -1122,7 +1207,7 @@ def _add_spike_lines(
         )
 
 
-def detect_loss_spikes(
+def detect_transition_spikes(
     epochs: Sequence[int],
     series: Sequence[float] | NDArray[Any],
     *,
@@ -1132,14 +1217,14 @@ def detect_loss_spikes(
     min_epoch_gap: int = 200,
 ) -> List[int]:
     """
-    Identify epoch numbers where significant spikes or transitions occur in a time series.
+    Identify time indices or steps where significant transitions or gradient spikes occur.
 
     Parameters
     ----------
     epochs : Sequence[int]
-        Sequence of epoch numbers or time points.
+        Sequence of time step numbers or indices.
     series : Sequence[float] | NDArray
-        Values across epochs.
+        Values across steps (e.g. order parameter derivatives, Hamiltonian energy drift, error metrics).
     threshold : float, default=1.0
         Sensitivity threshold for detecting a transition.
     method : str, default='log_diff'
@@ -1152,7 +1237,7 @@ def detect_loss_spikes(
     Returns
     -------
     List[int]
-        List of epoch numbers where significant transitions were detected.
+        List of indices/steps where significant transitions were detected.
     """
     if len(epochs) < 2 or len(series) < 2:
         return []
@@ -1213,6 +1298,10 @@ def detect_loss_spikes(
     return detected_epochs
 
 
+# Backwards compatibility alias
+detect_loss_spikes = detect_transition_spikes
+
+
 # -----------------------------------------------------------------------------------------------------------
 # 💨 Smoke tests / example usage
 # -----------------------------------------------------------------------------------------------------------
@@ -1220,24 +1309,16 @@ def detect_loss_spikes(
 
 def _run_smoke_test() -> None:
     """Sanity check for visualization tools and colormaps."""
-    print("💨 Running visualization smoke tests...")
+    print("Running visualization smoke tests...")
 
     # 1. Verify all semantic colormaps exist and are callable
     all_colormaps = {
-        "temporal_pod_cmap": (temporal_pod_cmap, TEMPORAL_POD_CMAP),
-        "spatial_pod_cmap": (spatial_pod_cmap, SPATIAL_POD_CMAP),
-        "wavefunction_cmap": (wavefunction_cmap, WAVEFUNCTION_CMAP),
+        "phase_cmap": (phase_cmap, PHASE_CMAP),
+        "order_parameter_cmap": (order_parameter_cmap, ORDER_PARAMETER_CMAP),
+        "spectral_density_cmap": (spectral_density_cmap, SPECTRAL_DENSITY_CMAP),
         "hamiltonian_cmap": (hamiltonian_cmap, HAMILTONIAN_CMAP),
         "spatial_overlap_cmap": (spatial_overlap_cmap, SPATIAL_OVERLAP_CMAP),
         "temporal_overlap_cmap": (temporal_overlap_cmap, TEMPORAL_OVERLAP_CMAP),
-        "wavefunction_overlap_cmap": (
-            wavefunction_overlap_cmap,
-            WAVEFUNCTION_OVERLAP_CMAP,
-        ),
-        "hamiltonian_density_cmap": (
-            hamiltonian_density_cmap,
-            HAMILTONIAN_DENSITY_CMAP,
-        ),
         "temporal_cmap": (temporal_cmap, TEMPORAL_CMAP),
         "cross_overlap_cmap": (cross_overlap_cmap, CROSS_OVERLAP_CMAP),
     }
@@ -1256,9 +1337,9 @@ def _run_smoke_test() -> None:
             ), f"{name}({val}) channel values must be in [0.0, 1.0]"
 
     # 2. Test get_comparison_colors
-    t_col, l_col = get_comparison_colors("potential")
-    assert t_col == COLOR_POTENTIAL_TRUE
-    assert l_col == COLOR_POTENTIAL_LEARNED
+    r_ref, r_sim = get_comparison_colors("order_parameter")
+    assert r_ref == COLOR_REFERENCE
+    assert r_sim == COLOR_SIMULATED
 
     # 3. Test Network data & plot
     n = 20
@@ -1284,10 +1365,10 @@ def _run_smoke_test() -> None:
     plot_semantic_colormaps(out_path="plots/tests/test_colormaps.png")
     assert os.path.exists("plots/tests/test_colormaps.png")
 
-    print("\n✅ Visualization smoke tests passed.")
-    print("\n📁 Saved plots to plots/tests/")
+    print("\n[OK] Visualization smoke tests passed.")
+    print("\nSaved plots to plots/tests/")
     for fn in os.listdir("plots/tests"):
-        print(f"   └─ {fn}")
+        print(f"   |-- {fn}")
 
 
 # -----------------------------------------------------------------------------------------------------------
