@@ -1,4 +1,5 @@
 import numpy as np
+
 from kuramoto.api import generate_kuramoto_dataset
 
 def test_determinsim():
@@ -20,11 +21,11 @@ def test_shapes():
 
 def test_solvers_and_symmetry():
     omega = np.ones(5)
-    for solver in ["rk45", "euler", "rotor"]:
+    for solver in ["rk45", "euler", "rotor", "euler_fast", "euler_geometric", "fast_euler", "euler_standard"]:
         data = generate_kuramoto_dataset(
             5, omega, 1.0, 20, 0.05, solver=solver, symmetry_metrics=True, seed=42
         )
         assert data["theta"].shape == (20, 5)
-        if solver == "rotor":
+        if solver != "rk45":
             assert "global_phase_invariant" in data
             assert data["global_phase_invariant"] is True

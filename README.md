@@ -68,27 +68,29 @@ kuramoto generate --config my_config.json -o data/rotor.npz \
     --solver rotor --track-symmetries
     
 # Available solver choices
-kuramoto generate --solver euler      # Standard Euler integration
-kuramoto generate --solver rk45       # SciPy adaptive RK45
-kuramoto generate --solver rotor      # Geometric Algebra Cl(2) rotors
+kuramoto generate --solver euler            # Standard pairwise Euler integration
+kuramoto generate --solver euler_fast       # Vectorized fast Euler (order parameter formulation)
+kuramoto generate --solver euler_geometric  # Geometric Algebra bivector torque Euler
+kuramoto generate --solver rk45             # SciPy adaptive RK45
+kuramoto generate --solver rotor            # Geometric Algebra Cl(2) rotors (fast Euler)
 
-# Lie symmetry tracking (requires --solver rotor)
+# Lie symmetry tracking (supported for rotor and Euler solvers)
 kuramoto generate --track-symmetries  # Enables U(1) invariance diagnostics
 ```
 
 #### ⚗️ Advanced Analysis Features
 
 The new `RotorSolver` implements Kuramoto dynamics using Clifford algebra ($\operatorname{Cl}(2)$):
-```bash
+```python
 from kuramoto.solvers import RotorSolver
 
 # Initialize GA-based solver
 solver = RotorSolver(n_oscillators=100, dim=2, seed=27)
 
-# Run simulation
-times, phases = solver.simulate(K=1.5, t_eval=times)
+# Run simulation (method='fast', 'standard', or 'geometric')
+times, phases = solver.simulate(K=1.5, t_eval=times, method="fast")
 
-W Extract synchronization strength
+# Extract synchronization strength
 sync = solver.get_synchronization_strength()
 ```
 
@@ -195,9 +197,10 @@ Example `my_config.json`:
 ```
 
 New solver field values:
-- `"euler"` - Standard Euler (default)
+- `"euler"` / `"euler_standard"` - Standard pairwise Euler (default)
+- `"euler_fast"` / `"fast_euler"` / `"rotor"` - Vectorized fast Euler (order parameter formulation)
+- `"euler_geometric"` / `"geometric"` / `"rotor_geometric"` - Pure Geometric Algebra bivector torque Euler
 - `"rk45"` - SciPy adaptive RK45
-- `"rotor"` - Geometric Algebra $\operatorname{Cl}(2)$
 
 ---
 

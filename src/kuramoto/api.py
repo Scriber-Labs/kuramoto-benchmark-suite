@@ -79,7 +79,7 @@ def generate_kuramoto_dataset(
     seed : int, optional
         Random seed.
     solver : str, default='rk45'
-        Integration solver method ('rk45', 'rotor', or 'euler').
+        Integration solver method ('rk45', 'rotor', 'euler', 'euler_fast', 'euler_geometric', etc.).
     symmetry_metrics : bool, default=False
         Whether to calculate Lie symmetry metrics (U(1) invariance, energy).
     **kwargs : Any
@@ -100,7 +100,7 @@ def generate_kuramoto_dataset(
             kwargs_top["n"] = n_oscillators
         adj_matrix = load_topology(topology, **kwargs_top)
 
-    solver_type = "rotor" if solver == "rotor" else "rk45"
+    solver_type = solver.lower()
 
     model = KuramotoModel(
         n_oscillators=n_oscillators,
@@ -115,7 +115,17 @@ def generate_kuramoto_dataset(
     dataset = model.simulate(t_span=t_span, n_points=timesteps)
 
     result = dataset.to_dict()
-    if symmetry_metrics and solver == "rotor":
+    is_rotor_or_euler = solver.lower() in (
+        "rotor",
+        "euler",
+        "euler_fast",
+        "fast_euler",
+        "euler_geometric",
+        "geometric",
+        "euler_standard",
+        "rotor_geometric",
+    )
+    if symmetry_metrics and is_rotor_or_euler:
         from kuramoto.order_parameter import track_lie_symmetries
         states = {f"node_{i}": result["theta"][:, i] for i in range(n_oscillators)}
         metrics = track_lie_symmetries(states, result["time"])

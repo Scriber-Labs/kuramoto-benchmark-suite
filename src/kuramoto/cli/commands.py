@@ -84,8 +84,26 @@ def datasetforbeginners(output: str) -> None:
 @click.command()
 @click.option("--config", "-c", type=click.Path(exists=True), help="Path to JSON config file.")
 @click.option("--output", "-o", default="data/output.npz", help="Output path for the dataset.")
-@click.option("--solver", "-s", default="euler", type=click.Choice(["euler", "rk45", "rotor"]),
-              help="Integration method (euler, rk45, or GA rotor).")
+@click.option(
+    "--solver",
+    "-s",
+    default="euler",
+    type=click.Choice(
+        [
+            "euler",
+            "rk45",
+            "rotor",
+            "euler_fast",
+            "fast_euler",
+            "euler_geometric",
+            "geometric",
+            "euler_standard",
+            "rotor_geometric",
+        ],
+        case_sensitive=False,
+    ),
+    help="Integration method (euler, euler_fast, euler_geometric, rk45, or rotor).",
+)
 @click.option("--track-symmetries", is_flag=True, help="Enable Lie symmetry tracking.")
 def generate(config: str, output: str, solver: str, track_symmetries: bool) -> None:
     """Generate a dataset from a JSON configuration file."""
@@ -100,17 +118,27 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
     params = parse_simulation_config(json_str)
 
     # Override solver if explicitly specified
-    if solver != "euler":
-        params["solver"] = solver
+    params["solver"] = solver.lower()
 
     click.secho(f"👟 Running simulation with {solver} solve...", fg="magenta")
 
+    is_rotor_or_euler = solver.lower() in (
+        "rotor",
+        "euler",
+        "euler_fast",
+        "fast_euler",
+        "euler_geometric",
+        "geometric",
+        "euler_standard",
+        "rotor_geometric",
+    )
+
     # Conditional Lie symmetry tracking
-    if track_symmetries and solver == "rotor":
+    if track_symmetries and is_rotor_or_euler:
         click.secho(" ↪️ Tracking U(1) phase invariance and Noether charges...", fg="yellow")
         params["symmetry_metrics"] = True
-    elif track_symmetries and solver != "rotor":
-        click.echo("  ⚠️ Warning: Lie symmetry tracking requires --solver rotor")
+    elif track_symmetries and not is_rotor_or_euler:
+        click.echo("  ⚠️ Warning: Lie symmetry tracking requires a rotor or Euler solver (--solver rotor, euler, euler_fast, euler_geometric)")
 
     data = generate_kuramoto_dataset(**params)
 

@@ -95,15 +95,29 @@ class KuramotoModel:
         validate_positive_scalar(coupling_strength, "coupling_strength")
         validate_non_negative_scalar(noise_std, "noise_std")
 
-        if solver_type not in ("rk45", "rotor"):
-            raise ValueError(f"solver_type must be 'rk45' or 'rotor', got '{solver_type}'")
+        valid_solvers = (
+            "rk45",
+            "rotor",
+            "euler",
+            "euler_fast",
+            "fast_euler",
+            "euler_geometric",
+            "geometric",
+            "euler_standard",
+            "rotor_geometric",
+        )
+        solver_lower = solver_type.lower()
+        if solver_lower not in valid_solvers:
+            raise ValueError(
+                f"solver_type must be one of {valid_solvers}, got '{solver_type}'"
+            )
 
         # ---- solver configuration -------------------------------------- #
-        self.solver_type = solver_type
+        self.solver_type = solver_lower
 
-        if solver_type == "rotor" and noise_std > 0.0:
+        if self.solver_type != "rk45" and noise_std > 0.0:
             raise ValueError(
-                "noise_std > 0 is not supported by RotorSolver. "
+                f"noise_std > 0 is not supported by {solver_type}. "
                 "The GA-based Euler integration does not yet include stochastic "
                 "differential equation support. Set noise_std=0 or use solver_type='rk45'."
             )
@@ -137,7 +151,7 @@ class KuramotoModel:
         self.initial_phases: PhaseArray = self.rng.uniform(0.0, 2*np.pi, self.n)
 
         # ---- RotorSolver initialization (if applicable) ---------------- #
-        if solver_type == "rotor":
+        if self.solver_type != "rk45":
             self.rotor_solver = RotorSolver(
                 n_oscillators=n_oscillators,
                 dim=2,
@@ -195,10 +209,8 @@ class KuramotoModel:
 
         if self.solver_type == "rk45":
             return self._simulate_rk45(t_span, t_eval, points)
-        elif self.solver_type == "rotor":
-            return self._simulate_rotor(t_span, t_eval, points)
         else:
-            raise RuntimeError(f"Unknown solver_type: {self.solver_type}")
+            return self._simulate_rotor(t_span, t_eval, points)
 
     def _simulate_rk45(self, t_span: float, t_eval: NDArray, n_points: int) -> KuramotoDataset:
         """Classic RK45 integration path."""
@@ -254,11 +266,20 @@ class KuramotoModel:
         # Calculate internal timestep for Euler integration
         dt_internal = float(np.min(np.diff(t_eval))) * 0.1
 
+        method = "fast"
+        if self.solver_type in ("standard", "euler", "euler_standard"):
+            method = "standard"
+        elif self.solver_type in ("geometric", "euler_geometric", "rotor_geometric"):
+            method = "geometric"
+        elif self.solver_type in ("fast", "euler_fast", "fast_euler", "rotor"):
+            method = "fast"
+
         sim_times, sim_phases = self.rotor_solver.simulate(
             K=self.K,
             t_eval=t_eval,
             dt_internal=dt_internal,
             enforce_nyquist=True,
+            method=method,
         )
 
         # Compute derivatives numerically via finite differences

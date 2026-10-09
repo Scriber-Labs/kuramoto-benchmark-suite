@@ -311,6 +311,7 @@ class RotorSolver:
         dt_internal: float | None = None,
         enforce_nyquist: bool = True,
         max_phase_increment: float = 1.0,
+        method: str = "fast",
     ) -> tuple[TimeArray, PhaseArray]:
         """
         Run a full rotor simulation.
@@ -327,6 +328,10 @@ class RotorSolver:
             If True, apply Nyquist-inspired temporal-resolution criterion.
         max_phase_increment : float, optional
             Maximum estimated angular phase advance per internal step (radians).
+        method : str, optional
+            Stepping method to use: 'fast' (vectorized order parameter Euler),
+            'standard' (standard pairwise Euler), or 'geometric' (pure GA bivector torque Euler).
+            Default is 'fast'.
 
         Returns
         -------
@@ -336,7 +341,7 @@ class RotorSolver:
         Raises
         ------
         ValueError
-            If the time axis or timestep paramaters are invalid.
+            If the time axis or timestep paramaters are invalid, or if method is unrecognized.
         """
         validate_time_axis(t_eval)
 
@@ -377,6 +382,10 @@ class RotorSolver:
                         stacklevel=2,
                     )
 
+        method_norm = method.lower()
+        if method_norm not in ("fast", "euler_fast", "fast_euler", "standard", "euler", "euler_standard", "geometric", "euler_geometric", "rotor_geometric"):
+            raise ValueError(f"❌ Unknown simulation method: '{method}'. Expected 'fast', 'standard', or 'geometric'.")
+
         times: list[float] = []
         all_phases: list[PhaseArray] = []
 
@@ -391,12 +400,23 @@ class RotorSolver:
         for t_out in t_eval[1:]:
             while current_time < t_out - 1e-12:
                 dt = min(dt_internal, t_out - current_time)
-                # In-place vectorized fast Euler step
-                order_param = np.mean(np.exp(1j * current_phases))
-                R = np.abs(order_param)
-                psi = np.angle(order_param)
-                coupling = K * R * np.sin(psi - current_phases)
-                current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
+                if method_norm in ("geometric", "euler_geometric", "rotor_geometric"):
+                    # Step using geometric torque formulation
+                    self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in current_phases]
+                    self.step_euler_geometric(K, dt)
+                    current_phases = self.extract_phases()
+                elif method_norm in ("standard", "euler", "euler_standard"):
+                    # Step using standard pairwise difference matrix
+                    diff_matrix = current_phases[np.newaxis, :] - current_phases[:, np.newaxis]
+                    coupling = (K / self.N) * np.sum(np.sin(diff_matrix), axis=1)
+                    current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
+                else:
+                    # In-place vectorized fast Euler step
+                    order_param = np.mean(np.exp(1j * current_phases))
+                    R = np.abs(order_param)
+                    psi = np.angle(order_param)
+                    coupling = K * R * np.sin(psi - current_phases)
+                    current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
                 current_time += dt
 
             times.append(float(t_out))
