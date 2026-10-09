@@ -128,6 +128,7 @@ def track_lie_symmetries(
         )
 
     if times.size < 2:
+
         raise ValueError("❌ At least two time points are required")
 
     # ------------------------------------------------------------------
