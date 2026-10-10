@@ -133,21 +133,67 @@ class RotorSolver:
         plane_key = f'e{dim-1}{dim}' if dim <= 3 else 'e12'
         self.B_plane = self.blades[plane_key]
 
-        # Precompute the slot of rotation plane in coefficent array
-        self._blade_idx = int(
-            np.nonzero(np.asarray(self.B_plane.value))[0][0]
-        )
+        # Precompute indices for rotor components in the multivector value array
+        # For any dim, we always want the scalar (index 0)
+        # For dim=2, we want e12
+        # For dim=3, we want e12, e23, e31
+        if dim == 2:
+            self._blade_indices = [0, int(np.nonzero(np.asarray(self.B_plane.value))[0][0])]
+        elif dim == 3:
+            # Cl(3) bivector indices for e12, e13, e23
+            # We identify them by name length (e.g., 'e12') or bit count
+            self._blade_indices = [0] + [i for i, name in enumerate(self.layout.names) if len(name.replace('e', '')) == 2]
+        else:
+            # Fallback for higher dim
+            self._blade_indices = [0, int(np.nonzero(np.asarray(self.B_plane.value))[0][0])]
 
         # Initial condition
         self.rotors = self._random_rotors()
-        self.omegas = self.rng.uniform(
-            -1.0, 1.0, n_oscillators,
-        )
+        
+        # Optimized array representation
+        self._rotor_array = np.array([r.value[self._blade_indices] for r in self.rotors])
+
+        # Natural frequencies
+        if dim == 2:
+            self.omegas = self.rng.uniform(-1.0, 1.0, n_oscillators)
+        else:
+            # For dim=3, we can have 3D natural frequency bivectors
+            # We'll store them as an (N, 3) array of bivector coefficients
+            # But to keep compatibility with existing code that expects scalar self.omegas,
+            # we'll store the 'primary' frequency as a scalar and have an optional
+            # self.omega_bivectors for the full 3D case.
+            self.omegas = self.rng.uniform(-1.0, 1.0, n_oscillators)
+            # Initialize 3D bivector frequencies (random axes)
+            num_bivectors = len(self._blade_indices) - 1
+            self.omega_bivectors = self.rng.uniform(-0.5, 0.5, (n_oscillators, num_bivectors))
 
     def _random_rotors(self) -> list:
         """Generate random initial rotors."""
-        phases = self.rng.uniform(0, 2 * np.pi, self.N)
-        return [np.exp(-self.B_plane * p / 2.0) for p in phases]
+        if self.dim == 2:
+            phases = self.rng.uniform(0, 2 * np.pi, self.N)
+            return [np.exp(-self.B_plane * p / 2.0) for p in phases]
+        
+        # For dim=3 (S^2), generate random unit vectors and find rotors
+        e1 = self.layout.basis_vectors["e1"]
+        rotors = []
+        for _ in range(self.N):
+            # Sample from isotropic distribution on sphere
+            v_raw = self.rng.standard_normal(self.dim)
+            v = v_raw / np.linalg.norm(v_raw)
+            v_ga = sum(c * self.layout.basis_vectors[f"e{i+1}"] for i, c in enumerate(v))
+            
+            # Rotor that takes e1 to v_ga
+            # R = (1 + v*e1) / sqrt(2*(1 + v.e1))
+            dot = float((v_ga | e1).value[0])
+            if dot < -0.9999: # Handle south pole singularity
+                # Rotate by pi around e2
+                r = self.layout.basis_vectors["e1"] * self.layout.basis_vectors["e2"]
+                rotors.append(r)
+            else:
+                r_unnorm = 1 + v_ga * e1
+                r = r_unnorm / np.sqrt(2 * (1 + dot))
+                rotors.append(r)
+        return rotors
 
     def extract_phases(self) -> PhaseArray:
         """"
@@ -157,11 +203,21 @@ class RotorSolver:
         -------
         PhaseArray
             Phases of shape ``(N,)``, wrapped to ``[0, 2*pi)``.
+            For dim > 2, this projects the rotor onto the primary B_plane.
         """
+        if self.dim == 2 and hasattr(self, "_rotor_array") and self._rotor_array.shape[1] == 2:
+            # Use optimized array if available
+            a = self._rotor_array[:, 0]
+            b = self._rotor_array[:, 1]
+            return (2.0 * np.arctan2(-b, a)) % (2.0 * np.pi)
+
         phases = []
+        # Find the index of the B_plane blade again to be sure
+        b_idx = int(np.nonzero(np.asarray(self.B_plane.value))[0][0])
+        
         for r in self.rotors:
             scalar = float(r.value[0])
-            bivector = float(r.value[self._blade_idx])
+            bivector = float(r.value[b_idx])
             phases.append((2.0 * np.arctan2(-bivector, scalar)) % (2.0 * np.pi))
         return np.array(phases)
 
@@ -198,6 +254,7 @@ class RotorSolver:
 
         # Reconstruct rotors from updated phases
         self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in new_phases]
+        self._sync_array_from_rotors()
 
     def step_euler_geometric(
         self,
@@ -207,9 +264,9 @@ class RotorSolver:
         """
         Advance the rotor solver one step using pure geometric algebra bivector torque.
 
-        This method leverages the bivector torque formulation in Cl(2,0),
+        This method leverages the bivector torque formulation,
         computing collective mean-field polarization and wedge-product torques
-        without extracting phase angles at every step.
+        without extracting phase angles at every step. Works for any dim >= 2.
 
         Parameters
         ----------
@@ -231,17 +288,128 @@ class RotorSolver:
 
         new_rotors = []
         for i, (r_i, vi) in enumerate(zip(self.rotors, v_i, strict=True)):
-            # 3. Project out bivector torque magnitude: (v_mean ^ v_i) * B_plane
-            torque_scalar = float(((v_mean ^ vi) * self.B_plane).value[0])
+            # 3. Compute interaction bivector torque: (v_mean ^ v_i)
+            torque_bivector = K * (v_mean ^ vi)
 
             # 4. Synthesize total bivector velocity generator
-            omega_total = (self.omegas[i] + K * torque_scalar) * self.B_plane
+            # We subtract torque_bivector to achieve attraction (theta_i toward theta_mean)
+            omega_nat = self.omegas[i] * self.B_plane
+            
+            # If 3D natural bivectors are defined, add them
+            if self.dim == 3 and hasattr(self, 'omega_bivectors'):
+                # bivector indices are at indices 1, 2, 3 of our _blade_indices [scalar, e12, e13, e23]
+                for j, b_idx in enumerate(self._blade_indices[1:]):
+                    b_val = np.zeros(self.layout.ga_dims)
+                    b_val[b_idx] = self.omega_bivectors[i, j]
+                    omega_nat += self.layout.MultiVector(b_val)
+            
+            omega_total = omega_nat - torque_bivector
 
             # 5. Advance the rotor state explicitly using rotor exponential update
             d_rotor = np.exp(-omega_total * dt / 2.0)
             new_rotors.append(d_rotor * r_i)
 
         self.rotors = new_rotors
+        self._sync_array_from_rotors()
+
+    def step_euler_vectorized_geometric(
+        self,
+        K: float,
+        dt: float,
+    ) -> None:
+        """
+        Fast vectorized Euler step using pure GA bivector torque logic.
+
+        This method avoids Python loops and object overhead by using NumPy
+        broadcasting to compute the mean-field torque. Supports dim=2 and dim=3.
+
+        Parameters
+        ----------
+        K : float
+            Coupling strength.
+        dt : float
+            Timestep.
+        """
+        if self.dim == 2:
+            # Optimized 2D path
+            a = self._rotor_array[:, 0]
+            b = self._rotor_array[:, 1]
+
+            # u = R * e1 * ~R
+            x = a**2 - b**2
+            y = -2 * a * b
+
+            x_mean = np.mean(x)
+            y_mean = np.mean(y)
+
+            # Torque: (u_mean ^ u_i) . B
+            torque = x_mean * y - y_mean * x
+            # Subtract torque to achieve attraction
+            omega_total = self.omegas - K * torque
+            phi = -omega_total * dt / 2.0
+
+            c = np.cos(phi)
+            s = np.sin(phi)
+
+            # Update rotors: R_new = exp(phi*B) * R
+            self._rotor_array[:, 0] = a * c - b * s
+            self._rotor_array[:, 1] = a * s + b * c
+
+        elif self.dim == 3:
+            # Optimized 3D path (Lohe Model on S^2)
+            a = self._rotor_array[:, 0]
+            b12 = self._rotor_array[:, 1]
+            b13 = self._rotor_array[:, 2]
+            b23 = self._rotor_array[:, 3]
+
+            # u = R * e1 * ~R
+            x = a**2 + b12**2 + b13**2 - b23**2
+            y = -2 * a * b12 + 2 * b13 * b23
+            z = -2 * a * b13 - 2 * b12 * b23
+
+            x_m, y_m, z_m = np.mean(x), np.mean(y), np.mean(z)
+
+            # Torque: (u_mean ^ u_i)
+            t12 = K * (x_m * y - y_m * x)
+            t13 = K * (x_m * z - z_m * x)
+            t23 = K * (y_m * z - z_m * y)
+
+            # Total angular velocity - subtract torque terms for attraction
+            v12 = self.omegas - t12
+            v13 = -t13
+            v23 = -t23
+            if hasattr(self, "omega_bivectors"):
+                v12 += self.omega_bivectors[:, 0]
+                v13 += self.omega_bivectors[:, 1]
+                v23 += self.omega_bivectors[:, 2]
+
+            phi12 = -v12 * dt / 2.0
+            phi13 = -v13 * dt / 2.0
+            phi23 = -v23 * dt / 2.0
+
+            phi_mag = np.sqrt(phi12**2 + phi13**2 + phi23**2)
+            c = np.cos(phi_mag)
+            s = np.zeros_like(phi_mag)
+            mask = phi_mag > 1e-12
+            s[mask] = np.sin(phi_mag[mask]) / phi_mag[mask]
+            s[~mask] = 1.0
+
+            ma, mb12, mb13, mb23 = c, s * phi12, s * phi13, s * phi23
+
+            # Vectorized quaternion-like multiplication: R_new = M * R
+            self._rotor_array[:, 0] = ma * a - mb12 * b12 - mb13 * b13 - mb23 * b23
+            self._rotor_array[:, 1] = ma * b12 + a * mb12 - mb13 * b23 + mb23 * b13
+            self._rotor_array[:, 2] = ma * b13 + a * mb13 + mb12 * b23 - mb23 * b12
+            self._rotor_array[:, 3] = ma * b23 + a * mb23 - mb12 * b13 + mb13 * b12
+
+    def _sync_rotors_from_array(self) -> None:
+        """Synchronize clifford rotor objects from internal array."""
+        for i, r in enumerate(self.rotors):
+            r.value[self._blade_indices] = self._rotor_array[i, :]
+
+    def _sync_array_from_rotors(self) -> None:
+        """Synchronize internal array from clifford rotor objects."""
+        self._rotor_array = np.array([r.value[self._blade_indices] for r in self.rotors])
 
     def step_euler_fast(
         self,
@@ -276,10 +444,11 @@ class RotorSolver:
         half = new_phases * 0.5
         cos_half = np.cos(half)
         sin_half = -np.sin(half)
-        blade_idx = self._blade_idx
+        blade_idx = self._blade_indices[1]
         for i, rot in enumerate(self.rotors):
             rot.value[0] = cos_half[i]
             rot.value[blade_idx] = sin_half[i]
+        self._sync_array_from_rotors()
 
     def get_complex_order_parameter(self) -> complex:
         """
@@ -300,9 +469,28 @@ class RotorSolver:
         phases = self.extract_phases()
         return complex(np.mean(np.exp(1j * phases)))
 
+    def get_order_parameter_vector(self) -> NDArray[np.floating]:
+        """
+        Compute the mean orientation vector (Order Parameter) in dim-space.
+
+        For dim=2, this is equivalent to the complex order parameter.
+        For dim=3, this is the 3D synchronization vector on S^2.
+
+        Returns
+        -------
+        NDArray
+            Mean vector of shape ``(dim,)``.
+        """
+        e1 = self.layout.basis_vectors["e1"]
+        # Transform e1 under each rotor
+        v_i = np.array([(r * e1 * r.conjugate()).value[1 : self.dim + 1] for r in self.rotors])
+        return np.mean(v_i, axis=0)
+
     def get_synchronization_strength(self) -> float:
-        """Return the magnitude of the standard Kuramoto order parameter."""
-        return float(abs(self.get_complex_order_parameter()))
+        """Return the magnitude of the synchronization order parameter."""
+        if self.dim == 2:
+            return float(abs(self.get_complex_order_parameter()))
+        return float(np.linalg.norm(self.get_order_parameter_vector()))
 
     def simulate(
         self,
@@ -361,7 +549,7 @@ class RotorSolver:
         if dt_internal is None:
             dt_internal = float(np.min(output_dt)) * 0.1
 
-        # Nyquist-inspired temporal-resolution check
+        # Nyquist-inspired temporal-resolution check and frequency capping
         if enforce_nyquist:
             max_omega = float(np.max(np.abs(self.omegas)))
             estimated_max_rate = max_omega + abs(K)
@@ -372,19 +560,38 @@ class RotorSolver:
                 dt_safe = min(nyquist_dt, phase_increment_dt)
 
                 if dt_internal > dt_safe:
-                    warnings.warn(
-                        f"dt_internal={dt_internal:.6g} may under-resolve the oscillator dynamics. "
-                        f"The current Nyquist-inspired resolution estimate gives dt <= {nyquist_dt:.6g}, "
-                        f"while the maximum phase increment constraint gives dt <= {phase_increment_dt:.6g}. "
-                        f"Recommended dt <= {dt_safe:.6g} for estimated maximum phase rate {estimated_max_rate:.6g} "
-                        f"rad/time. This is a temporal-resolution heuristic, not a formal Euler stability bound.",
-                        RuntimeWarning,
-                        stacklevel=2,
-                    )
+                    # To "prevent wasting time/energy" and avoid aliasing, we enforce a frequency limit
+                    # rather than just warning. This ensures the simulation remains physically
+                    # resolvable at the current dt_internal.
+                    
+                    # Target max rate for current dt_internal
+                    target_max_rate = min(1.0 / (2.0 * dt_internal), max_phase_increment / dt_internal)
+                    
+                    # Cap frequencies so that |omega| + |K| <= target_max_rate
+                    omega_limit = max(0.0, target_max_rate - abs(K))
+                    
+                    if max_omega > omega_limit:
+                        warnings.warn(
+                            f"⚠️ Nyquist-based Frequency Limit Enforced: dt_internal={dt_internal:.6g} is too large "
+                            f"for the maximum natural frequency {max_omega:.6g}. To prevent aliasing and wasting "
+                            f"energy on unresolved iterations, natural frequencies have been capped to {omega_limit:.6g}. "
+                            f"Decrease dt_internal to resolve higher frequencies.",
+                            RuntimeWarning,
+                            stacklevel=2,
+                        )
+                        self.omegas = np.clip(self.omegas, -omega_limit, omega_limit)
+                    else:
+                        # If K itself is the problem, we might still have a violation, but we mostly focus on omegas
+                        warnings.warn(
+                            f"dt_internal={dt_internal:.6g} may under-resolve the dynamics due to coupling K={K}. "
+                            f"Nyquist dt safe: {nyquist_dt:.6g}. Proceeding with caution.",
+                            RuntimeWarning,
+                            stacklevel=2,
+                        )
 
         method_norm = method.lower()
-        if method_norm not in ("fast", "euler_fast", "fast_euler", "standard", "euler", "euler_standard", "geometric", "euler_geometric", "rotor_geometric"):
-            raise ValueError(f"❌ Unknown simulation method: '{method}'. Expected 'fast', 'standard', or 'geometric'.")
+        if method_norm not in ("fast", "euler_fast", "fast_euler", "standard", "euler", "euler_standard", "geometric", "euler_geometric", "rotor_geometric", "vectorized_geometric"):
+            raise ValueError(f"❌ Unknown simulation method: '{method}'. Expected 'fast', 'standard', 'geometric', or 'vectorized_geometric'.")
 
         times: list[float] = []
         all_phases: list[PhaseArray] = []
@@ -394,22 +601,29 @@ class RotorSolver:
         times.append(current_time)
         all_phases.append(current_phases.copy())
 
-        blade_idx = self._blade_idx
+        blade_idx = self._blade_indices[1]
         omegas = self.omegas
 
         for t_out in t_eval[1:]:
             while current_time < t_out - 1e-12:
                 dt = min(dt_internal, t_out - current_time)
                 if method_norm in ("geometric", "euler_geometric", "rotor_geometric"):
-                    # Step using geometric torque formulation
+                    # Step using geometric torque formulation (O(N) with loops)
                     self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in current_phases]
                     self.step_euler_geometric(K, dt)
+                    self._sync_array_from_rotors()
+                    current_phases = self.extract_phases()
+                elif method_norm == "vectorized_geometric":
+                    # Step using optimized vectorized geometric torque (O(N) with NumPy)
+                    self.step_euler_vectorized_geometric(K, dt)
                     current_phases = self.extract_phases()
                 elif method_norm in ("standard", "euler", "euler_standard"):
                     # Step using standard pairwise difference matrix
                     diff_matrix = current_phases[np.newaxis, :] - current_phases[:, np.newaxis]
                     coupling = (K / self.N) * np.sum(np.sin(diff_matrix), axis=1)
                     current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
+                    self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in current_phases]
+                    self._sync_array_from_rotors()
                 else:
                     # In-place vectorized fast Euler step
                     order_param = np.mean(np.exp(1j * current_phases))
@@ -417,6 +631,8 @@ class RotorSolver:
                     psi = np.angle(order_param)
                     coupling = K * R * np.sin(psi - current_phases)
                     current_phases = (current_phases + dt * (omegas + coupling)) % (2.0 * np.pi)
+                    self.rotors = [np.exp(-self.B_plane * p / 2.0) for p in current_phases]
+                    self._sync_array_from_rotors()
                 current_time += dt
 
             times.append(float(t_out))
@@ -429,6 +645,9 @@ class RotorSolver:
         for i, rot in enumerate(self.rotors):
             rot.value[0] = cos_half[i]
             rot.value[blade_idx] = sin_half[i]
+
+        if method_norm == "vectorized_geometric":
+            self._sync_rotors_from_array()
 
         return np.asarray(times), np.asarray(all_phases)
 
@@ -818,6 +1037,39 @@ def _run_smoke_test() -> None:
             )
 
         print(" ... ✔️ Future adaptive-method boundary test passed")
+        
+        # --------------------------------------------------------------
+        # Test 11: Nyquist frequency capping
+        # --------------------------------------------------------------
+        nyquist_test = RotorSolver(n_oscillators=3, dim=2, seed=42)
+        nyquist_test.omegas = np.array([100.0, 0.0, -100.0])
+        # Limit for dt=0.1 is 5.0
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            nyquist_test.simulate(K=0.0, t_eval=np.linspace(0, 1, 11), dt_internal=0.1, enforce_nyquist=True)
+            assert any("Nyquist-based Frequency Limit Enforced" in str(warn.message) for warn in w)
+        
+        assert np.all(np.abs(nyquist_test.omegas) <= 5.0 + 1e-9)
+        print(" ... ✔️ Nyquist frequency capping test passed")
+
+        # --------------------------------------------------------------
+        # Test 12: 3D Lohe Model (S^2)
+        # --------------------------------------------------------------
+        print("🚀 Running Test 12: 3D Lohe Model (S^2) synchronization...")
+        solver_3d = RotorSolver(n_oscillators=10, dim=3, seed=42)
+        
+        # Initial synchronization strength should be low
+        r_start = solver_3d.get_synchronization_strength()
+        print(f"  - Initial R: {r_start:.4f}")
+        
+        # Run attractive simulation
+        # In 3D, vectorized_geometric is now supported
+        solver_3d.simulate(K=5.0, t_eval=np.linspace(0, 2, 21), dt_internal=0.05, method="vectorized_geometric")
+        
+        r_end = solver_3d.get_synchronization_strength()
+        print(f"  - Final R: {r_end:.4f}")
+        assert r_end > r_start
+        print(" ... ✔️ 3D Lohe Model test passed")
 
     except ImportError:
         print(

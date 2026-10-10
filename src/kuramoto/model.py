@@ -105,6 +105,7 @@ class KuramotoModel:
             "geometric",
             "euler_standard",
             "rotor_geometric",
+            "vectorized_geometric",
         )
         solver_lower = solver_type.lower()
         if solver_lower not in valid_solvers:
@@ -272,7 +273,9 @@ class KuramotoModel:
         elif self.solver_type in ("geometric", "euler_geometric", "rotor_geometric"):
             method = "geometric"
         elif self.solver_type in ("fast", "euler_fast", "fast_euler", "rotor"):
-            method = "fast"
+            method = "vectorized_geometric"
+        elif self.solver_type == "vectorized_geometric":
+            method = "vectorized_geometric"
 
         sim_times, sim_phases = self.rotor_solver.simulate(
             K=self.K,

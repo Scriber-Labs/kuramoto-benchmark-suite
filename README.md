@@ -46,6 +46,17 @@ kuramoto fourieravailability data/examples/demo_dataset.npz -f 0.16
 
 ---
 
+## 🎓 Research & Portfolio
+This project serves as a **Research & Learning Portfolio**. Detailed analytical notes, benchmarks, and educational resources are located in the `research/` directory:
+
+- [research/RESEARCH_PREPRINT.md](research/RESEARCH_PREPRINT.md): Formal derivation of the GA rotor solver and Lie symmetry analysis.
+- [research/BENCHMARK_REPORT.md](research/BENCHMARK_REPORT.md): Rigorous scaling and precision comparison (Vectorized GA vs. RK45).
+- [research/LEARNING_GUIDE.md](research/LEARNING_GUIDE.md): Deep-dive into Bivector Torque, Fluid Flow analogies, and the Quantum Bridge.
+- [research/PRACTICE_PROBLEMS.md](research/PRACTICE_PROBLEMS.md): 10 fundamental exercises for mastering Geometric synchronization.
+- [research/MANUAL_ANALYSIS.md](research/MANUAL_ANALYSIS.md): A structured reflection guide for reviewing the codebase and theoretical foundations.
+
+---
+
 ## 🛠️ Command Line Interface (CLI)
 The `kuramoto` command provides a full suite of diagnostics.
 

@@ -860,6 +860,116 @@ def plot_autocorrelation(
     return ax
 
 
+def plot_fluid_vorticity(
+    phases: NDArray[np.floating],
+    omega: NDArray[np.floating],
+    K: float,
+    title: str = "Bivector Vorticity Field (Fluid Flow)",
+    save_path: Optional[str] = None,
+    grid_res: int = 30,
+) -> None:
+    """
+    Visualize the 'Fluid Flow' of oscillators using bivector vorticity analogy.
+
+    Maps the angular velocity bivector field to streamplots in phase-frequency space,
+    showing how the ensemble 'pulls' oscillators toward a central vortex
+    (synchronization).
+
+    Parameters
+    ----------
+    phases : NDArray
+        Current phases of the oscillators (N,).
+    omega : NDArray
+        Natural frequencies (N,).
+    K : float
+        Coupling strength.
+    title : str, default='Bivector Vorticity Field (Fluid Flow)'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    grid_res : int, default=30
+        Resolution of the vector field grid.
+    """
+    set_style()
+
+    # 1. Compute Mean Field
+    v_mean = np.mean(np.exp(1j * phases))
+    R = np.abs(v_mean)
+    psi = np.angle(v_mean)
+
+    # 2. Define Phase-Frequency Grid
+    # Wrap phases to [-pi, pi] for centered visualization
+    phases_wrapped = (phases + np.pi) % (2 * np.pi) - np.pi
+    psi_wrapped = (psi + np.pi) % (2 * np.pi) - np.pi
+
+    x = np.linspace(-np.pi, np.pi, grid_res)
+    y_min, y_max = np.min(omega), np.max(omega)
+    padding = (y_max - y_min) * 0.2 if y_max != y_min else 1.0
+    y = np.linspace(y_min - padding, y_max + padding, grid_res)
+    X, Y = np.meshgrid(x, y)
+
+    # 3. Compute Velocity Field V = d_theta/dt
+    # d_theta/dt = omega + K*R*sin(psi - theta)
+    # We use sin(psi - X) because torque pulls toward psi
+    U = Y + K * R * np.sin(psi_wrapped - X)
+    V = np.zeros_like(U)  # Vertical velocity (change in omega) is zero in this model
+
+    fig, ax = plt.subplots(figsize=(10, 6.5), facecolor=THEME_BG)
+
+    # 4. Render Streamplot (The 'Fluid Flow')
+    # We color by the absolute velocity to highlight high-torque regions
+    color_val = np.abs(U)
+    strm = ax.streamplot(
+        X, Y, U, V,
+        color=color_val,
+        cmap=PHASE_CMAP,
+        linewidth=1.2,
+        density=1.5,
+        arrowsize=1.0,
+        zorder=1
+    )
+
+    # 5. Overlay Oscillator 'Particles'
+    ax.scatter(
+        phases_wrapped,
+        omega,
+        color=PROJECT_COLORS["cyan_light"],
+        edgecolors=THEME_BG,
+        s=45,
+        zorder=5,
+        alpha=0.85,
+        label="Oscillator State"
+    )
+
+    # Mark the Mean Field (Vortex Center)
+    ax.axvline(psi_wrapped, color=PROJECT_COLORS["pink_vibrant"], linestyle="--", alpha=0.6, label="Mean Phase (Vortex Core)")
+
+    ax.set_title(title, fontsize=15, fontweight="bold", pad=15)
+    ax.set_xlabel(r"Phase $\theta$ (radians)", fontsize=12)
+    ax.set_ylabel(r"Natural Frequency $\omega$", fontsize=12)
+
+    # Add a glassmorphic colorbar
+    cbar = fig.colorbar(strm.lines, ax=ax, pad=0.02)
+    cbar.set_label("Angular Velocity Magnitude", fontsize=10, color=TEXT_MUTED)
+    cbar.ax.yaxis.set_tick_params(color=TEXT_MUTED, labelcolor=TEXT_MUTED)
+
+    ax.set_xlim(-np.pi, np.pi)
+    ax.set_xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
+    ax.set_xticklabels([r"$-\pi$", r"$-\pi/2$", "0", r"$\pi/2$", r"$\pi$"])
+
+    ax.legend(loc="upper right", framealpha=0.9, edgecolor=BORDER_COLOR)
+
+    _apply_aclonica_font(ax)
+    plt.tight_layout()
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
 def plot_semantic_colormaps(
     *,
     out_path: Optional[str | Path] = None,
