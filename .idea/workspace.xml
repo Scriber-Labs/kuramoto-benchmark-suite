@@ -7,21 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources.">
+      <change afterPath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/examples/demo_dataset.npz" beforeDir="false" afterPath="$PROJECT_DIR$/data/examples/demo_dataset.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/network.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/network.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="125" />
+    <option name="cachedIndexableFilesCount" value="138" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -61,61 +52,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.1354752685695788" />
-      <entry key="MS500" value="5.05170342668788" />
-      <entry key="S2" value="17.99378065679751" />
-      <entry key="S5" value="35.9388506455037" />
-      <entry key="S10" value="64.35862252589962" />
-      <entry key="S30" value="154.64329919824397" />
-      <entry key="S60" value="234.90258098572156" />
-      <entry key="M2" value="352.09115833185376" />
-      <entry key="M5" value="589.3661954178646" />
-      <entry key="M10" value="802.1800164254507" />
-      <entry key="M15" value="928.0220760788791" />
-      <entry key="M30" value="1149.12173122794" />
-      <entry key="H1" value="1496.2693875739374" />
-      <entry key="H2" value="2214.5857947223985" />
-      <entry key="H4" value="3302.3121535309624" />
-      <entry key="D1" value="9062.753879535338" />
-      <entry key="W1" value="13996.200887778794" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0001566961560266" />
+      <entry key="S2" value="1.264179324447726" />
+      <entry key="S5" value="2.931128270596334" />
+      <entry key="S10" value="5.378676937390037" />
+      <entry key="S30" value="11.766537733424816" />
+      <entry key="S60" value="19.944983373573034" />
+      <entry key="M2" value="48.824236989606604" />
+      <entry key="M5" value="195.80103159459136" />
+      <entry key="M10" value="463.61859351060986" />
+      <entry key="M15" value="701.7130759833925" />
+      <entry key="M30" value="1200.2361977341038" />
+      <entry key="H1" value="1791.5315817326386" />
+      <entry key="H2" value="2659.7374552466267" />
+      <entry key="H4" value="3862.576620917518" />
+      <entry key="D1" value="9804.563134100736" />
+      <entry key="W1" value="14850.643922697283" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.411842822028796E-99" />
-      <entry key="S5" value="4.548288586892749E-40" />
-      <entry key="S10" value="2.132671701620439E-20" />
-      <entry key="S30" value="2.773158349126672E-7" />
-      <entry key="S60" value="5.266078568656846E-4" />
-      <entry key="M2" value="0.022947937996313065" />
-      <entry key="M5" value="0.22104798519974048" />
-      <entry key="M10" value="0.4872145727951142" />
-      <entry key="M15" value="0.7196301079482191" />
-      <entry key="M30" value="1.7288574708305269" />
-      <entry key="H1" value="4.249597900874293" />
-      <entry key="H2" value="8.676407444472039" />
-      <entry key="H4" value="15.880779942988013" />
-      <entry key="D1" value="64.80289984294221" />
-      <entry key="W1" value="102.8763904095724" />
+      <entry key="MS100" value="4.344773439396207E-10" />
+      <entry key="MS500" value="0.01341508494437694" />
+      <entry key="S2" value="0.34076722488422667" />
+      <entry key="S5" value="0.6955619882584487" />
+      <entry key="S10" value="1.0467684875627754" />
+      <entry key="S30" value="2.214238695813607" />
+      <entry key="S60" value="3.7565951642707773" />
+      <entry key="M2" value="5.978436921292566" />
+      <entry key="M5" value="9.132142320921957" />
+      <entry key="M10" value="11.083596498547994" />
+      <entry key="M15" value="12.02453023527544" />
+      <entry key="M30" value="13.661228708257655" />
+      <entry key="H1" value="16.328250743575527" />
+      <entry key="H2" value="20.90219370292282" />
+      <entry key="H4" value="28.323163965827092" />
+      <entry key="D1" value="77.78749405543441" />
+      <entry key="W1" value="116.64685360300608" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0896457640717903" />
-      <entry key="MS500" value="5.003905805700639" />
-      <entry key="S2" value="17.951745775772917" />
-      <entry key="S5" value="35.90294922266523" />
-      <entry key="S10" value="64.31496502142737" />
-      <entry key="S30" value="154.59157967040252" />
-      <entry key="S60" value="234.85790959462574" />
-      <entry key="M2" value="352.077643748311" />
-      <entry key="M5" value="589.5603807866984" />
-      <entry key="M10" value="802.6467226238639" />
-      <entry key="M15" value="928.723336401464" />
-      <entry key="M30" value="1150.830381323847" />
-      <entry key="H1" value="1500.489136544148" />
-      <entry key="H2" value="2223.2203115743373" />
-      <entry key="H4" value="3318.1480524563804" />
-      <entry key="D1" value="9127.528320641411" />
-      <entry key="W1" value="14099.070852646737" />
+      <entry key="MS100" value="1.246352739856206E-4" />
+      <entry key="MS500" value="0.17121442537510886" />
+      <entry key="S2" value="1.1711945317677133" />
+      <entry key="S5" value="3.37842845039763" />
+      <entry key="S10" value="6.259009727436659" />
+      <entry key="S30" value="13.892083062418761" />
+      <entry key="S60" value="23.634935416995546" />
+      <entry key="M2" value="54.748670793138096" />
+      <entry key="M5" value="204.8958938009888" />
+      <entry key="M10" value="474.6751739110104" />
+      <entry key="M15" value="713.7146242312547" />
+      <entry key="M30" value="1213.8768188049482" />
+      <entry key="H1" value="1807.8332148635611" />
+      <entry key="H2" value="2680.601680613839" />
+      <entry key="H4" value="3890.8572518791075" />
+      <entry key="D1" value="9882.322330049816" />
+      <entry key="W1" value="14967.284325627183" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -634,14 +625,21 @@
       <option name="project" value="LOCAL" />
       <updated>1791528672128</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources.">
+      <option name="closed" value="true" />
+      <created>1791669487721</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1791669487721</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enhanced RotorSolver with Nyquist stability enforcement, phase increment limits, and experimental adaptive stepping placeholder. Updated documentation and warnings for safer integration handling." />
     <MESSAGE value="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification." />
     <MESSAGE value="Expanded **spectral.py** with harmonic analysis, synchronization transition detection, and advanced spectral functions. Updated smoke tests to validate new utilities and corrected minor documentation inconsistencies." />
     <MESSAGE value="Refined output messages in **spectral.py** smoke tests for consistent formatting." />
@@ -663,9 +661,10 @@
     <MESSAGE value="added rotor_dt_0.01.npz benchmark data" />
     <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
     <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
-    <MESSAGE value="expanded structural metrics validation with advanced spectral analysis and themed visualizations" />
     <MESSAGE value="updated execution timestamps in validate_structural_metrics.ipynb" />
     <MESSAGE value="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks" />
-    <option name="LAST_COMMIT_MESSAGE" value="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks" />
+    <MESSAGE value="expanded structural metrics validation with advanced spectral analysis and themed visualizations" />
+    <MESSAGE value="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources." />
   </component>
 </project>

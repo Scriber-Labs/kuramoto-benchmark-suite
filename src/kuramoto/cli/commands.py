@@ -58,7 +58,7 @@ def datasetforbeginners(output: str) -> None:
         "timesteps": 1000,
         "dt": 0.05,
         "coupling": 2.0,
-        "seed": 42,
+        "seed": 27,
         "topology": "small_world"
     }
 
@@ -413,9 +413,9 @@ def network(dataset_path: str, gradient: str) -> None:
         pos = {i: pos_dict[labels[i]] for i in range(10)}
         click.echo("🌳 Using canonical Tree of Life layout.")
 
-    click.echo(f"🕸️ Visualizing network with {gradient} theme (colored by frequency)...")
+    click.secho(f"🕸️ Visualizing network with {gradient} theme (colored by frequency)...", fg="bright_magenta")
     plot_network(adj, node_values=omega, pos=pos, cmap_name=gradient, save_path=plot_path)
-    click.echo(f"📈 Plot saved to {plot_path}")
+    click.secho(f"📈 Plot saved to {plot_path}", fg="green")
 
     import networkx as nx
     G = nx.from_numpy_array(adj)
