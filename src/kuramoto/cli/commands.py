@@ -41,6 +41,7 @@ from ..analysis.viz import (
 from ..api import generate_kuramoto_dataset
 from ..config import parse_simulation_config
 from ..order_parameter import compute_order_parameter
+from ..solver_types import SOLVER_ALIASES, is_rotor_or_euler
 from ..topologies.tree_of_life import tree_of_life_positions
 from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
@@ -90,20 +91,7 @@ def datasetforbeginners(output: str) -> None:
     "--solver",
     "-s",
     default="euler",
-    type=click.Choice(
-        [
-            "euler",
-            "rk45",
-            "rotor",
-            "euler_fast",
-            "fast_euler",
-            "euler_geometric",
-            "geometric",
-            "euler_standard",
-            "rotor_geometric",
-        ],
-        case_sensitive=False,
-    ),
+    type=click.Choice(list(SOLVER_ALIASES), case_sensitive=False),
     help="Integration method (euler, euler_fast, euler_geometric, rk45, or rotor).",
 )
 @click.option("--track-symmetries", is_flag=True, help="Enable Lie symmetry tracking.")
@@ -124,22 +112,11 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
 
     click.secho(f"👟 Running simulation with {solver} solve...", fg="magenta")
 
-    is_rotor_or_euler = solver.lower() in (
-        "rotor",
-        "euler",
-        "euler_fast",
-        "fast_euler",
-        "euler_geometric",
-        "geometric",
-        "euler_standard",
-        "rotor_geometric",
-    )
-
     # Conditional Lie symmetry tracking
-    if track_symmetries and is_rotor_or_euler:
+    if track_symmetries and is_rotor_or_euler(solver):
         click.secho(" ↪️ Tracking U(1) phase invariance and Noether charges...", fg="yellow")
         params["symmetry_metrics"] = True
-    elif track_symmetries and not is_rotor_or_euler:
+    elif track_symmetries and not is_rotor_or_euler(solver):
         click.echo("  ⚠️ Warning: Lie symmetry tracking requires a rotor or Euler solver (--solver rotor, euler, euler_fast, euler_geometric)")
 
     data = generate_kuramoto_dataset(**params)

@@ -15,12 +15,13 @@ from __future__ import annotations
 # --------------------------------------------------------------------------- #
 # Package / direct-script imports
 # --------------------------------------------------------------------------- #
+from typing import Any, Dict, Optional
 
-from typing import Optional, Final, Dict, Any
 import numpy as np
 from numpy.typing import NDArray
 
 from kuramoto.model import KuramotoModel
+from kuramoto.solver_types import is_rotor_or_euler
 from kuramoto.topologies import load_topology
 
 __all__: list[str] = [
@@ -91,7 +92,7 @@ def generate_kuramoto_dataset(
         Dataset dictionary.
     """
     t_span = timesteps * dt
-    
+
     # Resolve topology if requested
     adj_matrix = adjacency
     if topology is not None:
@@ -115,17 +116,7 @@ def generate_kuramoto_dataset(
     dataset = model.simulate(t_span=t_span, n_points=timesteps)
 
     result = dataset.to_dict()
-    is_rotor_or_euler = solver.lower() in (
-        "rotor",
-        "euler",
-        "euler_fast",
-        "fast_euler",
-        "euler_geometric",
-        "geometric",
-        "euler_standard",
-        "rotor_geometric",
-    )
-    if symmetry_metrics and is_rotor_or_euler:
+    if symmetry_metrics and is_rotor_or_euler(solver):
         from kuramoto.order_parameter import track_lie_symmetries
         states = {f"node_{i}": result["theta"][:, i] for i in range(n_oscillators)}
         metrics = track_lie_symmetries(states, result["time"])

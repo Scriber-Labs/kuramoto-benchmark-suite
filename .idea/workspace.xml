@@ -8,25 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot.">
-      <change beforePath="$PROJECT_DIR$/.idea/FlexibleTailwindSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlexibleTailwindSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README_old.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_old.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_old.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/network.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/network.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/time_series.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/time_series.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers.py.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/HOUSE_RULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/templates/HOUSE_RULES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,61 +61,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.5371241329016203" />
-      <entry key="MS500" value="3.3464639087600596" />
-      <entry key="S2" value="7.838067984903657" />
-      <entry key="S5" value="11.606552643411792" />
-      <entry key="S10" value="13.546924021120528" />
-      <entry key="S30" value="15.116873472791" />
-      <entry key="S60" value="15.555461530694597" />
-      <entry key="M2" value="17.12941526397834" />
-      <entry key="M5" value="60.480666495064305" />
-      <entry key="M10" value="209.92233236277636" />
-      <entry key="M15" value="398.4929342595809" />
-      <entry key="M30" value="972.2459173124225" />
-      <entry key="H1" value="1818.2107788135704" />
-      <entry key="H2" value="2943.23224418939" />
-      <entry key="H4" value="4367.677792364956" />
-      <entry key="D1" value="10652.193185325066" />
-      <entry key="W1" value="15881.803051811326" />
+      <entry key="MS100" value="1.6864535262906328" />
+      <entry key="MS500" value="4.637407891872524" />
+      <entry key="S2" value="12.521134548021948" />
+      <entry key="S5" value="24.882811895107338" />
+      <entry key="S10" value="36.354221727503955" />
+      <entry key="S30" value="49.5959087601287" />
+      <entry key="S60" value="54.032795306838885" />
+      <entry key="M2" value="59.80761673130788" />
+      <entry key="M5" value="135.22598939232134" />
+      <entry key="M10" value="310.6218684746544" />
+      <entry key="M15" value="487.4354679658645" />
+      <entry key="M30" value="1029.8439719932012" />
+      <entry key="H1" value="1930.2723901882082" />
+      <entry key="H2" value="3171.4447951915804" />
+      <entry key="H4" value="4723.911601672459" />
+      <entry key="D1" value="11228.043746178988" />
+      <entry key="W1" value="16572.8587210423" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.051562800687041E-195" />
-      <entry key="S5" value="1.7500442500524955E-78" />
-      <entry key="S10" value="1.3228923803743303E-39" />
-      <entry key="S30" value="1.0977619455270847E-13" />
-      <entry key="S60" value="3.3132542861127644E-7" />
-      <entry key="M2" value="5.768622394197023E-4" />
-      <entry key="M5" value="0.06808814853833452" />
-      <entry key="M10" value="0.718398232535875" />
-      <entry key="M15" value="1.9090961187714983" />
-      <entry key="M30" value="5.638536523216356" />
-      <entry key="H1" value="10.921011555072544" />
-      <entry key="H2" value="17.631041527919514" />
-      <entry key="H4" value="26.576309900348814" />
-      <entry key="D1" value="78.02783272810817" />
-      <entry key="W1" value="118.26840987423728" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="1.6517563487846466E-178" />
+      <entry key="S10" value="1.2852067338699067E-89" />
+      <entry key="S30" value="2.3423816875335497E-30" />
+      <entry key="S60" value="1.5304865406234358E-15" />
+      <entry key="M2" value="3.920662733845936E-8" />
+      <entry key="M5" value="0.0014655021981754427" />
+      <entry key="M10" value="0.10539566048563362" />
+      <entry key="M15" value="0.531046777497336" />
+      <entry key="M30" value="2.9738488383907526" />
+      <entry key="H1" value="7.931203850116102" />
+      <entry key="H2" value="15.025055720179697" />
+      <entry key="H4" value="24.53373900169557" />
+      <entry key="D1" value="76.9947396015639" />
+      <entry key="W1" value="118.04343279317196" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.4846594631836378" />
-      <entry key="MS500" value="3.3122638829232036" />
-      <entry key="S2" value="7.819253993859545" />
-      <entry key="S5" value="11.59573476708175" />
-      <entry key="S10" value="13.540661775167008" />
-      <entry key="S30" value="15.114554835174088" />
-      <entry key="S60" value="15.554270193079057" />
-      <entry key="M2" value="17.129338375171383" />
-      <entry key="M5" value="60.54762908219583" />
-      <entry key="M10" value="210.6373493168056" />
-      <entry key="M15" value="400.39638983691844" />
-      <entry key="M30" value="977.874328440795" />
-      <entry key="H1" value="1829.1139567504772" />
-      <entry key="H2" value="2960.832877466407" />
-      <entry key="H4" value="4394.216151013542" />
-      <entry key="D1" value="10730.193206229433" />
-      <entry key="W1" value="16000.065010966426" />
+      <entry key="MS100" value="1.6358031040259922" />
+      <entry key="MS500" value="4.608421866843457" />
+      <entry key="S2" value="12.501377648166288" />
+      <entry key="S5" value="24.866825592910722" />
+      <entry key="S10" value="36.342407900503865" />
+      <entry key="S30" value="49.59048226523695" />
+      <entry key="S60" value="54.02983083831818" />
+      <entry key="M2" value="59.80595801364275" />
+      <entry key="M5" value="135.2258115717662" />
+      <entry key="M10" value="310.7250162965309" />
+      <entry key="M15" value="487.9633616439961" />
+      <entry key="M30" value="1032.81138662947" />
+      <entry key="H1" value="1938.1899961256036" />
+      <entry key="H2" value="3186.4435852733386" />
+      <entry key="H4" value="4748.410122578767" />
+      <entry key="D1" value="11305.011010461745" />
+      <entry key="W1" value="16690.895710827084" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -197,6 +189,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/examples/notebooks" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\examples\notebooks" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\archive" />
@@ -659,7 +652,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791891293632</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot.">
+      <option name="closed" value="true" />
+      <created>1791895674265</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1791895674265</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

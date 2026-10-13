@@ -15,20 +15,23 @@ Date: May 2026
 
 from __future__ import annotations
 
-import warnings
-from time import time
-from typing import Optional, Final, Dict
+from typing import Dict, Final, Optional
 
 import numpy as np
 from numpy.typing import NDArray
 
-from kuramoto.validation import *
-
-from kuramoto.graphs import graph_stats
 from kuramoto.dataset import KuramotoDataset
-from kuramoto.solvers import solve_kuramoto, RotorSolver  # ← Updated import
+from kuramoto.graphs import graph_stats
 from kuramoto.order_parameter import compute_order_parameter as order_parameter
+from kuramoto.solver_types import SOLVER_ALIASES
+from kuramoto.solvers import RotorSolver, solve_kuramoto  # ← Updated import
 from kuramoto.utils import get_rng
+from kuramoto.validation import (
+    validate_adjacency,
+    validate_intrinsic_frequency_array,
+    validate_non_negative_scalar,
+    validate_positive_scalar,
+)
 
 __all__: list[str] = ["KuramotoModel"]
 
@@ -95,22 +98,10 @@ class KuramotoModel:
         validate_positive_scalar(coupling_strength, "coupling_strength")
         validate_non_negative_scalar(noise_std, "noise_std")
 
-        valid_solvers = (
-            "rk45",
-            "rotor",
-            "euler",
-            "euler_fast",
-            "fast_euler",
-            "euler_geometric",
-            "geometric",
-            "euler_standard",
-            "rotor_geometric",
-            "vectorized_geometric",
-        )
         solver_lower = solver_type.lower()
-        if solver_lower not in valid_solvers:
+        if solver_lower not in {s.lower() for s in SOLVER_ALIASES}:
             raise ValueError(
-                f"solver_type must be one of {valid_solvers}, got '{solver_type}'"
+                f"solver_type must be one of {SOLVER_ALIASES}, got '{solver_type}'"
             )
 
         # ---- solver configuration -------------------------------------- #
