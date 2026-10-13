@@ -41,7 +41,7 @@ kuramoto network data/examples/demo_dataset.npz --gradient gradient_4
 kuramoto time data/examples/demo_dataset.npz -t 5.0
 
 # 4. Perform Fourier analysis
-kuramoto fourieravailability data/examples/demo_dataset.npz -f 0.16
+kuramoto fouriervariability data/examples/demo_dataset.npz -f 0.16
 ```
 
 ---
@@ -67,7 +67,7 @@ The `kuramoto` command provides a full suite of diagnostics.
 | `network` | Visualize the oscillator network (colored by degree) |
 | `distributions` | Plot histograms of natural frequencies and initial phases |
 | `time` | Plot phase trajectories (consistent coloring) and $r(t)$ |
-| `fourieravailability` | Check Fourier coefficients (consistent coloring) at a target frequency |
+| `fouriervariability` | Check Fourier coefficients (consistent coloring) at a target frequency |
 | `fourierconvergence` | Plot convergence of Fourier amplitude over increasing signal legnth |
 | `psdvariability` | Analyze Power Spectral Density (PSD) and energy distribution |
 | `psdconvergence` | Compare PSD estimates across different time segments |

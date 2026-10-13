@@ -3,7 +3,7 @@
 
 ## 📋 Part 1: The Deliverable Checklist
 *Before you dive into the code, check the outputs of our session.*
-- [ ] **Benchmarks**: Open `BENCHMARK_REPORT.md` and check the scaling results.
+- [x] **Benchmarks**: Open `BENCHMARK_REPORT.md` and check the scaling results.
 - [ ] **Theory**: Open `LEARNING_GUIDE.md` and read the Bivector Torque derivation.
 - [ ] **Practice**: Try to solve the first 3 problems in `PRACTICE_PROBLEMS.md` without looking at the solutions.
 - [ ] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.

@@ -21,7 +21,6 @@ if __name__ == "__main__":
 import os
 
 import click
-import matplotlib.pyplot as plt
 import numpy as np
 
 from ..analysis.spectral import (
@@ -30,12 +29,14 @@ from ..analysis.spectral import (
     compute_spectral_decomposition,
 )
 from ..analysis.viz import (
-    GRADIENTS,
-    PROJECT_COLORS,
     get_node_colors,
     plot_distributions,
+    plot_fourier_convergence,
+    plot_fourier_variability,
     plot_network,
-    set_style,
+    plot_psd_convergence,
+    plot_psd_variability,
+    plot_time_series,
 )
 from ..api import generate_kuramoto_dataset
 from ..config import parse_simulation_config
@@ -165,7 +166,6 @@ def generate(config: str, output: str, solver: str, track_symmetries: bool) -> N
 @click.option("--gradient", "-g", default="gradient_4", help="Gradient theme for coloring.")
 def time(dataset_path: str, start_time: float, gradient: str) -> None:
     """Plot the temporal signal and its time-average."""
-    set_style()
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
@@ -180,27 +180,8 @@ def time(dataset_path: str, start_time: float, gradient: str) -> None:
     colors = get_node_colors(adj, values=omega, cmap_name=gradient)
 
     ensure_plot_dir()
-    plt.figure(figsize=(10, 6))
-    plt.subplot(2, 1, 1)
-
-    # Plot first 10 oscillators with consistent colors
-    n_plot = min(10, theta_filtered.shape[1])
-    for i in range(n_plot):
-        plt.plot(t_filtered, np.sin(theta_filtered[:, i]), alpha=0.6, color=colors[i], label=f"Node {i}")
-
-    plt.title(f"Phases (first {n_plot} oscillators, colored by frequency)")
-    plt.ylabel("sin(theta)")
-
-    plt.subplot(2, 1, 2)
-    plt.plot(t_filtered, r, 'k-', linewidth=2, label="Order Parameter r(t)")
-    plt.axhline(np.mean(r), color=PROJECT_COLORS["pink_pink"], linestyle='--', label=f"Avg: {np.mean(r):.3f}")
-    plt.xlabel("Time")
-    plt.ylabel("Coherence r")
-    plt.legend(loc='upper right', fontsize='small', ncol=2)
-
     plot_path = os.path.join(PLOT_DIR, "time_series.png")
-    plt.savefig(plot_path)
-    plt.close()
+    plot_time_series(t_filtered, theta_filtered, r, node_colors=colors, save_path=plot_path)
 
     click.echo(f"📈 Plot saved to {plot_path}")
 
@@ -219,7 +200,6 @@ def time(dataset_path: str, start_time: float, gradient: str) -> None:
 @click.option("--gradient", "-g", default="gradient_4", help="Gradient theme for coloring.")
 def fouriervariability(dataset_path: str, start_time: float, freq: float, gradient: str) -> None:
     """Plot the Fourier variability diagnostic results."""
-    set_style()
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
@@ -235,17 +215,8 @@ def fouriervariability(dataset_path: str, start_time: float, freq: float, gradie
     colors = get_node_colors(adj, values=omega, cmap_name=gradient)
 
     ensure_plot_dir()
-    plt.figure(figsize=(10, 5))
-    plt.bar(range(len(amplitudes)), amplitudes, color=colors, edgecolor="white", linewidth=0.5)
-    plt.axhline(np.mean(amplitudes), color="black", linestyle='--', alpha=0.5, label="Mean")
-    plt.xlabel("Oscillator Index")
-    plt.ylabel(f"Fourier Amplitude at {freq} Hz")
-    plt.title("Fourier Variability (colored by frequency)")
-    plt.legend()
-
     plot_path = os.path.join(PLOT_DIR, "fourier_variability.png")
-    plt.savefig(plot_path)
-    plt.close()
+    plot_fourier_variability(amplitudes, node_colors=colors, freq=freq, save_path=plot_path)
 
     click.echo(f"📈 Plot saved to {plot_path}")
 
@@ -261,7 +232,6 @@ def fouriervariability(dataset_path: str, start_time: float, freq: float, gradie
 @click.option("--freq", "-f", type=float, required=True)
 def fourierconvergence(dataset_path: str, start_time: float, freq: float) -> None:
     """Plot discrete Fourier transform convergence."""
-    set_style()
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
@@ -280,15 +250,13 @@ def fourierconvergence(dataset_path: str, start_time: float, freq: float) -> Non
         })
 
     ensure_plot_dir()
-    plt.figure(figsize=(8, 5))
-    plt.plot([float(d["Duration"]) for d in conv_results], [d["Amplitude"] for d in conv_results], 'o-', color=GRADIENTS["gradient_5"][2])
-    plt.xlabel("Signal Duration")
-    plt.ylabel(f"Fourier Amplitude of r(t) at {freq} Hz")
-    plt.title("Fourier Convergence")
-
     plot_path = os.path.join(PLOT_DIR, "fourier_convergence.png")
-    plt.savefig(plot_path)
-    plt.close()
+    plot_fourier_convergence(
+        durations=[float(d["Duration"]) for d in conv_results],
+        amplitudes=[d["Amplitude"] for d in conv_results],
+        freq=freq,
+        save_path=plot_path,
+    )
 
     click.echo(f"📈 Plot saved to {plot_path}")
     print_table(conv_results, title=f"Convergence of r(t) at {freq} Hz")
@@ -299,7 +267,6 @@ def fourierconvergence(dataset_path: str, start_time: float, freq: float) -> Non
 @click.option("--freq", "-f", type=float, required=True)
 def psdvariability(dataset_path: str, start_time: float, freq: float) -> None:
     """Plot the spectral energy at the target frequency."""
-    set_style()
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
@@ -313,17 +280,8 @@ def psdvariability(dataset_path: str, start_time: float, freq: float) -> None:
     dist = compute_spectral_decomposition(f, pxx, freq, bandwidth=freq*0.1)
 
     ensure_plot_dir()
-    plt.figure(figsize=(8, 5))
-    plt.semilogy(f, pxx, color=GRADIENTS["gradient_1"][1])
-    plt.axvline(freq, color='r', linestyle='--', label='Target')
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("PSD")
-    plt.title("PSD Variability")
-    plt.legend()
-
     plot_path = os.path.join(PLOT_DIR, "psd_variability.png")
-    plt.savefig(plot_path)
-    plt.close()
+    plot_psd_variability(f, pxx, target_freq=freq, save_path=plot_path)
 
     click.echo(f"📈 Plot saved to {plot_path}")
 
@@ -338,7 +296,6 @@ def psdvariability(dataset_path: str, start_time: float, freq: float) -> None:
 @click.option("--freq", "-f", type=float, required=True)
 def psdconvergence(dataset_path: str, start_time: float, freq: float) -> None:
     """Plot the PSD convergence diagnostic results."""
-    set_style()
     data = np.load(dataset_path)
     t = data["time"]
     theta = data["theta"]
@@ -355,12 +312,15 @@ def psdconvergence(dataset_path: str, start_time: float, freq: float) -> None:
         "Last Quarter": r[3*n//4:]
     }
 
-    ensure_plot_dir()
-    plt.figure(figsize=(10, 6))
+    # Compute PSD for each window and collect stats
+    psd_data = {}
+    shared_f = None
     conv_stats = []
     for label, sig in signals.items():
         f, pxx = compute_psd(sig[:, np.newaxis], fs, nperseg=min(len(sig), 512))
-        plt.loglog(f, pxx, label=label)
+        psd_data[label] = pxx[:, 0]
+        if shared_f is None:
+            shared_f = f
 
         # Find peak near target frequency
         idx_target = np.argmin(np.abs(f - freq))
@@ -372,15 +332,9 @@ def psdconvergence(dataset_path: str, start_time: float, freq: float) -> None:
             "Peak PSD": f"{pxx[peak_idx, 0]:.4e}"
         })
 
-    plt.axvline(freq, color='k', linestyle=':')
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("PSD")
-    plt.title("PSD Convergence")
-    plt.legend()
-
+    ensure_plot_dir()
     plot_path = os.path.join(PLOT_DIR, "psd_convergence.png")
-    plt.savefig(plot_path)
-    plt.close()
+    plot_psd_convergence(shared_f, psd_data, target_freq=freq, save_path=plot_path)
 
     click.echo(f"📈 Plot saved to {plot_path}")
     print_table(conv_stats, title="PSD Convergence Statistics")

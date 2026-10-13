@@ -2,11 +2,17 @@
 *Mastering the foundations of the Kuramoto Benchmark Suite*
 
 ## Problem 1: The 2D Rotor Sandwich
-**Goal**: Apply a rotor to a vector.
-Given a basis vector $e_1$ and a rotor $R = \exp(-B \theta / 2)$ where $B = e_1 \wedge e_2$ and $\theta = \pi / 2$:
-1. Write the expression for the rotated vector $v'$.
-2. Calculate the components of $v'$.
-3. **Reference**: See how this is implemented in `RotorSolver._random_rotors` in `../src/kuramoto/solvers/rotor.py`.
+**Goal:** Apply a rotor to a vector $\mathbf{v}$.
+
+**Setup:** Consider an orthonormal set of basis vectors $\{\mathbf{e}_1, \mathbf{e}_2\}$ and a rotor 
+$R=\exp(-B \theta / 2)$ where $B=\mathbf{e}_1 \wedge \mathbf{e}_2$. 
+
+**Tasks:**
+1. Write out the expression for the rotated vector $\mathbf{v}'$.
+2. Calculate the components of $\mathbf{v}'$.
+
+**Reference:** See how this is implemented in `RotorSolver._random_rotors` in `../src/kuramoto/solvers/rotor.py`.
+
 
 ## Problem 2: The Bivector Torque
 **Goal**: Compute the interaction torque.

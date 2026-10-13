@@ -13,7 +13,6 @@ import os
 from typing import Any, Dict, List
 from tabulate import tabulate
 import click
-import matplotlib.pyplot as plt
 
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ Constants

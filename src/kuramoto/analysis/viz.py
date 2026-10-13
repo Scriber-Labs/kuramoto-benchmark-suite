@@ -13,6 +13,7 @@ Review status: Reviewed and maintained.
 
 from __future__ import annotations
 
+import logging
 import os
 import warnings
 from pathlib import Path
@@ -29,6 +30,9 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.font_manager import findSystemFonts
 from matplotlib.text import Text
 from numpy.typing import NDArray
+
+# Suppress matplotlib font manager verbose lookup / missing weight messages
+logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ Definitions, Constants & Design Tokens (The Scriber Experience)
@@ -970,6 +974,303 @@ def plot_fluid_vorticity(
         plt.show()
 
 
+def plot_time_series(
+    times: NDArray[np.floating],
+    theta: NDArray[np.floating],
+    r_values: NDArray[np.floating],
+    node_colors: Optional[NDArray[Any]] = None,
+    n_oscillators: int = 10,
+    title: str = "Time Series",
+    save_path: Optional[str] = None,
+) -> None:
+    """
+    Plot phase time series and order parameter with The Scriber Experience styling.
+
+    Parameters
+    ----------
+    times : NDArray
+        Time points, shape (n_steps,).
+    theta : NDArray
+        Phase values, shape (n_steps, n_oscillators).
+    r_values : NDArray
+        Order parameter values, shape (n_steps,).
+    node_colors : NDArray, optional
+        RGBA colors per oscillator for consistent coloring.
+    n_oscillators : int, default=10
+        Number of oscillators to plot in the phase subplot.
+    title : str, default='Time Series'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    """
+    set_style()
+    n_plot = min(n_oscillators, theta.shape[1])
+
+    if node_colors is None:
+        node_colors = np.tile(
+            plt.rcParams["axes.prop_cycle"].by_key()["color"][:n_plot],
+            (4, 1),
+        ).T
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), facecolor=THEME_BG)
+
+    for i in range(n_plot):
+        ax1.plot(
+            times,
+            np.sin(theta[:, i]),
+            alpha=0.6,
+            color=node_colors[i] if node_colors.ndim > 1 else node_colors,
+            label=f"Node {i}",
+        )
+    ax1.set_title(f"Phases (first {n_plot} oscillators)", fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax1.set_ylabel(r"$\sin(\theta)$", fontsize=11, color=TEXT_PRIMARY)
+
+    ax2.plot(times, r_values, color=PROJECT_COLORS["cyan_light"], linewidth=2, label=r"$R(t)$")
+    ax2.axhline(
+        np.mean(r_values),
+        color=PROJECT_COLORS["pink_pink"],
+        linestyle="--",
+        label=f"Avg: {np.mean(r_values):.3f}",
+    )
+    ax2.set_xlabel("Time", fontsize=11, color=TEXT_PRIMARY)
+    ax2.set_ylabel("Coherence $r$", fontsize=11, color=TEXT_PRIMARY)
+    ax2.legend(loc="upper right", fontsize="small", ncol=2)
+
+    _apply_aclonica_font(ax1)
+    _apply_aclonica_font(ax2)
+    plt.tight_layout()
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
+def plot_fourier_variability(
+    amplitudes: NDArray[np.floating],
+    node_colors: Optional[NDArray[Any]] = None,
+    freq: float = 0.0,
+    title: str = "Fourier Variability",
+    save_path: Optional[str] = None,
+) -> None:
+    """
+    Plot Fourier amplitude bar chart per oscillator with The Scriber Experience styling.
+
+    Parameters
+    ----------
+    amplitudes : NDArray
+        Fourier amplitudes per oscillator, shape (n_oscillators,).
+    node_colors : NDArray, optional
+        RGBA colors per oscillator for bar coloring.
+    freq : float, default=0.0
+        Target frequency for the label.
+    title : str, default='Fourier Variability'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    """
+    set_style()
+
+    if node_colors is None:
+        node_colors = np.tile(
+            plt.rcParams["axes.prop_cycle"].by_key()["color"][:len(amplitudes)],
+            (4, 1),
+        ).T
+
+    fig, ax = plt.subplots(figsize=(10, 5), facecolor=THEME_BG)
+    ax.set_facecolor(THEME_BG)
+
+    ax.bar(
+        range(len(amplitudes)),
+        amplitudes,
+        color=node_colors,
+        edgecolor=BORDER_COLOR,
+        linewidth=0.5,
+    )
+    ax.axhline(
+        np.mean(amplitudes),
+        color=TEXT_MUTED,
+        linestyle="--",
+        alpha=0.5,
+        label="Mean",
+    )
+    ax.set_xlabel("Oscillator Index", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_ylabel(f"Fourier Amplitude at {freq} Hz", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax.legend()
+
+    _apply_aclonica_font(ax)
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
+def plot_fourier_convergence(
+    durations: Sequence[float],
+    amplitudes: Sequence[float],
+    freq: float = 0.0,
+    title: str = "Fourier Convergence",
+    save_path: Optional[str] = None,
+) -> None:
+    """
+    Plot Fourier amplitude convergence over increasing signal duration.
+
+    Parameters
+    ----------
+    durations : Sequence[float]
+        Signal duration values.
+    amplitudes : Sequence[float]
+        Corresponding Fourier amplitudes.
+    freq : float, default=0.0
+        Target frequency for the label.
+    title : str, default='Fourier Convergence'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    """
+    set_style()
+
+    fig, ax = plt.subplots(figsize=(8, 5), facecolor=THEME_BG)
+    ax.set_facecolor(THEME_BG)
+
+    ax.plot(
+        durations,
+        amplitudes,
+        "o-",
+        color=GRADIENTS["gradient_5"][2],
+        linewidth=2.5,
+    )
+    ax.set_xlabel("Signal Duration", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_ylabel(
+        f"Fourier Amplitude of $R(t)$ at {freq} Hz", fontsize=11, color=TEXT_PRIMARY
+    )
+    ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+
+    _apply_aclonica_font(ax)
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
+def plot_psd_variability(
+    frequencies: NDArray[np.floating],
+    psd_values: NDArray[np.floating],
+    target_freq: float,
+    title: str = "PSD Variability",
+    save_path: Optional[str] = None,
+) -> None:
+    """
+    Plot power spectral density with target frequency marker.
+
+    Parameters
+    ----------
+    frequencies : NDArray
+        Frequency axis values.
+    psd_values : NDArray
+        Power spectral density values.
+    target_freq : float
+        Target frequency to highlight.
+    title : str, default='PSD Variability'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    """
+    set_style()
+
+    fig, ax = plt.subplots(figsize=(8, 5), facecolor=THEME_BG)
+    ax.set_facecolor(THEME_BG)
+
+    ax.semilogy(
+        frequencies,
+        psd_values,
+        color=GRADIENTS["gradient_1"][1],
+        linewidth=2,
+    )
+    ax.axvline(target_freq, color=PROJECT_COLORS["pink_pink"], linestyle="--", label="Target")
+    ax.set_xlabel("Frequency (Hz)", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_ylabel("PSD", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax.legend()
+
+    _apply_aclonica_font(ax)
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
+def plot_psd_convergence(
+    frequencies: NDArray[np.floating],
+    psd_data: Dict[str, NDArray[np.floating]],
+    target_freq: float,
+    title: str = "PSD Convergence",
+    save_path: Optional[str] = None,
+) -> None:
+    """
+    Plot PSD convergence across different signal windows.
+
+    Parameters
+    ----------
+    frequencies : NDArray
+        Frequency axis values (shared across windows).
+    psd_data : Dict[str, NDArray]
+        Mapping from window label to PSD values.
+    target_freq : float
+        Target frequency to highlight.
+    title : str, default='PSD Convergence'
+        Plot title.
+    save_path : str, optional
+        If provided, saves the plot to this file path.
+    """
+    set_style()
+
+    palette = [
+        PROJECT_COLORS["cyan_light"],
+        PROJECT_COLORS["purple_light"],
+        PROJECT_COLORS["pink_pink"],
+    ]
+
+    fig, ax = plt.subplots(figsize=(10, 6), facecolor=THEME_BG)
+    ax.set_facecolor(THEME_BG)
+
+    for idx, (label, psd) in enumerate(psd_data.items()):
+        ax.loglog(
+            frequencies,
+            psd,
+            label=label,
+            color=palette[idx % len(palette)],
+            linewidth=2,
+        )
+
+    ax.axvline(target_freq, color=TEXT_MUTED, linestyle=":")
+    ax.set_xlabel("Frequency (Hz)", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_ylabel("PSD", fontsize=11, color=TEXT_PRIMARY)
+    ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax.legend()
+
+    _apply_aclonica_font(ax)
+
+    if save_path:
+        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
+        plt.close(fig)
+    else:
+        plt.show()
+
+
 def plot_semantic_colormaps(
     *,
     out_path: Optional[str | Path] = None,
@@ -1084,12 +1385,6 @@ def _apply_aclonica_font(ax: plt.Axes) -> None:
                     text.set_fontname("Aclonica")
                 if legend.get_title():
                     legend.get_title().set_fontname("Aclonica")
-        else:
-            warnings.warn(
-                "📝 Aclonica not found. Using system sans-serif font."
-                "Download from https://www.dafont.com/aclonica.font for full aesthetic.",
-                stacklevel=2,
-            )
     except Exception:
         pass  # Silent failover
 

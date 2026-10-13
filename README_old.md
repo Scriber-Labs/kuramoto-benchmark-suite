@@ -26,7 +26,7 @@ kuramoto datasetforbeginners
 data/examples/demo_dataset.npz --gradient gradient_4
 
 # 3. Check the temporal signal and order parameterkuramoto time 
-data/examples/demo_dataset.npz -t 5.0
+kuramoto time data/examples/demo_dataset.npz -t 5.0
 
 # 4. Perform Fourier analysiskuramoto fouriervariability 
 data/examples/demo_dataset.npz -f 0.16
