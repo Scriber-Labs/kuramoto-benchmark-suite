@@ -138,5 +138,11 @@ Date:
 >    - New features: add tests proportional to complexity.
 >    - Target 70%+ coverage for core logic modules.
 
+>[!important] ⚡ Environment & Dependency Management
+>13. Use `uv` and maintain `pyproject.toml`
+>    - Use `uv` as the virtual environment and package management tool.
+>    - Keep `pyproject.toml` updated with dependencies, tools, and project metadata.
+>    - If `pyproject.toml` does not exist in a project/repository, create one tailored to the needs and requirements of the project.
+
 
 
