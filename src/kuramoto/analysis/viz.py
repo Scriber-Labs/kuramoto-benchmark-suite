@@ -896,6 +896,9 @@ def plot_fluid_vorticity(
     """
     set_style()
 
+    if phases.ndim > 1:
+        phases = phases[-1]
+
     # 1. Compute Mean Field
     v_mean = np.mean(np.exp(1j * phases))
     R = np.abs(v_mean)
@@ -1007,19 +1010,18 @@ def plot_time_series(
     n_plot = min(n_oscillators, theta.shape[1])
 
     if node_colors is None:
-        node_colors = np.tile(
-            plt.rcParams["axes.prop_cycle"].by_key()["color"][:n_plot],
-            (4, 1),
-        ).T
+        prop_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+        node_colors = [prop_colors[i % len(prop_colors)] for i in range(n_plot)]
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), facecolor=THEME_BG)
 
     for i in range(n_plot):
+        c = node_colors[i] if hasattr(node_colors, "__len__") and len(node_colors) > i else None
         ax1.plot(
             times,
             np.sin(theta[:, i]),
             alpha=0.6,
-            color=node_colors[i] if node_colors.ndim > 1 else node_colors,
+            color=c,
             label=f"Node {i}",
         )
     ax1.set_title(f"Phases (first {n_plot} oscillators)", fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
@@ -1074,10 +1076,8 @@ def plot_fourier_variability(
     set_style()
 
     if node_colors is None:
-        node_colors = np.tile(
-            plt.rcParams["axes.prop_cycle"].by_key()["color"][:len(amplitudes)],
-            (4, 1),
-        ).T
+        prop_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+        node_colors = [prop_colors[i % len(prop_colors)] for i in range(len(amplitudes))]
 
     fig, ax = plt.subplots(figsize=(10, 5), facecolor=THEME_BG)
     ax.set_facecolor(THEME_BG)
@@ -1246,9 +1246,17 @@ def plot_psd_convergence(
     fig, ax = plt.subplots(figsize=(10, 6), facecolor=THEME_BG)
     ax.set_facecolor(THEME_BG)
 
-    for idx, (label, psd) in enumerate(psd_data.items()):
+    for idx, (label, val) in enumerate(psd_data.items()):
+        if isinstance(val, (tuple, list)) and len(val) == 2:
+            f_win, psd = val
+        else:
+            psd = val
+            if len(frequencies) == len(psd):
+                f_win = frequencies
+            else:
+                f_win = np.linspace(frequencies[0], frequencies[-1], len(psd))
         ax.loglog(
-            frequencies,
+            f_win,
             psd,
             label=label,
             color=palette[idx % len(palette)],

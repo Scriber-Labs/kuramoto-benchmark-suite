@@ -7,12 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="demo notbook added">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent-workspace" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/HOUSE_RULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/templates/HOUSE_RULES.md" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added boilerplate repo as a submodule">
+      <change beforePath="$PROJECT_DIR$/agent-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/agent-workspace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent-workspace/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/agent-workspace/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,61 +56,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3205909097392734" />
-      <entry key="MS500" value="3.2768932497571144" />
-      <entry key="S2" value="10.221039730610583" />
-      <entry key="S5" value="17.68342090020151" />
-      <entry key="S10" value="22.042652184225588" />
-      <entry key="S30" value="26.18660864794543" />
-      <entry key="S60" value="30.508164519727394" />
-      <entry key="M2" value="38.99986692807484" />
-      <entry key="M5" value="67.95983135357636" />
-      <entry key="M10" value="152.45316675512368" />
-      <entry key="M15" value="261.930040458699" />
-      <entry key="M30" value="676.4412011810803" />
-      <entry key="H1" value="1550.7491199454007" />
-      <entry key="H2" value="2913.8948187513597" />
-      <entry key="H4" value="4661.36435334053" />
-      <entry key="D1" value="11554.437577452889" />
-      <entry key="W1" value="17106.452669818056" />
+      <entry key="MS100" value="1.0029346573202054" />
+      <entry key="MS500" value="1.6064319689870774" />
+      <entry key="S2" value="4.054223211906303" />
+      <entry key="S5" value="9.4324840385733" />
+      <entry key="S10" value="17.457138113392784" />
+      <entry key="S30" value="29.98917976507224" />
+      <entry key="S60" value="37.5166724065634" />
+      <entry key="M2" value="47.800967024915074" />
+      <entry key="M5" value="77.79623225512886" />
+      <entry key="M10" value="162.10502633822398" />
+      <entry key="M15" value="271.2710312889396" />
+      <entry key="M30" value="685.0402543938933" />
+      <entry key="H1" value="1558.8626884552423" />
+      <entry key="H2" value="2922.246899792732" />
+      <entry key="H4" value="4670.447597896756" />
+      <entry key="D1" value="11565.233071522045" />
+      <entry key="W1" value="17118.19794101126" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.013608577327975E-210" />
-      <entry key="S5" value="1.743468103599299E-84" />
-      <entry key="S10" value="1.3204045227123658E-42" />
-      <entry key="S30" value="1.0970733560531107E-14" />
-      <entry key="S60" value="1.0474133399317558E-7" />
-      <entry key="M2" value="3.2399321814528673E-4" />
-      <entry key="M5" value="0.044165132012046374" />
-      <entry key="M10" value="0.29350832239078234" />
-      <entry key="M15" value="0.6524745700647864" />
-      <entry key="M30" value="2.2810019448186196" />
-      <entry key="H1" value="6.5240796870003965" />
-      <entry key="H2" value="13.820865269729532" />
-      <entry key="H4" value="24.064987488582474" />
-      <entry key="D1" value="78.19114571347049" />
-      <entry key="W1" value="120.64866059193434" />
+      <entry key="S2" value="4.4513906505194866E-212" />
+      <entry key="S5" value="2.880038435838578E-85" />
+      <entry key="S10" value="5.366598956358235E-43" />
+      <entry key="S30" value="8.126428413219652E-15" />
+      <entry key="S60" value="9.014676035721896E-8" />
+      <entry key="M2" value="3.0057436007435023E-4" />
+      <entry key="M5" value="0.04285938525418563" />
+      <entry key="M10" value="0.2891369679341363" />
+      <entry key="M15" value="0.6459799791109623" />
+      <entry key="M30" value="2.2696212533937214" />
+      <entry key="H1" value="6.507783913457504" />
+      <entry key="H2" value="13.803593676156979" />
+      <entry key="H4" value="24.049946077994587" />
+      <entry key="D1" value="78.18299825070156" />
+      <entry key="W1" value="120.64686458227666" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.266199558746425" />
-      <entry key="MS500" value="3.2481045244109596" />
-      <entry key="S2" value="10.197913126918083" />
-      <entry key="S5" value="17.66680280268602" />
-      <entry key="S10" value="22.032151917598245" />
-      <entry key="S30" value="26.182414289388873" />
-      <entry key="S60" value="30.505720207272965" />
-      <entry key="M2" value="38.998620389464115" />
-      <entry key="M5" value="68.0020966404754" />
-      <entry key="M10" value="152.74301945526167" />
-      <entry key="M15" value="262.57790130972444" />
-      <entry key="M30" value="678.7159606864784" />
-      <entry key="H1" value="1557.2624363210878" />
-      <entry key="H2" value="2927.693986992927" />
-      <entry key="H4" value="4685.397691330841" />
-      <entry key="D1" value="11632.60169742452" />
-      <entry key="W1" value="17227.094883207224" />
+      <entry key="MS100" value="0.9621176998277118" />
+      <entry key="MS500" value="1.594249882678476" />
+      <entry key="S2" value="4.04657621178731" />
+      <entry key="S5" value="9.424353617052647" />
+      <entry key="S10" value="17.44910157869937" />
+      <entry key="S30" value="29.9844133336853" />
+      <entry key="S60" value="37.51367266434008" />
+      <entry key="M2" value="47.799344523649474" />
+      <entry key="M5" value="77.83705699904807" />
+      <entry key="M10" value="162.39046587168923" />
+      <entry key="M15" value="271.91237912814984" />
+      <entry key="M30" value="687.3036320940417" />
+      <entry key="H1" value="1565.3597197903025" />
+      <entry key="H2" value="2936.0288154737204" />
+      <entry key="H4" value="4694.465910216467" />
+      <entry key="D1" value="11643.389046173115" />
+      <entry key="W1" value="17238.83835839047" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -678,14 +679,21 @@
       <option name="project" value="LOCAL" />
       <updated>1791899463176</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="added boilerplate repo as a submodule">
+      <option name="closed" value="true" />
+      <created>1791937965947</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1791937965947</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enhanced **commands.py** with runtime checks, added new CLI options (`--solver` and `--track-symmetries`), and updated simulation logic to support Lie symmetry tracking and configurable solvers." />
     <MESSAGE value="minor updates" />
     <MESSAGE value="updated @solvers.py and minor touch ups on api.py" />
     <MESSAGE value="updated model.py" />
@@ -710,6 +718,7 @@
     <MESSAGE value="updated house rules and did some repo cleaning" />
     <MESSAGE value="added a plan of action markdown for viz.py splitting in future work folder" />
     <MESSAGE value="demo notbook added" />
-    <option name="LAST_COMMIT_MESSAGE" value="demo notbook added" />
+    <MESSAGE value="added boilerplate repo as a submodule" />
+    <option name="LAST_COMMIT_MESSAGE" value="added boilerplate repo as a submodule" />
   </component>
 </project>

@@ -65,10 +65,11 @@ def load_topology(
            kwargs.get("p", 0.2)
         )
 
-    elif name == "random":
+    elif name in ("random", "erdos_renyi", "erdos-renyi"):
         G = nx.erdos_renyi_graph(
             kwargs.get("n", 20),
-            kwargs.get("p", 0.2)
+            kwargs.get("p", 0.2),
+            seed=kwargs.get("seed", None),
         )
 
     elif name == "tree_of_life":
