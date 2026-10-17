@@ -8,7 +8,7 @@
 - [x] **Benchmarks**: Open `BENCHMARK_REPORT.md` and check the scaling results.
 - [ ] **Theory**: Open `LEARNING_GUIDE.md` and read the Bivector Torque derivation.
 - [ ] **Practice**: Try to solve the first 3 problems in `PRACTICE_PROBLEMS.md` without looking at the solutions.
-- [ ] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.
+- [x] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.
 - [ ] **Quantum**: Inspect `../src/kuramoto/quantum/circuit_gen.py` to see the SCF mapping logic.
 
 ---
