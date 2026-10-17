@@ -7,19 +7,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)">
-      <change beforePath="$PROJECT_DIR$/.idea/agent-workspace-boilerplate.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/benchmark/rigorous_results.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/benchmark/rigorous_results.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/architecture.mmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/benchmarks/scaling_performance.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/benchmarks/scaling_performance.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/LEARNING_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/LEARNING_GUIDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/RESEARCH_PREPRINT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,61 +61,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.7083441401666457" />
-      <entry key="MS500" value="3.9999540767866817" />
-      <entry key="S2" value="7.0791697054018865" />
-      <entry key="S5" value="11.4597965006359" />
-      <entry key="S10" value="16.52073163023632" />
-      <entry key="S30" value="26.257663789889133" />
-      <entry key="S60" value="32.80170009680735" />
-      <entry key="M2" value="45.18386747902758" />
-      <entry key="M5" value="80.55246706742528" />
-      <entry key="M10" value="151.89442180049696" />
-      <entry key="M15" value="245.90860637234474" />
-      <entry key="M30" value="624.1414378410296" />
-      <entry key="H1" value="1472.478538911492" />
-      <entry key="H2" value="2842.7091981669096" />
-      <entry key="H4" value="4621.085321490979" />
-      <entry key="D1" value="11590.170888305302" />
-      <entry key="W1" value="17184.960804015132" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0000000000000062" />
+      <entry key="M5" value="1.0000362444645918" />
+      <entry key="M10" value="1.1018880490288054" />
+      <entry key="M15" value="2.884349005416528" />
+      <entry key="M30" value="55.63573931714705" />
+      <entry key="H1" value="436.6581844744139" />
+      <entry key="H2" value="1547.254179509466" />
+      <entry key="H4" value="3409.146173041181" />
+      <entry key="D1" value="11017.717431710224" />
+      <entry key="W1" value="17061.836193991574" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="3.0685822980130617E-298" />
-      <entry key="S5" value="9.88041326671742E-120" />
-      <entry key="S10" value="3.143312467241719E-60" />
-      <entry key="S30" value="1.4648590944544526E-20" />
-      <entry key="S60" value="1.210314378655881E-10" />
-      <entry key="M2" value="1.101351545578487E-5" />
-      <entry key="M5" value="0.011419196631446683" />
-      <entry key="M10" value="0.14924453229095178" />
-      <entry key="M15" value="0.4156702372615645" />
-      <entry key="M30" value="1.8206158750833958" />
-      <entry key="H1" value="5.828617982629791" />
-      <entry key="H2" value="13.06346544362087" />
-      <entry key="H4" value="23.396302287094368" />
-      <entry key="D1" value="77.82476908006922" />
-      <entry key="W1" value="120.56773825106266" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="1.2367241304817863E-250" />
+      <entry key="S30" value="4.982235802041554E-84" />
+      <entry key="S60" value="2.2320936195913633E-42" />
+      <entry key="M2" value="1.4956606653973555E-21" />
+      <entry key="M5" value="5.138050801468581E-9" />
+      <entry key="M10" value="1.0011055075685384E-4" />
+      <entry key="M15" value="0.003185198800968719" />
+      <entry key="M30" value="0.15937204024106377" />
+      <entry key="H1" value="1.7244972073987201" />
+      <entry key="H2" value="7.105699750822786" />
+      <entry key="H4" value="17.255257705856007" />
+      <entry key="D1" value="73.97418885413735" />
+      <entry key="W1" value="119.69689404824437" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.6599769989669615" />
-      <entry key="MS500" value="3.955489128118539" />
-      <entry key="S2" value="7.060662805050684" />
-      <entry key="S5" value="11.449784709418806" />
-      <entry key="S10" value="16.513266298819335" />
-      <entry key="S30" value="26.252369091970802" />
-      <entry key="S60" value="32.798069015855454" />
-      <entry key="M2" value="45.18144834100003" />
-      <entry key="M5" value="80.56213491553764" />
-      <entry key="M10" value="152.04109189541" />
-      <entry key="M15" value="246.32083739394935" />
-      <entry key="M30" value="625.9568086302586" />
-      <entry key="H1" value="1478.2974062590094" />
-      <entry key="H2" value="2855.7520873840795" />
-      <entry key="H4" value="4644.450819378634" />
-      <entry key="D1" value="11667.968752522938" />
-      <entry key="W1" value="17305.522098564987" />
+      <entry key="MS100" value="0.5034777750283593" />
+      <entry key="MS500" value="0.8717582395370622" />
+      <entry key="S2" value="0.9662711549639227" />
+      <entry key="S5" value="0.9863694348542658" />
+      <entry key="S10" value="0.9931613337490872" />
+      <entry key="S30" value="0.997715228377302" />
+      <entry key="S60" value="0.9988569609194812" />
+      <entry key="M2" value="0.9994283170490486" />
+      <entry key="M5" value="0.9998075364037133" />
+      <entry key="M10" value="1.1018720699483493" />
+      <entry key="M15" value="2.8874316069050625" />
+      <entry key="M30" value="55.79461409366813" />
+      <entry key="H1" value="438.3797777267942" />
+      <entry key="H2" value="1554.3486775625356" />
+      <entry key="H4" value="3426.3787070988105" />
+      <entry key="D1" value="11091.666046094831" />
+      <entry key="W1" value="17181.526690767114" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -701,14 +700,29 @@
       <option name="project" value="LOCAL" />
       <updated>1792229914928</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file.">
+      <option name="closed" value="true" />
+      <created>1792256262543</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1792256262543</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file.">
+      <option name="closed" value="true" />
+      <created>1792256313721</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1792256313721</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated @solvers.py and minor touch ups on api.py" />
     <MESSAGE value="updated model.py" />
     <MESSAGE value="demo.ipynb needs to be updated" />
     <MESSAGE value="updated cli" />
@@ -733,6 +747,7 @@
     <MESSAGE value="demo notbook added" />
     <MESSAGE value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
     <MESSAGE value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
-    <option name="LAST_COMMIT_MESSAGE" value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
+    <MESSAGE value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
   </component>
 </project>
