@@ -95,7 +95,7 @@ class KuramotoModel:
         # ---- validation ------------------------------------------------ #
         if n_oscillators <= 0:
             raise ValueError(f"n_oscillators must be positive, got N={n_oscillators}")
-        validate_positive_scalar(coupling_strength, "coupling_strength")
+        validate_non_negative_scalar(coupling_strength, "coupling_strength")
         validate_non_negative_scalar(noise_std, "noise_std")
 
         solver_lower = solver_type.lower()
@@ -148,6 +148,9 @@ class KuramotoModel:
                 n_oscillators=n_oscillators,
                 dim=2,
                 seed=random_seed,
+                adjacency_matrix=self.A,
+                natural_frequencies=self.omega,
+                initial_phases=self.initial_phases,
             )
 
         # ---- placeholders for results ---------------------------------- #
@@ -248,24 +251,30 @@ class KuramotoModel:
 
     def _simulate_rotor(self, t_span: float, t_eval: NDArray, n_points: int) -> KuramotoDataset:
         """Geometric Algebra rotor integration path."""
-        # Override rotor solver frequencies and initial phases
+        # Override rotor solver frequencies, adjacency, and initial phases
         self.rotor_solver.omegas = self.omega.copy()
+        self.rotor_solver.A = self.A.copy()
         self.rotor_solver.rotors = [
             np.exp(-self.rotor_solver.B_plane * p / 2.0)
             for p in self.initial_phases
         ]
+        self.rotor_solver._sync_array_from_rotors()
 
         # Calculate internal timestep for Euler integration
         dt_internal = float(np.min(np.diff(t_eval))) * 0.1
 
-        method = "fast"
+        method = "vectorized_geometric"
         if self.solver_type in ("standard", "euler", "euler_standard"):
             method = "standard"
         elif self.solver_type in ("geometric", "euler_geometric", "rotor_geometric"):
             method = "geometric"
-        elif self.solver_type in ("fast", "euler_fast", "fast_euler", "rotor"):
-            method = "vectorized_geometric"
-        elif self.solver_type == "vectorized_geometric":
+        elif self.solver_type in ("rkmk4", "rkmk", "rk4"):
+            method = "rkmk4"
+        elif self.solver_type in ("midpoint", "midpoint_geometric"):
+            method = "midpoint"
+        elif self.solver_type in ("fast", "euler_fast", "fast_euler"):
+            method = "fast"
+        elif self.solver_type in ("rotor", "vectorized_geometric"):
             method = "vectorized_geometric"
 
         sim_times, sim_phases = self.rotor_solver.simulate(

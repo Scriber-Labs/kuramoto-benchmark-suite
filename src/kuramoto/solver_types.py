@@ -22,6 +22,10 @@ from typing import Final
 SOLVER_ALIASES: Final[tuple[str, ...]] = (
     "rk45",
     "rotor",
+    "rkmk4",
+    "rkmk",
+    "midpoint",
+    "midpoint_geometric",
     "euler",
     "euler_fast",
     "fast_euler",
@@ -36,6 +40,10 @@ SOLVER_ALIASES: Final[tuple[str, ...]] = (
 # These are all non-rk45 solvers that use rotor/Euler-based integration.
 ROTOR_OR_EULER_SOLVERS: Final[set[str]] = {
     "rotor",
+    "rkmk4",
+    "rkmk",
+    "midpoint",
+    "midpoint_geometric",
     "euler",
     "euler_fast",
     "fast_euler",

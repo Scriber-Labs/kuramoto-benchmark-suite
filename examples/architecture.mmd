@@ -1,0 +1,93 @@
+%%{ init: {
+    "theme": "base",
+    "themeVariables": {
+        "background": "#0D1117",
+        "primaryColor": "#14B5FF",
+        "primaryTextColor": "#F0F6FC",
+        "primaryBorderColor": "#14B5FF",
+        "lineColor": "#14B5FF",
+        "secondaryColor": "#0070EB",
+        "tertiaryColor": "#0D1117",
+        "fontFamily": "'Aclonica', sans-serif",
+        "fontSize": "16px",
+        "clusterBkg": "rgba(255, 255, 255, 0.03)",
+        "clusterBorder": "#30363D",
+        "edgeLabelBackground":"#0D1117",
+        "nodeSpacing": 48,
+        "rankSpacing": 80,
+        "borderRadius": "10"
+    },
+    "themeCSS": "
+        .node rect, .node circle, .node ellipse, .node polygon, .node path: {
+            "fill-opacity": 0.9;
+            "stroke-width": 2px;1
+        }
+        .cluster rect {
+            "rx": 16;
+            "ry": 16;
+        }
+        .nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * {
+            color: #F0F6FC !important;
+            fill: #F0F6FC !important;
+            -webkit-text-fill-color: #F0F6FC !important;
+        }
+    ",
+    "flowchart": {
+        "curve": "basis",
+        "useMaxWidth": true,
+        "htmlLabels": true
+    },
+    "handDrawn": false
+    }
+}%%
+
+
+flowchart TD
+
+subgraph Client_API["Client & High-Level API"]
+    CLI["kuramoto CLI"]
+    Notebooks["Jupyter Notebooks (demo, benchmark)"]
+    API_Gen["generate_kuramoto_dataset()"]
+end
+
+subgraph Model_Orchestration["KuramotoModel & Problem Specification"]
+    Config["SimulationConfig<br/>(N, K, topology, dt, seed, initial_phases)"]
+    Topology["TopologyGraph (Adjacency Matrix A_ij & Degree k_i)"]
+end
+
+subgraph Physics_Law["Dynamical Physics Law"]
+      KuramotoPhysics["KuramotoDynamics<br/>- Phase RHS: dθ/dt = ω + (K/k_i) ∑ A_ij sin(θ_j - θ_i)<br/>- Bivector Torque: Ω_i = ω_i B - K (v_mean,i ∧ v_i)"]
+end
+
+subgraph State_Representations["State Representations"]
+    PhaseState["PhaseState (θ ∈ R^N)<br/>Canonical phase angles"]
+    RotorState["RotorState (R ∈ Spin(n)^N)<br/>Even-subalgebra rotor array"]
+end
+
+subgraph Integrator_Ecosystem["Numerical Integrators (Decoupled & Stateless)"]
+    RK45_Int["Adaptive RK45 Integrator<br/>(Dormand-Prince 5(4) with error control)"]
+    Lie_RKMK["Geometric Lie-Group Integrator<br/>(4th-Order Runge-Kutta-Munthe-Kaas / RKMK4)"]
+    Vec_Euler["Vectorized GA Euler Integrator<br/>(Direct Spin(n) array algebra)"]
+end
+
+subgraph Diagnostics_Layer["Observables & Diagnostics"]
+    Obs_OP["compute_order_parameter()"]
+    Obs_Lie["track_lie_symmetries() (U(1) Invariants & Noether Energy)"]
+    Dataset_Out["KuramotoDataset (Immutable Output)"]
+end
+
+Client_API --> Config
+Config --> Model_Orchestration
+Topology --> Physics_Law
+
+Model_Orchestration -->|"Instantiates with explicit initial_phases"| State_Representations
+
+PhaseState --> RK45_Int
+RotorState --> Lie_RKMK
+RotorState --> Vec_Euler
+
+Physics_Law --> Integrator_Ecosystem
+Integrator_Ecosystem -->|"Stateless Step Updates (No State Mutation)"| State_Representations
+
+State_Representations --> Diagnostics_Layer
+Diagnostics_Layer --> Dataset_Out

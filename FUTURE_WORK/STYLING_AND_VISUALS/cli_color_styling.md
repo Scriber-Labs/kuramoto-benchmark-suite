@@ -4,134 +4,108 @@
 
 Color styling in the CLI is not just visual polish. It helps with attention, orientation, and quickly distinguishing message types while working in the terminal.
 
-This should eventually become a small intentional styling layer rather than scattered one-off color choices.
+In accordance with `.agent-workspace/.junie/AGENTS.md` and Scriber Labs design rules, styling should operate as a cohesive semantic layer aligned with the 4-layer design token taxonomy and ADHD high-contrast semantic spectrum.
 
-## Current trigger
+---
 
-Click supports a limited color vocabulary for `fg=...`. For example, `purple` is not a supported Click foreground color name, even though it is an intuitive color name.
+## Eigenscribe & Scriber Labs Palette Alignment
 
-Click accepts colors such as:
+The canonical semantic tokens map to the CLI color vocabulary as follows:
 
-- `black`
-- `red`
-- `green`
-- `yellow`
-- `blue`
-- `magenta`
-- `cyan`
-- `white`
-- bright variants such as `bright_magenta`
+| Token / Category | Hex / ANSI Truecolor | Semantic Meaning / Role | Click Fallback |
+| :--- | :--- | :--- | :--- |
+| **Primary Cyan / Electric Blue** | `#00e8ff` / `rgb(0, 232, 255)` | Interactive focal points, info, active state | `cyan` / `bright_cyan` |
+| **Secondary Violet / Purple** | `#9b7dff` / `rgb(155, 125, 255)` | Structural markers, network / topology | `bright_magenta` / `magenta` |
+| **Tertiary Neon Green** | `#22f792` / `rgb(34, 247, 146)` | Success metrics, verified invariants, math | `bright_green` / `green` |
+| **Quaternary Coral / Amber** | `#ff783d` / `rgb(255, 120, 61)` | Warnings, dynamic parameters, cautions | `bright_yellow` / `yellow` |
+| **Pernary Hot Pink / Red** | `#ff40a1` / `rgb(255, 64, 161)` | Errors, critical alerts, validation halts | `bright_red` / `red` |
 
-For now, use `magenta` or `bright_magenta` when a purple-like CLI message is needed.
+---
 
-## Future goal
+## Architectural Goal & Specification
 
-Create a small internal CLI style API so command code can use meaningful style names instead of raw Click colors or ANSI escape codes.
+Create a dedicated styling module (`src/kuramoto/cli/style.py`) providing a clean functional API:
 
-Example future usage:
 ```python
-cli_info("Parsing configuration...") 
-cli_success("Dataset saved.") 
-cli_warning("Lie symmetry tracking requires a rotor or Euler solver.") 
-cli_error("Missing configuration file.") 
-cli_purple("Visualizing network...")
+from kuramoto.cli.style import (
+    cli_info,
+    cli_success,
+    cli_warning,
+    cli_error,
+    cli_highlight,
+    cli_network,
+)
+
+cli_info("Initializing simulation network...")
+cli_network("Network topology loaded: Small-World (N=50, k=4).")
+cli_success("Integration complete across all 100 timesteps.")
+cli_warning("Nyquist limit triggered: effective omega capped.")
+cli_error("Validation error: Adjacency matrix must be symmetric.")
 ```
-or
+
+---
+
+## Implementation Reference (`src/kuramoto/cli/style.py`)
+
+A minimal, zero-dependency Click + ANSI truecolor implementation:
+
 ```python
-cli_message("Visualizing network...", style="purple")
-```
+"""
+src/kuramoto/cli/style.py — Semantic CLI output styling.
+"""
+from __future__ import annotations
 
+import click
 
-## Design principles
-
-- Keep command code readable.
-- Use semantic names where possible: `success`, `warning`, `error`, `info`, `accent`.
-- Allow personal attention-support colors like `purple`.
-- Avoid making the CLI noisy or inconsistent.
-- Keep the first implementation small.
-- Do not build a full standalone package until the need is clearly bigger than this project.
-
-## Possible implementation phases
-
-### Phase 1: Minimal Click wrapper
-
-Use Click’s built-in colors, mapping project style names to Click-supported names.
-```python
-python STYLE_COLORS = { 
-    "info": "blue", 
-    "success": "bright_green", 
-    "warning": "yellow", 
-    "error": "red", 
-    "accent": "bright_magenta", 
-    "purple": "bright_magenta",
+# Semantic Click color mappings
+STYLE_MAP = {
+    "info": "bright_cyan",
+    "network": "bright_magenta",
+    "success": "bright_green",
+    "warning": "bright_yellow",
+    "error": "bright_red",
+    "highlight": "bright_magenta",
 }
+
+def cli_message(msg: str, level: str = "info", bold: bool = False) -> None:
+    """Print a styled message using the semantic color palette."""
+    fg = STYLE_MAP.get(level, "bright_cyan")
+    click.secho(msg, fg=fg, bold=bold)
+
+def cli_info(msg: str) -> None:
+    """Print an informational prompt (Electric Cyan)."""
+    cli_message(f"ℹ️ {msg}", level="info")
+
+def cli_network(msg: str) -> None:
+    """Print a topology or structural update (Secondary Violet)."""
+    cli_message(f"🌐 {msg}", level="network", bold=True)
+
+def cli_success(msg: str) -> None:
+    """Print a success confirmation (Tertiary Green)."""
+    cli_message(f"✅ {msg}", level="success", bold=True)
+
+def cli_warning(msg: str) -> None:
+    """Print a warning notification (Quaternary Amber)."""
+    cli_message(f"⚠️ {msg}", level="warning")
+
+def cli_error(msg: str) -> None:
+    """Print an error alert (Pernary Red/Magenta)."""
+    cli_message(f"❌ {msg}", level="error", bold=True)
 ```
 
+---
 
-### Phase 2: ANSI truecolor support
+## Migration Plan
 
-Support RGB colors manually for terminals that support 24-bit color.
+When implementing CLI commands or updating existing subcommands (`kuramoto/cli/`):
+1. Replace direct `click.secho(..., fg="green")` calls with `cli_success(...)`.
+2. Replace direct `click.secho(..., fg="yellow")` calls with `cli_warning(...)`.
+3. Replace direct `click.secho(..., fg="red")` calls with `cli_error(...)`.
+4. Replace direct `click.secho(..., fg="blue")` or `fg="cyan"` calls with `cli_info(...)`.
+5. Use `cli_network(...)` for graph / topology generation commands (`kuramoto network`, `kuramoto generate`).
 
-Example purple:
-```python
-"\033[38;2;128;0;255mmessage\033[0m"
-```
-
-Potential API:
-```python
-python cli_rgb("Visualizing network...", 128, 0, 255)
-```
-
-
-### Phase 3: Rich integration
-
-Consider adding `rich` if the project needs better terminal UI features:
-
-- custom named styles
-- hex colors
-- styled tables
-- panels
-- progress bars
-- improved tracebacks
-
-Example:
-```python
-from rich.console import Console
-console = Console() console.print("Visualizing network...", style="#8000ff")
-```
-
-## Potential file locations
-
-Possible implementation file:
-```text
-src/kuramoto/cli/style.py
-```
-
-or, if kept very small:
-```python
-text src/kuramoto/cli/utils.py
-```
-
-Preferrred long-term location
-```text
-text
-text src/kuramoto/cli/style.py
-```
-
-## Related cleanup opportunity
-If a styling helper is added, migrate existing direct calls like:
-```python
-click.secho(..., fg="green") click.secho(..., fg="blue") click.secho(..., fg="yellow") click.secho(..., fg="bright_green")
-```
-to semantic wrappers.
-
-Example:
-```python
-cli_success(...) 
-cli_info(...) 
-cli_warning(...)
-```
+---
 
 ## Status
 
-Parked for later. Do not pursue during unrelated debugging unless CLI output styling is the actual task.
+**Ready for implementation.** The specification is aligned with `.agent-workspace/.junie/AGENTS.md` and ready for integration into `src/kuramoto/cli/style.py`.

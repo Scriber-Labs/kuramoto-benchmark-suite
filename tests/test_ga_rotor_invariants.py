@@ -1,4 +1,7 @@
 import numpy as np
+import pytest
+
+pytest.importorskip("clifford")
 
 from kuramoto.order_parameter import compute_order_parameter
 from kuramoto.solvers.rotor import RotorSolver
@@ -66,3 +69,96 @@ def test_rotor_norm_preservation():
     # Final norms
     for r in solver.rotors:
         assert np.isclose(abs(r), 1.0, atol=1e-12)
+
+
+def test_rotor_constructor_initial_conditions():
+    """Verify direct injection of natural frequencies and initial phases in RotorSolver."""
+    N = 4
+    omegas = np.array([0.5, -0.2, 1.0, -1.0])
+    phases = np.array([0.0, np.pi / 4, np.pi / 2, np.pi])
+
+    solver = RotorSolver(
+        n_oscillators=N,
+        natural_frequencies=omegas,
+        initial_phases=phases,
+    )
+
+    assert np.allclose(solver.omegas, omegas)
+    extracted = solver.extract_phases()
+    assert np.allclose(extracted, phases, atol=1e-12)
+
+
+def test_rotor_nyquist_safe_adaptation_no_frequency_mutation():
+    """Verify that enforce_nyquist adapts time step without mutating self.omegas."""
+    import warnings
+
+    N = 3
+    large_omegas = np.array([50.0, 0.0, -50.0])
+    solver = RotorSolver(n_oscillators=N, natural_frequencies=large_omegas)
+
+    with warnings.catch_warnings(record=True) as recorded_warnings:
+        warnings.simplefilter("always")
+        solver.simulate(
+            K=1.0,
+            t_eval=np.linspace(0, 0.1, 5),
+            dt_internal=0.05,
+            enforce_nyquist=True,
+        )
+        assert any(
+            "Temporal resolution warning" in str(w.message) for w in recorded_warnings
+        )
+
+    # Natural frequencies must remain unaltered
+    assert np.allclose(solver.omegas, large_omegas)
+
+
+def test_rotor_rkmk4_order_and_invariants():
+    """Verify 4th-order Lie-group RKMK4 solver convergence and norm preservation."""
+    N = 2
+    omegas = np.array([0.0, 0.0])
+    init_phases = np.array([0.0, np.pi / 3.0])
+    K = 1.0
+
+    solver_rkmk = RotorSolver(
+        n_oscillators=N,
+        natural_frequencies=omegas,
+        initial_phases=init_phases,
+    )
+
+    t_eval = np.linspace(0, 0.5, 6)
+    _, phases_rkmk = solver_rkmk.simulate(
+        K=K,
+        t_eval=t_eval,
+        dt_internal=0.01,
+        method="rkmk4",
+    )
+
+    # Exact 2-node ODE analytical solution: tan(Delta theta(t) / 2) = tan(Delta_0 / 2) * exp(-K * t)
+    delta_0 = np.pi / 3.0
+    exact_delta = 2.0 * np.arctan(np.tan(delta_0 / 2.0) * np.exp(-K * t_eval))
+    simulated_delta = phases_rkmk[:, 1] - phases_rkmk[:, 0]
+
+    assert np.allclose(simulated_delta, exact_delta, atol=1e-5)
+
+    # Check rotor norm preservation in RKMK4
+    for r in solver_rkmk.rotors:
+        assert np.isclose(abs(r), 1.0, atol=1e-12)
+
+
+def test_kuramoto_model_with_rkmk4():
+    """Verify KuramotoModel works seamlessly with solver_type='rkmk4'."""
+    from kuramoto.model import KuramotoModel
+
+    model = KuramotoModel(
+        n_oscillators=4,
+        coupling_strength=1.5,
+        random_seed=42,
+        solver_type="rkmk4",
+    )
+
+    dataset = model.simulate(t_span=1.0, n_points=20)
+    assert dataset.theta.shape == (20, 4)
+    assert np.all(np.isfinite(dataset.theta))
+    r = compute_order_parameter(dataset.theta)
+    assert np.all(r >= 0.0)
+    assert np.all(r <= 1.0 + 1e-6)
