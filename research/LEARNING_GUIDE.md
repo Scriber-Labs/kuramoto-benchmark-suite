@@ -1,6 +1,8 @@
 # 📘 Kuramoto Research & Learning Guide
 *A Portfolio of Geometric Mechanics, Synchronization, and Quantum Bridges*
 
+> ⚠️ **AI-GENERATED CONTENT NOTICE:** This learning guide was drafted with the assistance of an AI (Junie). It is intended as an educational resource and theoretical overview of the `kuramoto-benchmark-suite`.
+
 ## Overview
 This guide serves as the theoretical backbone of the `kuramoto-benchmark-suite`. It bridges first-principles physics (Fluid Dynamics, Lie Algebras) with modern computational tools (Geometric Algebra, Quantum Circuits).
 
@@ -40,12 +42,25 @@ By mapping the bivector torque $\Omega(x,y)$ to a vector field, we can use **str
 ## 3. The Quantum Bridge: SCF Mapping
 ### 3.1 Self-Consistent Field (SCF)
 The non-linear interaction $K \sum \sin(\theta_j - \theta_i)$ is difficult to map directly to a quantum circuit because it requires $O(N^2)$ gates. 
-However, by using the **SCF approximation**, we treat each oscillator as moving in a time-dependent mean field $v_{\text{mean}}(t)$.
+However, by using the **SCF approximation**, we treat each oscillator as moving in a time-dependent mean field $v_{\text{mean}}(t)$. In our classical source code, this is implemented as the `fast` method in the `RotorSolver`, which scales linearly with the number of oscillators.
 
 ### 3.2 $O(1)$ Circuit Depth
 If $v_{\text{mean}}(t)$ is known or approximated classically, the update for all $N$ oscillators can be performed in **parallel** using single-qubit rotation gates $R_z(\phi_i)$:
 $$\phi_i = (\omega_i + K R \sin(\psi - \theta_i)) \Delta t$$
 This result is profound: **A fully coupled Kuramoto system can be simulated on quantum hardware with constant circuit depth.**
+
+---
+
+## 4. Numerical Analysis for Nonlinear Systems
+### 4.1 Stability
+Numerical stability refers to the property that errors do not grow exponentially over time. For the Kuramoto model, the step size $\Delta t$ must be small enough to resolve the fastest oscillations (the high-frequency natural frequencies $\omega_i$) and the strongest coupling $K$.
+A rule of thumb for Euler-like methods is $\Delta t < 2 / (K + \max|\omega_i|)$.
+
+### 4.2 Consistency
+A method is **consistent** if the local truncation error goes to zero as $\Delta t \to 0$. The `RotorSolver`'s geometric update is first-order consistent in time, but zeroth-order consistent with the unit-norm constraint (meaning it preserves the constraint exactly, which is a significant advantage over phase-based methods that might suffer from numerical drift if converted to vectors).
+
+### 4.3 Convergence (Lax Equivalence Theorem)
+For linear problems, the Lax Equivalence Theorem states that **Consistency + Stability = Convergence**. For nonlinear systems like Kuramoto, convergence is generally guaranteed if the vector field is Lipschitz continuous and the method is stable and consistent. Our benchmarks against RK45 confirm that the GA rotor solver converges to the physical ground truth.
 
 ---
 

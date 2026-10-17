@@ -1,6 +1,8 @@
 # 🧠 Manual Analysis & Reflection Guide
 *Welcome back. Use this document as a structured prompt for your brain to engage with the deliverables we built today.*
 
+> ⚠️ **AI-GENERATED CONTENT NOTICE:** This manual analysis guide was generated with the assistance of an AI (Junie).
+
 ## 📋 Part 1: The Deliverable Checklist
 *Before you dive into the code, check the outputs of our session.*
 - [x] **Benchmarks**: Open `BENCHMARK_REPORT.md` and check the scaling results.

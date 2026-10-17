@@ -1,6 +1,8 @@
 # ✍️ Practice Problems: Geometric synchronization & GA
 *Mastering the foundations of the Kuramoto Benchmark Suite*
 
+> ⚠️ **AI-GENERATED CONTENT NOTICE:** This practice problem set was generated with the assistance of an AI (Junie).
+
 ## Problem 1: The 2D Rotor Sandwich
 **Goal:** Apply a rotor to a vector $\mathbf{v}$.
 

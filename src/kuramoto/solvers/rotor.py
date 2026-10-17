@@ -149,9 +149,12 @@ class RotorSolver:
         if adjacency_matrix is None:
             A = np.ones((self.N, self.N), dtype=np.float64)
             np.fill_diagonal(A, 0.0)
+            self._is_complete = True
         else:
             validate_adjacency(adjacency_matrix, self.N)
             A = np.asarray(adjacency_matrix, dtype=np.float64)
+            # Pre-calculate if complete graph to allow O(N) Mean-Field optimizations
+            self._is_complete = bool(np.allclose(A, np.ones((self.N, self.N)) - np.eye(self.N)))
         self.A: AdjacencyMatrix = A
 
         # Rotation plane: for 2D this is e12, for 3D typically xy-plane
@@ -365,8 +368,16 @@ class RotorSolver:
         x = a**2 - b**2
         y = -2.0 * a * b
         V = np.column_stack((x, y))
-        V_mean = (self.A @ V) / self.N
-        torque = V_mean[:, 0] * y - V_mean[:, 1] * x
+
+        if self._is_complete:
+            # O(N) Self-Consistent Field (SCF) optimization
+            v_sum = np.sum(V, axis=0)
+            v_mean = (v_sum - V) / self.N
+        else:
+            # O(N^2) or O(E) general graph coupling
+            v_mean = (self.A @ V) / self.N
+
+        torque = v_mean[:, 0] * y - v_mean[:, 1] * x
         return self.omegas - K * torque
 
     def _apply_bivector_step_2d(
@@ -399,10 +410,17 @@ class RotorSolver:
         z = -2.0 * a * b13 - 2.0 * b12 * b23
 
         V = np.column_stack((x, y, z))
-        V_mean = (self.A @ V) / self.N
-        x_m = V_mean[:, 0]
-        y_m = V_mean[:, 1]
-        z_m = V_mean[:, 2]
+
+        if self._is_complete:
+            # O(N) Self-Consistent Field (SCF) optimization
+            v_sum = np.sum(V, axis=0)
+            v_mean = (v_sum - V) / self.N
+        else:
+            v_mean = (self.A @ V) / self.N
+
+        x_m = v_mean[:, 0]
+        y_m = v_mean[:, 1]
+        z_m = v_mean[:, 2]
 
         t12 = K * (x_m * y - y_m * x)
         t13 = K * (x_m * z - z_m * x)
@@ -773,21 +791,18 @@ class RotorSolver:
                 dt = min(dt_internal, t_out - current_time)
                 if method_norm in ("rkmk4", "rkmk", "rk4", "geometric_rk4"):
                     self.step_rkmk4(K, dt)
-                    current_phases = self.extract_phases()
                 elif method_norm in ("midpoint", "midpoint_geometric", "euler_midpoint"):
                     self.step_midpoint_geometric(K, dt)
-                    current_phases = self.extract_phases()
                 elif method_norm in ("vectorized_geometric", "geometric", "euler_geometric", "rotor_geometric"):
                     self.step_euler_vectorized_geometric(K, dt)
-                    current_phases = self.extract_phases()
                 elif method_norm in ("standard", "euler", "euler_standard"):
                     self.step_euler(K, dt)
-                    current_phases = self.extract_phases()
                 else:
                     self.step_euler_fast(K, dt)
-                    current_phases = self.extract_phases()
                 current_time += dt
 
+            # Extract phases once per output point for performance
+            current_phases = self.extract_phases()
             times.append(float(t_out))
             all_phases.append(current_phases.copy())
 

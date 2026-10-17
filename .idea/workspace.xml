@@ -7,21 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refactored rotor simulation with SCF linearization; updated notebook timestamps.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)">
+      <change beforePath="$PROJECT_DIR$/.idea/agent-workspace-boilerplate.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/AUDIT/audit-summary.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/examples/architecture.mmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/benchmark/rigorous_results.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/benchmark/rigorous_results.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/architecture.mmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/benchmarks/scaling_performance.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/benchmarks/scaling_performance.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/LEARNING_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/LEARNING_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/RESEARCH_PREPRINT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="139" />
+    <option name="cachedIndexableFilesCount" value="145" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -64,61 +62,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.4946782494581572" />
-      <entry key="MS500" value="3.3308014183276806" />
-      <entry key="S2" value="4.468509692886025" />
-      <entry key="S5" value="4.775953730524133" />
-      <entry key="S10" value="4.885964709410882" />
-      <entry key="S30" value="4.962674826240849" />
-      <entry key="S60" value="5.252693625007489" />
-      <entry key="M2" value="9.192277510123759" />
-      <entry key="M5" value="26.72613390891384" />
-      <entry key="M10" value="42.58658112536829" />
-      <entry key="M15" value="50.33334824117238" />
-      <entry key="M30" value="74.64917881163078" />
-      <entry key="H1" value="285.73321316356146" />
-      <entry key="H2" value="1165.5154527694476" />
-      <entry key="H4" value="2955.6495751092625" />
-      <entry key="D1" value="10867.001626889496" />
-      <entry key="W1" value="17201.832854634362" />
+      <entry key="MS100" value="1.7083441401666457" />
+      <entry key="MS500" value="3.9999540767866817" />
+      <entry key="S2" value="7.0791697054018865" />
+      <entry key="S5" value="11.4597965006359" />
+      <entry key="S10" value="16.52073163023632" />
+      <entry key="S30" value="26.257663789889133" />
+      <entry key="S60" value="32.80170009680735" />
+      <entry key="M2" value="45.18386747902758" />
+      <entry key="M5" value="80.55246706742528" />
+      <entry key="M10" value="151.89442180049696" />
+      <entry key="M15" value="245.90860637234474" />
+      <entry key="M30" value="624.1414378410296" />
+      <entry key="H1" value="1472.478538911492" />
+      <entry key="H2" value="2842.7091981669096" />
+      <entry key="H4" value="4621.085321490979" />
+      <entry key="D1" value="11590.170888305302" />
+      <entry key="W1" value="17184.960804015132" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="6.289754499083269E-292" />
-      <entry key="S2" value="1.5836471502536064E-73" />
-      <entry key="S5" value="7.583389614207696E-30" />
-      <entry key="S10" value="2.7537954924445095E-15" />
-      <entry key="S30" value="1.4016639216954058E-5" />
-      <entry key="S60" value="0.003743880235391355" />
-      <entry key="M2" value="0.061187255498112915" />
-      <entry key="M5" value="0.32708783295055566" />
-      <entry key="M10" value="0.5719167410336653" />
-      <entry key="M15" value="0.6891318565405559" />
-      <entry key="M30" value="0.8620482808675075" />
-      <entry key="H1" value="1.6836438193426566" />
-      <entry key="H2" value="5.710521566992082" />
-      <entry key="H4" value="15.09390069105319" />
-      <entry key="D1" value="72.53629087836923" />
-      <entry key="W1" value="120.12560143797153" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="3.0685822980130617E-298" />
+      <entry key="S5" value="9.88041326671742E-120" />
+      <entry key="S10" value="3.143312467241719E-60" />
+      <entry key="S30" value="1.4648590944544526E-20" />
+      <entry key="S60" value="1.210314378655881E-10" />
+      <entry key="M2" value="1.101351545578487E-5" />
+      <entry key="M5" value="0.011419196631446683" />
+      <entry key="M10" value="0.14924453229095178" />
+      <entry key="M15" value="0.4156702372615645" />
+      <entry key="M30" value="1.8206158750833958" />
+      <entry key="H1" value="5.828617982629791" />
+      <entry key="H2" value="13.06346544362087" />
+      <entry key="H4" value="23.396302287094368" />
+      <entry key="D1" value="77.82476908006922" />
+      <entry key="W1" value="120.56773825106266" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.4523340037367134" />
-      <entry key="MS500" value="3.308108681913549" />
-      <entry key="S2" value="4.460351084601673" />
-      <entry key="S5" value="4.772413842535168" />
-      <entry key="S10" value="4.884144983367095" />
-      <entry key="S30" value="4.962069454251175" />
-      <entry key="S60" value="5.255942027590264" />
-      <entry key="M2" value="9.251794597247688" />
-      <entry key="M5" value="27.049916287344214" />
-      <entry key="M10" value="43.15562953145683" />
-      <entry key="M15" value="51.02017340638174" />
-      <entry key="M30" value="75.50966248669386" />
-      <entry key="H1" value="287.4145596912772" />
-      <entry key="H2" value="1171.2177957172994" />
-      <entry key="H4" value="2970.7244628165004" />
-      <entry key="D1" value="10939.513097880648" />
-      <entry key="W1" value="17321.952076392998" />
+      <entry key="MS100" value="1.6599769989669615" />
+      <entry key="MS500" value="3.955489128118539" />
+      <entry key="S2" value="7.060662805050684" />
+      <entry key="S5" value="11.449784709418806" />
+      <entry key="S10" value="16.513266298819335" />
+      <entry key="S30" value="26.252369091970802" />
+      <entry key="S60" value="32.798069015855454" />
+      <entry key="M2" value="45.18144834100003" />
+      <entry key="M5" value="80.56213491553764" />
+      <entry key="M10" value="152.04109189541" />
+      <entry key="M15" value="246.32083739394935" />
+      <entry key="M30" value="625.9568086302586" />
+      <entry key="H1" value="1478.2974062590094" />
+      <entry key="H2" value="2855.7520873840795" />
+      <entry key="H4" value="4644.450819378634" />
+      <entry key="D1" value="11667.968752522938" />
+      <entry key="W1" value="17305.522098564987" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -129,70 +127,70 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\FUTURE_WORK\QUANTUM_ROTOR_RK45_VIA_SCF_METHODS" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/examples/notebooks" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\examples\notebooks" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src" />
@@ -695,13 +693,13 @@
       <option name="project" value="LOCAL" />
       <updated>1791900296235</updated>
     </task>
-    <task id="LOCAL-00044" summary="Refactored rotor simulation with SCF linearization; updated notebook timestamps.">
+    <task id="LOCAL-00044" summary="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)">
       <option name="closed" value="true" />
-      <created>1792236717680</created>
+      <created>1792229914927</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1792236717680</updated>
+      <updated>1792229914928</updated>
     </task>
     <option name="localTasksCounter" value="45" />
     <servers />
@@ -734,7 +732,7 @@
     <MESSAGE value="added a plan of action markdown for viz.py splitting in future work folder" />
     <MESSAGE value="demo notbook added" />
     <MESSAGE value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
-    <MESSAGE value="Refactored rotor simulation with SCF linearization; updated notebook timestamps." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored rotor simulation with SCF linearization; updated notebook timestamps." />
+    <MESSAGE value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
+    <option name="LAST_COMMIT_MESSAGE" value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
   </component>
 </project>
