@@ -1,93 +1,102 @@
-%%{ init: {
-    "theme": "base",
-    "themeVariables": {
-        "background": "#0D1117",
-        "primaryColor": "#14B5FF",
-        "primaryTextColor": "#F0F6FC",
-        "primaryBorderColor": "#14B5FF",
-        "lineColor": "#14B5FF",
-        "secondaryColor": "#0070EB",
-        "tertiaryColor": "#0D1117",
-        "fontFamily": "'Aclonica', sans-serif",
-        "fontSize": "16px",
-        "clusterBkg": "rgba(255, 255, 255, 0.03)",
-        "clusterBorder": "#30363D",
-        "edgeLabelBackground":"#0D1117",
-        "nodeSpacing": 48,
-        "rankSpacing": 80,
-        "borderRadius": "10"
-    },
-    "themeCSS": "
-        .node rect, .node circle, .node ellipse, .node polygon, .node path: {
-            "fill-opacity": 0.9;
-            "stroke-width": 2px;1
-        }
-        .cluster rect {
-            "rx": 16;
-            "ry": 16;
-        }
-        .nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * {
-            color: #F0F6FC !important;
-            fill: #F0F6FC !important;
-            -webkit-text-fill-color: #F0F6FC !important;
-        }
-    ",
-    "flowchart": {
-        "curve": "basis",
-        "useMaxWidth": true,
-        "htmlLabels": true
-    },
-    "handDrawn": false
-    }
-}%%
-
-
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    background: "#0D1117"
+    primaryColor: "#14B5FF"
+    primaryTextColor: "#F0F6FC"
+    primaryBorderColor: "#14B5FF"
+    lineColor: "#14B5FF"
+    secondaryColor: "#0070EB"
+    tertiaryColor: "#0D1117"
+    fontFamily: "'Aclonica', sans-serif"
+    fontSize: "16px"
+    clusterBkg: "rgba(255, 255, 255, 0.03)"
+    clusterBorder: "#30363D"
+    edgeLabelBackground: "#0D1117"
+    nodeSpacing: 48
+    rankSpacing: 80
+    borderRadius: "10"
+  flowchart:
+    curve: basis
+    useMaxWidth: true
+    htmlLabels: true
+  themeCSS: |
+    .node rect, .node circle, .node ellipse, .node polygon, .node path { fill-opacity: 0.9; stroke-width: 2px; }
+    .cluster rect { rx: 16; ry: 16; }
+    .nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; -webkit-text-fill-color: #F0F6FC !important; }
+---
 flowchart TD
 
 subgraph Client_API["Client & High-Level API"]
-    CLI["kuramoto CLI"]
+    CLI["kuramoto CLI<br/>(generate, time, network, etc.)"]
     Notebooks["Jupyter Notebooks (demo, benchmark)"]
     API_Gen["generate_kuramoto_dataset()"]
+    Direct_Rotor["RotorSolver Direct API<br/>(simulate, step_*, observables)"]
 end
 
 subgraph Model_Orchestration["KuramotoModel & Problem Specification"]
-    Config["SimulationConfig<br/>(N, K, topology, dt, seed, initial_phases)"]
+    Config["SimulationConfig & Solver Options<br/>(N, K, topology, dt, seed, initial_phases, solver_type)"]
     Topology["TopologyGraph (Adjacency Matrix A_ij & Degree k_i)"]
+    Temporal_Ctrl["Temporal Resolution Controller<br/>- Nyquist Criterion: dt <= 1 / (2 * max_rate)<br/>- Max Phase Increment Guard: dt <= max_Δθ / max_rate"]
 end
 
 subgraph Physics_Law["Dynamical Physics Law"]
-      KuramotoPhysics["KuramotoDynamics<br/>- Phase RHS: dθ/dt = ω + (K/k_i) ∑ A_ij sin(θ_j - θ_i)<br/>- Bivector Torque: Ω_i = ω_i B - K (v_mean,i ∧ v_i)"]
+    KuramotoPhysics["Kuramoto Dynamics & Bivector Generators<br/>- Phase RHS: dθ_i/dt = ω_i + (K/N) ∑ A_ij sin(θ_j - θ_i)<br/>- 2D Bivector Torque: Ω_i = ω_i e12 - K (v_mean,i ∧ v_i)<br/>- 3D Spin(3) Lohe Torque: Ω_i = Ω_nat,i - K (v_mean,i ∧ v_i)<br/>- Rotor Derivative: dR_i/dt = -1/2 Ω_i R_i"]
 end
 
-subgraph State_Representations["State Representations"]
+subgraph State_Representations["State Representations & Manifold Embeddings"]
     PhaseState["PhaseState (θ ∈ R^N)<br/>Canonical phase angles"]
-    RotorState["RotorState (R ∈ Spin(n)^N)<br/>Even-subalgebra rotor array"]
+    RotorState["Clifford Rotor Objects (R ∈ Spin(n)^N)<br/>List of Clifford Cl(dim) multivectors: R_i = exp(-B θ_i / 2)"]
+    RotorArray["Contiguous Array Buffer (_rotor_array)<br/>- 2D Cl(2): [scalar, e12] components<br/>- 3D Cl(3): [scalar, e12, e13, e23] components<br/>- Fast SIMD/NumPy vectorized operations"]
+    Sync["Bidirectional State Sync<br/>_sync_array_from_rotors() ⟷ _sync_rotors_from_array()"]
 end
 
-subgraph Integrator_Ecosystem["Numerical Integrators (Decoupled & Stateless)"]
-    RK45_Int["Adaptive RK45 Integrator<br/>(Dormand-Prince 5(4) with error control)"]
-    Lie_RKMK["Geometric Lie-Group Integrator<br/>(4th-Order Runge-Kutta-Munthe-Kaas / RKMK4)"]
-    Vec_Euler["Vectorized GA Euler Integrator<br/>(Direct Spin(n) array algebra)"]
+subgraph Integrator_Ecosystem["Numerical Integrators Ecosystem (Decoupled & Stateless)"]
+    RK45_Int["Adaptive Phase RK45 Integrator<br/>(Dormand-Prince 5(4) with error control)"]
+    Lie_RKMK["4th-Order Lie-Group Integrator (RKMK4)<br/>step_rkmk4: Spin(n) manifold O(dt^4) Lie evolution"]
+    Midpoint_Geom["2nd-Order Geometric Midpoint<br/>step_midpoint_geometric: 2-stage Spin(n) update"]
+    Vec_Euler["Vectorized GA Euler Integrator<br/>step_euler_vectorized_geometric: pure array bivector torque"]
+    Geom_Euler["Clifford Multivector Euler Integrator<br/>step_euler_geometric: object-level bivector torque"]
+    Fast_Euler["Fast Mean-Field Euler Integrator<br/>step_euler_fast: O(N) all-to-all complex order parameter"]
+    Std_Euler["Standard Pairwise Euler Integrator<br/>step_euler: phase-space pairwise difference update"]
+    Adaptive_Future["Future Adaptive Rotor Stepper<br/>step_rk45_adaptive: reserved extension point"]
 end
 
-subgraph Diagnostics_Layer["Observables & Diagnostics"]
-    Obs_OP["compute_order_parameter()"]
-    Obs_Lie["track_lie_symmetries() (U(1) Invariants & Noether Energy)"]
+subgraph Diagnostics_Layer["Observables & Diagnostics Layer"]
+    Obs_Phase["Phase Extraction Engine<br/>extract_phases(): θ = 2 atan2(-b, a) mod 2π"]
+    Obs_OP["Order Parameter Engine<br/>- get_complex_order_parameter(): ⟨exp(iθ)⟩<br/>- get_order_parameter_vector(): ⟨v_i⟩ on S^(dim-1)<br/>- get_synchronization_strength(): ||r|| or ||⟨v⟩||"]
+    Obs_Lie["Lie Symmetry & Invariant Diagnostics<br/>- track_lie_symmetries() (U(1) Phase Shift Invariance)<br/>- Noether Energy Conservation Tracker"]
     Dataset_Out["KuramotoDataset (Immutable Output)"]
 end
 
 Client_API --> Config
+Direct_Rotor --> Temporal_Ctrl
 Config --> Model_Orchestration
 Topology --> Physics_Law
+Temporal_Ctrl --> Integrator_Ecosystem
 
-Model_Orchestration -->|"Instantiates with explicit initial_phases"| State_Representations
+Model_Orchestration -->|"Instantiates initial state"| State_Representations
+
+RotorState <--> Sync
+Sync <--> RotorArray
 
 PhaseState --> RK45_Int
-RotorState --> Lie_RKMK
-RotorState --> Vec_Euler
+PhaseState --> Std_Euler
+PhaseState --> Fast_Euler
+RotorArray --> Lie_RKMK
+RotorArray --> Midpoint_Geom
+RotorArray --> Vec_Euler
+RotorState --> Geom_Euler
+RotorState --> Adaptive_Future
 
 Physics_Law --> Integrator_Ecosystem
-Integrator_Ecosystem -->|"Stateless Step Updates (No State Mutation)"| State_Representations
+Integrator_Ecosystem -->|"Advances state via exponential map / updates"| State_Representations
 
 State_Representations --> Diagnostics_Layer
+RotorArray --> Obs_Phase
+RotorState --> Obs_OP
+PhaseState --> Obs_OP
+Diagnostics_Layer --> Obs_Lie
 Diagnostics_Layer --> Dataset_Out
