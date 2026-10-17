@@ -7,13 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="added boilerplate repo as a submodule">
-      <change beforePath="$PROJECT_DIR$/agent-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/agent-workspace" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent-workspace/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/agent-workspace/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/styling_and_visuals_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="141" />
+    <option name="cachedIndexableFilesCount" value="139" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -56,61 +52,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0029346573202054" />
-      <entry key="MS500" value="1.6064319689870774" />
-      <entry key="S2" value="4.054223211906303" />
-      <entry key="S5" value="9.4324840385733" />
-      <entry key="S10" value="17.457138113392784" />
-      <entry key="S30" value="29.98917976507224" />
-      <entry key="S60" value="37.5166724065634" />
-      <entry key="M2" value="47.800967024915074" />
-      <entry key="M5" value="77.79623225512886" />
-      <entry key="M10" value="162.10502633822398" />
-      <entry key="M15" value="271.2710312889396" />
-      <entry key="M30" value="685.0402543938933" />
-      <entry key="H1" value="1558.8626884552423" />
-      <entry key="H2" value="2922.246899792732" />
-      <entry key="H4" value="4670.447597896756" />
-      <entry key="D1" value="11565.233071522045" />
-      <entry key="W1" value="17118.19794101126" />
+      <entry key="MS100" value="1.0103803579231927" />
+      <entry key="MS500" value="1.4046404976936202" />
+      <entry key="S2" value="2.039904765030983" />
+      <entry key="S5" value="2.4815734779400973" />
+      <entry key="S10" value="2.7095949109527715" />
+      <entry key="S30" value="3.077382315719183" />
+      <entry key="S60" value="6.029411133590354" />
+      <entry key="M2" value="17.194458800921154" />
+      <entry key="M5" value="51.86703189454302" />
+      <entry key="M10" value="123.53721202730831" />
+      <entry key="M15" value="218.29970172217898" />
+      <entry key="M30" value="598.6205263385108" />
+      <entry key="H1" value="1448.633140565535" />
+      <entry key="H2" value="2818.55828938435" />
+      <entry key="H4" value="4595.10519900891" />
+      <entry key="D1" value="11559.529560302793" />
+      <entry key="W1" value="17151.67253485164" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.4513906505194866E-212" />
-      <entry key="S5" value="2.880038435838578E-85" />
-      <entry key="S10" value="5.366598956358235E-43" />
-      <entry key="S30" value="8.126428413219652E-15" />
-      <entry key="S60" value="9.014676035721896E-8" />
-      <entry key="M2" value="3.0057436007435023E-4" />
-      <entry key="M5" value="0.04285938525418563" />
-      <entry key="M10" value="0.2891369679341363" />
-      <entry key="M15" value="0.6459799791109623" />
-      <entry key="M30" value="2.2696212533937214" />
-      <entry key="H1" value="6.507783913457504" />
-      <entry key="H2" value="13.803593676156979" />
-      <entry key="H4" value="24.049946077994587" />
-      <entry key="D1" value="78.18299825070156" />
-      <entry key="W1" value="120.64686458227666" />
+      <entry key="S2" value="8.555972241990217E-293" />
+      <entry key="S5" value="1.4890447398743613E-117" />
+      <entry key="S10" value="3.8588142477635956E-59" />
+      <entry key="S30" value="3.3792316005238775E-20" />
+      <entry key="S60" value="1.8382697719748925E-10" />
+      <entry key="M2" value="1.3573176362737525E-5" />
+      <entry key="M5" value="0.012414743810161038" />
+      <entry key="M10" value="0.15561431115710506" />
+      <entry key="M15" value="0.42741490817086397" />
+      <entry key="M30" value="1.846157265287503" />
+      <entry key="H1" value="5.869360379668738" />
+      <entry key="H2" value="13.109043146759682" />
+      <entry key="H4" value="23.437080947056874" />
+      <entry key="D1" value="77.84736016768511" />
+      <entry key="W1" value="120.57273742618557" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9621176998277118" />
-      <entry key="MS500" value="1.594249882678476" />
-      <entry key="S2" value="4.04657621178731" />
-      <entry key="S5" value="9.424353617052647" />
-      <entry key="S10" value="17.44910157869937" />
-      <entry key="S30" value="29.9844133336853" />
-      <entry key="S60" value="37.51367266434008" />
-      <entry key="M2" value="47.799344523649474" />
-      <entry key="M5" value="77.83705699904807" />
-      <entry key="M10" value="162.39046587168923" />
-      <entry key="M15" value="271.91237912814984" />
-      <entry key="M30" value="687.3036320940417" />
-      <entry key="H1" value="1565.3597197903025" />
-      <entry key="H2" value="2936.0288154737204" />
-      <entry key="H4" value="4694.465910216467" />
-      <entry key="D1" value="11643.389046173115" />
-      <entry key="W1" value="17238.83835839047" />
+      <entry key="MS100" value="0.9690845363139737" />
+      <entry key="MS500" value="1.3914188369775524" />
+      <entry key="S2" value="2.026249495227841" />
+      <entry key="S5" value="2.4708882379227464" />
+      <entry key="S10" value="2.7027649213498197" />
+      <entry key="S30" value="3.0746623112859885" />
+      <entry key="S60" value="6.027794037163359" />
+      <entry key="M2" value="17.19326485323505" />
+      <entry key="M5" value="51.87822394215467" />
+      <entry key="M10" value="123.69047746889497" />
+      <entry key="M15" value="218.72380273638657" />
+      <entry key="M30" value="600.4614756221772" />
+      <entry key="H1" value="1454.4927373573626" />
+      <entry key="H2" value="2831.646712083179" />
+      <entry key="H4" value="4618.51143564119" />
+      <entry key="D1" value="11637.350010092754" />
+      <entry key="W1" value="17272.238828637215" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -169,7 +165,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -679,13 +675,13 @@
       <option name="project" value="LOCAL" />
       <updated>1791899463176</updated>
     </task>
-    <task id="LOCAL-00043" summary="added boilerplate repo as a submodule">
+    <task id="LOCAL-00043" summary="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18">
       <option name="closed" value="true" />
-      <created>1791937965947</created>
+      <created>1791900296235</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1791937965947</updated>
+      <updated>1791900296235</updated>
     </task>
     <option name="localTasksCounter" value="44" />
     <servers />
@@ -718,7 +714,7 @@
     <MESSAGE value="updated house rules and did some repo cleaning" />
     <MESSAGE value="added a plan of action markdown for viz.py splitting in future work folder" />
     <MESSAGE value="demo notbook added" />
-    <MESSAGE value="added boilerplate repo as a submodule" />
-    <option name="LAST_COMMIT_MESSAGE" value="added boilerplate repo as a submodule" />
+    <MESSAGE value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
   </component>
 </project>
