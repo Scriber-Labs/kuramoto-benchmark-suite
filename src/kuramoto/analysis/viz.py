@@ -106,7 +106,7 @@ SCRIBER_PALETTE: Final[Dict[str, str]] = {
 
 # Solver Color Tokens
 SOLVER_COLORS: Final[Dict[str, str]] = {
-    "rk45": PROJECT_COLORS["cyan_light"],
+    "rk45": PROJECT_COLORS["orange_warm"],
     "euler": PROJECT_COLORS["purple_light"],
     "rotor": PROJECT_COLORS["cyan_blue"],
     "euler_fast": PROJECT_COLORS["indigo"],
