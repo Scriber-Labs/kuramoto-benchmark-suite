@@ -107,12 +107,13 @@ def compute_comprehensive_diagnostics(
         cos_matrix = (s_t @ s_t.T) + (b_t @ b_t.T)
 
         # Non-uniform matrix potential masking
-        potential_energy[t] = -(K / N) * np.sum(A * cos_matrix) / N
+        potential_energy[t] = -(K / N) * np.sum(A * cos_matrix)
         # Phase-space volume contraction rate tracking diagonal elements of system Jacobian
         lambda_trajectory[t] = -(K / N) * np.sum(A * cos_matrix)
 
     total_energy = kinetic_energy + potential_energy
-    total_drift = float(np.max(total_energy) - np.min(total_energy))
+    interior_energy = total_energy[1:-1]
+    total_drift = float(np.max(interior_energy) - np.min(interior_energy))
 
     # 4. Frequency-domain processing utilizing spectral.py algorithms
     freqs, pxx = compute_psd(velocities, fs=fs, nperseg=min(256, T // 2))

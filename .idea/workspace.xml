@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Finished sanity checks notebook">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,61 +53,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000427756075472" />
-      <entry key="S5" value="1.0197347023221697" />
-      <entry key="S10" value="1.176975015873805" />
-      <entry key="S30" value="2.1700380954462526" />
-      <entry key="S60" value="6.738225128581986" />
-      <entry key="M2" value="26.339653551553294" />
-      <entry key="M5" value="109.86389976283549" />
-      <entry key="M10" value="256.4187009942626" />
-      <entry key="M15" value="401.78787488271877" />
-      <entry key="M30" value="801.2042145054675" />
-      <entry key="H1" value="1431.8278000141454" />
-      <entry key="H2" value="2487.290299659383" />
-      <entry key="H4" value="4400.808514436022" />
-      <entry key="D1" value="13260.270666620976" />
-      <entry key="W1" value="20402.67157343042" />
+      <entry key="MS100" value="1.0031865382551801" />
+      <entry key="MS500" value="1.494606333432674" />
+      <entry key="S2" value="3.428241813317169" />
+      <entry key="S5" value="5.216089792057513" />
+      <entry key="S10" value="7.515200966400513" />
+      <entry key="S30" value="17.736276722304783" />
+      <entry key="S60" value="31.686607022996483" />
+      <entry key="M2" value="57.24002414547681" />
+      <entry key="M5" value="114.60444934000476" />
+      <entry key="M10" value="175.32601786406227" />
+      <entry key="M15" value="240.90546540490433" />
+      <entry key="M30" value="508.23856350024965" />
+      <entry key="H1" value="1114.1672854700462" />
+      <entry key="H2" value="2227.191292576336" />
+      <entry key="H4" value="4215.320825140055" />
+      <entry key="D1" value="13469.927163980483" />
+      <entry key="W1" value="20942.141048110603" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="4.88185670329743E-147" />
-      <entry key="S2" value="2.6432991902492757E-37" />
-      <entry key="S5" value="2.3437477260709614E-15" />
-      <entry key="S10" value="5.185556529556108E-8" />
-      <entry key="S30" value="0.007028929717640904" />
-      <entry key="S60" value="0.19151903261378164" />
-      <entry key="M2" value="1.1803948388655423" />
-      <entry key="M5" value="4.06545806307062" />
-      <entry key="M10" value="7.214434905302016" />
-      <entry key="M15" value="9.614106153920309" />
-      <entry key="M30" value="14.884940336474825" />
-      <entry key="H1" value="20.860816956161994" />
-      <entry key="H2" value="27.39548063442369" />
-      <entry key="H4" value="37.46153354560617" />
-      <entry key="D1" value="98.0187636762212" />
-      <entry key="W1" value="150.59304863583222" />
+      <entry key="MS500" value="8.609793050357334E-195" />
+      <entry key="S2" value="3.0891877143535054E-49" />
+      <entry key="S5" value="4.6359448816559237E-20" />
+      <entry key="S10" value="2.837224086706312E-10" />
+      <entry key="S30" value="0.0011744187159423328" />
+      <entry key="S60" value="0.06509451424085293" />
+      <entry key="M2" value="0.541006115703959" />
+      <entry key="M5" value="2.0378177847736363" />
+      <entry key="M10" value="3.491930442847659" />
+      <entry key="M15" value="4.842710442158965" />
+      <entry key="M30" value="9.56606839341075" />
+      <entry key="H1" value="17.858039046056838" />
+      <entry key="H2" value="28.10688957545512" />
+      <entry key="H4" value="41.11419289683062" />
+      <entry key="D1" value="105.81176044672877" />
+      <entry key="W1" value="160.89148744592993" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.5547847360339225" />
-      <entry key="MS500" value="0.8888426811665702" />
-      <entry key="S2" value="0.9709920746021312" />
-      <entry key="S5" value="1.003355920972825" />
-      <entry key="S10" value="1.1502402361185045" />
-      <entry key="S30" value="2.1411852179933066" />
-      <entry key="S60" value="6.883114289547608" />
-      <entry key="M2" value="27.421992383512755" />
-      <entry key="M5" value="113.7731161928647" />
-      <entry key="M10" value="263.46698471292643" />
-      <entry key="M15" value="411.2372068265075" />
-      <entry key="M30" value="815.9370132557584" />
-      <entry key="H1" value="1452.5627391387854" />
-      <entry key="H2" value="2514.5940384743853" />
-      <entry key="H4" value="4438.204072722006" />
-      <entry key="D1" value="13358.255632701852" />
-      <entry key="W1" value="20553.25669479068" />
+      <entry key="MS100" value="0.8151546519311096" />
+      <entry key="MS500" value="1.423807484745783" />
+      <entry key="S2" value="3.373482369493625" />
+      <entry key="S5" value="5.177080076808081" />
+      <entry key="S10" value="7.47599346251138" />
+      <entry key="S30" value="17.69921238186413" />
+      <entry key="S60" value="31.71366461170703" />
+      <entry key="M2" value="57.72185949292547" />
+      <entry key="M5" value="116.56537955163543" />
+      <entry key="M10" value="178.74179010219714" />
+      <entry key="M15" value="245.66454004223138" />
+      <entry key="M30" value="517.699500423548" />
+      <entry key="H1" value="1131.9122649397248" />
+      <entry key="H2" value="2255.2014614759273" />
+      <entry key="H4" value="4256.361339858652" />
+      <entry key="D1" value="13575.702656413127" />
+      <entry key="W1" value="21103.024131792317" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -188,7 +189,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\archive" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex">
+  <component name="RunManager" selected="Python.analytics_engine">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -308,10 +309,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
-        <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python.rotor" />
       </list>
     </recent_temporary>
@@ -701,16 +702,29 @@
       <option name="project" value="LOCAL" />
       <updated>1792256313721</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb.">
+      <option name="closed" value="true" />
+      <created>1792696414969</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1792696414969</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Finished sanity checks notebook">
+      <option name="closed" value="true" />
+      <created>1792698121780</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1792698121780</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated model.py" />
-    <MESSAGE value="demo.ipynb needs to be updated" />
-    <MESSAGE value="updated cli" />
     <MESSAGE value="updated viz.py" />
     <MESSAGE value="updated the notebooks (demo-2.ipynb) and moved the other workbook (demo-1.ipynb) into the notebooks folder inside the examples folder. also made some minor changes to source code" />
     <MESSAGE value="edited a bug in the cli" />
@@ -733,6 +747,9 @@
     <MESSAGE value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
     <MESSAGE value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
     <MESSAGE value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
+    <MESSAGE value="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook." />
+    <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
+    <MESSAGE value="Finished sanity checks notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished sanity checks notebook" />
   </component>
 </project>
