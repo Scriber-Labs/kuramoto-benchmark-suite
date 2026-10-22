@@ -99,6 +99,7 @@ SCRIBER_PALETTE: Final[Dict[str, str]] = {
     "accent_teal": PROJECT_COLORS["cyan_blue"],
     "accent_pink": PROJECT_COLORS["pink_pink"],
     "accent_purple": PROJECT_COLORS["purple_light"],
+    "accent_orange": PROJECT_COLORS["orange_warm"],
     "accent_indigo": PROJECT_COLORS["indigo"],
     "text_primary": TEXT_PRIMARY,
     "text_muted": TEXT_MUTED,
