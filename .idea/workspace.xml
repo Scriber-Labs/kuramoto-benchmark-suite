@@ -7,21 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics.">
-      <change afterPath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/research/preprint-rough-draft/methods.md" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,59 +59,59 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000077743977167" />
-      <entry key="S5" value="1.0096416898079348" />
-      <entry key="S10" value="1.120997491623653" />
-      <entry key="S30" value="2.711478332810237" />
-      <entry key="S60" value="8.670229643132394" />
-      <entry key="M2" value="25.17539741794292" />
-      <entry key="M5" value="81.88163034210748" />
-      <entry key="M10" value="159.83481355284815" />
-      <entry key="M15" value="221.62506103040886" />
-      <entry key="M30" value="366.1634653716291" />
-      <entry key="H1" value="578.3549046408508" />
-      <entry key="H2" value="1045.230678523679" />
-      <entry key="H4" value="2421.3438188088753" />
-      <entry key="D1" value="12510.764714764426" />
-      <entry key="W1" value="21736.8291782281" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000000001785" />
+      <entry key="S60" value="1.0000017238500813" />
+      <entry key="M2" value="1.0057545521188282" />
+      <entry key="M5" value="2.1839378982946016" />
+      <entry key="M10" value="17.35125448582052" />
+      <entry key="M15" value="50.036840992823784" />
+      <entry key="M30" value="165.70180412442664" />
+      <entry key="H1" value="329.5905075897565" />
+      <entry key="H2" value="607.9550271951646" />
+      <entry key="H4" value="1495.7319161626408" />
+      <entry key="D1" value="11352.923808057942" />
+      <entry key="W1" value="21882.666121155344" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="6.598136215363616E-27" />
-      <entry key="MS500" value="5.806096576077875E-6" />
-      <entry key="S2" value="0.049087516906380316" />
-      <entry key="S5" value="0.2994942063964561" />
-      <entry key="S10" value="0.5472606384538271" />
-      <entry key="S30" value="0.8181181709369656" />
-      <entry key="S60" value="0.9170387076358454" />
-      <entry key="M2" value="1.065325738579315" />
-      <entry key="M5" value="1.5223339701024838" />
-      <entry key="M10" value="2.1505707511165917" />
-      <entry key="M15" value="2.6253686584580547" />
-      <entry key="M30" value="3.714177800610754" />
-      <entry key="H1" value="5.279945625730848" />
-      <entry key="H2" value="9.431652159118627" />
-      <entry key="H4" value="20.91737195179788" />
-      <entry key="D1" value="96.14072471335858" />
-      <entry key="W1" value="164.76549853213672" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="6.373559233382448E-242" />
+      <entry key="S5" value="3.331664910104489E-97" />
+      <entry key="S10" value="6.029889099275413E-49" />
+      <entry key="S30" value="1.1300399734503462E-16" />
+      <entry key="S60" value="1.4603731926413598E-8" />
+      <entry key="M2" value="1.7482183373732703E-4" />
+      <entry key="M5" value="0.06418089985348215" />
+      <entry key="M10" value="0.680327847564641" />
+      <entry key="M15" value="1.6681243565314532" />
+      <entry key="M30" value="4.351560706885408" />
+      <entry key="H1" value="7.31746728585636" />
+      <entry key="H2" value="10.806791301267998" />
+      <entry key="H4" value="18.996748211452708" />
+      <entry key="D1" value="94.41399703624127" />
+      <entry key="W1" value="173.21357955022654" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.8916438292526018E-5" />
-      <entry key="MS500" value="0.11359778275162859" />
-      <entry key="S2" value="0.6073849314836393" />
-      <entry key="S5" value="1.0449571960052848" />
-      <entry key="S10" value="1.4725298678228362" />
-      <entry key="S30" value="3.3823438009564795" />
-      <entry key="S60" value="9.448044331704706" />
-      <entry key="M2" value="26.089321330228323" />
-      <entry key="M5" value="83.22432590294133" />
-      <entry key="M10" value="161.81586686218864" />
-      <entry key="M15" value="224.09762137495255" />
-      <entry key="M30" value="369.7603766826255" />
-      <entry key="H1" value="583.5535848618864" />
-      <entry key="H2" value="1054.6026073353937" />
-      <entry key="H4" value="2442.2087655535756" />
-      <entry key="D1" value="12606.869965759384" />
-      <entry key="W1" value="21901.585725409146" />
+      <entry key="MS100" value="1.7645263188872476E-10" />
+      <entry key="MS500" value="0.01120277537512365" />
+      <entry key="S2" value="0.3253354638604834" />
+      <entry key="S5" value="0.6381643844144764" />
+      <entry key="S10" value="0.798851916449148" />
+      <entry key="S30" value="0.9278734764714591" />
+      <entry key="S60" value="0.9632636216362414" />
+      <entry key="M2" value="0.9873676089434548" />
+      <entry key="M5" value="2.2386237316261464" />
+      <entry key="M10" value="18.013005180483095" />
+      <entry key="M15" value="51.672555213097354" />
+      <entry key="M30" value="170.00159130571228" />
+      <entry key="H1" value="336.8570318535818" />
+      <entry key="H2" value="618.7181742499234" />
+      <entry key="H4" value="1514.6874478788118" />
+      <entry key="D1" value="11447.303460901885" />
+      <entry key="W1" value="22055.870378238324" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -348,14 +337,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00001" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
-      <option name="closed" value="true" />
-      <created>1777799173376</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1777799173376</updated>
     </task>
     <task id="LOCAL-00002" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
       <option name="closed" value="true" />
@@ -741,14 +722,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792700418507</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps.">
+      <option name="closed" value="true" />
+      <created>1792750667610</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1792750667611</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated the notebooks (demo-2.ipynb) and moved the other workbook (demo-1.ipynb) into the notebooks folder inside the examples folder. also made some minor changes to source code" />
     <MESSAGE value="edited a bug in the cli" />
     <MESSAGE value="evaluating demo.ipynb tests" />
     <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
@@ -773,6 +761,7 @@
     <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
     <MESSAGE value="Finished sanity checks notebook" />
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
-    <option name="LAST_COMMIT_MESSAGE" value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
+    <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
   </component>
 </project>
