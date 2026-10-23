@@ -4,7 +4,7 @@ import pytest
 pytest.importorskip("clifford")
 
 from kuramoto.order_parameter import compute_order_parameter
-from kuramoto.solvers.rotor import RotorSolver
+from kuramoto.solvers.rotor import RotorSolver, step_rkmk4
 
 
 def test_rotor_u1_invariance():
@@ -162,3 +162,21 @@ def test_kuramoto_model_with_rkmk4():
     r = compute_order_parameter(dataset.theta)
     assert np.all(r >= 0.0)
     assert np.all(r <= 1.0 + 1e-6)
+
+
+def test_step_rkmk4_standalone():
+    """Verify that the standalone step_rkmk4 function integrates rotors properly."""
+    N = 4
+    solver = RotorSolver(n_oscillators=N, dim=2, seed=42)
+    initial_rotors = solver._rotor_array.copy()
+
+    updated_rotors = step_rkmk4(solver, K=1.0, dt=0.01)
+
+    assert isinstance(updated_rotors, np.ndarray)
+    assert updated_rotors.shape == (N, 2)
+    assert np.allclose(solver._rotor_array, updated_rotors)
+    assert not np.allclose(initial_rotors, updated_rotors)
+
+    # Norms must stay equal to 1.0
+    norms = np.sum(updated_rotors**2, axis=1)
+    assert np.allclose(norms, 1.0, atol=1e-12)

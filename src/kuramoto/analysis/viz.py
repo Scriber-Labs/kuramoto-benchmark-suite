@@ -96,6 +96,7 @@ SCRIBER_PALETTE: Final[Dict[str, str]] = {
     "bg_deep": THEME_BG,
     "bg_panel": CARD_BG,
     "accent_cyan": PROJECT_COLORS["blue_light"],
+    "accent_blue": PROJECT_COLORS["blue_deep"],
     "accent_teal": PROJECT_COLORS["cyan_blue"],
     "accent_pink": PROJECT_COLORS["pink_pink"],
     "accent_purple": PROJECT_COLORS["purple_light"],

@@ -4,7 +4,7 @@
 > ⚠️ **AI-GENERATED CONTENT NOTICE:** This practice problem set was generated with the assistance of an AI (Junie).
 
 ## Problem 1: The 2D Rotor Sandwich
-**Goal:** Apply a rotor to a vector $\mathbf{v}$.
+**Goal:** Apply a rotor to a vector $\mathbf{v}=\mathbf{e}_1$.
 
 **Setup:** Consider an orthonormal set of basis vectors $\{\mathbf{e}_1, \mathbf{e}_2\}$ and a rotor 
 $R=\exp(-B \theta / 2)$ where $B=\mathbf{e}_1 \wedge \mathbf{e}_2$. 

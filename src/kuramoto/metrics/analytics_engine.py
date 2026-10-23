@@ -83,7 +83,7 @@ def compute_comprehensive_diagnostics(
     # 1. Resolve network structure using graphs.py matrix factory
     A = build_adjacency(N, adjacency_in)
 
-    # 2. Map coordinates cleanly from Geometric Algebra representation layout
+    # 2. Map coordinates cleanly from Geometric Algebra representation Layout
     if np.iscomplexobj(rotors):
         scalars = rotors.real
         bivectors = -rotors.imag
@@ -112,8 +112,13 @@ def compute_comprehensive_diagnostics(
         lambda_trajectory[t] = -(K / N) * np.sum(A * cos_matrix)
 
     total_energy = kinetic_energy + potential_energy
-    interior_energy = total_energy[1:-1]
-    total_drift = float(np.max(interior_energy) - np.min(interior_energy))
+
+    # Truncate the first and last frames to eliminate 1st-order boundary artifacts
+    if T > 2:
+        interior_energy = total_energy[1:-1]
+        total_drift = float(np.max(interior_energy) - np.min(interior_energy))
+    else:
+        total_drift = float(np.max(total_energy) - np.min(total_energy))
 
     # 4. Frequency-domain processing utilizing spectral.py algorithms
     freqs, pxx = compute_psd(velocities, fs=fs, nperseg=min(256, T // 2))
@@ -133,7 +138,6 @@ def compute_comprehensive_diagnostics(
         energy_decomposition=energy_decomp,
         total_energy_drift=total_drift,
     )
-
 
 # ------------------------------------------------------------------------------
 # 💨 Smoke Tests

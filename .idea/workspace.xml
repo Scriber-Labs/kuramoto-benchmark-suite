@@ -7,10 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Finished sanity checks notebook">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics.">
+      <change afterPath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/research/preprint-rough-draft/methods.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +29,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="156" />
+    <option name="cachedIndexableFilesCount" value="137" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,61 +68,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0031865382551801" />
-      <entry key="MS500" value="1.494606333432674" />
-      <entry key="S2" value="3.428241813317169" />
-      <entry key="S5" value="5.216089792057513" />
-      <entry key="S10" value="7.515200966400513" />
-      <entry key="S30" value="17.736276722304783" />
-      <entry key="S60" value="31.686607022996483" />
-      <entry key="M2" value="57.24002414547681" />
-      <entry key="M5" value="114.60444934000476" />
-      <entry key="M10" value="175.32601786406227" />
-      <entry key="M15" value="240.90546540490433" />
-      <entry key="M30" value="508.23856350024965" />
-      <entry key="H1" value="1114.1672854700462" />
-      <entry key="H2" value="2227.191292576336" />
-      <entry key="H4" value="4215.320825140055" />
-      <entry key="D1" value="13469.927163980483" />
-      <entry key="W1" value="20942.141048110603" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000077743977167" />
+      <entry key="S5" value="1.0096416898079348" />
+      <entry key="S10" value="1.120997491623653" />
+      <entry key="S30" value="2.711478332810237" />
+      <entry key="S60" value="8.670229643132394" />
+      <entry key="M2" value="25.17539741794292" />
+      <entry key="M5" value="81.88163034210748" />
+      <entry key="M10" value="159.83481355284815" />
+      <entry key="M15" value="221.62506103040886" />
+      <entry key="M30" value="366.1634653716291" />
+      <entry key="H1" value="578.3549046408508" />
+      <entry key="H2" value="1045.230678523679" />
+      <entry key="H4" value="2421.3438188088753" />
+      <entry key="D1" value="12510.764714764426" />
+      <entry key="W1" value="21736.8291782281" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="8.609793050357334E-195" />
-      <entry key="S2" value="3.0891877143535054E-49" />
-      <entry key="S5" value="4.6359448816559237E-20" />
-      <entry key="S10" value="2.837224086706312E-10" />
-      <entry key="S30" value="0.0011744187159423328" />
-      <entry key="S60" value="0.06509451424085293" />
-      <entry key="M2" value="0.541006115703959" />
-      <entry key="M5" value="2.0378177847736363" />
-      <entry key="M10" value="3.491930442847659" />
-      <entry key="M15" value="4.842710442158965" />
-      <entry key="M30" value="9.56606839341075" />
-      <entry key="H1" value="17.858039046056838" />
-      <entry key="H2" value="28.10688957545512" />
-      <entry key="H4" value="41.11419289683062" />
-      <entry key="D1" value="105.81176044672877" />
-      <entry key="W1" value="160.89148744592993" />
+      <entry key="MS100" value="6.598136215363616E-27" />
+      <entry key="MS500" value="5.806096576077875E-6" />
+      <entry key="S2" value="0.049087516906380316" />
+      <entry key="S5" value="0.2994942063964561" />
+      <entry key="S10" value="0.5472606384538271" />
+      <entry key="S30" value="0.8181181709369656" />
+      <entry key="S60" value="0.9170387076358454" />
+      <entry key="M2" value="1.065325738579315" />
+      <entry key="M5" value="1.5223339701024838" />
+      <entry key="M10" value="2.1505707511165917" />
+      <entry key="M15" value="2.6253686584580547" />
+      <entry key="M30" value="3.714177800610754" />
+      <entry key="H1" value="5.279945625730848" />
+      <entry key="H2" value="9.431652159118627" />
+      <entry key="H4" value="20.91737195179788" />
+      <entry key="D1" value="96.14072471335858" />
+      <entry key="W1" value="164.76549853213672" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8151546519311096" />
-      <entry key="MS500" value="1.423807484745783" />
-      <entry key="S2" value="3.373482369493625" />
-      <entry key="S5" value="5.177080076808081" />
-      <entry key="S10" value="7.47599346251138" />
-      <entry key="S30" value="17.69921238186413" />
-      <entry key="S60" value="31.71366461170703" />
-      <entry key="M2" value="57.72185949292547" />
-      <entry key="M5" value="116.56537955163543" />
-      <entry key="M10" value="178.74179010219714" />
-      <entry key="M15" value="245.66454004223138" />
-      <entry key="M30" value="517.699500423548" />
-      <entry key="H1" value="1131.9122649397248" />
-      <entry key="H2" value="2255.2014614759273" />
-      <entry key="H4" value="4256.361339858652" />
-      <entry key="D1" value="13575.702656413127" />
-      <entry key="W1" value="21103.024131792317" />
+      <entry key="MS100" value="1.8916438292526018E-5" />
+      <entry key="MS500" value="0.11359778275162859" />
+      <entry key="S2" value="0.6073849314836393" />
+      <entry key="S5" value="1.0449571960052848" />
+      <entry key="S10" value="1.4725298678228362" />
+      <entry key="S30" value="3.3823438009564795" />
+      <entry key="S60" value="9.448044331704706" />
+      <entry key="M2" value="26.089321330228323" />
+      <entry key="M5" value="83.22432590294133" />
+      <entry key="M10" value="161.81586686218864" />
+      <entry key="M15" value="224.09762137495255" />
+      <entry key="M30" value="369.7603766826255" />
+      <entry key="H1" value="583.5535848618864" />
+      <entry key="H2" value="1054.6026073353937" />
+      <entry key="H4" value="2442.2087655535756" />
+      <entry key="D1" value="12606.869965759384" />
+      <entry key="W1" value="21901.585725409146" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -189,7 +204,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\archive" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.analytics_engine">
+  <component name="RunManager" selected="Python.viz">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -309,9 +324,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" />
-        <item itemvalue="Python.viz" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
         <item itemvalue="Python.rotor" />
       </list>
@@ -718,14 +733,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792698121780</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics.">
+      <option name="closed" value="true" />
+      <created>1792700418507</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1792700418507</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated viz.py" />
     <MESSAGE value="updated the notebooks (demo-2.ipynb) and moved the other workbook (demo-1.ipynb) into the notebooks folder inside the examples folder. also made some minor changes to source code" />
     <MESSAGE value="edited a bug in the cli" />
     <MESSAGE value="evaluating demo.ipynb tests" />
@@ -750,6 +772,7 @@
     <MESSAGE value="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook." />
     <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
     <MESSAGE value="Finished sanity checks notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished sanity checks notebook" />
+    <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
+    <option name="LAST_COMMIT_MESSAGE" value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
   </component>
 </project>

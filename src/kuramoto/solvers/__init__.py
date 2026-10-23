@@ -8,6 +8,6 @@ This module exports:
 """
 
 from .rk45 import solve_kuramoto
-from .rotor import RotorSolver
+from .rotor import RotorSolver, step_rkmk4
 
-__all__: list[str] = ["solve_kuramoto", "RotorSolver"]
+__all__: list[str] = ["solve_kuramoto", "RotorSolver", "step_rkmk4"]
