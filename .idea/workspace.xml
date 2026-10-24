@@ -7,28 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Removed `data/failure_modes.ipynb` notebook.">
-      <change afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/agent-workspace-boilerplate.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" beforeDir="false" afterPath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agent-workspace" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/utils.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -356,14 +338,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00003" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
-      <option name="closed" value="true" />
-      <created>1777801420151</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1777801420151</updated>
     </task>
     <task id="LOCAL-00004" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
       <option name="closed" value="true" />
@@ -749,14 +723,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792769953718</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references.">
+      <option name="closed" value="true" />
+      <created>1792816342779</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1792816342780</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="evaluating demo.ipynb tests" />
     <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
     <MESSAGE value="added benchmark configuration and sample data" />
     <MESSAGE value="added quantum solvers and stabilization benchmarks" />
@@ -781,7 +762,8 @@
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed `data/failure_modes.ipynb` notebook." />
+    <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

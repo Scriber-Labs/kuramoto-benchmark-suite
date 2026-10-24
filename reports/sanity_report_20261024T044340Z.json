@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-10-24T04:43:40.565080+00:00",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "ok": true,
+  "checks": [
+    {
+      "mode": "k0_control",
+      "name": "k0_energy_drift",
+      "value": 1.233457780358549e-13,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "",
+      "note": "Hamiltonian energy drift for uncoupled oscillators (expected ~1e-13).",
+      "passed": true
+    },
+    {
+      "mode": "k0_control",
+      "name": "k0_velocity_accuracy",
+      "value": 4.0523140398818214e-13,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "rad/s",
+      "note": "Measured velocity max error vs intrinsic omegas (expected ~1e-13).",
+      "passed": true
+    },
+    {
+      "mode": "gauge_invariance",
+      "name": "so2_gauge_potential_diff",
+      "value": 7.087663789206999e-13,
+      "threshold": 1e-11,
+      "direction": "below",
+      "units": "",
+      "note": "Potential energy difference under global SO(2) rotation (400-term cosine round-off floor).",
+      "passed": true
+    },
+    {
+      "mode": "time_reversal",
+      "name": "rkmk4_reconstruction_error",
+      "value": 1.1014313584236904e-12,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "",
+      "note": "50s roundtrip initial state reconstruction chordal error.",
+      "passed": true
+    }
+  ]
+}

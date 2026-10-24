@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-10-24T04:43:46.672896+00:00",
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "ok": true,
+  "checks": [
+    {
+      "mode": "denormalization",
+      "name": "max_manifold_drift",
+      "value": 9.865441796819141e-13,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "dimensionless",
+      "note": "RKMK4 should sit at round-off (~1e-12); threshold 1e-10 is ~100x above floor.",
+      "passed": true
+    },
+    {
+      "mode": "aliasing",
+      "name": "hf_psd_ratio",
+      "value": 0.2494535925146508,
+      "threshold": 1.0,
+      "direction": "below",
+      "units": "",
+      "note": "Mean upper band PSD ratio; ratio < 1.0 confirms halving dt reduced high-frequency power.",
+      "passed": true
+    },
+    {
+      "mode": "aliasing",
+      "name": "hf_psd_ratio_worst_case",
+      "value": 0.2492922666239512,
+      "threshold": 1.0,
+      "direction": "below",
+      "units": "",
+      "note": "Worst-case oscillator PSD ratio in upper band.",
+      "passed": true
+    },
+    {
+      "mode": "singularity",
+      "name": "nan_free",
+      "value": 0.0,
+      "threshold": 0.0,
+      "direction": "below",
+      "units": "",
+      "note": "Any NaN at K -> 0 is a hard failure.",
+      "passed": true
+    },
+    {
+      "mode": "singularity",
+      "name": "max_velocity_spike",
+      "value": 0.9743770042817346,
+      "threshold": 50.0,
+      "direction": "below",
+      "units": "rad/s",
+      "note": "Unwrapped phase differentiation velocity spike (threshold 50 rad/s vs observed ~0.97 rad/s).",
+      "passed": true
+    },
+    {
+      "mode": "parity_control",
+      "name": "k0_parity",
+      "value": 1.840194543586259e-12,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "",
+      "note": "Decoupled K=0 flow exact match against analytical / RK45 reference.",
+      "passed": true
+    },
+    {
+      "mode": "phase_space_distortion",
+      "name": "rk45_parity_rmse",
+      "value": 0.002943860701329832,
+      "threshold": 0.05,
+      "direction": "below",
+      "units": "",
+      "note": "Curve-shape agreement across K sweep sampled on identical grid.",
+      "passed": true
+    }
+  ]
+}

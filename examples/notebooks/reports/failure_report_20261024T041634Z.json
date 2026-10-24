@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-10-24T04:16:34.425850+00:00",
+  "total": 5,
+  "passed": 4,
+  "failed": 1,
+  "ok": false,
+  "checks": [
+    {
+      "mode": "denormalization",
+      "name": "max_manifold_drift",
+      "value": 9.865441796819141e-13,
+      "threshold": 1e-10,
+      "direction": "below",
+      "units": "dimensionless",
+      "note": "RKMK4 should sit at round-off; growth implies a broken lift or exp.",
+      "passed": true
+    },
+    {
+      "mode": "aliasing",
+      "name": "hf_psd_ratio",
+      "value": 0.2494535925146508,
+      "threshold": 1.0,
+      "direction": "below",
+      "units": "",
+      "note": "Ratio >> 1 means halving dt removed injected energy.",
+      "passed": true
+    },
+    {
+      "mode": "singularity",
+      "name": "nan_free",
+      "value": 0.0,
+      "threshold": 0.0,
+      "direction": "below",
+      "units": "",
+      "note": "Any NaN at K -> 0 is a hard failure.",
+      "passed": true
+    },
+    {
+      "mode": "singularity",
+      "name": "max_velocity_spike",
+      "value": 0.646613214056746,
+      "threshold": 50.0,
+      "direction": "below",
+      "units": "rad/s",
+      "note": "",
+      "passed": true
+    },
+    {
+      "mode": "phase_space_distortion",
+      "name": "rk45_parity_rmse",
+      "value": 0.07525257721016623,
+      "threshold": 0.05,
+      "direction": "below",
+      "units": "",
+      "note": "Curve-shape disagreement, not just endpoint offset.",
+      "passed": false
+    }
+  ]
+}
