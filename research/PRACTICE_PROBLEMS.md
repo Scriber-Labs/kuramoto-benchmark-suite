@@ -66,7 +66,7 @@ In 3D, a rotor is represented by 4 coefficients (like a quaternion).
 **Goal**: Computational complexity.
 Why is $O(N)$ better than $O(N^2)$ for $N=10,000$?
 1. Calculate the number of operations for both for a single step.
-2. **Reference**: See the `BENCHMARK_REPORT.md` results.
+2. **Reference**: See the `BENCHMARK_RUNDOWN.md` results.
 
 ## Problem 10: Symmetry Invariance
 **Goal**: Proving Noether's Theorem.

@@ -9,5 +9,12 @@ This module exports:
 
 from .rk45 import solve_kuramoto
 from .rotor import RotorSolver, step_rkmk4
+from .quantum_rotor import QuantumRotorSolver, step_quantum_scf
 
-__all__: list[str] = ["solve_kuramoto", "RotorSolver", "step_rkmk4"]
+__all__: list[str] = [
+    "solve_kuramoto",
+    "RotorSolver",
+    "step_rkmk4",
+    "QuantumRotorSolver",
+    "step_quantum_scf",
+]
