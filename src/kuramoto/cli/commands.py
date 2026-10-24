@@ -43,6 +43,7 @@ from ..config import parse_simulation_config
 from ..order_parameter import compute_order_parameter
 from ..solver_types import SOLVER_ALIASES, is_rotor_or_euler
 from ..topologies.tree_of_life import tree_of_life_positions
+from ..utils import get_rng
 from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
 # -----------------------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ def datasetforbeginners(output: str) -> None:
         "topology": "small_world"
     }
 
-    rng = np.random.default_rng(params["seed"])
+    rng = get_rng(params["seed"])
     omega = rng.normal(0, 1.0, params["n_oscillators"])
 
     data = generate_kuramoto_dataset(

@@ -31,6 +31,8 @@ from matplotlib.font_manager import findSystemFonts
 from matplotlib.text import Text
 from numpy.typing import NDArray
 
+from kuramoto.utils import get_rng
+
 # Suppress matplotlib font manager verbose lookup / missing weight messages
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
 
@@ -1759,13 +1761,14 @@ def _run_smoke_test() -> None:
 
     # 3. Test Network data & plot
     n = 20
+    rng = get_rng(27)
     adj = np.ones((n, n)) - np.eye(n)
-    omega = np.random.normal(0, 1, n)
-    theta_0 = np.random.uniform(0, 2 * np.pi, n)
+    omega = rng.normal(0, 1, n)
+    theta_0 = rng.uniform(0, 2 * np.pi, n)
 
     # 4. Order parameter time-series data
     times = np.linspace(0, 100, 500)
-    r_values = 0.7 + 0.2 * np.sin(0.1 * times) + 0.05 * np.random.randn(500)
+    r_values = 0.7 + 0.2 * np.sin(0.1 * times) + 0.05 * rng.standard_normal(500)
 
     os.makedirs("plots/tests", exist_ok=True)
 

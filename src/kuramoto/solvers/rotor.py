@@ -45,7 +45,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 # Import RNG utilities from the central utils module
-from kuramoto.utils import get_rng
+from kuramoto.utils import resolve_rng
 
 # Validation imports support both package execution and direct script execution.
 from kuramoto.validation import (
@@ -96,6 +96,7 @@ class RotorSolver:
         natural_frequencies: NDArray[np.floating] | None = None,
         initial_phases: PhaseArray | None = None,
         initial_rotors: list | None = None,
+        rng: np.random.Generator | None = None,
     ) -> None:
         """
         Initialize rotor-based Kuramoto solver.
@@ -108,6 +109,9 @@ class RotorSolver:
             GA dimensionality (default: 2 for SO(2) plane rotations).
         seed : int, optional
             Random seed for reproducibility.
+        rng : numpy.random.Generator, optional
+            Explicit generator to inject. Takes precedence over ``seed`` when
+            provided (dependency-injection for reproducible pipelines).
         adjacency_matrix : AdjacencyMatrix, optional
             Network topology matrix of shape (N, N). If None, all-to-all complete graph
             without self-loops is assumed.
@@ -140,7 +144,7 @@ class RotorSolver:
                 "⬆️ Install with: pip install clifford"
             ) from exc
 
-        self.rng = get_rng(seed)
+        self.rng = resolve_rng(rng, seed)
 
         self.N = n_oscillators
         self.dim = dim

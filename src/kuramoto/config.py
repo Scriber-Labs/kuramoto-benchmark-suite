@@ -14,6 +14,8 @@ import numpy as np
 from typing import Dict, Any, Optional, Tuple
 from numpy.typing import NDArray
 
+from kuramoto.utils import get_rng
+
 # -----------------------------------------------------------------------------------------------------------
 # 1️⃣ Core logic
 # -----------------------------------------------------------------------------------------------------------
@@ -65,7 +67,7 @@ def parse_simulation_config(json_str: str) -> Dict[str, Any]:
     dist_type = freq_cfg.get("type", "normal")
     n = config["n_oscillators"]
     
-    rng = np.random.default_rng(config["seed"])
+    rng = get_rng(config["seed"])
     
     if dist_type == "normal":
         config["natural_frequencies"] = rng.normal(

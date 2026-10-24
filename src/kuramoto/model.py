@@ -25,7 +25,7 @@ from kuramoto.graphs import graph_stats
 from kuramoto.order_parameter import compute_order_parameter as order_parameter
 from kuramoto.solver_types import SOLVER_ALIASES
 from kuramoto.solvers import RotorSolver, solve_kuramoto  # ← Updated import
-from kuramoto.utils import get_rng
+from kuramoto.utils import resolve_rng
 from kuramoto.validation import (
     validate_adjacency,
     validate_intrinsic_frequency_array,
@@ -67,6 +67,9 @@ class KuramotoModel:
         Note: Not supported by RotorSolver; raises error if solver_type='rotor'.
     random_seed : int, optional
         Seed forwarded to `numpy.random.default_rng`.
+    rng : numpy.random.Generator, optional
+        Explicit generator to inject. Takes precedence over ``random_seed`` when
+        provided, enabling dependency-injected reproducible pipelines.
     solver_type : str, default 'rk45'
         Integration method: 'rk45' (classic RK45) or 'rotor' (GA-based Euler).
     """
@@ -90,6 +93,7 @@ class KuramotoModel:
         coupling_strength: float = 1.0,
         noise_std: float = 0.0,
         random_seed: Optional[int] = None,
+        rng: Optional[np.random.Generator] = None,
         solver_type: str = "rk45",
     ) -> None:
         # ---- validation ------------------------------------------------ #
@@ -118,7 +122,7 @@ class KuramotoModel:
         self.n: Final[int] = n_oscillators
         self.K: Final[float] = coupling_strength
         self.noise_std: Final[float] = noise_std
-        self.rng = get_rng(random_seed)
+        self.rng = resolve_rng(rng, random_seed)
 
         # ---- natural frequencies --------------------------------------- #
         if natural_frequencies is None:

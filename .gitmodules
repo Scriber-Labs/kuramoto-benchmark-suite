@@ -1,3 +1,3 @@
-[submodule "agent-workspace"]
-	path = agent-workspace
-	url = https://github.com/eigenscribe/agent-workspace.git
+[submodule ".scriber-core"]
+	path = .scriber-core
+	url = https://github.com/eigenscribe/scriber-core.git

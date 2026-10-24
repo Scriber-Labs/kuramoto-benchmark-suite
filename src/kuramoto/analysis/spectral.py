@@ -17,6 +17,8 @@ from scipy.signal import welch
 from typing import Dict, Any, List, Tuple
 from numpy.typing import NDArray
 
+from kuramoto.utils import get_rng
+
 # ------------------------------------------------------------------------------
 # 🎭 Type Aliases
 # ------------------------------------------------------------------------------
@@ -266,8 +268,9 @@ def _run_smoke_test() -> None:
     print(" ... ✔️  Harmonic analysis test passed.")
 
     # Test detect_sync_transition
+    rng = get_rng(27)
     K_range = np.linspace(0.5, 2.0, 10)
-    fake_psd = np.array([np.random.rand(len(f)) for _ in K_range])
+    fake_psd = rng.random((len(K_range), len(f)))
     fake_psd[5:] += 5  # Simulate transition at K_index 5
     K_c = detect_sync_transition(f, fake_psd, K_range)
     assert K_c in K_range

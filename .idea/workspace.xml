@@ -7,10 +7,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Removed `data/failure_modes.ipynb` notebook.">
+      <change afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/agent-workspace-boilerplate.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/failure_modes.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" beforeDir="false" afterPath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent-workspace" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_dist.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_network.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/plots/tests/test_order_param.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/utils.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +36,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="137" />
+    <option name="cachedIndexableFilesCount" value="140" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -57,61 +75,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000001785" />
-      <entry key="S60" value="1.0000017238500813" />
-      <entry key="M2" value="1.0057545521188282" />
-      <entry key="M5" value="2.1839378982946016" />
-      <entry key="M10" value="17.35125448582052" />
-      <entry key="M15" value="50.036840992823784" />
-      <entry key="M30" value="165.70180412442664" />
-      <entry key="H1" value="329.5905075897565" />
-      <entry key="H2" value="607.9550271951646" />
-      <entry key="H4" value="1495.7319161626408" />
-      <entry key="D1" value="11352.923808057942" />
-      <entry key="W1" value="21882.666121155344" />
+      <entry key="MS100" value="1.0000000000000597" />
+      <entry key="MS500" value="1.0025051604281479" />
+      <entry key="S2" value="1.5632522751671991" />
+      <entry key="S5" value="3.5408681252370444" />
+      <entry key="S10" value="6.112028570791772" />
+      <entry key="S30" value="11.035426481309754" />
+      <entry key="S60" value="13.552806655821058" />
+      <entry key="M2" value="15.52703382057371" />
+      <entry key="M5" value="27.871551288127502" />
+      <entry key="M10" value="75.91608130193062" />
+      <entry key="M15" value="126.84477970226057" />
+      <entry key="M30" value="233.814281599961" />
+      <entry key="H1" value="360.9926222145373" />
+      <entry key="H2" value="590.1135413240391" />
+      <entry key="H4" value="1285.2528066484579" />
+      <entry key="D1" value="10807.914831023578" />
+      <entry key="W1" value="22072.283546441133" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="6.373559233382448E-242" />
-      <entry key="S5" value="3.331664910104489E-97" />
-      <entry key="S10" value="6.029889099275413E-49" />
-      <entry key="S30" value="1.1300399734503462E-16" />
-      <entry key="S60" value="1.4603731926413598E-8" />
-      <entry key="M2" value="1.7482183373732703E-4" />
-      <entry key="M5" value="0.06418089985348215" />
-      <entry key="M10" value="0.680327847564641" />
-      <entry key="M15" value="1.6681243565314532" />
-      <entry key="M30" value="4.351560706885408" />
-      <entry key="H1" value="7.31746728585636" />
-      <entry key="H2" value="10.806791301267998" />
-      <entry key="H4" value="18.996748211452708" />
-      <entry key="D1" value="94.41399703624127" />
-      <entry key="W1" value="173.21357955022654" />
+      <entry key="MS100" value="5.901083961115672E-42" />
+      <entry key="MS500" value="5.67788194991562E-9" />
+      <entry key="S2" value="0.008680536942617919" />
+      <entry key="S5" value="0.14976786399369926" />
+      <entry key="S10" value="0.38699853228881786" />
+      <entry key="S30" value="0.7287352419544949" />
+      <entry key="S60" value="0.8536697094122717" />
+      <entry key="M2" value="0.9270708180195372" />
+      <entry key="M5" value="1.0840822568215598" />
+      <entry key="M10" value="1.5775198120988025" />
+      <entry key="M15" value="2.192772769831159" />
+      <entry key="M30" value="3.803093856329563" />
+      <entry key="H1" value="6.269515946418051" />
+      <entry key="H2" value="10.42257392150999" />
+      <entry key="H4" value="18.665548960803605" />
+      <entry key="D1" value="94.73090112704026" />
+      <entry key="W1" value="179.87136561276432" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.7645263188872476E-10" />
-      <entry key="MS500" value="0.01120277537512365" />
-      <entry key="S2" value="0.3253354638604834" />
-      <entry key="S5" value="0.6381643844144764" />
-      <entry key="S10" value="0.798851916449148" />
-      <entry key="S30" value="0.9278734764714591" />
-      <entry key="S60" value="0.9632636216362414" />
-      <entry key="M2" value="0.9873676089434548" />
-      <entry key="M5" value="2.2386237316261464" />
-      <entry key="M10" value="18.013005180483095" />
-      <entry key="M15" value="51.672555213097354" />
-      <entry key="M30" value="170.00159130571228" />
-      <entry key="H1" value="336.8570318535818" />
-      <entry key="H2" value="618.7181742499234" />
-      <entry key="H4" value="1514.6874478788118" />
-      <entry key="D1" value="11447.303460901885" />
-      <entry key="W1" value="22055.870378238324" />
+      <entry key="MS100" value="4.208007551940743E-12" />
+      <entry key="MS500" value="0.005657329699484902" />
+      <entry key="S2" value="0.6783568476833735" />
+      <entry key="S5" value="2.935902981905193" />
+      <entry key="S10" value="5.856444159515769" />
+      <entry key="S30" value="11.3757622443825" />
+      <entry key="S60" value="14.170894193641947" />
+      <entry key="M2" value="16.322829050348023" />
+      <entry key="M5" value="28.887355360415473" />
+      <entry key="M10" value="77.43138809280735" />
+      <entry key="M15" value="128.97625055053012" />
+      <entry key="M30" value="237.56583139258706" />
+      <entry key="H1" value="367.22239992735257" />
+      <entry key="H2" value="600.5017542997737" />
+      <entry key="H4" value="1303.8838944808338" />
+      <entry key="D1" value="10902.612495296135" />
+      <entry key="W1" value="22252.145428079773" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -122,65 +140,66 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in order_parameter (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (2).executor": "Run",
+    "Python tests.Doctests in order_parameter.executor": "Run",
+    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
+    "Python.analytics_engine.executor": "Run",
+    "Python.api.executor": "Run",
+    "Python.commands.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.dataset.executor": "Run",
+    "Python.generate_example_dataset.executor": "Run",
+    "Python.graphs.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.order_parameter.executor": "Run",
+    "Python.rk45.executor": "Run",
+    "Python.rotor.executor": "Run",
+    "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
+    "Python.test_generate_kuramoto_dataset.executor": "Run",
+    "Python.utils.executor": "Run",
+    "Python.validation.executor": "Run",
+    "Python.viz.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT",
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
@@ -337,14 +356,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00002" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
-      <option name="closed" value="true" />
-      <created>1777799197705</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1777799197705</updated>
     </task>
     <task id="LOCAL-00003" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
       <option name="closed" value="true" />
@@ -730,14 +741,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792750667611</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Removed `data/failure_modes.ipynb` notebook.">
+      <option name="closed" value="true" />
+      <created>1792769953718</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1792769953718</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="edited a bug in the cli" />
     <MESSAGE value="evaluating demo.ipynb tests" />
     <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
     <MESSAGE value="added benchmark configuration and sample data" />
@@ -762,6 +780,18 @@
     <MESSAGE value="Finished sanity checks notebook" />
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
+    <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed `data/failure_modes.ipynb` notebook." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/kuramoto/cli/utils.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

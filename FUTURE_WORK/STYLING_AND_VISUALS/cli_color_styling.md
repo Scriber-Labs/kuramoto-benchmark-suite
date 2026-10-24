@@ -4,7 +4,7 @@
 
 Color styling in the CLI is not just visual polish. It helps with attention, orientation, and quickly distinguishing message types while working in the terminal.
 
-In accordance with `.agent-workspace/.junie/AGENTS.md` and Scriber Labs design rules, styling should operate as a cohesive semantic layer aligned with the 4-layer design token taxonomy and ADHD high-contrast semantic spectrum.
+In accordance with `.scriber-core/.junie/AGENTS.md` and Scriber Labs design rules, styling should operate as a cohesive semantic layer aligned with the 4-layer design token taxonomy and ADHD high-contrast semantic spectrum.
 
 ---
 
@@ -108,4 +108,4 @@ When implementing CLI commands or updating existing subcommands (`kuramoto/cli/`
 
 ## Status
 
-**Ready for implementation.** The specification is aligned with `.agent-workspace/.junie/AGENTS.md` and ready for integration into `src/kuramoto/cli/style.py`.
+**Ready for implementation.** The specification is aligned with `.scriber-core/.junie/AGENTS.md` and ready for integration into `src/kuramoto/cli/style.py`.
