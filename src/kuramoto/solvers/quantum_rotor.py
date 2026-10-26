@@ -25,6 +25,7 @@ from numpy.typing import NDArray
 from kuramoto.quantum.circuit_gen import export_to_qasm, generate_scf_angles
 from kuramoto.utils import resolve_rng
 from kuramoto.validation import (
+    validate_adjacency,
     validate_intrinsic_frequency_array,
     validate_non_negative_scalar,
     validate_positive_scalar,
@@ -58,6 +59,7 @@ def step_quantum_scf(
     omegas: NDArray[np.floating],
     K: float,
     dt: float,
+    adjacency_matrix: AdjacencyMatrix | None = None,
     scheme: QuantumScheme = "statevector",
     shots: int = 1024,
     rng: np.random.Generator | None = None,
@@ -75,6 +77,8 @@ def step_quantum_scf(
         Coupling strength.
     dt : float
         Integration time step.
+    adjacency_matrix : AdjacencyMatrix, optional
+        Adjacency matrix of shape (N, N) defining the network topology.
     scheme : {"statevector", "expectation", "shot_sampling"}, optional
         Numerical quantum scheme to apply (default: "statevector").
     shots : int, optional
@@ -94,7 +98,13 @@ def step_quantum_scf(
 
     # 1. Compute parallel rotation angles via the Self-Consistent Field (SCF) torque
     # phi_j = (omega_j + K * R * sin(psi - theta_j)) * dt
-    dtheta = generate_scf_angles(phases, omegas, K=K, dt=dt)
+    dtheta = generate_scf_angles(
+        phases,
+        omegas,
+        K=K,
+        dt=dt,
+        adjacency_matrix=adjacency_matrix,
+    )
     target_phases = phases + dtheta
 
     if scheme == "statevector":
@@ -152,6 +162,7 @@ class QuantumRotorSolver:
         self,
         n_oscillators: int,
         seed: int | None = None,
+        adjacency_matrix: AdjacencyMatrix | None = None,
         natural_frequencies: NDArray[np.floating] | None = None,
         initial_phases: PhaseArray | None = None,
         rng: np.random.Generator | None = None,
@@ -165,6 +176,8 @@ class QuantumRotorSolver:
             Number of coupled oscillators (qubits).
         seed : int, optional
             Seed for random number generator.
+        adjacency_matrix : AdjacencyMatrix, optional
+            Adjacency matrix of shape (N, N) defining the network topology.
         natural_frequencies : NDArray[np.floating], optional
             Array of intrinsic frequencies omega_i. Defaults to standard normal.
         initial_phases : PhaseArray, optional
@@ -174,13 +187,22 @@ class QuantumRotorSolver:
         """
         validate_positive_scalar(n_oscillators, "n_oscillators")
         self.N: int = int(n_oscillators)
-        self.rng: np.random.Generator = resolve_rng(rng or seed)
+        self.rng: np.random.Generator = resolve_rng(rng, seed)
+
+        if adjacency_matrix is not None:
+            validate_adjacency(adjacency_matrix, self.N)
+            self.adjacency_matrix: AdjacencyMatrix | None = np.asarray(
+                adjacency_matrix, dtype=float
+            )
+        else:
+            self.adjacency_matrix = None
 
         if natural_frequencies is not None:
+            validate_intrinsic_frequency_array(natural_frequencies, self.N)
             self.omegas: NDArray[np.floating] = np.asarray(
-                validate_intrinsic_frequency_array(natural_frequencies, self.N),
+                natural_frequencies,
                 dtype=float,
-            )
+            ).copy()
         else:
             self.omegas = self.rng.normal(0.0, 1.0, size=self.N)
 
@@ -227,6 +249,7 @@ class QuantumRotorSolver:
             self.omegas,
             K=K,
             dt=dt,
+            adjacency_matrix=self.adjacency_matrix,
             scheme=scheme,
             shots=shots,
             rng=self.rng,
@@ -316,7 +339,13 @@ class QuantumRotorSolver:
         str
             OpenQASM 2.0 code representation.
         """
-        angles = generate_scf_angles(self.phases, self.omegas, K=K, dt=dt)
+        angles = generate_scf_angles(
+            self.phases,
+            self.omegas,
+            K=K,
+            dt=dt,
+            adjacency_matrix=self.adjacency_matrix,
+        )
         return export_to_qasm(angles)
 
 
@@ -336,7 +365,19 @@ def _run_smoke_test() -> None:
     _, traj_exp = solver_exp.simulate(K=1.5, t_eval=t_eval, scheme="expectation")
     assert np.allclose(traj_sv, traj_exp, atol=1e-5)
 
-    qasm = solver.to_qasm(K=1.5, dt=0.05)
+    # Test with custom adjacency matrix
+    adj = np.array([
+        [0, 1, 0, 0, 1],
+        [1, 0, 1, 0, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 0, 1, 0],
+    ], dtype=float)
+    solver_adj = QuantumRotorSolver(n_oscillators=5, seed=42, adjacency_matrix=adj)
+    _, traj_adj = solver_adj.simulate(K=1.5, t_eval=t_eval, scheme="statevector")
+    assert traj_adj.shape == (10, 5)
+
+    qasm = solver_adj.to_qasm(K=1.5, dt=0.05)
     assert "rz(" in qasm
     print("✅ QuantumRotorSolver smoke test passed successfully!")
 

@@ -18,7 +18,8 @@ def generate_scf_angles(
     phases: NDArray[np.floating],
     omegas: NDArray[np.floating],
     K: float,
-    dt: float
+    dt: float,
+    adjacency_matrix: NDArray[np.floating] | None = None,
 ) -> NDArray[np.floating]:
     """
     Compute parallel Rz gate angles using the Self-Consistent Field (SCF) mapping.
@@ -36,22 +37,29 @@ def generate_scf_angles(
         Coupling strength.
     dt : float
         Integration timestep.
+    adjacency_matrix : NDArray, optional
+        Adjacency matrix of shape (N, N) defining the network topology.
 
     Returns
     -------
     NDArray
         Array of rotation angles phi_i for Rz gates.
     """
-    # 1. Compute Mean Field (Order Parameter)
-    v_mean = np.mean(np.exp(1j * phases))
-    R = np.abs(v_mean)
-    psi = np.angle(v_mean)
+    z = np.exp(1j * phases)
+    if adjacency_matrix is not None:
+        # 1. Compute Local Mean Field via Adjacency Matrix
+        v_local = (adjacency_matrix @ z) / len(phases)
+        R = np.abs(v_local)
+        psi = np.angle(v_local)
+        dtheta_dt = omegas + K * R * np.sin(psi - phases)
+    else:
+        # 1. Compute Global Mean Field (Order Parameter)
+        v_mean = np.mean(z)
+        R = np.abs(v_mean)
+        psi = np.angle(v_mean)
+        dtheta_dt = omegas + K * R * np.sin(psi - phases)
 
-    # 2. Compute effective angular velocity (The SCF Torque)
-    # dtheta/dt = omega + K*R*sin(psi - theta)
-    dtheta_dt = omegas + K * R * np.sin(psi - phases)
-
-    # 3. Map to gate angles (phi = velocity * dt)
+    # 2. Map to gate angles (phi = velocity * dt)
     return dtheta_dt * dt
 
 def export_to_qasm(angles: NDArray[np.floating]) -> str:
@@ -85,29 +93,40 @@ def synthesize_quantum_bridge(
     step_idx: int = -1,
     dt: float = 0.05,
     K: float = 1.5,
+    adjacency_matrix: NDArray[np.floating] | None = None,
 ) -> Dict[str, Any]:
     """
     High-level utility to synthesize a quantum circuit from a classical simulation snapshot.
     """
     phases = dataset["theta"][step_idx]
     omegas = dataset["omega"]
-    
-    angles = generate_scf_angles(phases, omegas, K, dt)
+    adj = (
+        adjacency_matrix
+        if adjacency_matrix is not None
+        else dataset.get("adjacency_matrix")
+    )
+
+    angles = generate_scf_angles(phases, omegas, K, dt, adjacency_matrix=adj)
     qasm = export_to_qasm(angles)
-    
+
     return {
         "n_qubits": len(phases),
         "angles": angles,
         "qasm": qasm,
-        "depth": 1, # Always 1 for parallel Rz
-        "mapping": "SCF-GA"
+        "depth": 1,  # Always 1 for parallel Rz
+        "mapping": "SCF-GA",
     }
 
 if __name__ == "__main__":
     # Quick Smoke Test
     test_phases = np.array([0, 0.1, 0.2])
     test_omegas = np.ones(3)
+    test_adj = np.array([[0, 1, 1], [1, 0, 1], [1, 1, 0]], dtype=float)
     res = generate_scf_angles(test_phases, test_omegas, K=1.0, dt=0.01)
-    print(f"Generated angles for N=3: {res}")
+    res_adj = generate_scf_angles(
+        test_phases, test_omegas, K=1.0, dt=0.01, adjacency_matrix=test_adj
+    )
+    print(f"Generated angles for N=3 (all-to-all): {res}")
+    print(f"Generated angles for N=3 (adjacency): {res_adj}")
     print("\nSample QASM:")
     print(export_to_qasm(res))

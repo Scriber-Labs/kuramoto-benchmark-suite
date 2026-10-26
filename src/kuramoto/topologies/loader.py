@@ -36,11 +36,11 @@ def load_topology(
     Parameters
     ----------
     name : str
-        Topology name ('ring', 'complete', 'small_world', 'random', 'tree_of_life').
+        Topology name ('ring', 'complete', 'small_world', 'random', 'bipartite', 'tree_of_life').
     return_graph : bool, default=False
         If True, returns the NetworkX Graph object. If False, returns the adjacency matrix.
     **kwargs : Any
-        Parameters for the topology generator (e.g., n, k, p).
+        Parameters for the topology generator (e.g., n, k, p, n1, n2, seed).
 
     Returns
     -------
@@ -72,6 +72,12 @@ def load_topology(
             seed=kwargs.get("seed", None),
         )
 
+    elif name == "bipartite":
+        n = kwargs.get("n", 20)
+        n1 = kwargs.get("n1", n // 2)
+        n2 = kwargs.get("n2", n - n1)
+        G = nx.complete_bipartite_graph(n1, n2)
+
     elif name == "tree_of_life":
         from .tree_of_life import build_tree_of_life
         G = build_tree_of_life()
@@ -102,6 +108,11 @@ def _run_smoke_test() -> None:
     G_comp = load_topology("complete", n=5, return_graph=True)
     assert isinstance(G_comp, nx.Graph)
     assert G_comp.number_of_nodes() == 5
+
+    # Test bipartite
+    A_bip = load_topology("bipartite", n=6)
+    assert isinstance(A_bip, np.ndarray)
+    assert A_bip.shape == (6, 6)
     
     print("✅ Topology loader smoke tests passed.")
 

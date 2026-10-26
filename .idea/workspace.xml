@@ -7,18 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references.">
-      <change afterPath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/failure_report_20261024T044346Z.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/sanity_report_20261024T044305Z.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/sanity_report_20261024T044340Z.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/BENCHMARK_REPORT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="sanity check notebook">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-4.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,14 +348,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00004" summary="updating the source code. all original src scripts are in the kuramoto folder located in the archive folder.">
-      <option name="closed" value="true" />
-      <created>1777816651688</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1777816651688</updated>
     </task>
     <task id="LOCAL-00005" summary="finished writing solver.py">
       <option name="closed" value="true" />
@@ -739,14 +733,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792816342780</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="sanity check notebook">
+      <option name="closed" value="true" />
+      <created>1792884337320</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1792884337321</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="split the solver into separate modules (one for each integration scheme)" />
     <MESSAGE value="added benchmark configuration and sample data" />
     <MESSAGE value="added quantum solvers and stabilization benchmarks" />
     <MESSAGE value="updated execution timestamps in demo.ipynb" />
@@ -771,7 +772,8 @@
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
     <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
+    <MESSAGE value="sanity check notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="sanity check notebook" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

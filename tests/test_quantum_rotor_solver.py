@@ -70,3 +70,48 @@ def test_quantum_rotor_qasm_generation():
     assert "OPENQASM 2.0;" in qasm
     assert "qreg q[4];" in qasm
     assert "rz(" in qasm
+
+
+def test_quantum_rotor_with_topology_adjacency():
+    """Verify quantum solver execution with adjacency matrices from kuramoto.topologies."""
+    from kuramoto.topologies import load_topology
+
+    n = 6
+    adj_ring = load_topology("ring", n=n)
+    adj_sw = load_topology("small_world", n=n, k=2, p=0.1)
+    adj_bip = load_topology("bipartite", n=n)
+
+    for adj in (adj_ring, adj_sw, adj_bip):
+        solver = QuantumRotorSolver(n_oscillators=n, seed=42, adjacency_matrix=adj)
+        assert solver.adjacency_matrix is not None
+        assert solver.adjacency_matrix.shape == (n, n)
+
+        t_eval = np.linspace(0.0, 1.0, 10)
+        t_out, traj = solver.simulate(K=1.5, t_eval=t_eval, scheme="statevector")
+        assert traj.shape == (10, n)
+        r = compute_order_parameter(traj)
+        assert np.all((r >= 0.0) & (r <= 1.0 + 1e-6))
+
+
+def test_quantum_rotor_matches_euler_with_adjacency():
+    """Verify that quantum statevector step exactly matches Euler graph coupling."""
+    from kuramoto.topologies import load_topology
+
+    n = 8
+    adj = load_topology("ring", n=n)
+    phases = np.array([0.1, -0.5, 0.8, -1.2, 0.4, -0.9, 1.1, -0.2])
+    omegas = np.array([0.5, -0.3, 0.2, -0.4, 0.1, 0.6, -0.5, 0.3])
+    K = 1.4
+    dt = 0.02
+
+    # Classical Euler step on graph A
+    diff = phases[np.newaxis, :] - phases[:, np.newaxis]
+    coupling = (K / n) * np.sum(adj * np.sin(diff), axis=1)
+    euler_next = (phases + dt * (omegas + coupling) + np.pi) % (2 * np.pi) - np.pi
+
+    # Quantum statevector step with adjacency
+    quantum_next = step_quantum_scf(
+        phases, omegas, K=K, dt=dt, adjacency_matrix=adj, scheme="statevector"
+    )
+
+    assert np.allclose(euler_next, quantum_next, atol=1e-12)
