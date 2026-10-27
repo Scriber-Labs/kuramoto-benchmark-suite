@@ -19,14 +19,17 @@
 1. **The Vectorized GA Speedup**: Do I understand *why* the GA solver scaled linearly $O(N)$ while standard solvers often struggle? (Hint: It’s the "Mean-Field" reduction).
 2. **The Fluid Flow Analogy**: Can I explain why a "Bivector Torque" is the same thing as "Vorticity" in a fluid? Why does this make sense visually in the streamplots?
 3. **The Quantum Bridge**: Do I see the connection between the rotor update $\exp(\Omega \Delta t)$ and the $R_z$ gate in Qiskit? Why did we call it the "Self-Consistent Field" (SCF) approximation?
+4. **Lie-Group Integrators (RKMK4 & DOPRI54)**: Why does evaluating Runge-Kutta stages directly in the Lie algebra $\mathfrak{spin}(n)$ guarantee exact rotor unit-norm conservation ($\sum R_k^2 = 1$) without numerical projection?
+5. **Time-Reversal Reconstruction**: Why does 5th-order DOPRI54 and 4th-order RKMK4 achieve $\sim 10^{-13}$ machine-precision time-reversal reconstruction over 50 seconds, whereas 2nd-order adaptive schemes accumulate $O(\Delta t^2) \sim 10^{-9}$ error?
 
 ---
 
-## 🏗️ Part 3: Deep Dive Prompts (The "What I Don't Understand")
+## 🏗️ Part 3: Deep Dive Prompts (The "Hard Parts")
 *These are the "Hard Parts." If these are fuzzy, mark them for our next session.*
 
-- **Manifold Constraints**: Why does the rotor formulation stay on the circle/sphere naturally, while RK45 needs high precision to avoid "drifting" off the manifold?
-- **SCF Mapping**: How does the quantum mapping turn a "coupled" system into "parallel" gates? Is there a hidden cost we aren't seeing?
+- **Manifold Constraints & Lie Exp Map**: Why does exponentiating a bivector $\exp(-\frac{\Delta t}{2}\Omega B)$ preserve unit rotors to machine precision ($10^{-16}$) while standard Euclidean ODE integrators drift away from the circle/sphere?
+- **FSAL Velocity Caching**: In Dormand-Prince 5(4), why is the 7th stage evaluate identical to the 1st stage of the subsequent step, and how does that save $O(N^2)$ bivector torque calculations?
+- **Cartesian Product Manifolds**: How does the product structure $\operatorname{Spin}(n)^N$ allow decoupled per-oscillator rotor updates while enforcing unified ensemble-level error control?
 - **Bivector Algebra**: How exactly does the wedge product $v_i \wedge v_{mean}$ represent a physical pull?
 
 ---

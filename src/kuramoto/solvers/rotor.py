@@ -58,7 +58,13 @@ from kuramoto.validation import (
     validate_time_axis,
 )
 
-__all__: list[str] = ["RotorSolver", "AdaptiveStatus", "AdaptiveStepResult", "step_rkmk4"]
+__all__: list[str] = [
+    "RotorSolver",
+    "AdaptiveStatus",
+    "AdaptiveStepResult",
+    "step_rkmk4",
+    "step_dopri54",
+]
 
 # ---------------------------------------------------------------------------- #
 # 🎭 Type Aliases
@@ -649,10 +655,11 @@ class RotorSolver:
         K : float
             Coupling strength (non-negative).
         dt : float
-            Timestep.
+            Timestep (can be negative for time-reversal integration).
         """
         validate_non_negative_scalar(K, "K")
-        validate_positive_scalar(dt, "dt")
+        if np.isclose(dt, 0.0):
+            raise ValueError("❌ dt cannot be zero in step_rkmk4.")
 
         if self.dim == 2:
             y0 = self._rotor_array
@@ -787,6 +794,259 @@ class RotorSolver:
         if self.dim == 2:
             return float(abs(self.get_complex_order_parameter()))
         return float(np.linalg.norm(self.get_order_parameter_vector()))
+
+    def step_dopri54(
+        self,
+        K: float,
+        dt: float,
+        w1_cached: NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None = None,
+    ) -> tuple[NDArray[np.float64], float, NDArray[np.float64] | tuple[NDArray[np.float64], ...]]:
+        """
+        Take one 5th-order Dormand-Prince (DOPRI54) Lie-group geometric step on Spin(n).
+
+        Computes 7 Lie-algebra stages from base state y0 on the Cartesian product Lie group
+        Spin(n)^N, producing a 5th-order candidate update, an embedded 4th-order candidate update,
+        and an intrinsic local truncation error (LTE) vector on the Lie algebra.
+
+        Parameters
+        ----------
+        K : float
+            Coupling strength (non-negative).
+        dt : float
+            Trial time step size (can be positive or negative for time-reversal).
+        w1_cached : optional
+            Precomputed stage 1 Lie-algebra bivectors (FSAL property from previous accepted step).
+
+        Returns
+        -------
+        tuple
+            ``(y5, lte, w7)`` where ``y5`` is the 5th-order candidate rotor array, ``lte`` is the
+            maximum Lie-algebra error scaled in radians, and ``w7`` is stage 7 velocity for FSAL.
+        """
+        validate_non_negative_scalar(K, "K")
+        if np.isclose(dt, 0.0):
+            raise ValueError("❌ dt cannot be zero in step_dopri54.")
+
+        y0 = self._rotor_array
+
+        if self.dim == 2:
+            # Stage 1 (FSAL)
+            w1 = self._compute_bivector_omega_2d(y0, K) if w1_cached is None else w1_cached
+
+            # Stage 2 (c2 = 1/5)
+            y1 = self._apply_bivector_step_2d(y0, (1.0 / 5.0) * w1, dt)
+            w2 = self._compute_bivector_omega_2d(y1, K)
+
+            # Stage 3 (c3 = 3/10)
+            y2 = self._apply_bivector_step_2d(y0, (3.0 / 40.0) * w1 + (9.0 / 40.0) * w2, dt)
+            w3 = self._compute_bivector_omega_2d(y2, K)
+
+            # Stage 4 (c4 = 4/5)
+            y3 = self._apply_bivector_step_2d(
+                y0,
+                (44.0 / 45.0) * w1 - (56.0 / 15.0) * w2 + (32.0 / 9.0) * w3,
+                dt,
+            )
+            w4 = self._compute_bivector_omega_2d(y3, K)
+
+            # Stage 5 (c5 = 8/9)
+            y4 = self._apply_bivector_step_2d(
+                y0,
+                (19372.0 / 6561.0) * w1
+                - (25360.0 / 2187.0) * w2
+                + (64448.0 / 6561.0) * w3
+                - (212.0 / 729.0) * w4,
+                dt,
+            )
+            w5 = self._compute_bivector_omega_2d(y4, K)
+
+            # Stage 6 (c6 = 1)
+            y5_eval = self._apply_bivector_step_2d(
+                y0,
+                (9017.0 / 3168.0) * w1
+                - (355.0 / 33.0) * w2
+                + (46732.0 / 5247.0) * w3
+                + (49.0 / 176.0) * w4
+                - (5103.0 / 18656.0) * w5,
+                dt,
+            )
+            w6 = self._compute_bivector_omega_2d(y5_eval, K)
+
+            # 5th-order Lie bivector update (c7 = 1)
+            w_5th = (
+                (35.0 / 384.0) * w1
+                + (500.0 / 1113.0) * w3
+                + (125.0 / 192.0) * w4
+                - (2187.0 / 6784.0) * w5
+                + (11.0 / 84.0) * w6
+            )
+            y5 = self._apply_bivector_step_2d(y0, w_5th, dt)
+
+            # Stage 7 (FSAL at y5)
+            w7 = self._compute_bivector_omega_2d(y5, K)
+
+            # Embedded LTE: (w_5th - w_4th) * dt
+            # Using Dormand-Prince error difference coefficients:
+            w_err = (
+                (71.0 / 57600.0) * w1
+                - (71.0 / 16695.0) * w3
+                + (71.0 / 1920.0) * w4
+                - (17253.0 / 339200.0) * w5
+                + (22.0 / 525.0) * w6
+                - (1.0 / 40.0) * w7
+            )
+            lte = float(np.max(np.abs(w_err) * abs(dt)))
+
+            return y5, lte, w7
+
+        elif self.dim == 3:
+            v1_cached = w1_cached
+            if v1_cached is None:
+                v12_1, v13_1, v23_1 = self._compute_bivector_omega_3d(y0, K)
+            else:
+                v12_1, v13_1, v23_1 = v1_cached  # type: ignore[misc]
+
+            # Stage 2
+            y1 = self._apply_bivector_step_3d(
+                y0, (1.0 / 5.0) * v12_1, (1.0 / 5.0) * v13_1, (1.0 / 5.0) * v23_1, dt
+            )
+            v12_2, v13_2, v23_2 = self._compute_bivector_omega_3d(y1, K)
+
+            # Stage 3
+            y2 = self._apply_bivector_step_3d(
+                y0,
+                (3.0 / 40.0) * v12_1 + (9.0 / 40.0) * v12_2,
+                (3.0 / 40.0) * v13_1 + (9.0 / 40.0) * v13_2,
+                (3.0 / 40.0) * v23_1 + (9.0 / 40.0) * v23_2,
+                dt,
+            )
+            v12_3, v13_3, v23_3 = self._compute_bivector_omega_3d(y2, K)
+
+            # Stage 4
+            y3 = self._apply_bivector_step_3d(
+                y0,
+                (44.0 / 45.0) * v12_1 - (56.0 / 15.0) * v12_2 + (32.0 / 9.0) * v12_3,
+                (44.0 / 45.0) * v13_1 - (56.0 / 15.0) * v13_2 + (32.0 / 9.0) * v13_3,
+                (44.0 / 45.0) * v23_1 - (56.0 / 15.0) * v23_2 + (32.0 / 9.0) * v23_3,
+                dt,
+            )
+            v12_4, v13_4, v23_4 = self._compute_bivector_omega_3d(y3, K)
+
+            # Stage 5
+            y4 = self._apply_bivector_step_3d(
+                y0,
+                (19372.0 / 6561.0) * v12_1 - (25360.0 / 2187.0) * v12_2 + (64448.0 / 6561.0) * v12_3 - (212.0 / 729.0) * v12_4,
+                (19372.0 / 6561.0) * v13_1 - (25360.0 / 2187.0) * v13_2 + (64448.0 / 6561.0) * v13_3 - (212.0 / 729.0) * v13_4,
+                (19372.0 / 6561.0) * v23_1 - (25360.0 / 2187.0) * v23_2 + (64448.0 / 6561.0) * v23_3 - (212.0 / 729.0) * v23_4,
+                dt,
+            )
+            v12_5, v13_5, v23_5 = self._compute_bivector_omega_3d(y4, K)
+
+            # Stage 6
+            y5_eval = self._apply_bivector_step_3d(
+                y0,
+                (9017.0 / 3168.0) * v12_1 - (355.0 / 33.0) * v12_2 + (46732.0 / 5247.0) * v12_3 + (49.0 / 176.0) * v12_4 - (5103.0 / 18656.0) * v12_5,
+                (9017.0 / 3168.0) * v13_1 - (355.0 / 33.0) * v13_2 + (46732.0 / 5247.0) * v13_3 + (49.0 / 176.0) * v13_4 - (5103.0 / 18656.0) * v13_5,
+                (9017.0 / 3168.0) * v23_1 - (355.0 / 33.0) * v23_2 + (46732.0 / 5247.0) * v23_3 + (49.0 / 176.0) * v23_4 - (5103.0 / 18656.0) * v23_5,
+                dt,
+            )
+            v12_6, v13_6, v23_6 = self._compute_bivector_omega_3d(y5_eval, K)
+
+            # 5th-order Lie bivector update
+            v12_5th = (35.0 / 384.0) * v12_1 + (500.0 / 1113.0) * v12_3 + (125.0 / 192.0) * v12_4 - (2187.0 / 6784.0) * v12_5 + (11.0 / 84.0) * v12_6
+            v13_5th = (35.0 / 384.0) * v13_1 + (500.0 / 1113.0) * v13_3 + (125.0 / 192.0) * v13_4 - (2187.0 / 6784.0) * v13_5 + (11.0 / 84.0) * v13_6
+            v23_5th = (35.0 / 384.0) * v23_1 + (500.0 / 1113.0) * v23_3 + (125.0 / 192.0) * v23_4 - (2187.0 / 6784.0) * v23_5 + (11.0 / 84.0) * v23_6
+
+            y5 = self._apply_bivector_step_3d(y0, v12_5th, v13_5th, v23_5th, dt)
+            v12_7, v13_7, v23_7 = self._compute_bivector_omega_3d(y5, K)
+
+            v12_err = (71.0 / 57600.0) * v12_1 - (71.0 / 16695.0) * v12_3 + (71.0 / 1920.0) * v12_4 - (17253.0 / 339200.0) * v12_5 + (22.0 / 525.0) * v12_6 - (1.0 / 40.0) * v12_7
+            v13_err = (71.0 / 57600.0) * v13_1 - (71.0 / 16695.0) * v13_3 + (71.0 / 1920.0) * v13_4 - (17253.0 / 339200.0) * v13_5 + (22.0 / 525.0) * v13_6 - (1.0 / 40.0) * v13_7
+            v23_err = (71.0 / 57600.0) * v23_1 - (71.0 / 16695.0) * v23_3 + (71.0 / 1920.0) * v23_4 - (17253.0 / 339200.0) * v23_5 + (22.0 / 525.0) * v23_6 - (1.0 / 40.0) * v23_7
+
+            err_stack = np.stack([v12_err, v13_err, v23_err], axis=-1)
+            lte = float(np.max(np.linalg.norm(err_stack, axis=-1) * abs(dt)))
+
+            return y5, lte, (v12_7, v13_7, v23_7)
+
+        else:
+            raise ValueError(f"Unsupported dim-{self.dim} for DOPRI54 stepping.")
+
+    def step_adaptive_dopri54(
+        self,
+        K: float,
+        dt_current: float,
+        rtol: float = 1e-8,
+        atol: float = 1e-10,
+        dt_min: float = 1e-6,
+        dt_max: float = 0.5,
+        w1_cached: NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None = None,
+    ) -> tuple[AdaptiveStepResult, NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None]:
+        """
+        Attempt a single Dormand-Prince 5(4) adaptive Lie-group step on Spin(n)^N.
+
+        Uses the 5th-order scaling exponent (1/5) with FSAL velocity caching.
+
+        Parameters
+        ----------
+        K : float
+            Coupling strength (non-negative).
+        dt_current : float
+            Trial time step.
+        rtol : float, optional
+            Relative tolerance contribution. Default 1e-8.
+        atol : float, optional
+            Absolute tolerance contribution. Default 1e-10.
+        dt_min : float, optional
+            Lower step size clamp. Default 1e-6.
+        dt_max : float, optional
+            Upper step size clamp. Default 0.5.
+        w1_cached : optional
+            FSAL stage cache from previous accepted step.
+
+        Returns
+        -------
+        tuple[AdaptiveStepResult, optional cached velocity]
+            Step result and next FSAL velocity cache if accepted.
+        """
+        validate_non_negative_scalar(K, "K")
+        validate_positive_scalar(abs(dt_current), "dt_current")
+        validate_positive_scalar(rtol, "rtol")
+        validate_positive_scalar(atol, "atol")
+
+        abs_dt = abs(dt_current)
+        sign_dt = np.sign(dt_current)
+
+        y_backup = self._rotor_array.copy()
+        y_5th, lte, w_fsal = self.step_dopri54(K, dt_current, w1_cached=w1_cached)
+
+        tol = self._effective_tolerance(rtol, atol)
+        s = _ADAPTIVE_SAFETY * (tol / (lte + _ADAPTIVE_EPS)) ** 0.2
+        s = float(np.clip(s, _ADAPTIVE_S_FLOOR, _ADAPTIVE_S_CEIL))
+
+        if lte <= tol:
+            self._rotor_array = y_5th
+            self._consecutive_rejections = 0
+            abs_dt_next = float(np.clip(abs_dt * s, dt_min, dt_max))
+            return (
+                AdaptiveStepResult(dt_current, sign_dt * abs_dt_next, AdaptiveStatus.ACCEPTED),
+                w_fsal,
+            )
+
+        self._rotor_array = y_backup
+        self._consecutive_rejections += 1
+        abs_dt_proposed = float(np.clip(abs_dt * min(s, 1.0), dt_min, dt_max))
+
+        if abs_dt_proposed >= abs_dt:
+            return (
+                AdaptiveStepResult(0.0, dt_current, AdaptiveStatus.DT_MIN_EXHAUSTED),
+                None,
+            )
+
+        return (
+            AdaptiveStepResult(0.0, sign_dt * abs_dt_proposed, AdaptiveStatus.REJECTED),
+            None,
+        )
 
     def step_predictor_corrector(
         self,
@@ -964,7 +1224,7 @@ class RotorSolver:
                 RuntimeWarning,
                 stacklevel=2,
             )
-            return AdaptiveStepResult(0.0, dt_curent, AdaptiveStatus.DT_MIN_EXHAUSTED)
+            return AdaptiveStepResult(0.0, dt_current, AdaptiveStatus.DT_MIN_EXHAUSTED)
 
         return AdaptiveStepResult(0.0, dt_proposed, AdaptiveStatus.REJECTED)
 
@@ -1057,6 +1317,9 @@ class RotorSolver:
             "rkmk",
             "rk4",
             "geometric_rk4",
+            "dopri54",
+            "dopri",
+            "adaptive_dopri54",
             "midpoint",
             "midpoint_geometric",
             "euler_midpoint",
@@ -1079,7 +1342,7 @@ class RotorSolver:
         if method_norm not in valid_methods:
             raise ValueError(
                 f"❌ Unknown simulation method: '{method}'. Expected one of: "
-                f"'rkmk4', 'midpoint', 'vectorized_geometric', 'fast', 'standard', 'adaptive', 'adaptive_embedded', "
+                f"'dopri54', 'adaptive_dopri54', 'rkmk4', 'midpoint', 'vectorized_geometric', 'fast', 'standard', 'adaptive', 'adaptive_embedded', "
                 f"'embedded')."
             )
 
@@ -1091,52 +1354,76 @@ class RotorSolver:
         times.append(current_time)
         all_phases.append(current_phases.copy())
 
-        for t_out in t_eval[1:]:
-            while current_time < t_out - 1e-12:
-                dt = min(dt_internal, t_out - current_time)
-                if method_norm in ("rkmk4", "rkmk", "rk4", "geometric_rk4"):
-                    self.step_rkmk4(K, dt)
-                elif method_norm in (
-                    "midpoint",
-                    "midpoint_geometric",
-                    "euler_midpoint",
-                ):
-                    self.step_midpoint_geometric(K, dt)
-                elif method_norm in (
-                    "vectorized_geometric",
-                    "geometric",
-                    "euler_geometric",
-                    "rotor_geometric",
-                ):
-                    self.step_euler_vectorized_geometric(K, dt)
-                elif method_norm in ("standard", "euler", "euler_standard"):
-                    self.step_euler(K, dt)
-                elif method_norm in ("adaptive", "adaptive_embedded", "embedded"):
-                    dt_trial = dt_internal
-                    dt_ceiling = dt_max if dt_max is not None else dt_internal
-                    while current_time < t_out - 1e-12:
-                        dt_trial = min(dt_trial, t_out - current_time)
-                        result = self.step_adaptive_embedded(
-                            K,
-                            dt_current=dt_trial,
-                            rtol=adaptive_rtol,
-                            atol=adaptive_atol,
-                            dt_min=dt_min,
-                            dt_max=dt_ceiling,
-                        )
-                        if result.status == AdaptiveStatus.DT_MIN_EXHAUSTED:
-                            raise RuntimeError(
-                                f"Adaptive stepper exhausted dt_min={dt_min:g} at t={current_time:.6g}."
-                            )
-                        if result.accepted:
-                            current_time += result.dt_taken
-                        dt_trial = result.dt_next
-                else:
-                    while current_time < t_out - 1e-12:
-                        dt = min(dt_internal, t_out - current_time)
-                    self.step_euler_fast(K, dt)
+        w_fsal_cache = None
 
-                current_time += dt
+        for t_out in t_eval[1:]:
+            if method_norm in ("adaptive_dopri54", "dopri54"):
+                dt_trial = dt_internal
+                dt_ceiling = dt_max if dt_max is not None else dt_internal
+                while current_time < t_out - 1e-12:
+                    dt_trial = min(dt_trial, t_out - current_time)
+                    result, w_next_fsal = self.step_adaptive_dopri54(
+                        K,
+                        dt_current=dt_trial,
+                        rtol=adaptive_rtol,
+                        atol=adaptive_atol,
+                        dt_min=dt_min,
+                        dt_max=dt_ceiling,
+                        w1_cached=w_fsal_cache,
+                    )
+                    if result.status == AdaptiveStatus.DT_MIN_EXHAUSTED:
+                        raise RuntimeError(
+                            f"Adaptive DOPRI54 stepper exhausted dt_min={dt_min:g} at t={current_time:.6g}."
+                        )
+                    if result.accepted:
+                        current_time += result.dt_taken
+                        w_fsal_cache = w_next_fsal
+                    else:
+                        w_fsal_cache = None
+                    dt_trial = result.dt_next
+            elif method_norm in ("adaptive", "adaptive_embedded", "embedded"):
+                dt_trial = dt_internal
+                dt_ceiling = dt_max if dt_max is not None else dt_internal
+                while current_time < t_out - 1e-12:
+                    dt_trial = min(dt_trial, t_out - current_time)
+                    result = self.step_adaptive_embedded(
+                        K,
+                        dt_current=dt_trial,
+                        rtol=adaptive_rtol,
+                        atol=adaptive_atol,
+                        dt_min=dt_min,
+                        dt_max=dt_ceiling,
+                    )
+                    if result.status == AdaptiveStatus.DT_MIN_EXHAUSTED:
+                        raise RuntimeError(
+                            f"Adaptive stepper exhausted dt_min={dt_min:g} at t={current_time:.6g}."
+                        )
+                    if result.accepted:
+                        current_time += result.dt_taken
+                    dt_trial = result.dt_next
+            else:
+                while current_time < t_out - 1e-12:
+                    dt = min(dt_internal, t_out - current_time)
+                    if method_norm in ("rkmk4", "rkmk", "rk4", "geometric_rk4"):
+                        self.step_rkmk4(K, dt)
+                    elif method_norm in (
+                        "midpoint",
+                        "midpoint_geometric",
+                        "euler_midpoint",
+                    ):
+                        self.step_midpoint_geometric(K, dt)
+                    elif method_norm in (
+                        "vectorized_geometric",
+                        "geometric",
+                        "euler_geometric",
+                        "rotor_geometric",
+                    ):
+                        self.step_euler_vectorized_geometric(K, dt)
+                    elif method_norm in ("standard", "euler", "euler_standard"):
+                        self.step_euler(K, dt)
+                    else:
+                        self.step_euler_fast(K, dt)
+                    current_time += dt
 
             # Extract phases once per output point for performance
             current_phases = self.extract_phases()
@@ -1220,6 +1507,33 @@ def step_rkmk4(
         Updated internal rotor state array.
     """
     solver.step_rkmk4(K, dt)
+    return solver._rotor_array
+
+
+def step_dopri54(
+    solver: RotorSolver,
+    K: float,
+    dt: float,
+) -> NDArray[np.floating]:
+    """
+    Perform a 5th-order Dormand-Prince (DOPRI54) Lie-group geometric step.
+
+    Parameters
+    ----------
+    solver : RotorSolver
+        Rotor solver instance.
+    K : float
+        Coupling strength (non-negative).
+    dt : float
+        Time step size.
+
+    Returns
+    -------
+    NDArray[np.floating]
+        Updated internal rotor state array.
+    """
+    y5, _, _ = solver.step_dopri54(K, dt)
+    solver._rotor_array = y5
     return solver._rotor_array
 
 
@@ -1570,7 +1884,7 @@ def _run_smoke_test() -> None:
             dt_trial = result.dt_next
 
             normas = np.sum(adaptive._rotor_array**2, axis=1)
-            assert np.allclose(norms, 1.0, atol=1e-12), (
+            assert np.allclose(normas, 1.0, atol=1e-12), (
                 "Rotor norm drifted off the Spin(n) manifold under adaptive sampling."
             )
 

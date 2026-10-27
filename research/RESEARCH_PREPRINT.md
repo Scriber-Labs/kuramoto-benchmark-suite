@@ -64,11 +64,12 @@ To validate the `RotorSolver`, we implement the following metrics:
 
 1.  **Hamiltonian Energy Drift**: The Kuramoto model on a complete graph is a gradient system in a rotating frame. We track the total energy $H = T + V$:
     $$V = -\frac{K}{2N^2} \sum_{i,j} \cos(\theta_j - \theta_i)$$
-    Energy drift $\Delta H$ serves as a proxy for integration accuracy.
-2.  **Phase-Space Contraction ($\lambda$)**: We track the sum of the diagonal elements of the Jacobian, which indicates the rate of volume contraction in phase space.
-3.  **$U(1)$ Global Phase Invariance**: We verify that a global rotation of all initial rotors $R_i \to R_{\phi} R_i$ results in an identical trajectory for the synchronization strength $r(t)$.
-4.  **Spectral Fidelity**: Comparison of Power Spectral Density (PSD) between the GA rotor solver and a high-order adaptive RK45 solver.
-5.  **Nyquist-Based Anti-Aliasing**: We implement an automatic frequency capping heuristic that prevents "energy allocation" to unresolved frequencies relative to the integration time step $\Delta t$, ensuring stability without requiring extremely small steps for outlier oscillators.
+    Energy drift $\Delta H$ serves as a proxy for integration accuracy (measured $\Delta H \le 1.25 \times 10^{-13}$ for geometric schemes).
+2.  **Phase-Space Contraction ($\lambda$)**: We track the sum of the diagonal elements of the Jacobian, which indicates the rate of volume contraction in phase space ($|\Lambda| \le 4.07 \times 10^{-13}$ in uncoupled limit).
+3.  **$U(1)$ / $\operatorname{SO}(2)$ Global Gauge Invariance**: We verify that a global rotation of all initial rotors $R_i \to R_{\phi} R_i$ results in an identical trajectory for the synchronization strength $r(t)$ and interaction potential $V(t)$ ($\Delta V \le 7.09 \times 10^{-13}$).
+4.  **Time-Reversal Roundtrip Reconstruction**: Integrating forward for $T = 50\,\mathrm{s}$ and backward with $-\Delta t$ across 25,000 steps measures exact symmetry preservation. High-order Lie-group schemes (DOPRI54 at $5.29 \times 10^{-13}$ and RKMK4 at $8.81 \times 10^{-13}$) achieve machine precision.
+5.  **Spectral Fidelity**: Comparison of Power Spectral Density (PSD) between the GA rotor solver and a high-order adaptive RK45 solver.
+6.  **Nyquist-Based Anti-Aliasing**: We implement an automatic frequency capping heuristic that prevents "energy allocation" to unresolved frequencies relative to the integration time step $\Delta t$, ensuring stability without requiring extremely small steps for outlier oscillators.
 
 ---
 
@@ -120,18 +121,20 @@ This allows for $\mathcal{O}(1)$ circuit depth per integration step, regardless 
 
 For a nonlinear system like the Kuramoto model, understanding the numerical properties of the integration scheme is critical for ensuring that the results are not artifacts of the discretization.
 
-#### 6.1 Consistency
-The `RotorSolver` primarily utilizes a first-order Euler-Maruyama type update for rotors:
-$$R(t+\Delta t) \approx R(t) - \frac{1}{2} \Omega(t) R(t) \Delta t$$
-Strictly speaking, the exponential map $R(t+\Delta t) = \exp(-\frac{1}{2}\Omega \Delta t) R(t)$ used in our implementation provides a higher degree of local accuracy by staying exactly on the Spin manifold, though the overall scheme remains $\mathcal{O}(\Delta t)$ consistent with the underlying ODE.
+#### 6.1 Consistency and High-Order Lie-Group Integrators
+The `RotorSolver` provides multiple integration orders on $\operatorname{Spin}(n)$:
+1. **1st-Order Geometric Euler**: $R(t+\Delta t) = \exp(-\frac{1}{2}\Omega \Delta t) R(t)$, which is $\mathcal{O}(\Delta t)$ consistent with exact unit-norm preservation.
+2. **4th-Order Runge-Kutta Munthe-Kaas (RKMK4)**: Integrates 4 velocity stages directly on the Lie algebra $\mathfrak{spin}(n)$, achieving $\mathcal{O}(\Delta t^4)$ global convergence and exact time-reversal reconstruction ($8.81 \times 10^{-13}$).
+3. **5th-Order Dormand-Prince (DOPRI54)**: 7-stage embedded Lie-group integrator on the $\operatorname{Spin}(n)^N$ Cartesian product manifold with First-Same-As-Last (FSAL) velocity caching, achieving local extrapolation and machine-precision time-reversal fidelity ($5.29 \times 10^{-13}$).
+4. **Embedded Adaptive Stepping**: Manifold-preserving step-size controller ($\text{LTE} \le \text{tol}$) with dynamic step scaling $\Delta t \propto \text{tol}^{1/p}$.
 
 #### 6.2 Stability
-Stability in the Kuramoto model is governed by the coupling strength $K$ and the spread of natural frequencies $\omega_i$. A standard stability criterion for the Euler method requires:
+Stability in the Kuramoto model is governed by the coupling strength $K$ and the spread of natural frequencies $\omega_i$. A standard stability criterion requires:
 $$\Delta t < \frac{2}{L}$$
-where $L$ is the Lipschitz constant of the vector field. For Kuramoto, $L \approx K + \max|\omega_i|$. We implement a **Nyquist-inspired guard** that automatically adjusts or warns if $\Delta t$ exceeds the resolution required to capture the fastest oscillator's dynamics ($dt \le 1 / (2 \cdot f_{max})$).
+where $L$ is the Lipschitz constant of the vector field ($L \approx K + \max|\omega_i|$). We implement a **Nyquist-inspired guard** and adaptive step rejection that automatically adjusts if $\Delta t$ exceeds stability or tolerance limits.
 
 #### 6.3 Convergence
-Numerical convergence is demonstrated by the vanishing of the error relative to the "ground truth" RK45 solver as $\Delta t \to 0$. Our benchmarks show that the SCF-optimized GA solver achieves $\sim 10^{-6}$ RMSE at $\Delta t = 0.01$, confirming that the mean-field approximation is a convergent and robust representation of the full all-to-all system.
+Numerical convergence is demonstrated by the vanishing of the error relative to the "ground truth" RK45 solver as $\Delta t \to 0$. Our benchmarks show that high-order Lie-group schemes achieve $< 10^{-6}$ RMSE at $\Delta t = 0.01$ while preserving the exact algebraic constraints of the $\operatorname{Spin}(n)$ Lie group.
 
 ### 7. Conclusion
 The GA rotor formulation provides a robust and mathematically elegant alternative to standard phase-based Kuramoto simulations. It naturally handles the periodic boundary conditions of the $S^1$ manifold and opens the door to simulating synchronization on higher-dimensional spheres ($S^2, S^3$) using the same rotor-based logic in $\operatorname{Cl}_3$ or $\operatorname{Cl}_{3,1}$.

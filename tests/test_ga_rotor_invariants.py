@@ -4,7 +4,7 @@ import pytest
 pytest.importorskip("clifford")
 
 from kuramoto.order_parameter import compute_order_parameter
-from kuramoto.solvers.rotor import RotorSolver, step_rkmk4
+from kuramoto.solvers.rotor import RotorSolver, step_dopri54, step_rkmk4
 
 
 def test_rotor_u1_invariance():
@@ -180,3 +180,45 @@ def test_step_rkmk4_standalone():
     # Norms must stay equal to 1.0
     norms = np.sum(updated_rotors**2, axis=1)
     assert np.allclose(norms, 1.0, atol=1e-12)
+
+
+def test_step_dopri54_and_adaptive_invariants():
+    """Verify Dormand-Prince 5(4) Lie-group stepper order, norm conservation, and time-reversibility."""
+    N = 4
+    solver = RotorSolver(n_oscillators=N, dim=2, seed=42)
+    initial_rotors = solver._rotor_array.copy()
+
+    # 1. Standalone step_dopri54
+    updated_rotors = step_dopri54(solver, K=1.2, dt=0.01)
+    assert isinstance(updated_rotors, np.ndarray)
+    assert updated_rotors.shape == (N, 2)
+    assert np.allclose(solver._rotor_array, updated_rotors)
+    assert not np.allclose(initial_rotors, updated_rotors)
+
+    # Norm conservation on Spin(2)
+    norms = np.sum(updated_rotors**2, axis=1)
+    assert np.allclose(norms, 1.0, atol=1e-14)
+
+    # 2. Time-reversal roundtrip over 10s
+    solver_rev = RotorSolver(n_oscillators=6, dim=2, seed=123)
+    init_phases = solver_rev.extract_phases()
+    dt = 0.005
+    n_steps = 200
+
+    for _ in range(n_steps):
+        step_dopri54(solver_rev, K=0.8, dt=dt)
+    for _ in range(n_steps):
+        step_dopri54(solver_rev, K=0.8, dt=-dt)
+
+    recon_phases = solver_rev.extract_phases()
+    recon_err = np.max(np.abs(np.exp(1j * recon_phases) - np.exp(1j * init_phases)))
+    assert recon_err < 1e-12
+
+    # 3. Full simulate with method='adaptive_dopri54'
+    t_eval = np.linspace(0.0, 1.0, 11)
+    solver_adapt = RotorSolver(n_oscillators=6, dim=2, seed=123)
+    t_out, phases_out = solver_adapt.simulate(
+        K=0.8, t_eval=t_eval, dt_internal=0.01, method="adaptive_dopri54"
+    )
+    assert len(t_out) == len(t_eval)
+    assert phases_out.shape == (11, 6)

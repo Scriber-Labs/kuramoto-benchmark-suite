@@ -74,6 +74,20 @@ Show that shifting all phases $\theta_i \to \theta_i + \alpha$ does not change t
 1. Apply the shift to the $\sin(\theta_j - \theta_i)$ term.
 2. What physical "charge" corresponds to this $U(1)$ symmetry?
 
+## Problem 11: Runge-Kutta Munthe-Kaas (RKMK4) on Lie Algebras
+**Goal**: Understand why RKMK4 avoids manifold drift.
+Given a rotor differential equation $\dot{R} = -\frac{1}{2}\Omega(R) R$:
+1. If standard RK4 updates $R_{\text{next}} = R_0 + \Delta t \sum b_i k_i$, why does $R_{\text{next}}$ violate $\|R_{\text{next}}\|=1$?
+2. How does RKMK4 restore exact unit-norm invariant conservation by evaluating stages on the Lie algebra $\mathfrak{spin}(n)$?
+3. **Reference**: See `step_rkmk4` in `../src/kuramoto/solvers/rotor.py`.
+
+## Problem 12: Dormand-Prince FSAL & Adaptive Scaling
+**Goal**: Analyze embedded error estimation and FSAL efficiency.
+In the Dormand-Prince 5(4) integrator (DOPRI54):
+1. What does FSAL (First-Same-As-Last) mean, and how many bivector field evaluations are saved per accepted step?
+2. If the local truncation error estimate is $\text{LTE} = 10^{-10}$ and the target tolerance is $\text{tol} = 10^{-8}$, what is the proposed step-size scale factor $s$ using 5th-order scaling?
+3. **Reference**: See `step_adaptive_dopri54` in `../src/kuramoto/solvers/rotor.py`.
+
 ---
 
 # ✅ Solutions
@@ -116,3 +130,11 @@ Show that shifting all phases $\theta_i \to \theta_i + \alpha$ does not change t
 ### Solution 10
 1. $\sin((\theta_j + \alpha) - (\theta_i + \alpha)) = \sin(\theta_j - \theta_i)$. The shift cancels out.
 2. The conservation of total phase (or the "Total Momentum" of the ensemble).
+
+### Solution 11
+1. Linear addition in Euclidean space does not preserve the quadratic constraint $\|R\|^2 = 1$; the sum of unit vectors/rotors generally lies outside the unit hypersphere.
+2. RKMK4 evaluates velocity stages $\omega_i \in \mathfrak{spin}(n)$ (bivectors) and applies the Lie group exponential map $\exp(-\frac{\Delta t}{2} \omega_{\text{eff}} B)$, which is analytically guaranteed to lie strictly in $\operatorname{Spin}(n)$ with $\|R\|=1$ to machine precision ($10^{-16}$).
+
+### Solution 12
+1. FSAL means the 7th stage velocity $\omega_7 = \Omega(y_5)$ computed at the accepted 5th-order state $y_5$ is identical to the 1st stage velocity $\omega_1$ of the next step. Reusing $\omega_7$ as $\omega_1$ saves 1 full bivector torque evaluation per accepted step (reducing cost from 7 to 6 evaluations).
+2. For order $p=5$, $s = 0.9 \times (\text{tol} / \text{LTE})^{1/5} = 0.9 \times (10^{-8} / 10^{-10})^{1/5} = 0.9 \times (100)^{0.2} \approx 0.9 \times 2.512 = 2.26$. The step size $\Delta t$ can safely increase by $\approx 2.26\times$.
