@@ -7,20 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="sanity check notebook">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="qiskit implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-2.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-4.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/validate_structural_metrics.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="140" />
+    <option name="cachedIndexableFilesCount" value="139" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -67,61 +61,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000000597" />
-      <entry key="MS500" value="1.0025051604281479" />
-      <entry key="S2" value="1.5632522751671991" />
-      <entry key="S5" value="3.5408681252370444" />
-      <entry key="S10" value="6.112028570791772" />
-      <entry key="S30" value="11.035426481309754" />
-      <entry key="S60" value="13.552806655821058" />
-      <entry key="M2" value="15.52703382057371" />
-      <entry key="M5" value="27.871551288127502" />
-      <entry key="M10" value="75.91608130193062" />
-      <entry key="M15" value="126.84477970226057" />
-      <entry key="M30" value="233.814281599961" />
-      <entry key="H1" value="360.9926222145373" />
-      <entry key="H2" value="590.1135413240391" />
-      <entry key="H4" value="1285.2528066484579" />
-      <entry key="D1" value="10807.914831023578" />
-      <entry key="W1" value="22072.283546441133" />
+      <entry key="MS100" value="1.4290005271257444" />
+      <entry key="MS500" value="2.4760029691465304" />
+      <entry key="S2" value="3.459037630353588" />
+      <entry key="S5" value="5.10510178624041" />
+      <entry key="S10" value="8.500593208192003" />
+      <entry key="S30" value="22.022143681471032" />
+      <entry key="S60" value="38.06499238878912" />
+      <entry key="M2" value="60.462630565636935" />
+      <entry key="M5" value="130.86450118345314" />
+      <entry key="M10" value="292.08934520023763" />
+      <entry key="M15" value="454.34488334856576" />
+      <entry key="M30" value="835.5774960752327" />
+      <entry key="H1" value="1280.4237878161703" />
+      <entry key="H2" value="1690.4418301854726" />
+      <entry key="H4" value="1996.8632686583733" />
+      <entry key="D1" value="4868.270311088084" />
+      <entry key="W1" value="20345.188780629178" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="5.901083961115672E-42" />
-      <entry key="MS500" value="5.67788194991562E-9" />
-      <entry key="S2" value="0.008680536942617919" />
-      <entry key="S5" value="0.14976786399369926" />
-      <entry key="S10" value="0.38699853228881786" />
-      <entry key="S30" value="0.7287352419544949" />
-      <entry key="S60" value="0.8536697094122717" />
-      <entry key="M2" value="0.9270708180195372" />
-      <entry key="M5" value="1.0840822568215598" />
-      <entry key="M10" value="1.5775198120988025" />
-      <entry key="M15" value="2.192772769831159" />
-      <entry key="M30" value="3.803093856329563" />
-      <entry key="H1" value="6.269515946418051" />
-      <entry key="H2" value="10.42257392150999" />
-      <entry key="H4" value="18.665548960803605" />
-      <entry key="D1" value="94.73090112704026" />
-      <entry key="W1" value="179.87136561276432" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="6.222187176E-314" />
+      <entry key="S2" value="4.994428128318807E-79" />
+      <entry key="S5" value="4.779630316585661E-32" />
+      <entry key="S10" value="2.186236564643829E-16" />
+      <entry key="S30" value="6.024216550298124E-6" />
+      <entry key="S60" value="0.0024590315444155126" />
+      <entry key="M2" value="0.051798653463749476" />
+      <entry key="M5" value="0.4399623060792408" />
+      <entry key="M10" value="1.4149259938427394" />
+      <entry key="M15" value="2.4478697294874308" />
+      <entry key="M30" value="4.928146561403212" />
+      <entry key="H1" value="7.974849354926208" />
+      <entry key="H2" value="11.019214077396686" />
+      <entry key="H4" value="13.45032444814632" />
+      <entry key="D1" value="38.46721762451654" />
+      <entry key="W1" value="163.0624476840173" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.208007551940743E-12" />
-      <entry key="MS500" value="0.005657329699484902" />
-      <entry key="S2" value="0.6783568476833735" />
-      <entry key="S5" value="2.935902981905193" />
-      <entry key="S10" value="5.856444159515769" />
-      <entry key="S30" value="11.3757622443825" />
-      <entry key="S60" value="14.170894193641947" />
-      <entry key="M2" value="16.322829050348023" />
-      <entry key="M5" value="28.887355360415473" />
-      <entry key="M10" value="77.43138809280735" />
-      <entry key="M15" value="128.97625055053012" />
-      <entry key="M30" value="237.56583139258706" />
-      <entry key="H1" value="367.22239992735257" />
-      <entry key="H2" value="600.5017542997737" />
-      <entry key="H4" value="1303.8838944808338" />
-      <entry key="D1" value="10902.612495296135" />
-      <entry key="W1" value="22252.145428079773" />
+      <entry key="MS100" value="1.1307571420154816" />
+      <entry key="MS500" value="2.349246245104095" />
+      <entry key="S2" value="3.3295132063093424" />
+      <entry key="S5" value="4.930150558829257" />
+      <entry key="S10" value="8.309463403042578" />
+      <entry key="S30" value="21.798645998062064" />
+      <entry key="S60" value="37.82722687021425" />
+      <entry key="M2" value="60.29177486306042" />
+      <entry key="M5" value="131.11395202767864" />
+      <entry key="M10" value="293.3274328471096" />
+      <entry key="M15" value="456.6234411840785" />
+      <entry key="M30" value="840.3612302151723" />
+      <entry key="H1" value="1288.293266286474" />
+      <entry key="H2" value="1701.3945533236138" />
+      <entry key="H4" value="2010.2756923511886" />
+      <entry key="D1" value="4906.722644970859" />
+      <entry key="W1" value="20508.242484552637" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -204,7 +198,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\archive" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.viz">
+  <component name="RunManager" selected="Python.rotor">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -324,11 +318,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rotor" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" />
         <item itemvalue="Python tests.Doctests in order_parameter" />
-        <item itemvalue="Python.rotor" />
       </list>
     </recent_temporary>
   </component>
@@ -348,14 +342,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00005" summary="finished writing solver.py">
-      <option name="closed" value="true" />
-      <created>1777822421552</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1777822421552</updated>
     </task>
     <task id="LOCAL-00006" summary="finished writing src/kuramoto/model.py">
       <option name="closed" value="true" />
@@ -741,14 +727,21 @@
       <option name="project" value="LOCAL" />
       <updated>1792884337321</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="qiskit implementation">
+      <option name="closed" value="true" />
+      <created>1793050478252</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1793050478252</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added benchmark configuration and sample data" />
     <MESSAGE value="added quantum solvers and stabilization benchmarks" />
     <MESSAGE value="updated execution timestamps in demo.ipynb" />
     <MESSAGE value="added rotor_dt_0.01.npz benchmark data" />
@@ -773,7 +766,8 @@
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
     <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
     <MESSAGE value="sanity check notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="sanity check notebook" />
+    <MESSAGE value="qiskit implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="qiskit implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

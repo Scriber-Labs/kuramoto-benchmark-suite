@@ -34,7 +34,7 @@ is stored as geometric-algebra rotors.
 Author: Eigenscribe
 Review status: Reviewed and maintained by Eigenscribe.
 Date created: 05-2026
-Last updated: 09-2026
+Last updated: 10-2026
 """
 
 from __future__ import annotations
@@ -43,6 +43,8 @@ import warnings
 
 import numpy as np
 from numpy.typing import NDArray
+from enum import IntEnum
+from typing import Final, NamedTuple
 
 # Import RNG utilities from the central utils module
 from kuramoto.utils import resolve_rng
@@ -56,7 +58,7 @@ from kuramoto.validation import (
     validate_time_axis,
 )
 
-__all__: list[str] = ["RotorSolver", "step_rkmk4"]
+__all__: list[str] = ["RotorSolver", "AdaptiveStatus", "AdaptiveStepResult", "step_rkmk4"]
 
 # ---------------------------------------------------------------------------- #
 # 🎭 Type Aliases
@@ -212,6 +214,9 @@ class RotorSolver:
         self._rotor_array = np.array(
             [r.value[self._blade_indices] for r in self.rotors]
         )
+
+        # Adaptive-stepper diagnostics (read-only telemetry for the benchmark suite)
+        self._consecutive_rejections: int = 0
 
         # Natural frequencies
         if natural_frequencies is not None:
@@ -405,6 +410,71 @@ class RotorSolver:
 
         torque = v_mean[:, 0] * y - v_mean[:, 1] * x
         return self.omegas - K * torque
+
+    def _estimate_lte(
+        self,
+        w1: NDArray[np.float64],
+        w2: NDArray[np.float64],
+        dt: float,
+    ) -> float:
+        """Return the bivector-space embedded local-truncation error estimate.
+
+        Parameters
+        ----------
+        w1 : NDArray[np.float64]
+            Bivector velocity at the base state, shape ``(N,)`` for dim=2 or ``(N,3)`` for dim=3.
+        w2 : NDArray[np.float64]
+            Bivector velocity at the predicted state, same shape as ``w1``.
+        dt : float
+            Trial step size.
+
+        Returns
+        -------
+        float
+            ``0.25 * dt * max_i |w2,i - w1,i|``, in radians.
+
+        Notes
+        -----
+        MAX-NORM, not RMS. Rational: the max-norm resolves the worst-behaved oscillator, which is the correct behavior
+        for partially synchronized and chimera-like states where a single outlier can carry the fastest local dynamics.
+        An RMS norm would let that oscillator be under-resolved in exchange for a larger dt. This chois is isolated here
+        so it lives in exactly one place.
+        """
+        assert w1.shape == w2.shape, "Bivector velocity shapes must match."
+        return float(0.25 * dt * np.max(np.abs(w1 - w2)))
+
+    def _effective_tolerance(
+        self,
+        rtol: float,
+        atol: float,
+    ) -> float:
+        """Return the scalar tolerance compared against the bivector-space LTE estimate.
+
+        Parameters
+        ----------
+        rtol : float
+            Relative tolerance contribution.
+        atol : float
+            Absolute tolerance floor, in radians.
+
+        Returns
+        -------
+        float
+            Effective tolerance in radians.
+
+        Notes
+        -----
+        The textbook criterion ``atol + rtol * |R|`` degenerates for unit rotors: ``|R| = 1`` for every state on
+        Spin(n), so ``rtol`` would carry no dimensional information at all. The LTE returned by
+        ``step_predictor_corrector`` is an angle in radians, so the tolerance is expressed in radians and ``rtol`` is
+        interpreted relative to a unit-radian angle scale.
+
+        DELIBERATELY dt-INDEPENDENT. Making the tolerance depend on ``dt`` (for example scaling by ``|Omega| * dt``)
+        contaminates the controller asymptotics: with ``lte ~ dt^2`` and ``tol ~ dt``, the scaling factor becomes
+        ``s ~ dt^(-1/2)`` and the clean ``dt ~ tol^(1/2)`` law is destroyed. If later you want a state-magnitude-aware
+        tolerance, scale by a quantity that is fixed for the duration of a run.
+        """
+        return atol + rtol * _ROTOR_ANGLE_SCALE
 
     def _apply_bivector_step_2d(
         self,
@@ -718,6 +788,187 @@ class RotorSolver:
             return float(abs(self.get_complex_order_parameter()))
         return float(np.linalg.norm(self.get_order_parameter_vector()))
 
+    def step_predictor_corrector(
+        self,
+        K: float,
+        dt: float,
+    ) -> tuple[NDArray[np.float64], float]:
+        """
+        Take one 2nd-order Lie-algebra Heun predictor-corrector step on Spin(n).
+
+        Computes a 1st-order Lie-Euler predictor and a 2nd-order Lie-algebra-average corrector from the SAME base state,
+        and returns the corrector together with an embedded local-truncation-error estimate. The solver state is NOT
+        modified.
+
+        Parameters
+        ----------
+        K : float
+           Global coupling strength. Must be non-negative.
+        dt : float
+           Trial step size. Must be strictly positive.
+
+        Returns
+        -------
+        tuple[NDArray[np.float64], float]
+            ``(y_corr, let)`` -- candidate rotor array of shape ``(N, n_components)`` and a scalar
+            local-truncation-error estimate in radians.
+
+        Raises
+        ------
+        ValueError
+            If ``K`` is negative, ``dt`` is non-positive, or ``dim`` is unsupported.
+
+        Notes
+        -----
+        PURITY CONTRACT: this method does not assign to ``self._rotor_array``. Both ``_apply_bivector_step_2d`` and
+        ``_apply_bivector_step_3d`` allocate frash arrays via ``np.column_stack``, so no defensive copy of ``y0`` is
+        required. The accept/reject decision belongs to ``step_adaptive_embedded``.
+
+        ANCHORING: the corrector re-exponentiates from the BASE state ``y0``, never from the predictor. Averaging
+        bivectors is a 2nd-order construction only when both are anchored at the same point; anchoring the corrector at
+        ``y_predict`` silently drops you to 1st order.
+
+        ERROR SCALE: ``lte`` is measured in bivector space as ``(dt / 4) * max_i |w2, i - w1, i|``. This is teh error
+        of the LOWER-order (predictor) member, hence O(dt^2). Tolerances passed to the adaptive driver are calibrated
+        against THIS definition.
+        """
+        validate_non_negative_scalar(K, "K")
+        validate_positive_scalar(dt, "dt")
+
+        y0 = self._rotor_array
+        if self.dim == 2:
+            # 1. Predictor: 1st-order Lie-Euler, anchored at y0.
+            w1 = self._compute_bivector_omega_2d(y0, K)
+            y_pred = self._apply_bivector_step_2d(y0, w1, dt)
+
+            #2. Corrector: 2nd-order Lie-algebra average, anchored at y0.
+            w2 = self._compute_bivector_omega_2d(y_pred, K)
+            w_eff = 0.5 * (w1 + w2)
+            y_corr = self._apply_bivector_step_2d(y0, w_eff, dt)
+
+            lte = self._estimate_lte(w1, w2, dt)
+
+        elif self.dim == 3:
+            v12_1, v13_1, v23_1 = self.compute_bivector_omega_3d(y0, K)
+            y_pred = self._apply_bivector_step_3d(y0, v12_1, v13_1, v23_1, dt)
+
+            v12_2, v13_2, v23_2 = self._compute_bivector_omega_3d(y_pred, K)
+            v12_eff = 0.5 * (v12_1 + v12_2)
+            v13_eff = 0.5 * (v13_1 + v13_2)
+            v23_eff = 0.5 * (v23_1 + v23_2)
+            y_corr = self._apply_bivector_step_3d(y0, v12_eff, v13_eff, v23_eff, dt)
+
+            # Stack the three planes into (N, 3) so ONE error estimator serves both dimensions.
+            w1 = np.stack([v12_1, v13_1, v23_1], axis=-1)
+            w2 = np.stack([v12_2, v13_2, v23_2], axis=-1)
+            lte = self._estimate_lte(w1, w2, dt)
+
+        else:
+            raise ValueError(
+                f"Unsopported dim-{self.dim}; predictor-corrector supports dim in (2, 3)."
+            )
+
+        return y_corr, lte
+
+    def step_adaptive_embedded(
+        self,
+        K: float,
+        dt_current: float,
+        rtol: float = 1e-5,
+        atol: float = 1e-7,
+        dt_min: float = 1e-5,
+        dt_max: float = 0.1,
+    ) -> AdaptiveStepResult:
+        """Attempt a single adaptive embedded step on Spin(n) and propose the next step size.
+
+        Wraps ``step_predictor_corrector`` with an elementary step-size controller. On acceptance the solver state is
+        advanced and committed; on rejection the state is restored and a reduced trial step is proposed.
+
+
+        Parameters
+        ----------
+        K : float
+            Global coupling strength. Must be non-negative.
+        dt_current :  float
+            Trial step size for this attempt. Must be strictly positive.
+        rtol : float, optional
+            Relative tolerance contribution. Default ``1e-5``.
+        atol : float, optional
+            Absolute tolerance floor, in radians. Default ``1e-7``.
+        dt_min : float, optional
+            Lower clamp on any proposed step size. Default ``1e-5``.
+        dt_max :
+            Upper clamp on any proposed step size. Default ``0.1``.
+
+        Returns
+        -------
+        AdaptiveStepResult
+            ``(dt_taken, dt_next, status)``. ``dt_taken`` is ``0.0`` on any non-acceptance.
+
+        Notes
+        -----
+        CONTROLLER EXPONENT: the embedded estimate tracks the 1st-order parameter, so the scaling exponent is
+        ``1 / (q + 1) = 1/2``, NOT ``1/3``. See the derivation block. Getting this wrong makes the asymptotic step-size
+        law ``dt ~ tol^(1/3)`` instead of ``dt ~ tol^(1/2)`` and will fail the controller-law assertion in the sanity
+        check notebook.
+
+        PROGRESS GUARANTEE: a rejected step is never allowed to propose a step size greater than or equal to the one
+        that just failed. If shrinking cannot make progress (the proposal clamps back up to ``dt_current``), the status
+        becomes `DT_MIN_EXHAUSTED` instead of looping forever.
+
+        REPRODUCIBILITY CAVEAT: the controller is deterministic, so a fixed seed plus a recorded dt history replays
+        bitwise. What adaptive stepping DOES break is comparison against a fixed-grid baseline -- run the
+        ``rk45_parity_rmse`` failure-mode check in fixed-dt mode, or interpolate both solutions onto a common grid.
+        """
+        validate_non_negative_scalar(K, "K")
+        validate_positive_scalar(dt_current, "dt_current")
+        validate_positive_scalar(rtol, "rtol")
+        validate_positive_scalar(atol, "atol")
+        validate_positive_scalar(dt_min, "dt_min")
+        validate_positive_scalar(dt_max, "dt_max")
+
+        if dt_min >= dt_max:
+            raise ValueError(
+                f"dt_main ({dt_min:g}) must be strictly less than dt_max ({dt_max:g})."
+            )
+
+        # Snapshot: the trial step is pure, so this is the only state we might need to restore.
+        y_backup = self._rotor_array.copy()
+
+        y_corr, lte = self.step_predictor_corrector(K, dt_current)
+
+        tol = self._effective_tolerance(rtol, atol)
+        s = _ADAPTIVE_SAFETY * (tol / (lte + _ADAPTIVE_EPS)) ** 0.5
+        s = float(np.clip(s, _ADAPTIVE_S_FLOOR, _ADAPTIVE_S_CEIL))
+
+        # ---- ACCEPT ----------------------------------------------------------------------------
+        if lte <= tol:
+            self._rotor_array = y_corr
+            self._consecutive_rejections = 0
+            dt_next = float(np.clip(dt_current * s, dt_min, dt_max))
+            return AdaptiveStepResult(dt_current, dt_next, AdaptiveStatus.ACCEPTED)
+
+        # ---- REJECT ----------------------------------------------------------------------------
+        self._rotor_array = y_backup
+        self._consecutive_rejections += 1
+
+        # min(s, 1.0) is belt-and braces: on rejection s <= safety < 1 by construction, but the clamp makes the "never
+        # grow a failed step" invariant explicit rather than incidental.
+        dt_proposed = float(np.clip(dt_current * min(s, 1.0), dt_min, dt_max))
+
+        if dt_proposed >= dt_current:
+            warnings.warn(
+                f"⚠️ Adaptive stepper cannot reduce dt below {dt_current:g} (dt_min={dt_min:g}); "
+                f"last LTE={lte:.3e} exceeded tol={tol:.3e}. Loosen rtol/atol, lower dt_min, or "
+                f"inspect the stiffness regime near K_c.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+            return AdaptiveStepResult(0.0, dt_curent, AdaptiveStatus.DT_MIN_EXHAUSTED)
+
+        return AdaptiveStepResult(0.0, dt_proposed, AdaptiveStatus.REJECTED)
+
+
     def simulate(
         self,
         K: float,
@@ -726,6 +977,10 @@ class RotorSolver:
         enforce_nyquist: bool = True,
         max_phase_increment: float = 1.0,
         method: str = "fast",
+        adaptive_rtol: float = 1e-5,
+        adaptive_atol: float = 1e-7,
+        dt_min: float = 1e-5,
+        dt_max: float | None = None,        # None -> dt_internal
     ) -> tuple[TimeArray, PhaseArray]:
         """
         Run a full rotor simulation.
@@ -815,11 +1070,17 @@ class RotorSolver:
             "standard",
             "euler",
             "euler_standard",
+            "predictor_corrector",
+            "pc",
+            "adaptive",
+            "adaptive_embedded",
+            "embedded",
         )
         if method_norm not in valid_methods:
             raise ValueError(
                 f"❌ Unknown simulation method: '{method}'. Expected one of: "
-                f"'rkmk4', 'midpoint', 'vectorized_geometric', 'fast', 'standard'."
+                f"'rkmk4', 'midpoint', 'vectorized_geometric', 'fast', 'standard', 'adaptive', 'adaptive_embedded', "
+                f"'embedded')."
             )
 
         times: list[float] = []
@@ -850,8 +1111,31 @@ class RotorSolver:
                     self.step_euler_vectorized_geometric(K, dt)
                 elif method_norm in ("standard", "euler", "euler_standard"):
                     self.step_euler(K, dt)
+                elif method_norm in ("adaptive", "adaptive_embedded", "embedded"):
+                    dt_trial = dt_internal
+                    dt_ceiling = dt_max if dt_max is not None else dt_internal
+                    while current_time < t_out - 1e-12:
+                        dt_trial = min(dt_trial, t_out - current_time)
+                        result = self.step_adaptive_embedded(
+                            K,
+                            dt_current=dt_trial,
+                            rtol=adaptive_rtol,
+                            atol=adaptive_atol,
+                            dt_min=dt_min,
+                            dt_max=dt_ceiling,
+                        )
+                        if result.status == AdaptiveStatus.DT_MIN_EXHAUSTED:
+                            raise RuntimeError(
+                                f"Adaptive stepper exhausted dt_min={dt_min:g} at t={current_time:.6g}."
+                            )
+                        if result.accepted:
+                            current_time += result.dt_taken
+                        dt_trial = result.dt_next
                 else:
+                    while current_time < t_out - 1e-12:
+                        dt = min(dt_internal, t_out - current_time)
                     self.step_euler_fast(K, dt)
+
                 current_time += dt
 
             # Extract phases once per output point for performance
@@ -864,28 +1148,49 @@ class RotorSolver:
 
         return np.asarray(times), np.asarray(all_phases)
 
-    def step_rk45_adaptive(
-        self,
-        K: float,
-        dt: float,
-        rtol: float = 1e-6,
-    ) -> tuple[float, float]:
-        """
-        Future work: adaptive RK45-like step with error estimation.
+class AdaptiveStatus(IntEnum):
+    """Outcome of a single adaptive trial step.
 
-        This method is intentionally retained as a development placeholder to preserve the intended future extenion
-        point.
+    A bare bool cannot express "rejected AND we hae run out of room to shrink". That third state is what prevents an
+    outer driver loop from spinning forever at dt_min.
+    """
+
+    ACCEPTED = 0
+    REJECTED = 1
+    DT_MIN_EXHAUSTED = 3
 
 
-        Raises
-        ------
-        NotImplementedError
-            Always, until the adaptive rotor integrator is implemented.
-        """
-        raise NotImplementedError(
-            "✖️🚧 Adaptive RK45-like rotor stepping is reserved for future development."
-        )
+class AdaptiveStepResult(NamedTuple):
+    """Result of one adaptive trial step.
 
+    Still unpacks as plain 3-tuple, so ``dt_taken, dt_next, s tatus = result`` works, but the named fields keep cell
+    sites still readable.
+
+    Attributes
+    ----------
+    dt_taken : float
+        Step size actually consumed. Zero when the step was rejcected.
+    dt_next : float
+        Suggested trial step size for the next attempt.
+    status : AdaptiveStatus
+        Acceptance outcome.
+    """
+
+    dt_taken: float
+    dt_next: float
+    status: AdaptiveStatus
+
+    @property
+    def accepted(self) -> bool:
+        """True only when the step size was accepted."""
+        return self.status == AdaptiveStatus.ACCEPTED
+
+# Controller constants -- single source of truth
+_ADAPTIVE_SAFETY: Final[float] = 0.85
+_ADAPTIVE_S_FLOOR: Final[float] = 0.2
+_ADAPTIVE_S_CEIL: Final[float] = 5.0
+_ADAPTIVE_EPS: Final[float] = 1e-15
+_ROTOR_ANGLE_SCALE: Final[float] = 1.0
 
 # ---------------------------------------------------------------------------- #
 # 2️⃣ Public Functional API
@@ -1243,20 +1548,39 @@ def _run_smoke_test() -> None:
         # --------------------------------------------------------------
         # Test 10: Future adaptive method remains unimplemented
         # --------------------------------------------------------------
-        try:
-            simulation.step_rk45_adaptive(
-                K=1.2,
-                dt=0.01,
+        adaptive = RotorSolver(n_oscillators=10, dim=2, seed=27)
+
+        dt_trial = 0.05
+        accepted_count = 0
+        rejectred_count = 0
+
+        for _ in range (300):
+            result = adaptive.step_adaptive_embedded(
+                K=1.5,
+                dt_current=dt_trial,
+                rtol=1e-6,
+                atol=1e-9,
+                dt_min=1e-7,
+                dt_max=0.1,
             )
-        except NotImplementedError:
-            print(" ... 🚧 Future RK45 placeholder test passed")
-        else:
-            raise AssertionError(
-                " ... ❌ step_rk45_adaptive should remain explicitly unimplemented until appropriate updates are "
-                "implemented"
+            if result.accepted:
+                accepted_count += 1
+            else:
+                rejectred_count += 1
+            dt_trial = result.dt_next
+
+            normas = np.sum(adaptive._rotor_array**2, axis=1)
+            assert np.allclose(norms, 1.0, atol=1e-12), (
+                "Rotor norm drifted off the Spin(n) manifold under adaptive sampling."
             )
 
-        print(" ... ✔️ Future adaptive-method boundary test passed")
+        assert accepted_count > 250, "Controller rejected far too many steps."
+        assert np.all(np.isfinite(adaptive._rotor_array))
+
+        print(
+            f" ... ✔️ Adaptive embedded step test passed "
+            f"(accepted={accepted_count}, rejected={rejectred_count})"
+        )
 
         # --------------------------------------------------------------
         # Test 11: Nyquist temporal adaptation warning & frequency preservation

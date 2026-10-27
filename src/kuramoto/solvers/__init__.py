@@ -8,7 +8,7 @@ This module exports:
 """
 
 from .rk45 import solve_kuramoto
-from .rotor import RotorSolver, step_rkmk4
+from .rotor import RotorSolver, step_rkmk4, AdaptiveStatus, AdaptiveStepResult
 from .quantum_rotor import QuantumRotorSolver, step_quantum_scf
 
 __all__: list[str] = [
