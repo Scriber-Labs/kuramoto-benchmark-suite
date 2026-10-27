@@ -34,6 +34,14 @@ def test_solvers_and_symmetry():
         "fast_euler",
         "euler_standard",
         "vectorized_geometric",
+        "rkmk4",
+        "dopri54",
+        "midpoint",
+        "predictor_corrector",
+        "adaptive",
+        "quantum",
+        "quantum_expectation",
+        "quantum_shot_sampling",
     ]:
         data = generate_kuramoto_dataset(
             5, omega, 1.0, 20, 0.05, solver=solver, symmetry_metrics=True, seed=42

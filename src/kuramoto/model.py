@@ -15,7 +15,7 @@ Date: May 2026
 
 from __future__ import annotations
 
-from typing import Dict, Final, Optional
+from typing import Any, Dict, Final, Optional
 
 import numpy as np
 from numpy.typing import NDArray
@@ -23,8 +23,13 @@ from numpy.typing import NDArray
 from kuramoto.dataset import KuramotoDataset
 from kuramoto.graphs import graph_stats
 from kuramoto.order_parameter import compute_order_parameter as order_parameter
-from kuramoto.solver_types import SOLVER_ALIASES
-from kuramoto.solvers import RotorSolver, solve_kuramoto  # ← Updated import
+from kuramoto.solver_types import (
+    SOLVER_ALIASES,
+    is_quantum_solver,
+    is_rotor_solver,
+)
+from kuramoto.solvers import RotorSolver, solve_kuramoto
+from kuramoto.solvers.quantum_rotor import QuantumRotorSolver
 from kuramoto.utils import resolve_rng
 from kuramoto.validation import (
     validate_adjacency,
@@ -41,6 +46,7 @@ __all__: list[str] = ["KuramotoModel"]
 FrequencyArray = NDArray[np.floating]
 PhaseArray = NDArray[np.floating]
 AdjacencyMatrix = NDArray[np.floating]
+
 
 # ---------------------------------------------------------------------------- #
 # Model Class
@@ -114,7 +120,7 @@ class KuramotoModel:
         if self.solver_type != "rk45" and noise_std > 0.0:
             raise ValueError(
                 f"noise_std > 0 is not supported by {solver_type}. "
-                "The GA-based Euler integration does not yet include stochastic "
+                "The GA/Quantum-based integration does not yet include stochastic "
                 "differential equation support. Set noise_std=0 or use solver_type='rk45'."
             )
 
@@ -144,10 +150,20 @@ class KuramotoModel:
         self.A: AdjacencyMatrix = A
 
         # ---- initial conditions ---------------------------------------- #
-        self.initial_phases: PhaseArray = self.rng.uniform(0.0, 2*np.pi, self.n)
+        self.initial_phases: PhaseArray = self.rng.uniform(0.0, 2 * np.pi, self.n)
 
-        # ---- RotorSolver initialization (if applicable) ---------------- #
-        if self.solver_type != "rk45":
+        # ---- Solver initialization (if applicable) --------------------- #
+        if is_quantum_solver(self.solver_type):
+            self.quantum_solver: Optional[QuantumRotorSolver] = QuantumRotorSolver(
+                n_oscillators=n_oscillators,
+                seed=random_seed,
+                adjacency_matrix=self.A,
+                natural_frequencies=self.omega,
+                initial_phases=self.initial_phases,
+                rng=self.rng,
+            )
+            self.rotor_solver: Optional[RotorSolver] = None
+        elif is_rotor_solver(self.solver_type):
             self.rotor_solver = RotorSolver(
                 n_oscillators=n_oscillators,
                 dim=2,
@@ -155,7 +171,12 @@ class KuramotoModel:
                 adjacency_matrix=self.A,
                 natural_frequencies=self.omega,
                 initial_phases=self.initial_phases,
+                rng=self.rng,
             )
+            self.quantum_solver = None
+        else:
+            self.rotor_solver = None
+            self.quantum_solver = None
 
         # ---- placeholders for results ---------------------------------- #
         self.time: NDArray | None = None
@@ -180,12 +201,21 @@ class KuramotoModel:
         omega_max = float(np.max(np.abs(self.omega)))
         deg_max = int(np.max(np.sum(self.A > 0, axis=1)))
         lambda_max = omega_max * self.K * deg_max
-        return np.inf if lambda_max == 0 else (2*np.pi / lambda_max) / self._STEPS_PER_PERIOD
+        return (
+            np.inf
+            if lambda_max == 0
+            else (2 * np.pi / lambda_max) / self._STEPS_PER_PERIOD
+        )
 
     # ------------------------------------------------------------------ #
     # Public API
     # ------------------------------------------------------------------ #
-    def simulate(self, t_span: float, n_points: Optional[int] = None) -> KuramotoDataset:
+    def simulate(
+        self,
+        t_span: float,
+        n_points: Optional[int] = None,
+        **kwargs: Any,
+    ) -> KuramotoDataset:
         """
         Integrate up to `t_span` seconds and return a `KuramotoDataset`.
 
@@ -195,6 +225,9 @@ class KuramotoModel:
             Total simulation time (must be > 0).
         n_points : int, optional
             Number of time points to output. If None, uses `_MIN_OUTPUT_POINTS`.
+        **kwargs : Any
+            Additional solver options passed to the underlying integrator (e.g.,
+            `dt_internal`, `enforce_nyquist`, `scheme`, `shots`, `adaptive_rtol`, `adaptive_atol`).
 
         Returns
         -------
@@ -207,11 +240,19 @@ class KuramotoModel:
         t_eval = np.linspace(0.0, t_span, points)
 
         if self.solver_type == "rk45":
-            return self._simulate_rk45(t_span, t_eval, points)
+            return self._simulate_rk45(t_span, t_eval, points, **kwargs)
+        elif is_quantum_solver(self.solver_type):
+            return self._simulate_quantum(t_span, t_eval, points, **kwargs)
         else:
-            return self._simulate_rotor(t_span, t_eval, points)
+            return self._simulate_rotor(t_span, t_eval, points, **kwargs)
 
-    def _simulate_rk45(self, t_span: float, t_eval: NDArray, n_points: int) -> KuramotoDataset:
+    def _simulate_rk45(
+        self,
+        t_span: float,
+        t_eval: NDArray,
+        n_points: int,
+        **kwargs: Any,
+    ) -> KuramotoDataset:
         """Classic RK45 integration path."""
         max_step = self._max_step()
 
@@ -229,7 +270,9 @@ class KuramotoModel:
             raise RuntimeError(f"Integration failed: {sol.message}")
 
         phases = sol.y.T
-        derivatives = np.array([self._rhs(t, y) for t, y in zip(t_eval, phases)])
+        derivatives = np.array(
+            [self._rhs(t, y) for t, y in zip(t_eval, phases, strict=False)]
+        )
         order_param = order_parameter(phases)
 
         self.time = t_eval
@@ -253,31 +296,52 @@ class KuramotoModel:
             phase_pdf="U(0, 2*pi)",
         )
 
-    def _simulate_rotor(self, t_span: float, t_eval: NDArray, n_points: int) -> KuramotoDataset:
+    def _simulate_rotor(
+        self,
+        t_span: float,
+        t_eval: NDArray,
+        n_points: int,
+        dt_internal: float | None = None,
+        enforce_nyquist: bool = True,
+        adaptive_rtol: float = 1e-5,
+        adaptive_atol: float = 1e-7,
+        dt_min: float = 1e-5,
+        dt_max: float | None = None,
+        **kwargs: Any,
+    ) -> KuramotoDataset:
         """Geometric Algebra rotor integration path."""
+        if self.rotor_solver is None:
+            raise RuntimeError("Rotor solver is not initialized.")
+
         # Override rotor solver frequencies, adjacency, and initial phases
         self.rotor_solver.omegas = self.omega.copy()
         self.rotor_solver.A = self.A.copy()
         self.rotor_solver.rotors = [
-            np.exp(-self.rotor_solver.B_plane * p / 2.0)
-            for p in self.initial_phases
+            np.exp(-self.rotor_solver.B_plane * p / 2.0) for p in self.initial_phases
         ]
         self.rotor_solver._sync_array_from_rotors()
 
-        # Calculate internal timestep for Euler integration
-        dt_internal = float(np.min(np.diff(t_eval))) * 0.1
+        # Calculate internal timestep for Euler integration if not specified
+        if dt_internal is None:
+            dt_internal = float(np.min(np.diff(t_eval))) * 0.1
 
         method = "vectorized_geometric"
         if self.solver_type in ("standard", "euler", "euler_standard"):
             method = "standard"
         elif self.solver_type in ("geometric", "euler_geometric", "rotor_geometric"):
             method = "geometric"
-        elif self.solver_type in ("rkmk4", "rkmk", "rk4"):
+        elif self.solver_type in ("rkmk4", "rkmk", "rk4", "geometric_rk4"):
             method = "rkmk4"
-        elif self.solver_type in ("midpoint", "midpoint_geometric"):
+        elif self.solver_type in ("dopri54", "dopri", "adaptive_dopri54"):
+            method = "dopri54"
+        elif self.solver_type in ("midpoint", "midpoint_geometric", "euler_midpoint"):
             method = "midpoint"
         elif self.solver_type in ("fast", "euler_fast", "fast_euler"):
             method = "fast"
+        elif self.solver_type in ("predictor_corrector", "pc"):
+            method = "predictor_corrector"
+        elif self.solver_type in ("adaptive", "adaptive_embedded", "embedded"):
+            method = "adaptive"
         elif self.solver_type in ("rotor", "vectorized_geometric"):
             method = "vectorized_geometric"
 
@@ -285,8 +349,79 @@ class KuramotoModel:
             K=self.K,
             t_eval=t_eval,
             dt_internal=dt_internal,
-            enforce_nyquist=True,
+            enforce_nyquist=enforce_nyquist,
             method=method,
+            adaptive_rtol=adaptive_rtol,
+            adaptive_atol=adaptive_atol,
+            dt_min=dt_min,
+            dt_max=dt_max,
+        )
+
+        # Compute derivatives numerically via finite differences
+        derivatives = np.gradient(sim_phases, axis=0)
+
+        # Compute order parameter across all timesteps
+        order_param_computed = order_parameter(sim_phases)
+
+        self.time = sim_times
+        self.phases = sim_phases
+        self.derivatives = derivatives
+        self.order_param = order_param_computed
+
+        net_stats: Dict[str, float] = graph_stats(self.A)
+
+        return KuramotoDataset(
+            omega=self.omega,
+            theta=sim_phases,
+            dtheta=derivatives,
+            time=sim_times,
+            initial_conditions=self.initial_phases,
+            coupling=self.K,
+            adjacency=self.A,
+            network_stats=net_stats,
+            noise_std=0.0,
+            freq_pdf=self.freq_pdf,
+            phase_pdf="U(0, 2*pi)",
+        )
+
+    def _simulate_quantum(
+        self,
+        t_span: float,
+        t_eval: NDArray,
+        n_points: int,
+        scheme: str | None = None,
+        shots: int = 1024,
+        dt_internal: float | None = None,
+        **kwargs: Any,
+    ) -> KuramotoDataset:
+        """Quantum SCF parallel R_Z gate integration path."""
+        if self.quantum_solver is None:
+            raise RuntimeError("Quantum solver is not initialized.")
+
+        # Determine quantum scheme from solver_type or kwargs
+        resolved_scheme = scheme
+        if resolved_scheme is None:
+            if self.solver_type in ("quantum_expectation", "expectation"):
+                resolved_scheme = "expectation"
+            elif self.solver_type in ("quantum_shot_sampling", "shot_sampling"):
+                resolved_scheme = "shot_sampling"
+            else:
+                resolved_scheme = "statevector"
+
+        if dt_internal is None:
+            dt_internal = float(np.min(np.diff(t_eval))) * 0.1
+
+        # Synchronize parameters
+        self.quantum_solver.omegas = self.omega.copy()
+        self.quantum_solver.phases = self.initial_phases.copy()
+        self.quantum_solver.adjacency_matrix = self.A.copy()
+
+        sim_times, sim_phases = self.quantum_solver.simulate(
+            K=self.K,
+            t_eval=t_eval,
+            dt_internal=dt_internal,
+            scheme=resolved_scheme,  # type: ignore[arg-type]
+            shots=shots,
         )
 
         # Compute derivatives numerically via finite differences
@@ -323,6 +458,7 @@ class KuramotoModel:
         sim = "no-run-yet" if self.time is None else f"T={self.time.size}"
         solver_str = f"[{self.solver_type.upper()}]"
         return f"KuramotoModel(N={self.n}, K={self.K:g}, sigma={self.noise_std:g}, {solver_str}, {sim})"
+
 
 # --------------------------------------------------------------------------- #
 # Smoke test
@@ -405,12 +541,15 @@ def _run_smoke_test() -> None:
 
     print("\n✅ KuramotoModel smoke test passed")
 
+
 # ------------------------------------------------------------------------------
 # Entry point
 # ------------------------------------------------------------------------------
 
+
 def main() -> None:
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

@@ -34,6 +34,7 @@ __all__: list[str] = [
 FrequencyArray = NDArray[np.floating]
 AdjacencyMatrix = NDArray[np.floating]
 
+
 # ------------------------------------------------------------------------------ #
 # 1️⃣ Public API
 # ------------------------------------------------------------------------------ #
@@ -68,10 +69,10 @@ def generate_kuramoto_dataset(
     dt : float
         Time step size.
     adjacency : AdjacencyMatrix, optional
-        Network structure (adjacency matrix). If both `adjacency` and `topology` 
+        Network structure (adjacency matrix). If both `adjacency` and `topology`
         are None, a complete graph is used.
     topology : str, optional
-        Name of a predefined topology (e.g., 'ring', 'small_world'). 
+        Name of a predefined topology (e.g., 'ring', 'small_world').
         Overrides `adjacency` if provided.
     topology_kwargs : Dict[str, Any], optional
         Arguments passed to the topology generator (e.g., {'k': 4, 'p': 0.1}).
@@ -113,11 +114,12 @@ def generate_kuramoto_dataset(
         solver_type=solver_type,
     )
 
-    dataset = model.simulate(t_span=t_span, n_points=timesteps)
+    dataset = model.simulate(t_span=t_span, n_points=timesteps, **kwargs)
 
     result = dataset.to_dict()
     if symmetry_metrics and is_rotor_or_euler(solver):
         from kuramoto.order_parameter import track_lie_symmetries
+
         states = {f"node_{i}": result["theta"][:, i] for i in range(n_oscillators)}
         metrics = track_lie_symmetries(states, result["time"])
         result["global_phase_invariant"] = metrics.global_phase_invariant
@@ -126,9 +128,11 @@ def generate_kuramoto_dataset(
 
     return result
 
+
 # ------------------------------------------------------------------------------ #
 # 💨 Smoke Test
 # ------------------------------------------------------------------------------ #
+
 
 def _run_smoke_test() -> None:
     """
@@ -159,9 +163,11 @@ def _run_smoke_test() -> None:
     print(" ... ✔️ API test passed")
     print("\n✅ API smoke test passed.")
 
+
 # ------------------------------------------------------------------------------
 # 🔥 Entry point
 # ------------------------------------------------------------------------------
+
 
 def main() -> None:
     """
@@ -170,6 +176,7 @@ def main() -> None:
     Runs smoke tests.
     """
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()
