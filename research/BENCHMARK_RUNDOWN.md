@@ -17,7 +17,7 @@ This rundown presents a rigorous numerical, mathematical, and architectural benc
 
 ## 1️⃣ Performance & Complexity Scaling
 
-We evaluated computational complexity and wall-clock scaling across system sizes $N \in [50, 100, 200, 500, 1000]$ and integration time steps $\Delta t \in [0.05, 0.01]$.
+Here, we evaluated computational complexity and wall-clock scaling across system sizes $N \in [50, 100, 200, 500, 1000]$ and integration time steps $\Delta t \in [0.05, 0.01]$.
 
 | Solver Architecture | Order / Stages | Interaction Complexity | Time Step Scaling | Manifold Preservation ($\|R\tilde{R}-1\|$) | Circuit Depth |
 | :--- | :--- | :--- | :--- | :--- | :--- |
