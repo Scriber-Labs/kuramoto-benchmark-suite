@@ -11,12 +11,12 @@ config:
     secondaryColor: "#0070EB"
     tertiaryColor: "#0D1117"
     fontFamily: "'Aclonica', sans-serif"
-    fontSize: "16px"
+    fontSize: "15px"
     clusterBkg: "rgba(255, 255, 255, 0.03)"
     clusterBorder: "#30363D"
     edgeLabelBackground: "#0D1117"
-    nodeSpacing: 48
-    rankSpacing: 80
+    nodeSpacing: 45
+    rankSpacing: 75
     borderRadius: "10"
   flowchart:
     curve: basis
@@ -29,74 +29,115 @@ config:
 ---
 flowchart TD
 
-subgraph Client_API["Client & High-Level API"]
-    CLI["kuramoto CLI<br/>(generate, time, network, etc.)"]
-    Notebooks["Jupyter Notebooks (demo, benchmark)"]
-    API_Gen["generate_kuramoto_dataset()"]
-    Direct_Rotor["RotorSolver Direct API<br/>(simulate, step_*, observables)"]
+subgraph Client_API["1️⃣ Client & High-Level API Layer"]
+    CLI["kuramoto CLI Suite<br/>(generate, time, network, psd, fourier, qasm)"]
+    Notebooks["Interactive Notebooks & Benchmarks<br/>(failure_modes, sanity_checks, quantum_sanity_checks)"]
+    API_Gen["generate_kuramoto_dataset()<br/>Unified Functional API"]
+    Direct_Solvers["Direct Solver Interfaces<br/>KuramotoModel / RotorSolver / QuantumRotorSolver"]
 end
 
-subgraph Model_Orchestration["KuramotoModel & Problem Specification"]
-    Config["SimulationConfig & Solver Options<br/>(N, K, topology, dt, seed, initial_phases, solver_type)"]
-    Topology["TopologyGraph (Adjacency Matrix A_ij & Degree k_i)"]
-    Temporal_Ctrl["Temporal Resolution Controller<br/>- Nyquist Criterion: dt <= 1 / (2 * max_rate)<br/>- Max Phase Increment Guard: dt <= max_Δθ / max_rate"]
+subgraph Model_Orchestration["2️⃣ Model Orchestration & Configuration Layer"]
+    Config["SimulationConfig & Solver Types<br/>(N, K, topology, dt, seed, initial_phases, solver_type)"]
+    Topology["Network Topologies (load_topology)<br/>Ring, Erdos-Renyi, Small-World, Tree-of-Life, Bipartite, Complete"]
+    Temporal_Ctrl["Temporal Resolution Controller<br/>- Nyquist Criterion: dt <= 1 / (2 * max_rate)<br/>- Max Phase Increment Guard: dt <= max_Δθ / max_rate<br/>- Adaptive Error Controller: LTE <= tol"]
 end
 
-subgraph Physics_Law["Dynamical Physics Law"]
-    KuramotoPhysics["Kuramoto Dynamics & Bivector Generators<br/>- Phase RHS: dθ_i/dt = ω_i + (K/N) ∑ A_ij sin(θ_j - θ_i)<br/>- 2D Bivector Torque: Ω_i = ω_i e12 - K (v_mean,i ∧ v_i)<br/>- 3D Spin(3) Lohe Torque: Ω_i = Ω_nat,i - K (v_mean,i ∧ v_i)<br/>- Rotor Derivative: dR_i/dt = -1/2 Ω_i R_i"]
+subgraph Physics_Law["3️⃣ Dynamical Physics & Algebra Generators"]
+    Phase_Physics["Phase-Space Vector Field (R^N)<br/>dθ_i/dt = ω_i + (K/N) ∑ A_ij sin(θ_j - θ_i)"]
+    GA_2D_Physics["2D Clifford Bivector Torque (Cl_2,0)<br/>Ω_i = ω_i e12 - K (v_mean,i ∧ v_i)<br/>dR_i/dt = -1/2 Ω_i R_i"]
+    GA_3D_Physics["3D Spin(3) Lohe Matrix/Bivector Torque (Cl_3,0)<br/>Ω_i = Ω_nat,i - K (v_mean,i ∧ v_i)"]
+    Quantum_Physics["Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 ∑_j Ω_j(t) σ_j^z<br/>Unitary Evolution: U(dt) = ⨂_j R_Z(Ω_j dt)"]
 end
 
-subgraph State_Representations["State Representations & Manifold Embeddings"]
-    PhaseState["PhaseState (θ ∈ R^N)<br/>Canonical phase angles"]
-    RotorState["Clifford Rotor Objects (R ∈ Spin(n)^N)<br/>List of Clifford Cl(dim) multivectors: R_i = exp(-B θ_i / 2)"]
-    RotorArray["Contiguous Array Buffer (_rotor_array)<br/>- 2D Cl(2): [scalar, e12] components<br/>- 3D Cl(3): [scalar, e12, e13, e23] components<br/>- Fast SIMD/NumPy vectorized operations"]
-    Sync["Bidirectional State Sync<br/>_sync_array_from_rotors() ⟷ _sync_rotors_from_array()"]
+subgraph State_Representations["4️⃣ Multi-Manifold State Representations"]
+    PhaseState["Phase Vector: θ ∈ R^N<br/>Canonical phase angles"]
+    RotorArray["Contiguous Rotor Array Buffer (_rotor_array)<br/>- 2D Cl(2): [scalar, e12] components<br/>- 3D Cl(3): [scalar, e12, e13, e23] components<br/>Fast SIMD/NumPy Vectorized State"]
+    RotorState["Clifford Rotor Objects (R_i ∈ Spin(n))<br/>Multivector Objects: R_i = exp(-B θ_i / 2)"]
+    QuantumState["Quantum N-Qubit Statevector<br/>|ψ⟩ = ⨂_j (cos(θ_j/2)|0⟩ + sin(θ_j/2)|1⟩)"]
+    Sync["Bidirectional Manifold Synchronizer<br/>_sync_array_from_rotors() ⟷ _sync_rotors_from_array()"]
 end
 
-subgraph Integrator_Ecosystem["Numerical Integrators Ecosystem (Decoupled & Stateless)"]
-    RK45_Int["Adaptive Phase RK45 Integrator<br/>(Dormand-Prince 5(4) with error control)"]
-    Lie_RKMK["4th-Order Lie-Group Integrator (RKMK4)<br/>step_rkmk4: Spin(n) manifold O(dt^4) Lie evolution"]
-    Midpoint_Geom["2nd-Order Geometric Midpoint<br/>step_midpoint_geometric: 2-stage Spin(n) update"]
-    Vec_Euler["Vectorized GA Euler Integrator<br/>step_euler_vectorized_geometric: pure array bivector torque"]
-    Geom_Euler["Clifford Multivector Euler Integrator<br/>step_euler_geometric: object-level bivector torque"]
-    Fast_Euler["Fast Mean-Field Euler Integrator<br/>step_euler_fast: O(N) all-to-all complex order parameter"]
-    Std_Euler["Standard Pairwise Euler Integrator<br/>step_euler: phase-space pairwise difference update"]
-    Adaptive_Future["Future Adaptive Rotor Stepper<br/>step_rk45_adaptive: reserved extension point"]
+subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schemes"]
+    subgraph Classic_Scheme["A. Classical Phase-Space Integrator"]
+        RK45_Int["Adaptive RK45 (solve_kuramoto)<br/>SciPy Dormand-Prince 5(4) with continuous interpolant"]
+    end
+
+    subgraph Explicit_GA_Schemes["B. First-Order & Mean-Field Rotor Integrators"]
+        Vec_Euler["Vectorized GA Euler (step_euler_vectorized_geometric)<br/>Pure NumPy bivector torque step on rotor buffer"]
+        Geom_Euler["Clifford Multivector Euler (step_euler_geometric)<br/>Direct object-level GA rotor update"]
+        Fast_Euler["Fast Mean-Field Euler (step_euler_fast)<br/>O(N) all-to-all complex order parameter acceleration"]
+        Std_Euler["Standard Pairwise Euler (step_euler)<br/>Phase-space difference stepping"]
+    end
+
+    subgraph Higher_Order_GA_Schemes["C. Geometric & Lie-Group Integrators"]
+        Midpoint_Geom["2nd-Order Geometric Midpoint (step_midpoint_geometric)<br/>2-stage predictor-corrector on Spin(n)"]
+        Pred_Corr["Embedded Predictor-Corrector (step_predictor_corrector)<br/>Heun/Midpoint embedded stages with LTE estimation"]
+        Lie_RKMK4["4th-Order Lie-Group RKMK4 (step_rkmk4)<br/>Runge-Kutta-Munthe-Kaas O(dt^4) exact Lie evolution"]
+        DOPRI54_Geom["Adaptive DOPRI 5(4) (step_adaptive_dopri54)<br/>7-stage Dormand-Prince Lie stepper with FSAL & PI step control"]
+        Adaptive_Emb["Adaptive Embedded Stepper (step_adaptive_embedded)<br/>Automatic dt adjustment with LTE error tolerances"]
+    end
+
+    subgraph Quantum_SCF_Schemes["D. Quantum Self-Consistent Field (SCF) Solvers"]
+        Q_Statevector["Quantum Statevector Mode (statevector)<br/>Exact unitary evolution U = exp(-i H dt)"]
+        Q_Expectation["Quantum Expectation Mode (expectation)<br/>Analytical Pauli X, Y, Z observable evaluation"]
+        Q_ShotSampling["Quantum Shot Sampling Mode (shot_sampling)<br/>Projective measurement with stochastic hardware shot noise"]
+        QASM_Gen["OpenQASM 2.0 / 3.0 Exporter (to_qasm)<br/>Exportable parametric quantum circuits"]
+    end
 end
 
-subgraph Diagnostics_Layer["Observables & Diagnostics Layer"]
-    Obs_Phase["Phase Extraction Engine<br/>extract_phases(): θ = 2 atan2(-b, a) mod 2π"]
-    Obs_OP["Order Parameter Engine<br/>- get_complex_order_parameter(): ⟨exp(iθ)⟩<br/>- get_order_parameter_vector(): ⟨v_i⟩ on S^(dim-1)<br/>- get_synchronization_strength(): ||r|| or ||⟨v⟩||"]
-    Obs_Lie["Lie Symmetry & Invariant Diagnostics<br/>- track_lie_symmetries() (U(1) Phase Shift Invariance)<br/>- Noether Energy Conservation Tracker"]
-    Dataset_Out["KuramotoDataset (Immutable Output)"]
+subgraph Diagnostics_Layer["6️⃣ Observables, Symmetries & Diagnostics Layer"]
+    Obs_Phase["Phase Extraction & Unwrapping Engine<br/>extract_phases(): θ_i = 2 atan2(-b, a) mod 2π"]
+    Obs_OP["Order Parameter Engine<br/>- Complex order parameter: r(t) = ⟨exp(iθ)⟩<br/>- Vector order parameter: ⟨v_i⟩ on S^(dim-1)<br/>- Synchronization strength: ||r|| or ||⟨v⟩||"]
+    Obs_Lie["Lie Symmetry & Invariants Tracker<br/>- U(1) Phase Shift Invariance: d/dα L = 0<br/>- Noether Energy Drift / Hamiltonian Invariant<br/>- Contraction Rate / Symplectic Inversion Check"]
+    Obs_Spectral["Spectral Analytics Engine<br/>- Fourier amplitude spectrum & convergence<br/>- Power Spectral Density (PSD) variability"]
+    Dataset_Out["KuramotoDataset (Immutable Output Container)<br/>Serialization (.npz, .h5, JSON analytics)"]
 end
 
+%% Client & Routing
 Client_API --> Config
-Direct_Rotor --> Temporal_Ctrl
+Client_API --> Direct_Solvers
 Config --> Model_Orchestration
 Topology --> Physics_Law
 Temporal_Ctrl --> Integrator_Ecosystem
 
-Model_Orchestration -->|"Instantiates initial state"| State_Representations
-
+%% Model to State & Physics
+Model_Orchestration -->|"Initializes state"| State_Representations
 RotorState <--> Sync
 Sync <--> RotorArray
 
+%% Physics to Integrator Mapping
+Phase_Physics --> Classic_Scheme
+GA_2D_Physics --> Explicit_GA_Schemes
+GA_2D_Physics --> Higher_Order_GA_Schemes
+GA_3D_Physics --> Higher_Order_GA_Schemes
+Quantum_Physics --> Quantum_SCF_Schemes
+
+%% State to Integrator Mapping
 PhaseState --> RK45_Int
 PhaseState --> Std_Euler
 PhaseState --> Fast_Euler
-RotorArray --> Lie_RKMK
-RotorArray --> Midpoint_Geom
 RotorArray --> Vec_Euler
+RotorArray --> Midpoint_Geom
+RotorArray --> Pred_Corr
+RotorArray --> Lie_RKMK4
+RotorArray --> DOPRI54_Geom
+RotorArray --> Adaptive_Emb
 RotorState --> Geom_Euler
-RotorState --> Adaptive_Future
+QuantumState --> Q_Statevector
+QuantumState --> Q_Expectation
+QuantumState --> Q_ShotSampling
+QuantumState --> QASM_Gen
 
-Physics_Law --> Integrator_Ecosystem
-Integrator_Ecosystem -->|"Advances state via exponential map / updates"| State_Representations
+%% Integrator state updates
+Integrator_Ecosystem -->|"Advances state along manifold"| State_Representations
 
+%% State to Diagnostics
 State_Representations --> Diagnostics_Layer
 RotorArray --> Obs_Phase
 RotorState --> Obs_OP
 PhaseState --> Obs_OP
+QuantumState --> Obs_Phase
+QuantumState --> Obs_OP
 Diagnostics_Layer --> Obs_Lie
+Diagnostics_Layer --> Obs_Spectral
 Diagnostics_Layer --> Dataset_Out

@@ -7,26 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="updated rotor integrator">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/data/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/fourier_convergence.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/fourier_convergence.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/fourier_variability.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/fourier_variability.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/network.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/network.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/psd_variability.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/psd_variability.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/time_series.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/time_series.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solver_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solver_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_quantum_rotor_solver.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="cli update">
+      <change beforePath="$PROJECT_DIR$/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/architecture.mmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,61 +58,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="9.411081894351333E-6" />
-      <entry key="MS500" value="0.38343206977711003" />
-      <entry key="S2" value="5.400290023908509" />
-      <entry key="S5" value="11.399158508722898" />
-      <entry key="S10" value="17.57311875982303" />
-      <entry key="S30" value="29.571225423146903" />
-      <entry key="S60" value="35.28629325929495" />
-      <entry key="M2" value="38.84971425024973" />
-      <entry key="M5" value="41.26296276842494" />
-      <entry key="M10" value="42.134418370121345" />
-      <entry key="M15" value="43.07184197073115" />
-      <entry key="M30" value="74.66325907607607" />
-      <entry key="H1" value="294.15534150406705" />
-      <entry key="H2" value="794.811645635235" />
-      <entry key="H4" value="1380.1588226986094" />
-      <entry key="D1" value="4607.634432713139" />
-      <entry key="W1" value="20209.869469392233" />
+      <entry key="MS100" value="1.0004500381533856" />
+      <entry key="MS500" value="1.2732577005490684" />
+      <entry key="S2" value="2.173472709172607" />
+      <entry key="S5" value="2.6109102969882825" />
+      <entry key="S10" value="2.794018072631114" />
+      <entry key="S30" value="2.928616185617388" />
+      <entry key="S60" value="2.964206944381983" />
+      <entry key="M2" value="3.0855650116169127" />
+      <entry key="M5" value="6.848200724419991" />
+      <entry key="M10" value="15.875752925315641" />
+      <entry key="M15" value="22.542422682939296" />
+      <entry key="M30" value="53.29396713679647" />
+      <entry key="H1" value="244.42673452380046" />
+      <entry key="H2" value="723.0603463874351" />
+      <entry key="H4" value="1316.655365396069" />
+      <entry key="D1" value="4572.865491981362" />
+      <entry key="W1" value="20189.120060647332" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0000000011897772" />
-      <entry key="M10" value="1.0000735798331175" />
-      <entry key="M15" value="1.0034103976266222" />
-      <entry key="M30" value="1.1839466880962533" />
-      <entry key="H1" value="2.5407304538917153" />
-      <entry key="H2" value="5.843426458707286" />
-      <entry key="H4" value="9.917308779707831" />
-      <entry key="D1" value="36.92038216476132" />
-      <entry key="W1" value="162.47451247129842" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="3.779917397373589E-155" />
+      <entry key="S5" value="1.7021307740872937E-62" />
+      <entry key="S10" value="1.3046573397207766E-31" />
+      <entry key="S30" value="5.071839331648593E-11" />
+      <entry key="S60" value="7.121684724591921E-6" />
+      <entry key="M2" value="0.0026686484827702435" />
+      <entry key="M5" value="0.09343649725331978" />
+      <entry key="M10" value="0.30569633254546774" />
+      <entry key="M15" value="0.45532075422610013" />
+      <entry key="M30" value="0.7975383432026641" />
+      <entry key="H1" value="2.085298858928224" />
+      <entry key="H2" value="5.2938598415100575" />
+      <entry key="H4" value="9.439440721333867" />
+      <entry key="D1" value="36.61774470234225" />
+      <entry key="W1" value="162.28358234053178" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.0139447227288084E-5" />
-      <entry key="MS500" value="0.5065551963105062" />
-      <entry key="S2" value="5.986806351894324" />
-      <entry key="S5" value="12.204519118288836" />
-      <entry key="S10" value="18.469050737171884" />
-      <entry key="S30" value="30.53418384556103" />
-      <entry key="S60" value="36.26733894406941" />
-      <entry key="M2" value="39.84011082930808" />
-      <entry key="M5" value="42.259088318605144" />
-      <entry key="M10" value="43.13253953664615" />
-      <entry key="M15" value="44.073715962509816" />
-      <entry key="M30" value="75.84111558931528" />
-      <entry key="H1" value="296.675259509673" />
-      <entry key="H2" value="800.6255366668597" />
-      <entry key="H4" value="1390.0508119575277" />
-      <entry key="D1" value="4644.540877062428" />
-      <entry key="W1" value="20372.33531738645" />
+      <entry key="MS100" value="0.9798610740890412" />
+      <entry key="MS500" value="1.2679733667174073" />
+      <entry key="S2" value="2.1712140788279366" />
+      <entry key="S5" value="2.609824675685902" />
+      <entry key="S10" value="2.7934371333098316" />
+      <entry key="S30" value="2.928413196496281" />
+      <entry key="S60" value="2.9641112099850977" />
+      <entry key="M2" value="3.0881563601976336" />
+      <entry key="M5" value="6.941254462563027" />
+      <entry key="M10" value="16.180842071599432" />
+      <entry key="M15" value="22.99703933149584" />
+      <entry key="M30" value="54.08739951002659" />
+      <entry key="H1" value="246.4949498796542" />
+      <entry key="H2" value="728.3274477038111" />
+      <entry key="H4" value="1326.070706190999" />
+      <entry key="D1" value="4609.469413044714" />
+      <entry key="W1" value="20351.394988682434" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -354,22 +339,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00008" summary="updated src/kuramoto/api.py">
-      <option name="closed" value="true" />
-      <created>1777838812317</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1777838812317</updated>
-    </task>
-    <task id="LOCAL-00009" summary="updated src/kuramoto/api.py">
-      <option name="closed" value="true" />
-      <created>1777926864276</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1777926864276</updated>
     </task>
     <task id="LOCAL-00010" summary="uv compatibility initiated and then updated the repo packages used in the code">
       <option name="closed" value="true" />
@@ -747,14 +716,29 @@
       <option name="project" value="LOCAL" />
       <updated>1793088101468</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="cli update">
+      <option name="closed" value="true" />
+      <created>1793094276790</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1793094276790</updated>
+    </task>
+    <task id="LOCAL-00058" summary="cli update">
+      <option name="closed" value="true" />
+      <created>1793094285422</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1793094285422</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated execution timestamps in demo.ipynb" />
     <MESSAGE value="added rotor_dt_0.01.npz benchmark data" />
     <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
     <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
@@ -779,7 +763,8 @@
     <MESSAGE value="sanity check notebook" />
     <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated rotor integrator" />
+    <MESSAGE value="cli update" />
+    <option name="LAST_COMMIT_MESSAGE" value="cli update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
