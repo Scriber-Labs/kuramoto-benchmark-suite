@@ -143,8 +143,8 @@ Your codebase uses coprime sampling to reduce memory from $O(MN)$ to $O(M+N)$. T
 $$ax + by = \gcd(a, b)$$
 
 **Tasks:**
-1. Use the extended Euclidean algorithm to find $\gcd(7, 11)$ and the Bézout coefficients $(x, y)$.
-2. Verify your answer: does $7x + 11y = 1$?
+- [x] Use the extended Euclidean algorithm to find $\gcd(7, 11)$ and the Bézout coefficients $(x, y)$.
+- [x] Verify your answer: does $7x + 11y = 1$?
 3. Now find $\gcd(6, 9)$ and the Bézout coefficients. What do you notice about the result?
 4. **Code reference:** Open `src/kuramoto/solvers/coprime.py` and locate the `extended_gcd` function. Trace through the recursive calls for inputs $(7, 11)$ and verify your hand calculation matches.
 

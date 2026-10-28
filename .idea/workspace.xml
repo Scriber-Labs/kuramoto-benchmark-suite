@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Added ANSI 256-color theming to `style.py` with Eigenscribe palette, semantic styles, and fallback support for 16-color mode. Updated CLI utilities (`utils.py`, `commands.py`) for enhanced colorized output. Included smoke tests and palette showcase. Enhanced headers and banners with gradient effects.">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/quantum_sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/quantum_sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="139" />
+    <option name="cachedIndexableFilesCount" value="159" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -60,23 +57,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000526966960116" />
-      <entry key="MS500" value="1.232751288889888" />
-      <entry key="S2" value="2.4911360333780435" />
-      <entry key="S5" value="5.015719070702759" />
-      <entry key="S10" value="9.639582448677968" />
-      <entry key="S30" value="33.953934668903955" />
-      <entry key="S60" value="70.20783431838395" />
-      <entry key="M2" value="128.83956128204431" />
-      <entry key="M5" value="231.71344451602076" />
-      <entry key="M10" value="316.0008550016897" />
-      <entry key="M15" value="364.72553526916664" />
-      <entry key="M30" value="446.8935740343328" />
-      <entry key="H1" value="548.7988183265192" />
-      <entry key="H2" value="825.0803278843083" />
-      <entry key="H4" value="1384.5553016847314" />
-      <entry key="D1" value="4829.966975654444" />
-      <entry key="W1" value="20586.002833246148" />
+      <entry key="MS100" value="1.0638225321534704" />
+      <entry key="MS500" value="1.7903432159252426" />
+      <entry key="S2" value="4.385755200783317" />
+      <entry key="S5" value="8.326424144243852" />
+      <entry key="S10" value="12.808941462967292" />
+      <entry key="S30" value="21.445902978465245" />
+      <entry key="S60" value="29.813160128388763" />
+      <entry key="M2" value="43.02583991189192" />
+      <entry key="M5" value="105.00015022237454" />
+      <entry key="M10" value="225.11878571897603" />
+      <entry key="M15" value="319.9037573876405" />
+      <entry key="M30" value="491.92759664386256" />
+      <entry key="H1" value="665.5873635062595" />
+      <entry key="H2" value="975.9307583136881" />
+      <entry key="H4" value="1553.3465551864224" />
+      <entry key="D1" value="5033.628574701529" />
+      <entry key="W1" value="20807.41415694378" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -84,37 +81,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="1.9015811158080881E-121" />
-      <entry key="S60" value="4.3607122305972986E-61" />
-      <entry key="M2" value="6.603568906733146E-31" />
-      <entry key="M5" value="8.470547576547194E-13" />
-      <entry key="M10" value="9.204234968361832E-7" />
-      <entry key="M15" value="9.493997044691247E-5" />
-      <entry key="M30" value="0.011516417335525515" />
-      <entry key="H1" value="0.2505827765022467" />
-      <entry key="H2" value="1.835117575371404" />
-      <entry key="H4" value="5.557660215560098" />
-      <entry key="D1" value="33.523489131908455" />
-      <entry key="W1" value="160.24965504766544" />
+      <entry key="S30" value="1.0719531534665166E-132" />
+      <entry key="S60" value="1.0353517052028824E-66" />
+      <entry key="M2" value="1.0175223364638612E-33" />
+      <entry key="M5" value="6.3535665188215E-14" />
+      <entry key="M10" value="2.520813665146177E-7" />
+      <entry key="M15" value="4.003911386339406E-5" />
+      <entry key="M30" value="0.007478854378164293" />
+      <entry key="H1" value="0.20193428371519398" />
+      <entry key="H2" value="1.6473782022999048" />
+      <entry key="H4" value="5.265707141631768" />
+      <entry key="D1" value="33.22334317250696" />
+      <entry key="W1" value="160.04389793060722" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9465561878419568" />
-      <entry key="MS500" value="1.2189275824809593" />
-      <entry key="S2" value="2.476214212773666" />
-      <entry key="S5" value="4.993756636962061" />
-      <entry key="S10" value="9.61966717649509" />
-      <entry key="S30" value="33.94050323569884" />
-      <entry key="S60" value="70.19738467334963" />
-      <entry key="M2" value="128.83146197421144" />
-      <entry key="M5" value="231.70748299966942" />
-      <entry key="M10" value="315.9955280599619" />
-      <entry key="M15" value="364.7206182283643" />
-      <entry key="M30" value="446.9006305570843" />
-      <entry key="H1" value="549.0439625506605" />
-      <entry key="H2" value="826.9039664893505" />
-      <entry key="H4" value="1390.0975002651974" />
-      <entry key="D1" value="4863.477568661545" />
-      <entry key="W1" value="20746.24390731001" />
+      <entry key="MS100" value="0.9999025980459711" />
+      <entry key="MS500" value="1.7693945153005097" />
+      <entry key="S2" value="4.373532531919603" />
+      <entry key="S5" value="8.317482747350212" />
+      <entry key="S10" value="12.802108317298364" />
+      <entry key="S30" value="21.44152002999753" />
+      <entry key="S60" value="29.809843581342335" />
+      <entry key="M2" value="43.02339432697889" />
+      <entry key="M5" value="104.9977806265912" />
+      <entry key="M10" value="225.11582973537202" />
+      <entry key="M15" value="319.9004919817672" />
+      <entry key="M30" value="491.9314575480687" />
+      <entry key="H1" value="665.7845159845482" />
+      <entry key="H2" value="977.5676217671326" />
+      <entry key="H4" value="1558.597505080105" />
+      <entry key="D1" value="5066.839118841242" />
+      <entry key="W1" value="20967.44948227407" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -341,14 +338,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00011" summary="uv compatibility initiated and then updated the repo packages used in the code">
-      <option name="closed" value="true" />
-      <created>1789460525673</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1789460525673</updated>
     </task>
     <task id="LOCAL-00012" summary="added a RotorSolver class to solvers.py">
       <option name="closed" value="true" />
@@ -734,14 +723,21 @@
       <option name="project" value="LOCAL" />
       <updated>1793161380437</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Added ANSI 256-color theming to `style.py` with Eigenscribe palette, semantic styles, and fallback support for 16-color mode. Updated CLI utilities (`utils.py`, `commands.py`) for enhanced colorized output. Included smoke tests and palette showcase. Enhanced headers and banners with gradient effects.">
+      <option name="closed" value="true" />
+      <created>1793163518476</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1793163518476</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
     <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
     <MESSAGE value="updated execution timestamps in validate_structural_metrics.ipynb" />
     <MESSAGE value="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks" />
@@ -766,7 +762,8 @@
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
     <MESSAGE value="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation." />
+    <MESSAGE value="Added ANSI 256-color theming to `style.py` with Eigenscribe palette, semantic styles, and fallback support for 16-color mode. Updated CLI utilities (`utils.py`, `commands.py`) for enhanced colorized output. Included smoke tests and palette showcase. Enhanced headers and banners with gradient effects." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ANSI 256-color theming to `style.py` with Eigenscribe palette, semantic styles, and fallback support for 16-color mode. Updated CLI utilities (`utils.py`, `commands.py`) for enhanced colorized output. Included smoke tests and palette showcase. Enhanced headers and banners with gradient effects." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
