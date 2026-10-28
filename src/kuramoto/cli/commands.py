@@ -47,13 +47,17 @@ from ..solver_types import (
 from ..topologies.tree_of_life import tree_of_life_positions
 from ..utils import get_rng
 from .style import (
+    ansi_256,
+    cli_echo,
     cli_error,
+    cli_highlight,
     cli_info,
     cli_network,
     cli_quantum,
     cli_rotor,
     cli_success,
     cli_warning,
+    supports_256_color,
 )
 from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
@@ -525,9 +529,13 @@ def qasm(
             f.write(qasm_str)
         cli_success(f"OpenQASM 2.0 circuit saved to '{output}'")
     else:
-        click.secho("\n--- OpenQASM 2.0 Circuit ---", fg="bright_cyan", bold=True)
-        click.echo(qasm_str)
-        click.echo("")
+        click.echo("", color=True)
+        if supports_256_color():
+            click.echo(ansi_256("eigen_cyan", "── OpenQASM 2.0 Circuit ──", bold=True), color=True)
+        else:
+            click.secho("--- OpenQASM 2.0 Circuit ---", fg="bright_cyan", bold=True)
+        click.echo(qasm_str, color=True)
+        click.echo("", color=True)
 
 
 @click.command()

@@ -7,20 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="cli update">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/architecture.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/architecture.mmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/euler.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rk45.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/failure_modes.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/quantum_sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/quantum_sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,61 +60,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000229687715843" />
-      <entry key="MS500" value="1.1374816025176913" />
-      <entry key="S2" value="2.4662360007912665" />
-      <entry key="S5" value="3.9420298979076325" />
-      <entry key="S10" value="4.826912247720932" />
-      <entry key="S30" value="8.546899154015614" />
-      <entry key="S60" value="19.070459732756547" />
-      <entry key="M2" value="40.55446547421864" />
-      <entry key="M5" value="77.54338292293833" />
-      <entry key="M10" value="100.14979170670816" />
-      <entry key="M15" value="109.71555909114389" />
-      <entry key="M30" value="124.64377896756892" />
-      <entry key="H1" value="195.39671703306428" />
-      <entry key="H2" value="513.2511071647075" />
-      <entry key="H4" value="1090.7231151938997" />
-      <entry key="D1" value="4472.274888958157" />
-      <entry key="W1" value="20173.089503319014" />
+      <entry key="MS100" value="1.000526966960116" />
+      <entry key="MS500" value="1.232751288889888" />
+      <entry key="S2" value="2.4911360333780435" />
+      <entry key="S5" value="5.015719070702759" />
+      <entry key="S10" value="9.639582448677968" />
+      <entry key="S30" value="33.953934668903955" />
+      <entry key="S60" value="70.20783431838395" />
+      <entry key="M2" value="128.83956128204431" />
+      <entry key="M5" value="231.71344451602076" />
+      <entry key="M10" value="316.0008550016897" />
+      <entry key="M15" value="364.72553526916664" />
+      <entry key="M30" value="446.8935740343328" />
+      <entry key="H1" value="548.7988183265192" />
+      <entry key="H2" value="825.0803278843083" />
+      <entry key="H4" value="1384.5553016847314" />
+      <entry key="D1" value="4829.966975654444" />
+      <entry key="W1" value="20586.002833246148" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="2.3042382898926492E-231" />
-      <entry key="S30" value="1.3208164313151224E-77" />
-      <entry key="S60" value="3.634303827853583E-39" />
-      <entry key="M2" value="6.028518746635518E-20" />
-      <entry key="M5" value="2.0515601130826573E-8" />
-      <entry key="M10" value="1.4324322073487616E-4" />
-      <entry key="M15" value="0.002746882056586036" />
-      <entry key="M30" value="0.06194594102235388" />
-      <entry key="H1" value="0.5811643249218825" />
-      <entry key="H2" value="2.794716503878051" />
-      <entry key="H4" value="6.858496539639637" />
-      <entry key="D1" value="34.71938597042982" />
-      <entry key="W1" value="161.05410257636402" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="1.9015811158080881E-121" />
+      <entry key="S60" value="4.3607122305972986E-61" />
+      <entry key="M2" value="6.603568906733146E-31" />
+      <entry key="M5" value="8.470547576547194E-13" />
+      <entry key="M10" value="9.204234968361832E-7" />
+      <entry key="M15" value="9.493997044691247E-5" />
+      <entry key="M30" value="0.011516417335525515" />
+      <entry key="H1" value="0.2505827765022467" />
+      <entry key="H2" value="1.835117575371404" />
+      <entry key="H4" value="5.557660215560098" />
+      <entry key="D1" value="33.523489131908455" />
+      <entry key="W1" value="160.24965504766544" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9460792264124774" />
-      <entry key="MS500" value="1.1247414913049467" />
-      <entry key="S2" value="2.4577760013604433" />
-      <entry key="S5" value="3.9359454092383634" />
-      <entry key="S10" value="4.822994802767924" />
-      <entry key="S30" value="8.53885942381093" />
-      <entry key="S60" value="19.053836411004145" />
-      <entry key="M2" value="40.53127479670217" />
-      <entry key="M5" value="77.52176626572958" />
-      <entry key="M10" value="100.13493733083583" />
-      <entry key="M15" value="109.70709555770998" />
-      <entry key="M30" value="124.69910940376118" />
-      <entry key="H1" value="195.96977753935818" />
-      <entry key="H2" value="516.0299737749339" />
-      <entry key="H4" value="1097.5632257487373" />
-      <entry key="D1" value="4506.98102006315" />
-      <entry key="W1" value="20334.134995981258" />
+      <entry key="MS100" value="0.9465561878419568" />
+      <entry key="MS500" value="1.2189275824809593" />
+      <entry key="S2" value="2.476214212773666" />
+      <entry key="S5" value="4.993756636962061" />
+      <entry key="S10" value="9.61966717649509" />
+      <entry key="S30" value="33.94050323569884" />
+      <entry key="S60" value="70.19738467334963" />
+      <entry key="M2" value="128.83146197421144" />
+      <entry key="M5" value="231.70748299966942" />
+      <entry key="M10" value="315.9955280599619" />
+      <entry key="M15" value="364.7206182283643" />
+      <entry key="M30" value="446.9006305570843" />
+      <entry key="H1" value="549.0439625506605" />
+      <entry key="H2" value="826.9039664893505" />
+      <entry key="H4" value="1390.0975002651974" />
+      <entry key="D1" value="4863.477568661545" />
+      <entry key="W1" value="20746.24390731001" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -348,14 +341,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00010" summary="uv compatibility initiated and then updated the repo packages used in the code">
-      <option name="closed" value="true" />
-      <created>1789460066868</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1789460066868</updated>
     </task>
     <task id="LOCAL-00011" summary="uv compatibility initiated and then updated the repo packages used in the code">
       <option name="closed" value="true" />
@@ -741,14 +726,21 @@
       <option name="project" value="LOCAL" />
       <updated>1793094285422</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation.">
+      <option name="closed" value="true" />
+      <created>1793161380437</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1793161380437</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added rotor_dt_0.01.npz benchmark data" />
     <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
     <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
     <MESSAGE value="updated execution timestamps in validate_structural_metrics.ipynb" />
@@ -773,14 +765,15 @@
     <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
-    <option name="LAST_COMMIT_MESSAGE" value="cli update" />
+    <MESSAGE value="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added `coprime.py` with dual-channel sub-Nyquist sampling and CRT frequency reconstruction, structured diagnostics, and smoke tests. Included failure and sanity reports for validation." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/kuramoto/cli/utils.py</url>
-          <line>11</line>
+          <line>14</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
