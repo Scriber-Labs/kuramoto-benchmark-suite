@@ -74,6 +74,8 @@ __all__: list[str] = [
     "psdconvergence",
     "network",
     "distributions",
+    "dash_export",
+    "zbw",
 ]
 
 # -----------------------------------------------------------------------------------------------------------
@@ -937,6 +939,118 @@ def distributions(dataset_path: str, gradient: str) -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
+# 5️⃣ Dash Export & ZBW Commands
+# -----------------------------------------------------------------------------------------------------------
+
+
+@click.command()
+@click.argument("dataset_path", type=click.Path(exists=True))
+@click.option(
+    "--output",
+    "-o",
+    default="data/dash_telemetry.json",
+    help="Output path for the Dash telemetry JSON file.",
+)
+def dash_export(dataset_path: str, output: str) -> None:
+    """Export simulation telemetry for Dash app consumption."""
+    from ..dash_export import compute_locking_fraction, compute_mean_field_phase, export_for_dash
+
+    cli_info(f"Loading dataset from '{dataset_path}'...")
+    data = np.load(dataset_path, allow_pickle=True)
+    dataset = {
+        "theta": data["theta"],
+        "time": data["time"],
+        "omega": data["omega"],
+    }
+    psi = compute_mean_field_phase(dataset["theta"])
+    locking = compute_locking_fraction(dataset["theta"], dataset["time"])
+
+    os.makedirs(os.path.dirname(output) or ".", exist_ok=True)
+    export_for_dash(dataset, output)
+    cli_success(f"Dash telemetry exported to '{output}'")
+
+    stats = [
+        {"Metric": "Mean field phase steps", "Value": len(psi)},
+        {"Metric": "Locking fraction steps", "Value": len(locking)},
+        {"Metric": "Mean locking", "Value": f"{np.mean(locking):.4f}"},
+    ]
+    print_table(stats, title="Dash Telemetry Summary")
+
+
+@click.command()
+@click.option(
+    "--oscillators",
+    "-n",
+    default=20,
+    type=click.IntRange(min=2),
+    help="Number of oscillators.",
+)
+@click.option(
+    "--timesteps",
+    "-t",
+    default=200,
+    type=click.IntRange(min=10),
+    help="Number of timesteps.",
+)
+@click.option(
+    "--coupling",
+    "-k",
+    default=0.5,
+    type=float,
+    help="Coupling strength K.",
+)
+@click.option(
+    "--omega0",
+    default=1.0,
+    type=float,
+    help="Base natural frequency omega_0.",
+)
+@click.option(
+    "--output",
+    "-o",
+    default="data/zbw_dataset.npz",
+    help="Output path for the ZBW dataset.",
+)
+@click.option("--seed", default=42, type=int, help="Random seed.")
+def zbw(
+    oscillators: int,
+    timesteps: int,
+    coupling: float,
+    omega0: float,
+    output: str,
+    seed: int,
+) -> None:
+    """Run the ZBW golden-ratio ensemble Kuramoto simulation."""
+    from ..models.zbw_generator import ZBWKuramotoDataGenerator
+
+    cli_info(
+        f"Running ZBW ensemble: N={oscillators}, K={coupling}, omega0={omega0}..."
+    )
+    gen = ZBWKuramotoDataGenerator(
+        num_oscillators=oscillators,
+        omega_0=omega0,
+        coupling_K=coupling,
+        seed=seed,
+    )
+    gen.evolve(timesteps)
+    theta = gen.get_phases()
+    time_arr = gen.get_time()
+    omega = gen.get_frequencies()
+
+    os.makedirs(os.path.dirname(output) or ".", exist_ok=True)
+    np.savez(output, theta=theta, time=time_arr, omega=omega, adjacency=gen.adjacency)
+    cli_success(f"ZBW dataset saved to '{output}'")
+
+    stats = [
+        {"Metric": "Oscillators", "Value": oscillators},
+        {"Metric": "Timesteps", "Value": timesteps},
+        {"Metric": "Coupling K", "Value": coupling},
+        {"Metric": "Base omega_0", "Value": omega0},
+    ]
+    print_table(stats, title="ZBW Simulation Parameters")
+
+
+# -----------------------------------------------------------------------------------------------------------
 # 💨 Smoke tests
 # -----------------------------------------------------------------------------------------------------------
 
@@ -951,6 +1065,8 @@ def _run_smoke_test() -> None:
     assert callable(benchmark)
     assert callable(time)
     assert callable(network)
+    assert callable(dash_export)
+    assert callable(zbw)
     print("✅ Commands smoke test passed.")
 
 

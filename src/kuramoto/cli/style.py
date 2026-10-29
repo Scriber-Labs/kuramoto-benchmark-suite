@@ -28,6 +28,12 @@ __all__: list[str] = [
     "cli_highlight",
     "cli_section",
     "cli_divider",
+    "cli_echo",
+    "cli_rule",
+    "cli_banner",
+    "EIGENSCRIBE_PALETTE",
+    "ansi_256",
+    "supports_256_color",
 ]
 
 # -----------------------------------------------------------------------------------------------------------
@@ -65,10 +71,116 @@ COLOR_PALETTE: Final[dict[str, str]] = {
     "bright_white": "bright_white",
 }
 
+# 256-color ANSI palette for terminals that support extended color
+ANSI_256_PALETTE: Final[dict[str, int]] = {
+    "eigen_cyan": 81,
+    "eigen_cyan_light": 122,
+    "eigen_magenta": 135,
+    "eigen_green": 41,
+    "eigen_yellow": 178,
+    "eigen_red": 196,
+    "eigen_blue": 69,
+    "eigen_blue_bright": 75,
+    "eigen_purple": 141,
+    "eigen_white": 189,
+}
+
+# Canonical alias exposed as EIGENSCRIBE_PALETTE for external consumers
+EIGENSCRIBE_PALETTE: Final[dict[str, int]] = ANSI_256_PALETTE
+
 
 # -----------------------------------------------------------------------------------------------------------
 # 1️⃣ Public API
 # -----------------------------------------------------------------------------------------------------------
+
+
+def supports_256_color() -> bool:
+    """
+    Check whether the current terminal supports 256-color ANSI output.
+
+    Returns
+    -------
+    bool
+        True if the terminal supports 256 colors, False otherwise.
+    """
+    return click.get_terminal_size().columns > 0 and click.can_echo()
+
+
+def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
+    """
+    Return a string wrapped in 256-color ANSI escape codes.
+
+    Parameters
+    ----------
+    color_name : str
+        Color key from ``ANSI_256_PALETTE`` (e.g. "eigen_cyan").
+    text : str
+        Text to colorize.
+    bold : bool, default=False
+        Whether to apply bold weight.
+
+    Returns
+    -------
+    str
+        ANSI-escaped string ready for ``click.echo(..., color=True)``.
+    """
+    color_code = ANSI_256_PALETTE.get(color_name, 81)
+    parts: list[str] = []
+    if bold:
+        parts.append("1")
+    parts.append(f"38;5;{color_code}")
+    return f"\033[{';'.join(parts)}m{text}\033[0m"
+
+
+def cli_echo(msg: str, **kwargs: str) -> None:
+    """
+    Print a message using click.echo with color enabled.
+
+    Parameters
+    ----------
+    msg : str
+        Message content to display.
+    **kwargs
+        Additional keyword arguments passed to ``click.echo``.
+    """
+    kwargs.setdefault("color", True)
+    click.echo(msg, **kwargs)
+
+
+def cli_rule(char: str = "─", width: int = 56, level: str = "info") -> None:
+    """
+    Print a horizontal rule line with a given character and style.
+
+    Parameters
+    ----------
+    char : str, default="─"
+        Character used to draw the rule.
+    width : int, default=56
+        Number of characters in the rule.
+    level : str, default="info"
+        Semantic level for color lookup in ``STYLE_MAP``.
+    """
+    fg = STYLE_MAP.get(level, "bright_cyan")
+    click.secho(char * width, fg=fg)
+
+
+def cli_banner() -> None:
+    """
+    Print the Kuramoto Benchmark Suite branded banner with 256-color support.
+    Falls back to standard click colors when 256-color is unavailable.
+    """
+    click.echo("")
+    if supports_256_color():
+        click.echo(ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True)
+        click.echo(ansi_256("eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True), color=True)
+        click.echo(ansi_256("eigen_purple", "     Oscillator Network Simulation & Analysis Framework", bold=False), color=True)
+        click.echo(ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True)
+    else:
+        click.secho("  " + "=" * 56, fg="bright_blue", bold=True)
+        click.secho("     KURAMOTO BENCHMARK SUITE", fg="bright_blue", bold=True)
+        click.secho("     Oscillator Network Simulation & Analysis Framework", fg="bright_magenta")
+        click.secho("  " + "=" * 56, fg="bright_blue", bold=True)
+    click.echo("")
 
 
 def cli_message(msg: str, level: str = "info", bold: bool = False) -> None:
