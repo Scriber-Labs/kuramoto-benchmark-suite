@@ -26,6 +26,7 @@ from .commands import (
     qasm,
     quantum,
     time,
+    zbw,
 )
 from .utils import print_header
 
@@ -68,6 +69,7 @@ cli.add_command(psdvariability)
 cli.add_command(psdconvergence)
 cli.add_command(network)
 cli.add_command(distributions)
+cli.add_command(zbw)
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -93,6 +95,7 @@ def _run_smoke_test() -> None:
         "psdconvergence",
         "network",
         "distributions",
+        "zbw",
     ]
     for cmd in expected:
         assert cmd in commands, f"Command '{cmd}' missing from CLI group."

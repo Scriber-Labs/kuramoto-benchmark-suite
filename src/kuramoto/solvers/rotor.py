@@ -1241,6 +1241,7 @@ class RotorSolver:
         adaptive_atol: float = 1e-7,
         dt_min: float = 1e-5,
         dt_max: float | None = None,        # None -> dt_internal
+        callback: Callable[[float, PhaseArray], None] | None = None,
     ) -> tuple[TimeArray, PhaseArray]:
         """
         Run a full rotor simulation.
@@ -1261,6 +1262,10 @@ class RotorSolver:
             Stepping method to use: 'fast' (vectorized order parameter Euler),
             'standard' (standard pairwise Euler), or 'geometric' (pure GA bivector torque Euler).
             Default is 'fast'.
+        callback : callable, optional
+            If provided, called after each output timestep as
+            ``callback(time, phases)`` where ``phases`` has shape ``(N,)``.
+            This enables near-real-time streaming export.
 
         Returns
         -------
@@ -1354,6 +1359,10 @@ class RotorSolver:
         times.append(current_time)
         all_phases.append(current_phases.copy())
 
+        # Invoke callback for the initial timestep
+        if callback is not None:
+            callback(current_time, current_phases)
+
         w_fsal_cache = None
 
         for t_out in t_eval[1:]:
@@ -1429,6 +1438,10 @@ class RotorSolver:
             current_phases = self.extract_phases()
             times.append(float(t_out))
             all_phases.append(current_phases.copy())
+
+            # Invoke callback for streaming export
+            if callback is not None:
+                callback(float(t_out), current_phases)
 
         # Sync final rotor states from internal array
         self._sync_rotors_from_array()

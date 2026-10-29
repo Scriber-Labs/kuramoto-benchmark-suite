@@ -21,10 +21,13 @@ __all__: list[str] = [
     "cli_network",
     "cli_quantum",
     "cli_rotor",
+    "cli_zbw",
     "cli_success",
     "cli_warning",
     "cli_error",
     "cli_highlight",
+    "cli_section",
+    "cli_divider",
 ]
 
 # -----------------------------------------------------------------------------------------------------------
@@ -36,10 +39,30 @@ STYLE_MAP: Final[dict[str, str]] = {
     "network": "bright_magenta",
     "quantum": "bright_cyan",
     "rotor": "bright_magenta",
+    "zbw": "bright_yellow",
     "success": "bright_green",
     "warning": "bright_yellow",
     "error": "bright_red",
     "highlight": "bright_magenta",
+    "section": "white",
+}
+
+# Extended color palette for richer output
+COLOR_PALETTE: Final[dict[str, str]] = {
+    "cyan": "cyan",
+    "magenta": "magenta",
+    "green": "green",
+    "yellow": "yellow",
+    "red": "red",
+    "blue": "blue",
+    "white": "white",
+    "bright_cyan": "bright_cyan",
+    "bright_magenta": "bright_magenta",
+    "bright_green": "bright_green",
+    "bright_yellow": "bright_yellow",
+    "bright_red": "bright_red",
+    "bright_blue": "bright_blue",
+    "bright_white": "bright_white",
 }
 
 
@@ -161,6 +184,41 @@ def cli_highlight(msg: str) -> None:
     cli_message(f"✨ {msg}", level="highlight", bold=True)
 
 
+def cli_zbw(msg: str) -> None:
+    """
+    Print a ZBW (golden-ratio ensemble) model update.
+
+    Parameters
+    ----------
+    msg : str
+        ZBW model message string.
+    """
+    cli_message(f"🌟 {msg}", level="zbw", bold=True)
+
+
+def cli_section(title: str) -> None:
+    """
+    Print a section header with decorative borders.
+
+    Parameters
+    ----------
+    title : str
+        Section title to display.
+    """
+    border = "─" * 50
+    click.echo("")
+    click.secho(f" {border}", fg="bright_white", bold=True)
+    click.secho(f"  {title}", fg="bright_white", bold=True)
+    click.secho(f" {border}", fg="bright_white", bold=True)
+
+
+def cli_divider() -> None:
+    """
+    Print a simple horizontal divider line.
+    """
+    click.secho(" ─" * 25, fg="bright_white")
+
+
 # -----------------------------------------------------------------------------------------------------------
 # 💨 Smoke tests
 # -----------------------------------------------------------------------------------------------------------
@@ -173,10 +231,13 @@ def _run_smoke_test() -> None:
     cli_network("Test network message")
     cli_quantum("Test quantum message")
     cli_rotor("Test rotor message")
+    cli_zbw("Test ZBW message")
     cli_success("Test success message")
     cli_warning("Test warning message")
     cli_error("Test error message")
     cli_highlight("Test highlight message")
+    cli_section("Test Section Header")
+    cli_divider()
     print("✅ Style smoke test passed.")
 
 

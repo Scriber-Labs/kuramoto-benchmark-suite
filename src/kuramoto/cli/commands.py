@@ -48,13 +48,16 @@ from ..solver_types import (
 from ..topologies.tree_of_life import tree_of_life_positions
 from ..utils import get_rng
 from .style import (
+    cli_divider,
     cli_error,
     cli_info,
     cli_network,
     cli_quantum,
     cli_rotor,
+    cli_section,
     cli_success,
     cli_warning,
+    cli_zbw,
 )
 from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
@@ -72,6 +75,7 @@ __all__: list[str] = [
     "psdconvergence",
     "network",
     "distributions",
+    "zbw",
 ]
 
 # -----------------------------------------------------------------------------------------------------------
@@ -80,6 +84,9 @@ __all__: list[str] = [
 
 DEFAULT_QUANTUM_SHOTS: Final[int] = 1024
 DEFAULT_COUPLING: Final[float] = 1.5
+DEFAULT_ZBW_OMEGA_0: Final[float] = 1.0
+DEFAULT_ZBW_LED_FREQ: Final[float] = 40.0
+DEFAULT_ZBW_LED_AMP: Final[float] = 1.0
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -931,7 +938,193 @@ def distributions(dataset_path: str, gradient: str) -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 5️⃣ Export Commands
+# 5️⃣ Specialized Model Commands
+# -----------------------------------------------------------------------------------------------------------
+
+
+@click.command()
+@click.option(
+    "--oscillators",
+    "-n",
+    default=50,
+    type=click.IntRange(min=2),
+    help="Number of oscillators in the ZBW ensemble.",
+)
+@click.option(
+    "--omega0",
+    "-o0",
+    default=DEFAULT_ZBW_OMEGA_0,
+    type=float,
+    help="Base natural frequency for the golden-ratio grid.",
+)
+@click.option(
+    "--coupling",
+    "-k",
+    default=DEFAULT_COUPLING,
+    type=float,
+    help="Coupling strength K.",
+)
+@click.option(
+    "--timesteps",
+    "-t",
+    default=500,
+    type=click.IntRange(min=2),
+    help="Number of timesteps.",
+)
+@click.option(
+    "--dt",
+    default=0.01,
+    type=click.FloatRange(min=0.0001),
+    help="Time step size.",
+)
+@click.option(
+    "--led-freq",
+    default=DEFAULT_ZBW_LED_FREQ,
+    type=float,
+    help="LED driving field frequency (Hz).",
+)
+@click.option(
+    "--led-amp",
+    default=DEFAULT_ZBW_LED_AMP,
+    type=float,
+    help="LED driving field amplitude.",
+)
+@click.option("--seed", default=42, type=int, help="Random seed for initial phases.")
+@click.option(
+    "--output",
+    "-o",
+    default=None,
+    type=click.Path(),
+    help="Output path to save the ZBW dataset (.npz).",
+)
+def zbw(
+    oscillators: int,
+    omega0: float,
+    coupling: float,
+    timesteps: int,
+    dt: float,
+    led_freq: float,
+    led_amp: float,
+    seed: int,
+    output: str | None,
+) -> None:
+    """Simulate the ZBW (golden-ratio) Kuramoto ensemble model.
+
+    Uses a golden-ratio frequency grid, coprime-index adjacency topology,
+    and an external LED macroscopic vector torque operator.
+    """
+    from scipy.integrate import solve_ivp
+
+    from ..models import ZBWKuramotoDataGenerator
+
+    cli_zbw(
+        f"Initializing ZBW ensemble: N={oscillators}, omega0={omega0}, K={coupling}"
+    )
+
+    # Create the ZBW generator
+    gen = ZBWKuramotoDataGenerator(
+        num_oscillators=oscillators,
+        omega_0=omega0,
+        coupling_K=coupling,
+    )
+
+    # Initialize phases randomly
+    rng = get_rng(seed)
+    phases_0 = rng.uniform(0, 2 * np.pi, oscillators)
+
+    # Time array
+    t_eval = np.arange(0, timesteps * dt, dt)
+    t_span = (0.0, timesteps * dt)
+
+    # Define the ODE system for solve_ivp
+    def ode_system(t: float, theta: np.ndarray) -> np.ndarray:
+        return gen.phase_evolution_derivatives(
+            time=t, phases=theta, led_frequency=led_freq, led_amplitude=led_amp
+        )
+
+    cli_zbw("Running simulation with golden-ratio frequencies and coprime topology...")
+    t0_sim = time_module.perf_counter()
+
+    sol = solve_ivp(
+        ode_system,
+        t_span=t_span,
+        y0=phases_0,
+        method="RK45",
+        t_eval=t_eval,
+        dense_output=False,
+    )
+
+    elapsed_ms = (time_module.perf_counter() - t0_sim) * 1000.0
+
+    if not sol.success:
+        cli_error(f"Simulation failed: {sol.message}")
+        return
+
+    theta = sol.y.T  # Shape: (timesteps, N)
+
+    # Compute order parameter
+    r = compute_order_parameter(theta)
+    mean_r = float(np.mean(r))
+    final_r = float(r[-1])
+    max_r = float(np.max(r))
+
+    cli_success(f"Simulation completed in {elapsed_ms:.2f} ms")
+
+    # Save dataset if output is specified
+    if output:
+        os.makedirs(os.path.dirname(output) or ".", exist_ok=True)
+        np.savez(
+            output,
+            theta=theta,
+            time=t_eval,
+            omega=gen.intrinsic_frequencies,
+            adjacency=gen.adjacency_matrix,
+            initial_conditions=phases_0,
+            coupling=coupling,
+            led_frequency=led_freq,
+            led_amplitude=led_amp,
+        )
+        cli_success(f"Dataset saved to '{output}'")
+
+    # Print results
+    cli_section("ZBW Ensemble Simulation Results")
+    cli_divider()
+
+    stats = [
+        {"Parameter": "Oscillators (N)", "Value": oscillators},
+        {"Parameter": "Base Frequency (omega0)", "Value": f"{omega0:.4f}"},
+        {"Parameter": "Coupling Strength (K)", "Value": f"{coupling:.4f}"},
+        {"Parameter": "Timesteps", "Value": timesteps},
+        {"Parameter": "Time Step (dt)", "Value": f"{dt:.4f}"},
+        {"Parameter": "LED Frequency (Hz)", "Value": f"{led_freq:.2f}"},
+        {"Parameter": "LED Amplitude", "Value": f"{led_amp:.2f}"},
+        {"Parameter": "Runtime (ms)", "Value": f"{elapsed_ms:.2f}"},
+        {"Parameter": "Mean Order Parameter <|r|>", "Value": f"{mean_r:.4f}"},
+        {"Parameter": "Final Order Parameter |r(T)|", "Value": f"{final_r:.4f}"},
+        {"Parameter": "Max Order Parameter max|r|", "Value": f"{max_r:.4f}"},
+    ]
+    print_table(stats, title="Simulation Parameters & Results")
+
+    # Show frequency spread info
+    freq_min = float(gen.intrinsic_frequencies[0])
+    freq_max = float(gen.intrinsic_frequencies[-1])
+    cli_zbw(
+        f"Frequency range: [{freq_min:.4f}, {freq_max:.4f}] "
+        f"(golden-ratio spacing, phi={gen.phi:.6f})"
+    )
+
+    # Show adjacency sparsity
+    total_edges = int(np.sum(gen.adjacency_matrix) / 2)  # Undirected
+    max_edges = oscillators * (oscillators - 1) // 2
+    sparsity = 1.0 - (total_edges / max_edges) if max_edges > 0 else 0.0
+    cli_network(
+        f"Coprime topology: {total_edges} edges / {max_edges} max "
+        f"(sparsity: {sparsity:.1%})"
+    )
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 6️⃣ Export Commands
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -939,9 +1132,16 @@ def distributions(dataset_path: str, gradient: str) -> None:
 @click.option(
     "--output",
     "-o",
-    default="data/dash_export.json",
+    default=None,
     type=click.Path(),
-    help="Output path for the enriched JSON file.",
+    help="Output path (defaults to dash_export.json or dash_export.jsonl with --stream).",
+)
+@click.option(
+    "--stream",
+    "-S",
+    is_flag=True,
+    default=False,
+    help="Stream one JSON line per timestep as the simulation runs (output .jsonl).",
 )
 @click.option(
     "--oscillators",
@@ -992,7 +1192,8 @@ def distributions(dataset_path: str, gradient: str) -> None:
     help="Optional JSON config file (overrides CLI defaults).",
 )
 def dash_export(
-    output: str,
+    output: str | None,
+    stream: bool,
     oscillators: int,
     coupling: float,
     timesteps: int,
@@ -1007,6 +1208,11 @@ def dash_export(
     Generates a Kuramoto dataset and exports it with additional metrics
     (mean field phase, locking fraction, topology metadata) in a format
     ready for the Dash dashboard.
+
+    By default, the entire dataset is exported as a single JSON file after
+    the simulation completes. With ``--stream``, the export writes one JSON
+    line per timestep to a ``.jsonl`` file, enabling near-real-time updates
+    in the Dash app via file polling.
     """
     # If a config file is provided, load and merge its parameters
     if config is not None:
@@ -1035,6 +1241,13 @@ def dash_export(
             "seed": seed,
         }
 
+    # Determine output path
+    if output is None:
+        if stream:
+            output = "data/dash_export.jsonl"
+        else:
+            output = "data/dash_export.json"
+
     n = params["n_oscillators"]
     rng = get_rng(params["seed"])
     omega = rng.normal(0.0, 1.0, n)
@@ -1056,10 +1269,15 @@ def dash_export(
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
 
-    # Export enriched JSON
-    export_for_dash(data, output)
+    # Export: streaming JSONL or standard JSON
+    if stream:
+        from kuramoto.dash_export import export_for_dash_stream
 
-    cli_success(f"Enriched JSON exported to '{output}'")
+        export_for_dash_stream(data, output)
+        cli_success(f"Streaming JSONL exported to '{output}'")
+    else:
+        export_for_dash(data, output)
+        cli_success(f"Enriched JSON exported to '{output}'")
 
     # Summary table
     summary = {
@@ -1090,6 +1308,7 @@ def _run_smoke_test() -> None:
     assert callable(benchmark)
     assert callable(time)
     assert callable(network)
+    assert callable(zbw)
     print("✅ Commands smoke test passed.")
 
 

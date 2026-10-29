@@ -14,7 +14,8 @@ Date: 10-2026
 from __future__ import annotations
 
 import json
-from typing import Any, Dict
+from collections import namedtuple
+from typing import Any, Callable, Dict, Optional
 
 import numpy as np
 import pandas as pd
@@ -34,9 +35,11 @@ except (ImportError, ValueError):
     from kuramoto.utils import get_rng
 
 __all__: list[str] = [
+    "TimestepRecord",
     "compute_mean_field_phase",
     "compute_locking_fraction",
     "export_for_dash",
+    "export_for_dash_stream",
 ]
 
 # ------------------------------------------------------------------------------
@@ -45,6 +48,15 @@ __all__: list[str] = [
 
 PhaseArray = NDArray[np.floating]
 TimeArray = NDArray[np.floating]
+
+# TimestepRecord for streaming export — one record per output timestep
+TimestepRecord = namedtuple(
+    "TimestepRecord",
+    ["time", "theta", "order_parameter", "mean_field_phase", "locking_fraction"],
+)
+
+# Callback type: invoked after each output timestep with the current time, phases, and record
+TimestepCallback = Callable[[float, PhaseArray, "TimestepRecord"], None]
 
 # ------------------------------------------------------------------------------
 # 1️⃣ Public API — Metric Computation
@@ -301,6 +313,161 @@ def export_for_dash(
     }
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2)
+
+
+# ------------------------------------------------------------------------------
+# 3️⃣ Public API — Streaming JSONL Export
+# ------------------------------------------------------------------------------
+
+
+def export_for_dash_stream(
+    dataset: Dict[str, Any],
+    output_path: str,
+    callback: Optional[TimestepCallback] = None,
+    include_locking: bool = True,
+    locking_threshold: float = 0.1,
+    locking_window: int = 10,
+) -> None:
+    """
+    Export a Kuramoto dataset as streaming JSONL for near-real-time Dash updates.
+
+    Writes one JSON line per timestep to ``output_path``. A header line (prefixed
+    with ``# ``) contains metadata as JSON. Each subsequent line is a JSON object
+    with fields: ``t``, ``theta``, ``R``, ``psi``, and ``locking``.
+
+    An optional callback is invoked after each timestep, allowing the caller to
+    perform additional actions (e.g., logging, progress reporting).
+
+    Parameters
+    ----------
+    dataset : Dict[str, Any]
+        Dataset dictionary from ``generate_kuramoto_dataset()``. Expected keys:
+        ``theta``, ``time``, ``omega``, ``adjacency``, ``coupling``,
+        ``noise_std``, ``solver``, etc.
+    output_path : str
+        Path for the output JSONL file.
+    callback : callable, optional
+        If provided, called after each timestep as
+        ``callback(time, theta_t, record)`` where ``record`` is a
+        ``TimestepRecord`` namedtuple.
+    include_locking : bool, default True
+        Whether to compute and include the locking fraction metric.
+    locking_threshold : float, default 0.1
+        Frequency deviation threshold for locking detection (rad/s).
+    locking_window : int, default 10
+        Sliding window size for locking detection (timesteps).
+
+    Examples
+    --------
+    >>> from kuramoto.api import generate_kuramoto_dataset
+    >>> import numpy as np
+    >>> data = generate_kuramoto_dataset(
+    ...     n_oscillators=10,
+    ...     natural_frequencies=np.ones(10),
+    ...     coupling=1.5,
+    ...     timesteps=100,
+    ...     dt=0.02,
+    ...     seed=42,
+    ... )
+    >>> export_for_dash_stream(data, "output.jsonl")  # doctest: +SKIP
+    """
+    theta = dataset["theta"]
+    time = dataset["time"]
+    T, N = theta.shape
+
+    # Compute order parameter R(t)
+    from .order_parameter import compute_order_parameter
+
+    R = compute_order_parameter(theta)
+
+    # Compute mean field phase ψ(t)
+    psi = compute_mean_field_phase(theta)
+
+    # Compute locking fraction if requested
+    locking = np.zeros(T)
+    if include_locking:
+        locking = compute_locking_fraction(
+            theta, time, threshold=locking_threshold, window=locking_window
+        )
+
+    # Build enriched metadata
+    adjacency = dataset.get("adjacency")
+    topology_type = dataset.get("topology_type", "complete")
+
+    # Compute topology stats if adjacency is available
+    topology_stats = {}
+    if adjacency is not None:
+        try:
+            import networkx as nx
+
+            G = nx.from_numpy_array(adjacency)
+            topology_stats = {
+                "num_nodes": G.number_of_nodes(),
+                "num_edges": G.number_of_edges(),
+                "density": nx.density(G),
+                "avg_degree": float(np.mean(dict(G.degree()).values())),
+            }
+        except Exception:
+            topology_stats = {
+                "num_nodes": int(adjacency.shape[0]),
+                "num_edges": int(np.sum(adjacency) // 2),
+            }
+
+    metadata = {
+        "n_oscillators": int(N),
+        "timesteps": int(T),
+        "coupling": float(dataset.get("coupling", 0.0)),
+        "noise_std": float(dataset.get("noise_std", 0.0)),
+        "solver": str(dataset.get("solver", "unknown")),
+        "dt": float(dataset.get("dt", 0.0)),
+        "topology_type": topology_type,
+        "topology_stats": topology_stats,
+        "solver_params": {
+            "dt": float(dataset.get("dt", 0.0)),
+            "noise_std": float(dataset.get("noise_std", 0.0)),
+            "locking_threshold": locking_threshold,
+            "locking_window": locking_window,
+        },
+    }
+
+    # Write JSONL file
+    with open(output_path, "w") as f:
+        # Header line (comment, starts with # )
+        f.write(f"# {json.dumps({'metadata': metadata})}\n")
+        f.flush()
+
+        # One JSON line per timestep
+        for t_idx in range(T):
+            t_val = float(time[t_idx])
+            theta_t = theta[t_idx].tolist()
+            r_val = float(R[t_idx])
+            psi_val = float(psi[t_idx])
+            lock_val = float(locking[t_idx])
+
+            record = TimestepRecord(
+                time=t_val,
+                theta=theta[t_idx],
+                order_parameter=r_val,
+                mean_field_phase=psi_val,
+                locking_fraction=lock_val,
+            )
+
+            # Invoke callback if provided
+            if callback is not None:
+                callback(t_val, theta[t_idx], record)
+
+            # Write JSONL line
+            line = json.dumps(
+                {
+                    "t": t_val,
+                    "theta": theta_t,
+                    "R": r_val,
+                    "psi": psi_val,
+                    "locking": lock_val,
+                }
+            )
+            f.write(line + "\n")
+            f.flush()
 
 
 # ------------------------------------------------------------------------------

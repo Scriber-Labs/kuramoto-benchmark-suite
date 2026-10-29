@@ -21,9 +21,11 @@ import pytest
 
 from kuramoto.api import generate_kuramoto_dataset
 from kuramoto.dash_export import (
+    TimestepRecord,
     compute_locking_fraction,
     compute_mean_field_phase,
     export_for_dash,
+    export_for_dash_stream,
 )
 
 
@@ -258,3 +260,159 @@ class TestExportForDash:
         finally:
             if os.path.exists(tmp_path):
                 os.unlink(tmp_path)
+
+
+class TestExportForDashStream:
+    """Tests for export_for_dash_stream()."""
+
+    def _make_dataset(self) -> dict:
+        """Create a small test dataset."""
+        return generate_kuramoto_dataset(
+            n_oscillators=10,
+            natural_frequencies=np.ones(10),
+            coupling=1.5,
+            timesteps=50,
+            dt=0.02,
+            seed=42,
+        )
+
+    def test_jsonl_format(self) -> None:
+        """Export should produce valid JSONL with header and data lines."""
+        dataset = self._make_dataset()
+        dataset["solver"] = "rk45"
+        dataset["dt"] = 0.02
+        dataset["topology_type"] = "complete"
+
+        with tempfile.NamedTemporaryFile(suffix=".jsonl", delete=False) as f:
+            tmp_path = f.name
+
+        try:
+            export_for_dash_stream(dataset, tmp_path)
+            with open(tmp_path, "r") as f:
+                lines = f.readlines()
+
+            # First line should be the header (comment)
+            assert lines[0].startswith("# "), "Header line should start with '# '"
+
+            # Remaining lines should be JSON objects
+            data_lines = [l for l in lines[1:] if l.strip()]
+            assert len(data_lines) == 50, f"Expected 50 data lines, got {len(data_lines)}"
+
+            # Each line should be valid JSON with expected keys
+            for line in data_lines:
+                obj = json.loads(line)
+                assert "t" in obj
+                assert "theta" in obj
+                assert "R" in obj
+                assert "psi" in obj
+                assert "locking" in obj
+        finally:
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+
+    def test_header_metadata(self) -> None:
+        """Header line should contain metadata as JSON."""
+        dataset = self._make_dataset()
+        dataset["solver"] = "rk45"
+        dataset["dt"] = 0.02
+        dataset["topology_type"] = "complete"
+
+        with tempfile.NamedTemporaryFile(suffix=".jsonl", delete=False) as f:
+            tmp_path = f.name
+
+        try:
+            export_for_dash_stream(dataset, tmp_path)
+            with open(tmp_path, "r") as f:
+                header_line = f.readline().strip()
+
+            # Parse the header (remove '# ' prefix)
+            header_json = json.loads(header_line[2:])
+            assert "metadata" in header_json
+            metadata = header_json["metadata"]
+            assert metadata["n_oscillators"] == 10
+            assert metadata["timesteps"] == 50
+            assert metadata["solver"] == "rk45"
+        finally:
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+
+    def test_callback_invocation(self) -> None:
+        """Callback should be invoked for each timestep."""
+        dataset = self._make_dataset()
+        callback_times: list[float] = []
+        callback_thetas: list[list[float]] = []
+
+        def mock_callback(t: float, theta: np.ndarray, record: TimestepRecord) -> None:
+            callback_times.append(t)
+            callback_thetas.append(theta.tolist())
+
+        with tempfile.NamedTemporaryFile(suffix=".jsonl", delete=False) as f:
+            tmp_path = f.name
+
+        try:
+            export_for_dash_stream(dataset, tmp_path, callback=mock_callback)
+            assert len(callback_times) == 50, f"Expected 50 callbacks, got {len(callback_times)}"
+            assert len(callback_thetas) == 50
+            # Times should be monotonically increasing
+            for i in range(1, len(callback_times)):
+                assert callback_times[i] > callback_times[i - 1]
+        finally:
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+
+    def test_timestep_record_fields(self) -> None:
+        """TimestepRecord should have all expected fields."""
+        record = TimestepRecord(
+            time=0.0,
+            theta=np.array([0.1, 0.2]),
+            order_parameter=0.5,
+            mean_field_phase=0.3,
+            locking_fraction=0.0,
+        )
+        assert record.time == 0.0
+        assert record.order_parameter == 0.5
+        assert record.mean_field_phase == 0.3
+        assert record.locking_fraction == 0.0
+        assert np.allclose(record.theta, [0.1, 0.2])
+
+    def test_backward_compatibility_with_json(self) -> None:
+        """Streaming export should produce same metrics as JSON export."""
+        dataset = self._make_dataset()
+        dataset["solver"] = "rk45"
+        dataset["dt"] = 0.02
+        dataset["topology_type"] = "complete"
+
+        json_path = None
+        jsonl_path = None
+        try:
+            json_path = tempfile.mktemp(suffix=".json")
+            jsonl_path = tempfile.mktemp(suffix=".jsonl")
+
+            export_for_dash(dataset, json_path)
+            export_for_dash_stream(dataset, jsonl_path)
+
+            # Load JSON export
+            with open(json_path, "r") as f:
+                json_data = json.load(f)
+
+            # Load JSONL export
+            with open(jsonl_path, "r") as f:
+                lines = f.readlines()
+            data_lines = [l for l in lines[1:] if l.strip()]
+
+            # Compare order parameter values
+            json_df = pd.DataFrame(
+                json_data["data"]["data"], columns=json_data["data"]["columns"]
+            )
+            json_R = json_df["order_parameter"].values
+
+            jsonl_R = [json.loads(l)["R"] for l in data_lines]
+
+            assert len(json_R) == len(jsonl_R)
+            assert np.allclose(json_R, jsonl_R, atol=1e-10)
+
+        finally:
+            if json_path and os.path.exists(json_path):
+                os.unlink(json_path)
+            if jsonl_path and os.path.exists(jsonl_path):
+                os.unlink(jsonl_path)

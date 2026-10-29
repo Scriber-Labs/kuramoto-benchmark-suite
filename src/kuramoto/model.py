@@ -15,7 +15,7 @@ Date: May 2026
 
 from __future__ import annotations
 
-from typing import Any, Dict, Final, Optional
+from typing import Any, Callable, Dict, Final, Optional
 
 import numpy as np
 from numpy.typing import NDArray
@@ -214,6 +214,7 @@ class KuramotoModel:
         self,
         t_span: float,
         n_points: Optional[int] = None,
+        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """
@@ -225,6 +226,12 @@ class KuramotoModel:
             Total simulation time (must be > 0).
         n_points : int, optional
             Number of time points to output. If None, uses `_MIN_OUTPUT_POINTS`.
+        callback : callable, optional
+            If provided, called after each output timestep as
+            ``callback(time, phases)`` where ``phases`` has shape ``(N,)``.
+            For RK45, the callback is invoked after the full integration completes
+            (best-effort streaming). For rotor-based solvers, the callback is invoked
+            after each output timestep within the simulation loop.
         **kwargs : Any
             Additional solver options passed to the underlying integrator (e.g.,
             `dt_internal`, `enforce_nyquist`, `scheme`, `shots`, `adaptive_rtol`, `adaptive_atol`).
@@ -240,17 +247,18 @@ class KuramotoModel:
         t_eval = np.linspace(0.0, t_span, points)
 
         if self.solver_type == "rk45":
-            return self._simulate_rk45(t_span, t_eval, points, **kwargs)
+            return self._simulate_rk45(t_span, t_eval, points, callback=callback, **kwargs)
         elif is_quantum_solver(self.solver_type):
-            return self._simulate_quantum(t_span, t_eval, points, **kwargs)
+            return self._simulate_quantum(t_span, t_eval, points, callback=callback, **kwargs)
         else:
-            return self._simulate_rotor(t_span, t_eval, points, **kwargs)
+            return self._simulate_rotor(t_span, t_eval, points, callback=callback, **kwargs)
 
     def _simulate_rk45(
         self,
         t_span: float,
         t_eval: NDArray,
         n_points: int,
+        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """Classic RK45 integration path."""
@@ -280,6 +288,11 @@ class KuramotoModel:
         self.derivatives = derivatives
         self.order_param = order_param
 
+        # For RK45, callback is invoked after full integration (best-effort streaming)
+        if callback is not None:
+            for t_idx in range(len(t_eval)):
+                callback(float(t_eval[t_idx]), phases[t_idx])
+
         net_stats: Dict[str, float] = graph_stats(self.A)
 
         return KuramotoDataset(
@@ -307,6 +320,7 @@ class KuramotoModel:
         adaptive_atol: float = 1e-7,
         dt_min: float = 1e-5,
         dt_max: float | None = None,
+        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """Geometric Algebra rotor integration path."""
@@ -355,6 +369,7 @@ class KuramotoModel:
             adaptive_atol=adaptive_atol,
             dt_min=dt_min,
             dt_max=dt_max,
+            callback=callback,
         )
 
         # Compute derivatives numerically via finite differences

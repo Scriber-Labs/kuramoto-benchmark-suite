@@ -134,7 +134,7 @@ def test_kuramoto_simulation_and_order_parameter():
 ## 3. Architecture & Code Style Guidelines
 
 ### 3.1 Structural Code Layout ("Gold Standard" Pattern)
-Modules follow the structure outlined in `templates/HOUSE_RULES.md` and `templates/python_boilerplate.py`:
+Modules follow the structure outlined in `docs/developer/HOUSE_RULES.md` and `docs/developer/python_boilerplate.py`:
 - **Narrative Flow**: `"What exists -> what you're allowed to call -> how it works -> proof it works"`
 - **Section Dividers (Numbered Emojis)**:
   - `0️⃣` / `🎭` **Definitions, Constants & Types**: Type aliases (`NDArray`, `Final`), protocols, global constants.
