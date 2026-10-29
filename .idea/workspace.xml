@@ -8,32 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="cli update">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/ABOUT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rk45.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rotor_bridge.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/cli_color_styling.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FUTURE_WORK/STYLING_AND_VISUALS/viz_refactor_plan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CLI_USAGE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CLI_USAGE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/data/examples/small_demo.npz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/BENCHMARK_RUNDOWN.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/LEARNING_GUIDE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/MANUAL_ANALYSIS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/PRACTICE_PROBLEMS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/RESEARCH_PREPRINT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/preprint-rough-draft/methods.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dash_export.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/HOUSE_RULES.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/python_boilerplate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_dash_export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ai_generated_notebooks/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ai_generated_notebooks/demo-2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ai_generated_notebooks/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ai_generated_notebooks/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +149,7 @@
     "Python.utils.executor": "Run",
     "Python.validation.executor": "Run",
     "Python.viz.executor": "Run",
+    "Python.zbw_generator.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -217,7 +196,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\archive" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.rotor">
+  <component name="RunManager" selected="Python.zbw_generator">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -297,25 +276,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Doctests in order_parameter" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+    <configuration name="zbw_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/models" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/order_parameter.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/models/zbw_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -337,11 +319,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.zbw_generator" />
         <item itemvalue="Python.rotor" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" />
-        <item itemvalue="Python tests.Doctests in order_parameter" />
       </list>
     </recent_temporary>
   </component>
@@ -361,22 +343,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00011" summary="uv compatibility initiated and then updated the repo packages used in the code">
-      <option name="closed" value="true" />
-      <created>1789460525673</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1789460525673</updated>
-    </task>
-    <task id="LOCAL-00012" summary="added a RotorSolver class to solvers.py">
-      <option name="closed" value="true" />
-      <created>1789463871339</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1789463871339</updated>
     </task>
     <task id="LOCAL-00013" summary="added geometric rotor solver to smoke test in @solvers.py and debugged RotorSolver errors until all smoke tests cleared">
       <option name="closed" value="true" />
@@ -754,7 +720,23 @@
       <option name="project" value="LOCAL" />
       <updated>1793232726098</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="cli update">
+      <option name="closed" value="true" />
+      <created>1793237631700</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1793237631700</updated>
+    </task>
+    <task id="LOCAL-00061" summary="cli update">
+      <option name="closed" value="true" />
+      <created>1793237717967</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1793237717967</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -793,7 +775,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/kuramoto/cli/utils.py</url>
-          <line>11</line>
+          <line>14</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -16,7 +16,7 @@ PLOTS_DIR: Final[str] = "plots/benchmarks"
 N_LIST: Final[List[int]] = [50, 100, 200, 500]
 DT_LIST: Final[List[float]] = [0.05, 0.01]
 T_MAX: Final[float] = 2.0
-SEED: Final[int] = 42
+SEED: Final[int] = 9
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(PLOTS_DIR, exist_ok=True)
