@@ -36,6 +36,7 @@ from ..analysis.viz import (
 )
 from ..api import generate_kuramoto_dataset
 from ..config import parse_simulation_config
+from ..dash_export import export_for_dash
 from ..order_parameter import compute_order_parameter
 from ..quantum.circuit_gen import export_to_qasm, generate_scf_angles
 from ..solver_types import (
@@ -59,6 +60,7 @@ from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 
 __all__: list[str] = [
     "datasetforbeginners",
+    "dash_export",
     "generate",
     "quantum",
     "qasm",
@@ -929,6 +931,150 @@ def distributions(dataset_path: str, gradient: str) -> None:
 
 
 # -----------------------------------------------------------------------------------------------------------
+# 5️⃣ Export Commands
+# -----------------------------------------------------------------------------------------------------------
+
+
+@click.command()
+@click.option(
+    "--output",
+    "-o",
+    default="data/dash_export.json",
+    type=click.Path(),
+    help="Output path for the enriched JSON file.",
+)
+@click.option(
+    "--oscillators",
+    "-n",
+    default=50,
+    type=click.IntRange(min=2),
+    help="Number of coupled oscillators.",
+)
+@click.option(
+    "--coupling",
+    "-k",
+    default=DEFAULT_COUPLING,
+    type=float,
+    help="Coupling strength K.",
+)
+@click.option(
+    "--timesteps",
+    "-t",
+    default=200,
+    type=click.IntRange(min=2),
+    help="Number of timesteps.",
+)
+@click.option(
+    "--dt",
+    default=0.05,
+    type=click.FloatRange(min=0.0001),
+    help="Time step size.",
+)
+@click.option(
+    "--solver",
+    "-s",
+    default="rk45",
+    type=click.Choice(list(SOLVER_ALIASES), case_sensitive=False),
+    help="Integration method (e.g. rk45, euler, rotor).",
+)
+@click.option(
+    "--topology",
+    type=str,
+    default=None,
+    help="Network topology (e.g., ring, small_world, erdos_renyi).",
+)
+@click.option("--seed", default=42, type=int, help="Random seed for reproducibility.")
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True),
+    default=None,
+    help="Optional JSON config file (overrides CLI defaults).",
+)
+def dash_export(
+    output: str,
+    oscillators: int,
+    coupling: float,
+    timesteps: int,
+    dt: float,
+    solver: str,
+    topology: str | None,
+    seed: int,
+    config: str | None,
+) -> None:
+    """Run a simulation and export enriched JSON for the Dash App.
+
+    Generates a Kuramoto dataset and exports it with additional metrics
+    (mean field phase, locking fraction, topology metadata) in a format
+    ready for the Dash dashboard.
+    """
+    # If a config file is provided, load and merge its parameters
+    if config is not None:
+        with open(config, "r") as f:
+
+            json_str = f.read()
+
+        cli_info(f"Loading configuration from {config}...")
+        params = parse_simulation_config(json_str)
+        # CLI options override config file
+        params.setdefault("n_oscillators", oscillators)
+        params.setdefault("coupling", coupling)
+        params.setdefault("timesteps", timesteps)
+        params.setdefault("dt", dt)
+        params.setdefault("solver", solver)
+        params.setdefault("topology", topology)
+        params.setdefault("seed", seed)
+    else:
+        params = {
+            "n_oscillators": oscillators,
+            "coupling": coupling,
+            "timesteps": timesteps,
+            "dt": dt,
+            "solver": solver,
+            "topology": topology,
+            "seed": seed,
+        }
+
+    n = params["n_oscillators"]
+    rng = get_rng(params["seed"])
+    omega = rng.normal(0.0, 1.0, n)
+
+    cli_info(
+        f"Running simulation: {n} oscillators, K={params['coupling']}, "
+        f"solver={params['solver']}..."
+    )
+
+    data = generate_kuramoto_dataset(natural_frequencies=omega, **params)
+
+    # Inject metadata not carried by the dataset dict
+    data["solver"] = params.get("solver", "unknown")
+    data["dt"] = params.get("dt", 0.05)
+    data["topology_type"] = params.get("topology") or "complete"
+
+    # Ensure output directory exists
+    output_dir = os.path.dirname(output)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+
+    # Export enriched JSON
+    export_for_dash(data, output)
+
+    cli_success(f"Enriched JSON exported to '{output}'")
+
+    # Summary table
+    summary = {
+        "N": params["n_oscillators"],
+        "K": params["coupling"],
+        "T": params["timesteps"],
+        "dt": params["dt"],
+        "solver": params["solver"].upper(),
+        "topology": params.get("topology") or "complete",
+        "output": output,
+    }
+    print_table([summary], title="Dash Export Summary")
+
+
+# -----------------------------------------------------------------------------------------------------------
 # 💨 Smoke tests
 # -----------------------------------------------------------------------------------------------------------
 
@@ -937,6 +1083,7 @@ def _run_smoke_test() -> None:
     """Quick sanity check for CLI commands definitions."""
     print("💨 Running commands smoke test...")
     assert callable(datasetforbeginners)
+    assert callable(dash_export)
     assert callable(generate)
     assert callable(quantum)
     assert callable(qasm)

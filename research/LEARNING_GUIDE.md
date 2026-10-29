@@ -106,10 +106,71 @@ For linear problems, the Lax Equivalence Theorem states that **Consistency + Sta
 ---
 
 ## 8. Dash App Bridge Protocol
-The `kuramoto-dash-app` can ingest pre-computed simulation data from this suite using the `export_to_dash.py` utility.
+The `kuramoto-dash-app` can ingest pre-computed simulation data from this suite. Two export options are available:
+
+### 8.1 Legacy Export (scripts/export_to_dash.py)
+The `scripts/export_to_dash.py` script converts `.npz` files to JSON with basic fields.
 - **Data Format**: `JSON` (orient='split') containing metadata and a structured data frame.
 - **Fields**: `time`, `node_i` (phases), `order_parameter`.
-- **Integration**: To load data into Dash, use `pd.read_json(path, orient='split')` on the `data` field of the exported JSON.
+
+### 8.2 Enhanced Export (kuramoto dash-export)
+The `kuramoto dash-export` CLI subcommand runs a simulation and exports enriched JSON in one step:
+
+```bash
+kuramoto dash-export -n 50 -k 1.5 -t 200 --topology small_world -o data/dash_export.json
+```
+
+**Enhanced JSON Schema:**
+
+```json
+{
+  "metadata": {
+    "n_oscillators": 50,
+    "timesteps": 200,
+    "coupling": 1.5,
+    "noise_std": 0.0,
+    "solver": "rk45",
+    "dt": 0.05,
+    "topology_type": "small_world",
+    "topology_stats": {
+      "num_nodes": 50,
+      "num_edges": 100,
+      "density": 0.082,
+      "avg_degree": 4.0
+    },
+    "solver_params": {
+      "dt": 0.05,
+      "noise_std": 0.0,
+      "locking_threshold": 0.1,
+      "locking_window": 10
+    }
+  },
+  "data": {
+    "columns": ["time", "node_0", ..., "node_49", "order_parameter", "mean_field_phase", "locking_fraction"],
+    "data": [[...], ...]
+  }
+}
+```
+
+**New Fields:**
+- **`mean_field_phase`** (ψ(t)): The collective phase angle of the oscillator population, computed as `arg(mean(exp(i·θ)))`. Complements R(t) by showing the direction of synchronization.
+- **`locking_fraction`**: The fraction of oscillators whose instantaneous frequency is locked to the mean frequency (within a threshold over a sliding window). Values range from 0 (no locking) to 1 (all oscillators phase-locked).
+- **`topology_stats`**: Network graph metrics (node count, edge count, density, average degree) derived from the adjacency matrix.
+- **`solver_params`**: Simulation parameters (dt, noise, locking detection thresholds) for reproducibility.
+
+**Loading in Dash:**
+```python
+import json
+import pandas as pd
+
+with open("data/dash_export.json") as f:
+    exported = json.load(f)
+
+metadata = exported["metadata"]
+df = pd.DataFrame(exported["data"]["data"], columns=exported["data"]["columns"])
+```
+
+The `data` field uses `orient='split'` for backward compatibility with the existing Dash app.
 
 ---
 *Created by Eigenscribe & Junie*

@@ -14,6 +14,7 @@ import click
 
 from .commands import (
     benchmark,
+    dash_export,
     datasetforbeginners,
     distributions,
     fourierconvergence,
@@ -55,6 +56,7 @@ def cli(ctx: click.Context) -> None:
 # -----------------------------------------------------------------------------------------------------------
 
 cli.add_command(datasetforbeginners)
+cli.add_command(dash_export)
 cli.add_command(generate)
 cli.add_command(quantum)
 cli.add_command(qasm)
@@ -79,6 +81,7 @@ def _run_smoke_test() -> None:
     commands = list(cli.commands.keys())
     expected = [
         "datasetforbeginners",
+        "dash-export",
         "generate",
         "quantum",
         "qasm",

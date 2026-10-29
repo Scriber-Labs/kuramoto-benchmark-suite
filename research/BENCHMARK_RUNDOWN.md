@@ -165,9 +165,9 @@ Accuracy was validated using the Root Mean Square Error (RMSE) of the macroscopi
 - **Circuit Synthesis**: `src/kuramoto/quantum/circuit_gen.py`
 - **Unit & Invariant Tests**: `tests/test_ga_rotor_invariants.py`, `tests/test_quantum_rotor_solver.py`
 - **Interactive Demonstrations & Sanity Checks**:
-  - `examples/notebooks/sanity_checks.ipynb`: 12/12 automated sanity checks testing Hamiltonian conservation, $\operatorname{SO}(2)$ gauge invariance, 50s time-reversal, and adaptive error scaling.
-  - `examples/notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb`: Qiskit circuit construction, scheme comparison, and shot noise tomography.
-  - `examples/notebooks/quantum_circuit_depth_and_failure_modes.ipynb`: Circuit depth proofs, OpenQASM synthesis, and rotor failure mode diagnostics.
+  - `examples/ai_generated_notebooks/sanity_checks.ipynb`: 12/12 automated sanity checks testing Hamiltonian conservation, $\operatorname{SO}(2)$ gauge invariance, 50s time-reversal, and adaptive error scaling.
+  - `examples/ai_generated_notebooks/qiskit_hybrid_kuramoto_pipeline.ipynb`: Qiskit circuit construction, scheme comparison, and shot noise tomography.
+  - `examples/ai_generated_notebooks/quantum_circuit_depth_and_failure_modes.ipynb`: Circuit depth proofs, OpenQASM synthesis, and rotor failure mode diagnostics.
 
 ---
 
