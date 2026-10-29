@@ -29,6 +29,10 @@ config:
     curve: basis
     useMaxWidth: true
     htmlLabels: true
+  themeCSS: |
+    .node rect, .node circle, .node ellipse, .node polygon, .node path { fill-opacity: 0.9; stroke-width: 2px; }
+    .cluster rect { rx: 16; ry: 16; }
+    .nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; -webkit-text-fill-color: #F0F6FC !important; }
 ---
 flowchart TD
 
@@ -42,22 +46,22 @@ end
 subgraph Model_Orchestration["2️⃣ Model Orchestration & Configuration Layer"]
     Config["SimulationConfig & Solver Types<br/>(N, K, topology, dt, seed, initial_phases, solver_type)"]
     Topology["Network Topologies (load_topology)<br/>Ring, Erdos-Renyi, Small-World, Tree-of-Life, Bipartite, Complete"]
-    Temporal_Ctrl["Temporal Resolution Controller<br/>- Nyquist Criterion: dt <= 1 / (2 * max_rate)<br/>- Max Phase Increment Guard: dt <= max_Δθ / max_rate<br/>- Adaptive Error Controller: LTE <= tol"]
+    Temporal_Ctrl["Temporal Resolution Controller<br/>- Nyquist Criterion: dt &le; 1 / (2 &times; max_rate)<br/>- Max Phase Increment Guard: dt &le; max_&Delta;&theta; / max_rate<br/>- Adaptive Error Controller: LTE &le; tol"]
 end
 
 subgraph Physics_Law["3️⃣ Dynamical Physics & Algebra Generators"]
-    Phase_Physics["Phase-Space Vector Field (R^N)<br/>dθ_i/dt = ω_i + (K/N) ∑ A_ij sin(θ_j - θ_i)"]
-    GA_2D_Physics["2D Clifford Bivector Torque (Cl_2,0)<br/>Ω_i = ω_i e12 - K (v_mean,i ∧ v_i)<br/>dR_i/dt = -1/2 Ω_i R_i"]
-    GA_3D_Physics["3D Spin(3) Lohe Matrix/Bivector Torque (Cl_3,0)<br/>Ω_i = Ω_nat,i - K (v_mean,i ∧ v_i)"]
-    Quantum_Physics["Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 ∑_j Ω_j(t) σ_j^z<br/>Unitary Evolution: U(dt) = ⨂_j R_Z(Ω_j dt)"]
+    Phase_Physics["Phase-Space Vector Field (R<sup>N</sup>)<br/>d&theta;<sub>i</sub>/dt = &omega;<sub>i</sub> + (K/N) &sum; A<sub>ij</sub> sin(&theta;<sub>j</sub> - &theta;<sub>i</sub>)"]
+    GA_2D_Physics["2D Clifford Bivector Torque (Cl<sub>2,0</sub>)<br/>&Omega;<sub>i</sub> = &omega;<sub>i</sub> e<sub>12</sub> - K (v<sub>mean,i</sub> &and; v<sub>i</sub>)<br/>dR<sub>i</sub>/dt = -1/2 &Omega;<sub>i</sub> R<sub>i</sub>"]
+    GA_3D_Physics["3D Spin(3) Lohe Matrix/Bivector Torque (Cl<sub>3,0</sub>)<br/>&Omega;<sub>i</sub> = &Omega;<sub>nat,i</sub> - K (v<sub>mean,i</sub> &and; v<sub>i</sub>)"]
+    Quantum_Physics["Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 &sum;<sub>j</sub> &Omega;<sub>j</sub>(t) &sigma;<sub>j</sub><sup>z</sup><br/>Unitary Evolution: U(dt) = &bigotimes;<sub>j</sub> R<sub>Z</sub>(&Omega;<sub>j</sub> dt)"]
 end
 
 subgraph State_Representations["4️⃣ Multi-Manifold State Representations"]
-    PhaseState["Phase Vector: θ ∈ R^N<br/>Canonical phase angles"]
+    PhaseState["Phase Vector: &theta; &isin; R<sup>N</sup><br/>Canonical phase angles"]
     RotorArray["Contiguous Rotor Array Buffer (_rotor_array)<br/>- 2D Cl(2): [scalar, e12] components<br/>- 3D Cl(3): [scalar, e12, e13, e23] components<br/>Fast SIMD/NumPy Vectorized State"]
-    RotorState["Clifford Rotor Objects (R_i ∈ Spin(n))<br/>Multivector Objects: R_i = exp(-B θ_i / 2)"]
-    QuantumState["Quantum N-Qubit Statevector<br/>|ψ⟩ = ⨂_j (cos(θ_j/2)|0⟩ + sin(θ_j/2)|1⟩)"]
-    Sync["Bidirectional Manifold Synchronizer<br/>_sync_array_from_rotors() ⟷ _sync_rotors_from_array()"]
+    RotorState["Clifford Rotor Objects (R<sub>i</sub> &isin; Spin(n))<br/>Multivector Objects: R<sub>i</sub> = exp(-B &theta;<sub>i</sub> / 2)"]
+    QuantumState["Quantum N-Qubit Statevector<br/>|&psi;&rang; = &bigotimes;<sub>j</sub> (cos(&theta;<sub>j</sub>/2)|0&rang; + sin(&theta;<sub>j</sub>/2)|1&rang;)"]
+    Sync["Bidirectional Manifold Synchronizer<br/>_sync_array_from_rotors() &harr; _sync_rotors_from_array()"]
 end
 
 subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schemes"]
@@ -75,7 +79,7 @@ subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schem
     subgraph Higher_Order_GA_Schemes["C. Geometric & Lie-Group Integrators"]
         Midpoint_Geom["2nd-Order Geometric Midpoint (step_midpoint_geometric)<br/>2-stage predictor-corrector on Spin(n)"]
         Pred_Corr["Embedded Predictor-Corrector (step_predictor_corrector)<br/>Heun/Midpoint embedded stages with LTE estimation"]
-        Lie_RKMK4["4th-Order Lie-Group RKMK4 (step_rkmk4)<br/>Runge-Kutta-Munthe-Kaas O(dt^4) exact Lie evolution"]
+        Lie_RKMK4["4th-Order Lie-Group RKMK4 (step_rkmk4)<br/>Runge-Kutta-Munthe-Kaas O(dt<sup>4</sup>) exact Lie evolution"]
         DOPRI54_Geom["Adaptive DOPRI 5(4) (step_adaptive_dopri54)<br/>7-stage Dormand-Prince Lie stepper with FSAL & PI step control"]
         Adaptive_Emb["Adaptive Embedded Stepper (step_adaptive_embedded)<br/>Automatic dt adjustment with LTE error tolerances"]
     end
@@ -86,13 +90,18 @@ subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schem
         Q_ShotSampling["Quantum Shot Sampling Mode (shot_sampling)<br/>Projective measurement with stochastic hardware shot noise"]
         QASM_Gen["OpenQASM 2.0 / 3.0 Exporter (to_qasm)<br/>Exportable parametric quantum circuits"]
     end
+
+    subgraph SubNyquist_Schemes["E. Dual-Channel Coprime Sub-Nyquist Sampling"]
+        Coprime_Sampler["CoprimeSamplerWrapper (Dual-rate decimation)<br/>Channels A (stride M) & B (stride N), gcd(M,N)=1"]
+        CRT_Recon["CRT Frequency Reconstruction<br/>coprime_reconstruct_frequency() & Bézout identity"]
+    end
 end
 
 subgraph Diagnostics_Layer["6️⃣ Observables, Symmetries & Diagnostics Layer"]
-    Obs_Phase["Phase Extraction & Unwrapping Engine<br/>extract_phases(): θ_i = 2 atan2(-b, a) mod 2π"]
-    Obs_OP["Order Parameter Engine<br/>- Complex order parameter: r(t) = ⟨exp(iθ)⟩<br/>- Vector order parameter: ⟨v_i⟩ on S^(dim-1)<br/>- Synchronization strength: ||r|| or ||⟨v⟩||"]
-    Obs_Lie["Lie Symmetry & Invariants Tracker<br/>- U(1) Phase Shift Invariance: d/dα L = 0<br/>- Noether Energy Drift / Hamiltonian Invariant<br/>- Contraction Rate / Symplectic Inversion Check"]
-    Obs_Spectral["Spectral Analytics Engine<br/>- Fourier amplitude spectrum & convergence<br/>- Power Spectral Density (PSD) variability"]
+    Obs_Phase["Phase Extraction & Unwrapping Engine<br/>extract_phases(): &theta;<sub>i</sub> = 2 atan2(-b, a) mod 2&pi;"]
+    Obs_OP["Order Parameter Engine<br/>- Complex order parameter: r(t) = &lang;exp(i&theta;)&rang;<br/>- Vector order parameter: &lang;v<sub>i</sub>&rang; on S<sup>dim-1</sup><br/>- Synchronization strength: ||r|| or ||&lang;v&rang;||"]
+    Obs_Lie["Lie Symmetry & Invariants Tracker<br/>- U(1) Phase Shift Invariance: d/d&alpha; L = 0<br/>- Noether Energy Drift / Hamiltonian Invariant<br/>- Contraction Rate / Symplectic Inversion Check"]
+    Obs_Spectral["Spectral Analytics Engine<br/>- Fourier amplitude spectrum & convergence<br/>- Power Spectral Density (PSD) variability<br/>- Spectral drift detection"]
     Dataset_Out["KuramotoDataset (Immutable Output Container)<br/>Serialization (.npz, .h5, JSON analytics)"]
 end
 
@@ -125,14 +134,16 @@ RotorArray --> Pred_Corr
 RotorArray --> Lie_RKMK4
 RotorArray --> DOPRI54_Geom
 RotorArray --> Adaptive_Emb
+RotorArray --> Coprime_Sampler
 RotorState --> Geom_Euler
 QuantumState --> Q_Statevector
 QuantumState --> Q_Expectation
 QuantumState --> Q_ShotSampling
 QuantumState --> QASM_Gen
 
-%% Integrator state updates
+%% Integrator state updates & sampling
 Integrator_Ecosystem -->|"Advances state along manifold"| State_Representations
+Coprime_Sampler --> CRT_Recon
 
 %% State to Diagnostics
 State_Representations --> Diagnostics_Layer
@@ -141,6 +152,7 @@ RotorState --> Obs_OP
 PhaseState --> Obs_OP
 QuantumState --> Obs_Phase
 QuantumState --> Obs_OP
+CRT_Recon --> Obs_Spectral
 Diagnostics_Layer --> Obs_Lie
 Diagnostics_Layer --> Obs_Spectral
 Diagnostics_Layer --> Dataset_Out
@@ -197,6 +209,14 @@ The suite organizes numerical integrators into four distinct operational paradig
   2. `expectation`: Analytical Pauli observable extraction $\langle \sigma^x \rangle = \sin\theta_j$, $\langle \sigma^z \rangle = \cos\theta_j$.
   3. `shot_sampling`: Statistical projective shot sampling on quantum registers simulating real NISQ/QPU measurement noise ($N_{\text{shots}}$).
   4. `to_qasm()`: OpenQASM 2.0 / 3.0 circuit serialization supporting Clifford+Rz synthesis and hardware execution.
+
+---
+
+### Paradigm E: Dual-Channel Coprime Sub-Nyquist Sampling
+- **Module**: `kuramoto.solvers.coprime` (`CoprimeSamplerWrapper`, `CoprimeSampleResult`)
+- **Sampling Scheme**: Dual sub-Nyquist channels with coprime strides $M$ and $N$ ($\gcd(M, N) = 1$).
+- **Frequency Reconstruction**: Chinese Remainder Theorem (CRT) via extended Euclidean algorithm / Bézout identity (`coprime_reconstruct_frequency`) resolving true unaliased frequency indices $k \in [0, MN-1]$ at reduced sampling storage.
+- **Diagnostics**: Spectral drift detection (`detect_spectral_drift`) and phase correlation monitoring.
 
 ---
 

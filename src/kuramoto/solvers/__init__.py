@@ -7,9 +7,16 @@ This module exports:
       integration.
 """
 
-from .rk45 import solve_kuramoto
-from .rotor import RotorSolver, step_rkmk4, AdaptiveStatus, AdaptiveStepResult
+from .coprime import (
+    CoprimeSampleResult,
+    CoprimeSamplerWrapper,
+    coprime_reconstruct_frequency,
+    detect_spectral_drift,
+    extended_gcd,
+)
 from .quantum_rotor import QuantumRotorSolver, step_quantum_scf
+from .rk45 import solve_kuramoto
+from .rotor import AdaptiveStatus, AdaptiveStepResult, RotorSolver, step_rkmk4
 
 __all__: list[str] = [
     "solve_kuramoto",
@@ -17,4 +24,9 @@ __all__: list[str] = [
     "step_rkmk4",
     "QuantumRotorSolver",
     "step_quantum_scf",
+    "CoprimeSampleResult",
+    "CoprimeSamplerWrapper",
+    "coprime_reconstruct_frequency",
+    "detect_spectral_drift",
+    "extended_gcd",
 ]
