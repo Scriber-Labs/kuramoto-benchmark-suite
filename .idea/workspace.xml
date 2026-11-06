@@ -7,14 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="cli update" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add CLI styling boilerplate and AI-generated plotting exercises notebook.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="">
+      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="139" />
+    <option name="cachedIndexableFilesCount" value="180" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -53,23 +58,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000194032402108" />
-      <entry key="MS500" value="1.239531034246006" />
-      <entry key="S2" value="3.9416377117402246" />
-      <entry key="S5" value="6.902748202773924" />
-      <entry key="S10" value="8.631411697088176" />
-      <entry key="S30" value="10.124445612281797" />
-      <entry key="S60" value="10.550363500061758" />
-      <entry key="M2" value="10.772126395423827" />
-      <entry key="M5" value="10.908105343112181" />
-      <entry key="M10" value="10.953928075170095" />
-      <entry key="M15" value="10.969484835941474" />
-      <entry key="M30" value="11.111551031944948" />
-      <entry key="H1" value="16.37129526121019" />
-      <entry key="H2" value="92.66398102327865" />
-      <entry key="H4" value="443.5524198217246" />
-      <entry key="D1" value="3839.916610950809" />
-      <entry key="W1" value="19738.25923266825" />
+      <entry key="MS100" value="4.438174190610533" />
+      <entry key="MS500" value="8.780156203868623" />
+      <entry key="S2" value="10.37322952685168" />
+      <entry key="S5" value="10.742846972103033" />
+      <entry key="S10" value="10.87033358579103" />
+      <entry key="S30" value="11.072320187541859" />
+      <entry key="S60" value="12.106534412700263" />
+      <entry key="M2" value="14.51184764289135" />
+      <entry key="M5" value="17.97123161195598" />
+      <entry key="M10" value="19.75744919898726" />
+      <entry key="M15" value="20.449235260366514" />
+      <entry key="M30" value="21.31294481629461" />
+      <entry key="H1" value="26.772202360113855" />
+      <entry key="H2" value="101.95356758675536" />
+      <entry key="H4" value="450.44010415594914" />
+      <entry key="D1" value="3844.960160845967" />
+      <entry key="W1" value="19744.88235374872" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -77,37 +82,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="7.58922352125424E-270" />
-      <entry key="S60" value="2.754854537222286E-135" />
-      <entry key="M2" value="5.2486708195716416E-68" />
-      <entry key="M5" value="1.2246718487270919E-27" />
-      <entry key="M10" value="3.499788673906844E-14" />
-      <entry key="M15" value="1.0735406862589842E-9" />
-      <entry key="M30" value="3.8725951991434203E-5" />
-      <entry key="H1" value="0.01453093536713795" />
-      <entry key="H2" value="0.4419112640603283" />
-      <entry key="H4" value="2.7272665121602078" />
-      <entry key="D1" value="29.772946145942814" />
-      <entry key="W1" value="157.55639885479152" />
+      <entry key="S30" value="8.679880272284874E-272" />
+      <entry key="S60" value="2.9461636533439284E-136" />
+      <entry key="M2" value="1.7164392367176661E-68" />
+      <entry key="M5" value="7.831615801758324E-28" />
+      <entry key="M10" value="2.7987083329291125E-14" />
+      <entry key="M15" value="9.249020062334518E-10" />
+      <entry key="M30" value="3.5945183848677915E-5" />
+      <entry key="H1" value="0.013999511263846359" />
+      <entry key="H2" value="0.43375522891284335" />
+      <entry key="H4" value="2.701981714733327" />
+      <entry key="D1" value="29.726762690560307" />
+      <entry key="W1" value="157.52146137971243" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9266065512292014" />
-      <entry key="MS500" value="1.222030533972432" />
-      <entry key="S2" value="3.928509495162884" />
-      <entry key="S5" value="6.8930087550776316" />
-      <entry key="S10" value="8.625165858086337" />
-      <entry key="S30" value="10.121959228722222" />
-      <entry key="S60" value="10.549062052881954" />
-      <entry key="M2" value="10.771460461143871" />
-      <entry key="M5" value="10.907835232847743" />
-      <entry key="M10" value="10.953792389970397" />
-      <entry key="M15" value="10.969394238144332" />
-      <entry key="M30" value="11.111543752960927" />
-      <entry key="H1" value="16.38567782975396" />
-      <entry key="H2" value="93.1036277948747" />
-      <entry key="H4" value="446.27269370150765" />
-      <entry key="D1" value="3869.67830796901" />
-      <entry key="W1" value="19895.807227784608" />
+      <entry key="MS100" value="4.248083735193335" />
+      <entry key="MS500" value="8.699429920773829" />
+      <entry key="S2" value="10.34889717463789" />
+      <entry key="S5" value="10.732723012508325" />
+      <entry key="S10" value="10.865203931484835" />
+      <entry key="S30" value="11.07056659314133" />
+      <entry key="S60" value="12.10553072688917" />
+      <entry key="M2" value="14.511197132733413" />
+      <entry key="M5" value="17.970885670516225" />
+      <entry key="M10" value="19.757254070287367" />
+      <entry key="M15" value="20.44909945275129" />
+      <entry key="M30" value="21.312909181003644" />
+      <entry key="H1" value="26.786044490583762" />
+      <entry key="H2" value="102.38509289714732" />
+      <entry key="H4" value="453.13515445768587" />
+      <entry key="D1" value="3874.675691256613" />
+      <entry key="W1" value="19902.395413167535" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -118,67 +123,67 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
