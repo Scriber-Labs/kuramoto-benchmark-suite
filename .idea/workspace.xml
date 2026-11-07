@@ -7,19 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="project updates">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="cli updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,61 +57,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="6.399430631097509E-8" />
-      <entry key="MS500" value="0.10397735412101232" />
-      <entry key="S2" value="4.710460709531064" />
-      <entry key="S5" value="15.687767268904807" />
-      <entry key="S10" value="25.145691854344612" />
-      <entry key="S30" value="35.53820331009568" />
-      <entry key="S60" value="40.45059352714684" />
-      <entry key="M2" value="50.24287338521021" />
-      <entry key="M5" value="79.0669758961793" />
-      <entry key="M10" value="103.376712532867" />
-      <entry key="M15" value="114.81778511734909" />
-      <entry key="M30" value="128.6277710290593" />
-      <entry key="H1" value="141.0965601921227" />
-      <entry key="H2" value="217.01647026974652" />
-      <entry key="H4" value="561.2048858899451" />
-      <entry key="D1" value="3952.420057823757" />
-      <entry key="W1" value="19856.62251666802" />
+      <entry key="MS100" value="1.0572101040497888" />
+      <entry key="MS500" value="1.8672842207594949" />
+      <entry key="S2" value="2.6098924247073256" />
+      <entry key="S5" value="2.832527405748224" />
+      <entry key="S10" value="2.9142227382081543" />
+      <entry key="S30" value="2.9709406062212715" />
+      <entry key="S60" value="2.9854110708664994" />
+      <entry key="M2" value="2.9926906645022746" />
+      <entry key="M5" value="3.003052225901574" />
+      <entry key="M10" value="3.897534332730967" />
+      <entry key="M15" value="7.854517000232806" />
+      <entry key="M30" value="29.450800818703424" />
+      <entry key="H1" value="66.98391616881756" />
+      <entry key="H2" value="149.14042198328227" />
+      <entry key="H4" value="463.53262087099864" />
+      <entry key="D1" value="3827.308588382694" />
+      <entry key="W1" value="19766.373145465088" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0000000000000158" />
-      <entry key="M15" value="1.000000000631234" />
-      <entry key="M30" value="1.0000296953225842" />
-      <entry key="H1" value="1.0127243774522656" />
-      <entry key="H2" value="1.4135295585467496" />
-      <entry key="H4" value="3.6382340606053716" />
-      <entry key="D1" value="30.60870654762245" />
-      <entry key="W1" value="158.43194076942473" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="5.2523662955636935E-248" />
+      <entry key="S10" value="2.291804157331881E-124" />
+      <entry key="S30" value="6.119639431292944E-42" />
+      <entry key="S60" value="2.473790498666559E-21" />
+      <entry key="M2" value="4.973721442407646E-11" />
+      <entry key="M5" value="7.562625303129498E-5" />
+      <entry key="M10" value="0.008696335609398786" />
+      <entry key="M15" value="0.04228868637522837" />
+      <entry key="M30" value="0.20564823835421148" />
+      <entry key="H1" value="0.45924804128729646" />
+      <entry key="H2" value="0.9518815712931192" />
+      <entry key="H4" value="2.985586425665619" />
+      <entry key="D1" value="29.616573625319447" />
+      <entry key="W1" value="157.6879230689034" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.891515784737301E-7" />
-      <entry key="MS500" value="0.15659742106949281" />
-      <entry key="S2" value="5.183708171434729" />
-      <entry key="S5" value="16.42385094939187" />
-      <entry key="S10" value="26.001392420770287" />
-      <entry key="S30" value="36.48670312630155" />
-      <entry key="S60" value="41.424175081423876" />
-      <entry key="M2" value="51.22909625962749" />
-      <entry key="M5" value="80.060816284009" />
-      <entry key="M10" value="104.37335550914959" />
-      <entry key="M15" value="115.81545945436864" />
-      <entry key="M30" value="129.62658464791096" />
-      <entry key="H1" value="142.10855157104393" />
-      <entry key="H2" value="218.4275758528952" />
-      <entry key="H4" value="564.8362022618143" />
-      <entry key="D1" value="3983.017551619167" />
-      <entry key="W1" value="20015.046056665837" />
+      <entry key="MS100" value="1.0219501183836834" />
+      <entry key="MS500" value="1.8563514767082179" />
+      <entry key="S2" value="2.606230081300772" />
+      <entry key="S5" value="2.830949336334134" />
+      <entry key="S10" value="2.9134128725725366" />
+      <entry key="S30" value="2.9706658231196763" />
+      <entry key="S60" value="2.985273062988083" />
+      <entry key="M2" value="2.9926215055510546" />
+      <entry key="M5" value="3.003099685385439" />
+      <entry key="M10" value="3.9061876178311064" />
+      <entry key="M15" value="7.89669809815999" />
+      <entry key="M30" value="29.65619436021203" />
+      <entry key="H1" value="67.44282950121293" />
+      <entry key="H2" value="150.0906700758774" />
+      <entry key="H4" value="466.5125299656485" />
+      <entry key="D1" value="3856.9143126032" />
+      <entry key="W1" value="19924.052707199786" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -352,14 +342,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00016" summary="Expanded **spectral.py** with harmonic analysis, synchronization transition detection, and advanced spectral functions. Updated smoke tests to validate new utilities and corrected minor documentation inconsistencies.">
-      <option name="closed" value="true" />
-      <created>1789542205254</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1789542205254</updated>
     </task>
     <task id="LOCAL-00017" summary="Refined output messages in **spectral.py** smoke tests for consistent formatting.">
       <option name="closed" value="true" />
@@ -745,14 +727,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794058975582</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="cli updates">
+      <option name="closed" value="true" />
+      <created>1794063231228</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1794063231228</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
     <MESSAGE value="updated execution timestamps in validate_structural_metrics.ipynb" />
     <MESSAGE value="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks" />
     <MESSAGE value="expanded structural metrics validation with advanced spectral analysis and themed visualizations" />
@@ -777,7 +766,8 @@
     <MESSAGE value="cli update" />
     <MESSAGE value="reconciled a whole bunch of commits" />
     <MESSAGE value="project updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="project updates" />
+    <MESSAGE value="cli updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="cli updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

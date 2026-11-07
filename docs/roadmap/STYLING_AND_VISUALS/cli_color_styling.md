@@ -14,11 +14,11 @@ The canonical semantic tokens map to the CLI color vocabulary as follows:
 
 | Token / Category | Hex / ANSI Truecolor | Semantic Meaning / Role | Click Fallback |
 | :--- | :--- | :--- | :--- |
-| **Primary Cyan / Electric Blue** | `#00e8ff` / `rgb(0, 232, 255)` | Interactive focal points, info, active state | `cyan` / `bright_cyan` |
-| **Secondary Violet / Purple** | `#9b7dff` / `rgb(155, 125, 255)` | Structural markers, network / topology | `bright_magenta` / `magenta` |
-| **Tertiary Neon Green** | `#22f792` / `rgb(34, 247, 146)` | Success metrics, verified invariants, math | `bright_green` / `green` |
-| **Quaternary Coral / Amber** | `#ff783d` / `rgb(255, 120, 61)` | Warnings, dynamic parameters, cautions | `bright_yellow` / `yellow` |
-| **Pernary Hot Pink / Red** | `#ff40a1` / `rgb(255, 64, 161)` | Errors, critical alerts, validation halts | `bright_red` / `red` |
+| **Primary Cyan / Electric Blue** | `#14B5FF` / `rgb(20, 181, 255)` | Interactive focal points, info, active state | `cyan` / `bright_cyan` |
+| **Secondary Violet / Purple** | `#7952F5` / `rgb(121, 82, 245)` | Structural markers, network / topology | `bright_magenta` / `magenta` |
+| **Tertiary Neon Green** | `#31FF48` / `rgb(49, 255, 72)` | Success metrics, verified invariants, math | `bright_green` / `green` |
+| **Quaternary Coral / Amber** | `#FEB538` / `rgb(254, 181, 56)` | Warnings, dynamic parameters, cautions | `bright_yellow` / `yellow` |
+| **Pernary Hot Pink / Red** | `#F72585` / `rgb(247, 37, 133)` | Errors, critical alerts, validation halts | `bright_red` / `red` |
 
 ---
 
