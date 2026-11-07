@@ -32,7 +32,7 @@ Before you dive in, take a breath and answer these questions honestly:
 - [x] **Benchmarks**: Open `BENCHMARK_RUNDOWN.md` and check the scaling results.
 - [ ] **Theory**: Open `LEARNING_GUIDE.md` and read the Bivector Torque derivation.
 - [ ] **Practice**: Work through `PRACTICE_PROBLEMS.md` — start with Section B (Canonical Derivation) for deep math, or Section D (Plotting) for visual learning.
-- [ ] **Number Theory**: Complete Section C (Bézout's Identity) to understand the coprime sampling in `coprime.py`.
+- [~] **Number Theory**: Complete Section C — wrapping up Problem 16 (Bézout's identity), then CRT (Problem 17), coprime failure (Problem 18), and forward-only Positive Rotor Composition (Problem 18b).
 - [x] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.
 - [ ] **Quantum**: Inspect `../src/kuramoto/quantum/circuit_gen.py` to see the SCF mapping logic.
 - [ ] **Scavenger Hunt**: Complete Section E of `PRACTICE_PROBLEMS.md` to connect the math to the actual code.
@@ -47,6 +47,7 @@ Before you dive in, take a breath and answer these questions honestly:
 3. **The Quantum Bridge**: Do I see the connection between the rotor update $\exp(\Omega \Delta t)$ and the $R_z$ gate in Qiskit? Why did we call it the "Self-Consistent Field" (SCF) approximation?
 4. **Lie-Group Integrators (RKMK4 & DOPRI54)**: Why does evaluating Runge-Kutta stages directly in the Lie algebra $\mathfrak{spin}(n)$ guarantee exact rotor unit-norm conservation ($\sum R_k^2 = 1$) without numerical projection?
 5. **Time-Reversal Reconstruction**: Why does 5th-order DOPRI54 and 4th-order RKMK4 achieve $\sim 10^{-13}$ machine-precision time-reversal reconstruction over 50 seconds, whereas 2nd-order adaptive schemes accumulate $O(\Delta t^2) \sim 10^{-9}$ error?
+6. **Operational Accessibility vs. Reversibility**: Why does the ordinary Bézout equation $nx + my = 1$ require negative coefficients (inverse rotations) for $m,n > 1$, and how does modular periodic wrapping $nx + my = 1 + kmn$ enable forward-only positive rotor composition ($R(2\pi/77) = R_7^2 R_{11}^8$)?
 
 ---
 
@@ -57,6 +58,7 @@ Before you dive in, take a breath and answer these questions honestly:
 - **FSAL Velocity Caching**: In Dormand-Prince 5(4), why is the 7th stage evaluate identical to the 1st stage of the subsequent step, and how does that save $O(N^2)$ bivector torque calculations?
 - **Cartesian Product Manifolds**: How does the product structure $\operatorname{Spin}(n)^N$ allow decoupled per-oscillator rotor updates while enforcing unified ensemble-level error control?
 - **Bivector Algebra**: How exactly does the wedge product $v_i \wedge v_{mean}$ represent a physical pull?
+- **Positive Rotor Synthesis**: In quantum gates or numerical forward integrators where inverse steps are unavailable, how does modular phase wrapping ($k \ge 1$) guarantee positive integer combinations, and what is the computational cost / gate depth trade-off?
 
 ---
 
@@ -82,12 +84,13 @@ Before you dive in, take a breath and answer these questions honestly:
 5. **Goal:** You have 3 plots you understand and can explain.
 
 ### Path C: Number Theory Foundation (Medium Energy, Builds Confidence)
-**Best if:** You want to understand the coprime sampling code in `coprime.py`.
+**Best if:** You want to understand the coprime sampling code in `coprime.py` and discrete rotor algebra.
 
-1. Complete **Problem 16** (Bézout's Identity by Hand).
-2. Complete **Problem 17** (CRT Reconstruction).
-3. Open `src/kuramoto/solvers/coprime.py` and read the `extended_gcd` function.
-4. **Goal:** You understand why the code requires `gcd(M, N) == 1`.
+1. Finish wrapping up **Problem 16** (Bézout's Identity by Hand) — almost done from last week!
+2. Complete **Problem 17** (CRT Reconstruction) and **Problem 18** (Why Coprime Matters).
+3. Tackle **Problem 18b** (Positive Rotor Composition & Forward-Only Operations) — derive $11x + 7y = 78$ to find $(x, y) = (2, 8)$ and explore the universal solvability proof.
+4. Open `src/kuramoto/solvers/coprime.py` and trace `extended_gcd` and `coprime_reconstruct_frequency`.
+5. **Goal:** You understand how coprime sampling and rotor composition operate under both unrestricted integer and forward-only modular constraints.
 
 ### Path D: Code Scavenger Hunt (Lower Energy, Still Productive)
 **Best if:** You're tired but still want to make progress.

@@ -25,6 +25,24 @@ $$\Omega_i = K (v_{\text{mean}} \wedge v_i)$$
 This bivector $\Omega_i$ acts as the generator of the rotation. The evolution of the rotor $R_i$ is then:
 $$\frac{dR_i}{dt} = -\frac{1}{2} \Omega_i R_i$$
 
+### 1.3 Discrete Rotor Composition & Operational Accessibility
+When compiling discrete rotation steps or analyzing sub-Nyquist coprime sampling strides, continuous dynamics reduce to compositions of discrete generator rotors:
+$$R_m = \exp\left(-\frac{B\pi}{m}\right), \qquad R_n = \exp\left(-\frac{B\pi}{n}\right) \quad (\gcd(m, n) = 1)$$
+To synthesize a finer target rotation $R\left(\frac{2\pi}{mn}\right)$ via sequential applications $R_m^x R_n^y$, matching the exponent requires:
+$$\frac{x}{m} + \frac{y}{n} = \frac{1}{mn} \implies nx + my = 1$$
+
+#### The Positivity Constraint & Operational Accessibility
+While Bézout's identity guarantees unrestricted integer solutions $(x, y) \in \mathbb{Z}^2$, for any $m, n > 1$ the inequality $nx + my \ge n + m > 1$ ensures that **no strictly positive solutions ($x, y > 0$) exist**. Standard Bézout solutions necessarily require negative integer powers (inverse rotations $R^{-1}$).
+
+In physical systems—such as quantum phase gate synthesis without inverse gate overhead, forward-only numerical ODE stepping, or non-reversible physical actuators—inverse operations may not be operationally accessible.
+
+#### Resolution via Modular Periodic Winding
+Because spatial vector rotations satisfy $R(\theta + 2\pi) = R(\theta)$, adding an integer number of full periods $k \ge 1$ preserves the exact target orientation:
+$$\frac{x}{m} + \frac{y}{n} = \frac{1}{mn} + k \implies nx + my = 1 + kmn$$
+For example, with coprime generators $m=7, n=11$ and $k=1$:
+$$11x + 7y = 78 \implies x = 2, \quad y = 8 \implies R\left(\frac{2\pi}{77}\right) = R_7^2 R_{11}^8$$
+This distinguishes **mathematical reversibility** (unrestricted integer linear combinations) from **operational accessibility** (strictly forward-only transformations under modular equivalence), demonstrating how periodic manifold topology enables forward-only synthesis of fine geometric rotations.
+
 ---
 
 ## 2. The Fluid Flow Analogy (Vorticity)

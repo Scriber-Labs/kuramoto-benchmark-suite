@@ -113,6 +113,11 @@ where $Z_i$ is the Pauli-Z operator. Because $H_{\text{eff}}(t)$ contains only s
 $$U(t, \Delta t) = \bigotimes_{i=1}^{N} R_z(\Omega_i(t) \Delta t)_i$$
 This allows for $\mathcal{O}(1)$ circuit depth per integration step, regardless of the number of oscillators $N$. The GA rotor solver mirrors this structure perfectly, with the vectorized bivector torque acting as the classical co-processor that calculates the rotation angles in parallel.
 
+#### 5.2 Discrete Rotor Synthesis & Operational Accessibility
+When mapping continuous rotor updates onto discrete quantum instruction sets or sub-Nyquist coprime sampling grids, target phases are synthesized from discrete generator rotors $R_m = \exp(-B\pi/m)$ and $R_n = \exp(-B\pi/n)$ with $\gcd(m, n) = 1$. While the unrestricted Bézout relation $nx + my = 1$ requires inverse operations ($x$ or $y < 0$), physical operational accessibility often restricts execution to forward-only gates ($x, y \in \mathbb{Z}_{>0}$). Leveraging the periodic manifold topology $R(\theta + 2\pi) = R(\theta)$ enables exact synthesis via the modular Diophantine equation:
+$$nx + my = 1 + kmn \quad (k \ge 1)$$
+This formulation guarantees strictly positive integer solutions for all coprime pairs $m, n > 1$ (e.g., $R(2\pi/77) = R_7^2 R_{11}^8$), establishing an algebraic bridge between mathematical reversibility and forward-only quantum gate synthesis.
+
 ---
 
 ---

@@ -171,6 +171,28 @@ where $(g, a, b) = \text{extended\_gcd}(M, N)$.
 2. Show that there exist time indices $t_1 \neq t_2$ in $[0, 53]$ such that $t_1 \equiv t_2 \pmod{6}$ and $t_1 \equiv t_2 \pmod{9}$. This means you cannot uniquely reconstruct the time index.
 3. **Code reference:** Run `extended_gcd(6, 9)` and observe the error when you try `coprime_reconstruct_frequency` with non-coprime strides.
 
+## Problem 18b: Positive Rotor Composition (Forward-Only Operations)
+
+**Goal:** Investigate whether two discrete rotations can generate a finer composite rotation using positive integer powers only (forward operations without inverse rotations).
+
+**Setup:** Consider two discrete generator rotors in the geometric algebra plane $B = \mathbf{e}_1 \wedge \mathbf{e}_2$:
+$$R_m = \exp\left(-\frac{B\pi}{m}\right), \qquad R_n = \exp\left(-\frac{B\pi}{n}\right)$$
+Assume $m, n > 1$ with $\gcd(m, n) = 1$. We wish to construct the fine rotation:
+$$R\left(\frac{2\pi}{mn}\right) = \exp\left(-\frac{B\pi}{mn}\right)$$
+Under rotor composition with powers $x, y \in \mathbb{Z}$:
+$$R_m^x R_n^y = \exp\left(-B\left(\frac{x\pi}{m} + \frac{y\pi}{n}\right)\right)$$
+
+**Tasks:**
+1. **The Ordinary Bézout Barrier:** Show that matching the rotation exponent directly requires $\frac{x}{m} + \frac{y}{n} = \frac{1}{mn}$, which simplifies to the linear Diophantine equation $nx + my = 1$. Prove that if $x, y \in \mathbb{Z}_{>0}$ (strictly positive integers), no solutions exist for $m, n > 1$. Explain why standard Bézout solutions necessarily require inverse rotations (negative powers).
+2. **Periodic Modular Wrapping:** Using the $2\pi$-periodicity of physical rotations ($R(\theta + 2\pi) = R(\theta)$), show that the composite exponent only needs to satisfy $\frac{x}{m} + \frac{y}{n} = \frac{1}{mn} + k$ for an integer $k \ge 1$. Deduce the modified Diophantine equation:
+$$nx + my = 1 + kmn$$
+3. **Concrete Construction for $m=7, n=11$:** Set $k=1$ and solve $11x + 7y = 78$. Find a pair of strictly positive integers $(x, y) \in \mathbb{Z}_{>0}^2$ satisfying this relation.
+4. **Rotor Verification:** Explicitly verify that $R(2\pi/77) = R_7^2 R_{11}^8$. Show how the extra full revolution ($2\pi$) disappears in the resulting physical rotation.
+5. **Gate Count vs. Computational Efficiency:** Investigate what happens to the solution $(x, y)$ if you choose $k=2$ ($11x + 7y = 155$). Contrast mathematical existence with operational gate depth (total applications $x + y$).
+6. **Bonus Proof (Universal Positive Solvability):** Prove that for any coprime integers $m, n > 1$, there always exists an integer $k \ge 1$ such that $nx + my = 1 + kmn$ admits strictly positive integer solutions $x, y > 0$. *(Hint: Express general integer solutions to $nx + my = 1$ and add sufficient periods $mn$).*
+
+**Physical & Algorithmic Context:** In physical implementations (such as quantum phase gate synthesis without inverse gate overhead, forward-only numerical ODE stepping, or non-reversible actuator dynamics), mathematical reversibility does not imply operational accessibility. Modular wrapping provides a mechanism to realize exact transformations strictly through forward evolution.
+
 ---
 
 ## 📊 Section D: Plotting & Visualization Exercises
@@ -397,6 +419,49 @@ In the Dormand-Prince 5(4) integrator (DOPRI54):
 1. $\gcd(6, 9) = 3 \neq 1$.
 2. For example, $t_1 = 0$ and $t_2 = 18$: $0 \equiv 18 \pmod{6}$ (both give 0) and $0 \equiv 18 \pmod{9}$ (both give 0). You cannot distinguish $t=0$ from $t=18$.
 3. The code raises `ValueError` when `gcd(M, N) != 1`.
+
+### Solution 18b (Positive Rotor Composition & Forward-Only Operations)
+1. **The Ordinary Bézout Barrier:**
+   Matching the exponent directly gives $\frac{x}{m} + \frac{y}{n} = \frac{1}{mn} \implies nx + my = 1$.
+   If $x, y \in \mathbb{Z}_{>0}$, then $x \ge 1$ and $y \ge 1$.
+   Since $m, n > 1$, the lower bound is $nx + my \ge n(1) + m(1) = n + m > 1$ (for $m=7, n=11$, $11x + 7y \ge 18 > 1$).
+   Hence, no strictly positive integer solutions exist for $nx + my = 1$. Unrestricted Bézout solutions necessarily contain negative coefficients (e.g., $11(2) + 7(-3) = 1$ or $11(-5) + 7(8) = 1$), which correspond to inverse rotor operations $R^{-1}$. When physical or algorithmic constraints forbid backwards rotations, unrestricted Bézout cannot be implemented directly.
+
+2. **Periodic Modular Wrapping:**
+   Physical vector rotations satisfy $R(\theta + 2\pi) = R(\theta)$ (a full $2\pi$ rotation is the identity on vectors).
+   Therefore, we only require the composite exponent to equal the target angle plus an integer number of full revolutions:
+   $$\frac{x}{m} + \frac{y}{n} = \frac{1}{mn} + k \quad (k \in \mathbb{Z})$$
+   Multiplying through by $mn$ gives the Diophantine equation:
+   $$nx + my = 1 + kmn$$
+
+3. **Solving for $m=7, n=11$ with $k=1$:**
+   For $k=1$, $1 + 77(1) = 78$, giving $11x + 7y = 78$.
+   - For $x=1$: $11(1) + 7y = 78 \implies 7y = 67$ (no integer solution).
+   - For $x=2$: $11(2) + 7y = 78 \implies 22 + 7y = 78 \implies 7y = 56 \implies y = 8$.
+   Both $x=2$ and $y=8$ are strictly positive integers ($x, y \in \mathbb{Z}_{>0}$).
+
+4. **Rotor Verification:**
+   $$R_7^2 R_{11}^8 = \exp\left(-B\left(\frac{2\pi}{7} + \frac{8\pi}{11}\right)\right) = \exp\left(-B\frac{22 + 56}{77}\pi\right) = \exp\left(-B\frac{78\pi}{77}\right) = \exp\left(-B\left(\pi + \frac{\pi}{77}\right)\right)$$
+   Under the rotor sandwich product $v' = R v \tilde{R}$, the factor $\exp(-B\pi) = -1$ appears on both sides:
+   $$v' = (-R(2\pi/77)) v (-\tilde{R}(2\pi/77)) = R(2\pi/77) v \tilde{R}(2\pi/77)$$
+   The extra half-rotor period (full $2\pi$ spatial turn) leaves the physical orientation invariant, yielding the exact rotation $R(2\pi/77)$.
+
+5. **Gate Count vs. Computational Efficiency:**
+   For $k=1$, the total gate applications are $x + y = 2 + 8 = 10$.
+   For $k=2$, $11x + 7y = 155$:
+   - Solution branch A: $x=2, y=19 \implies x + y = 21$ gates.
+   - Solution branch B: $x=9, y=8 \implies x + y = 17$ gates.
+   Although higher $k$ provides additional positive integer branches, the total number of operations increases. In quantum circuit compilation and numerical integration, one must minimize $x + y$ across admissible $k$ to avoid unnecessary circuit depth or accumulated numerical round-off.
+
+6. **Bonus Proof (Universal Positive Solvability):**
+   Let $\gcd(m, n) = 1$ with $m, n > 1$. By the extended Euclidean algorithm, there exists a base integer solution $(x_0, y_0)$ to $nx_0 + my_0 = 1$.
+   Now consider $nx + my = 1 + kmn$.
+   Decompose $k = k_1 + k_2$ with $k_1, k_2 \in \mathbb{Z}$. Then:
+   $$n(x_0 + k_1 m) + m(y_0 + k_2 n) = (nx_0 + my_0) + (k_1 + k_2)mn = 1 + kmn$$
+   We set $x = x_0 + k_1 m$ and $y = y_0 + k_2 n$.
+   Since $m, n > 1$, we can always choose integers $k_1 > -x_0 / m$ and $k_2 > -y_0 / n$.
+   This guarantees $x = x_0 + k_1 m \ge 1$ and $y = y_0 + k_2 n \ge 1$.
+   Setting $k = k_1 + k_2$ yields a valid $k \ge 1$ where both $x$ and $y$ are strictly positive integers.
 
 ---
 
