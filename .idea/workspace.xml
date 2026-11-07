@@ -7,12 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="repo update of mathematical foundational stuff">
-      <change afterPath="$PROJECT_DIR$/notebooks/practice-problems/section-c-number-theory-exercises.ipynb" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="made a section c practice problem jupyter notebook">
+      <change afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/research/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/PRACTICE_PROBLEMS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/section-c-number-theory-exercises.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +21,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="180" />
+    <option name="cachedIndexableFilesCount" value="155" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="printScope" value="1" />
@@ -59,61 +60,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0003397766598212" />
-      <entry key="MS500" value="1.282327151964201" />
-      <entry key="S2" value="2.738237510869869" />
-      <entry key="S5" value="4.790433012758523" />
-      <entry key="S10" value="6.836041150849773" />
-      <entry key="S30" value="11.244985746653562" />
-      <entry key="S60" value="16.815291420525824" />
-      <entry key="M2" value="27.120794213418527" />
-      <entry key="M5" value="61.54497742530936" />
-      <entry key="M10" value="115.62895247946811" />
-      <entry key="M15" value="158.60062412475975" />
-      <entry key="M30" value="245.01038901944077" />
-      <entry key="H1" value="339.3055275372491" />
-      <entry key="H2" value="457.17025973931584" />
-      <entry key="H4" value="765.9042799164887" />
-      <entry key="D1" value="4115.7080121313265" />
-      <entry key="W1" value="20089.97625768951" />
+      <entry key="MS100" value="1.0092906805859756" />
+      <entry key="MS500" value="1.3940498653133084" />
+      <entry key="S2" value="2.0008271910434" />
+      <entry key="S5" value="2.7220376769046135" />
+      <entry key="S10" value="3.936003672893962" />
+      <entry key="S30" value="6.416719629758747" />
+      <entry key="S60" value="7.572324322841929" />
+      <entry key="M2" value="9.460781580673775" />
+      <entry key="M5" value="23.39165787180734" />
+      <entry key="M10" value="46.34928882673817" />
+      <entry key="M15" value="64.86884889809963" />
+      <entry key="M30" value="127.51842624770937" />
+      <entry key="H1" value="268.78840629924343" />
+      <entry key="H2" value="489.46414972397633" />
+      <entry key="H4" value="858.3125938386889" />
+      <entry key="D1" value="4259.3245920674735" />
+      <entry key="W1" value="20323.772797759473" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
-      <entry key="S5" value="6.962370087103178E-195" />
-      <entry key="S10" value="8.344081787172896E-98" />
-      <entry key="S30" value="4.369779444726793E-33" />
-      <entry key="S60" value="6.610430730842576E-17" />
-      <entry key="M2" value="8.130455541265551E-9" />
-      <entry key="M5" value="5.808330473035696E-4" />
-      <entry key="M10" value="0.02418504717293739" />
-      <entry key="M15" value="0.08536400476494413" />
-      <entry key="M30" value="0.3327722084110647" />
-      <entry key="H1" value="0.7496855768725209" />
-      <entry key="H2" value="1.3802062214937438" />
-      <entry key="H4" value="3.31784879678868" />
-      <entry key="D1" value="29.65365978249409" />
-      <entry key="W1" value="157.96138706474582" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="2.2697655596213257E-119" />
+      <entry key="S60" value="4.764205662669572E-60" />
+      <entry key="M2" value="2.1827060412878805E-30" />
+      <entry key="M5" value="1.3664805882439066E-12" />
+      <entry key="M10" value="1.1730675277535875E-6" />
+      <entry key="M15" value="1.1353388457014352E-4" />
+      <entry key="M30" value="0.012135911673596721" />
+      <entry key="H1" value="0.14316664067921878" />
+      <entry key="H2" value="0.6031499834514786" />
+      <entry key="H4" value="2.1932960674558784" />
+      <entry key="D1" value="27.676961664512522" />
+      <entry key="W1" value="156.41231884676074" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9797507939615444" />
-      <entry key="MS500" value="1.2766968312908993" />
-      <entry key="S2" value="2.734778210168704" />
-      <entry key="S5" value="4.787675641723618" />
-      <entry key="S10" value="6.833917148168952" />
-      <entry key="S30" value="11.243671284348956" />
-      <entry key="S60" value="16.814141476198692" />
-      <entry key="M2" value="27.119350687545207" />
-      <entry key="M5" value="61.54374736095221" />
-      <entry key="M10" value="115.65145069767809" />
-      <entry key="M15" value="158.68439685084155" />
-      <entry key="M30" value="245.34177292465378" />
-      <entry key="H1" value="340.0541133928764" />
-      <entry key="H2" value="458.54877968974944" />
-      <entry key="H4" value="769.217128090622" />
-      <entry key="D1" value="4145.351107612433" />
-      <entry key="W1" value="20247.929313291024" />
+      <entry key="MS100" value="0.9482515549802173" />
+      <entry key="MS500" value="1.3767769228614943" />
+      <entry key="S2" value="1.9949538179433577" />
+      <entry key="S5" value="2.719111331791124" />
+      <entry key="S10" value="3.934020246916563" />
+      <entry key="S30" value="6.4156861308564155" />
+      <entry key="S60" value="7.571718192761339" />
+      <entry key="M2" value="9.460384653346864" />
+      <entry key="M5" value="23.391108156560154" />
+      <entry key="M10" value="46.34865704302941" />
+      <entry key="M15" value="64.86836854559206" />
+      <entry key="M30" value="127.53002943281672" />
+      <entry key="H1" value="268.9309896585922" />
+      <entry key="H2" value="490.0663071871369" />
+      <entry key="H4" value="860.5024301389515" />
+      <entry key="D1" value="4286.9916631657925" />
+      <entry key="W1" value="20480.17686235666" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -124,80 +125,81 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMThirdPartyAiProvidersConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS" />
+      <recent name="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C" />
       <recent name="$PROJECT_DIR$/notebooks/practice-problems" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\examples\notebooks" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/examples/notebooks" />
-      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.zbw_generator">
+  <component name="RunManager" selected="Python.coprime">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -221,6 +223,30 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="coprime" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/solvers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -301,30 +327,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.coprime" />
         <item itemvalue="Python.zbw_generator" />
         <item itemvalue="Python.rotor" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
-        <item itemvalue="Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex" />
       </list>
     </recent_temporary>
   </component>
@@ -344,22 +353,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00020" summary="minor updates">
-      <option name="closed" value="true" />
-      <created>1789818426331</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1789818426331</updated>
-    </task>
-    <task id="LOCAL-00021" summary="updated @solvers.py and minor touch ups on api.py">
-      <option name="closed" value="true" />
-      <created>1789852054140</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1789852054140</updated>
     </task>
     <task id="LOCAL-00022" summary="updated @solvers.py and minor touch ups on api.py">
       <option name="closed" value="true" />
@@ -737,14 +730,29 @@
       <option name="project" value="LOCAL" />
       <updated>1794074040681</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="made a section c practice problem jupyter notebook">
+      <option name="closed" value="true" />
+      <created>1794076527089</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1794076527089</updated>
+    </task>
+    <task id="LOCAL-00070" summary="made a section c practice problem jupyter notebook">
+      <option name="closed" value="true" />
+      <created>1794078574158</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1794078574158</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="expanded structural metrics validation with advanced spectral analysis and themed visualizations" />
     <MESSAGE value="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources." />
     <MESSAGE value="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot." />
     <MESSAGE value="updated house rules and did some repo cleaning" />
@@ -769,7 +777,8 @@
     <MESSAGE value="cli updates" />
     <MESSAGE value="color cli changes" />
     <MESSAGE value="repo update of mathematical foundational stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="repo update of mathematical foundational stuff" />
+    <MESSAGE value="made a section c practice problem jupyter notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="made a section c practice problem jupyter notebook" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

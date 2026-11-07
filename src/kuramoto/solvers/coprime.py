@@ -572,7 +572,7 @@ def _run_smoke_test() -> None:
     """
     Run smoke tests for coprime sampler wrapper and CRT frequency reconstruction.
     """
-    print("[SMOKE] Running Coprime Sampler & CRT smoke tests...")
+    print("💨 Running Coprime Sampler & CRT smoke tests...")
 
     # 1. Test Extended GCD and Bezout identity
     g, a, b = extended_gcd(7, 11)
@@ -635,7 +635,7 @@ def _run_smoke_test() -> None:
     assert "reconstructed_peak_index" in diag
     assert diag["crt_residual"] == 0.0
 
-    print("[SUCCESS] Coprime Sampler & CRT smoke tests passed.")
+    print("✅ Coprime Sampler & CRT smoke tests passed.")
 
 
 # ---------------------------------------------------------------------------- #
