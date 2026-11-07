@@ -7,13 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="reconciled a whole bunch of commits">
-      <change beforePath="$PROJECT_DIR$/docs/research/LEARNING_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/research/LEARNING_GUIDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/research/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/research/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/research/RESEARCH_PREPRINT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="project updates">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_ga_rotor_invariants.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,61 +67,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.2588162309603443" />
-      <entry key="MS500" value="1.7631296044802796" />
-      <entry key="S2" value="1.9346512161853182" />
-      <entry key="S5" value="1.9733293743854885" />
-      <entry key="S10" value="1.98662174396868" />
-      <entry key="S30" value="2.3040210538890484" />
-      <entry key="S60" value="6.312678378054445" />
-      <entry key="M2" value="20.81521090866176" />
-      <entry key="M5" value="50.813533503270264" />
-      <entry key="M10" value="70.12772812028439" />
-      <entry key="M15" value="78.29284061355227" />
-      <entry key="M30" value="87.63526995599834" />
-      <entry key="H1" value="97.47077303535629" />
-      <entry key="H2" value="172.96321989389685" />
-      <entry key="H4" value="518.5480559348617" />
-      <entry key="D1" value="3910.847843005689" />
-      <entry key="W1" value="19813.548778853827" />
+      <entry key="MS100" value="6.399430631097509E-8" />
+      <entry key="MS500" value="0.10397735412101232" />
+      <entry key="S2" value="4.710460709531064" />
+      <entry key="S5" value="15.687767268904807" />
+      <entry key="S10" value="25.145691854344612" />
+      <entry key="S30" value="35.53820331009568" />
+      <entry key="S60" value="40.45059352714684" />
+      <entry key="M2" value="50.24287338521021" />
+      <entry key="M5" value="79.0669758961793" />
+      <entry key="M10" value="103.376712532867" />
+      <entry key="M15" value="114.81778511734909" />
+      <entry key="M30" value="128.6277710290593" />
+      <entry key="H1" value="141.0965601921227" />
+      <entry key="H2" value="217.01647026974652" />
+      <entry key="H4" value="561.2048858899451" />
+      <entry key="D1" value="3952.420057823757" />
+      <entry key="W1" value="19856.62251666802" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="4.966029255687771E-275" />
-      <entry key="S60" value="7.047005928539966E-138" />
-      <entry key="M2" value="2.654619733321507E-69" />
-      <entry key="M5" value="3.711939831155746E-28" />
-      <entry key="M10" value="1.9267812783660156E-14" />
-      <entry key="M15" value="7.211278020018396E-10" />
-      <entry key="M30" value="3.1739418680349066E-5" />
-      <entry key="H1" value="0.013155034876015319" />
-      <entry key="H2" value="0.42046929624890994" />
-      <entry key="H4" value="2.6602790114064665" />
-      <entry key="D1" value="29.64979852127616" />
-      <entry key="W1" value="157.46313499492288" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0" />
+      <entry key="M10" value="1.0000000000000158" />
+      <entry key="M15" value="1.000000000631234" />
+      <entry key="M30" value="1.0000296953225842" />
+      <entry key="H1" value="1.0127243774522656" />
+      <entry key="H2" value="1.4135295585467496" />
+      <entry key="H4" value="3.6382340606053716" />
+      <entry key="D1" value="30.60870654762245" />
+      <entry key="W1" value="158.43194076942473" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1070792113306829" />
-      <entry key="MS500" value="1.694920122167264" />
-      <entry key="S2" value="1.9141529153097392" />
-      <entry key="S5" value="1.9648143726332659" />
-      <entry key="S10" value="1.9823099821999453" />
-      <entry key="S30" value="2.3025274941725065" />
-      <entry key="S60" value="6.311574104633386" />
-      <entry key="M2" value="20.813920054410612" />
-      <entry key="M5" value="50.81235616682222" />
-      <entry key="M10" value="70.12691895841593" />
-      <entry key="M15" value="78.29223827988848" />
-      <entry key="M30" value="87.63496421138169" />
-      <entry key="H1" value="97.48363595783611" />
-      <entry key="H2" value="173.3814536137088" />
-      <entry key="H4" value="521.2014730614994" />
-      <entry key="D1" value="3940.4864320196316" />
-      <entry key="W1" value="19971.00351409606" />
+      <entry key="MS100" value="4.891515784737301E-7" />
+      <entry key="MS500" value="0.15659742106949281" />
+      <entry key="S2" value="5.183708171434729" />
+      <entry key="S5" value="16.42385094939187" />
+      <entry key="S10" value="26.001392420770287" />
+      <entry key="S30" value="36.48670312630155" />
+      <entry key="S60" value="41.424175081423876" />
+      <entry key="M2" value="51.22909625962749" />
+      <entry key="M5" value="80.060816284009" />
+      <entry key="M10" value="104.37335550914959" />
+      <entry key="M15" value="115.81545945436864" />
+      <entry key="M30" value="129.62658464791096" />
+      <entry key="H1" value="142.10855157104393" />
+      <entry key="H2" value="218.4275758528952" />
+      <entry key="H4" value="564.8362022618143" />
+      <entry key="D1" value="3983.017551619167" />
+      <entry key="W1" value="20015.046056665837" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -346,14 +352,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00015" summary="Integrated Lie symmetry diagnostics into the order parameter module, added `track_lie_symmetries` utility, and expanded smoke tests to include U(1) invariance and symmetry preservation verification.">
-      <option name="closed" value="true" />
-      <created>1789511750584</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1789511750584</updated>
     </task>
     <task id="LOCAL-00016" summary="Expanded **spectral.py** with harmonic analysis, synchronization transition detection, and advanced spectral functions. Updated smoke tests to validate new utilities and corrected minor documentation inconsistencies.">
       <option name="closed" value="true" />
@@ -739,14 +737,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794045345935</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="project updates">
+      <option name="closed" value="true" />
+      <created>1794058975582</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1794058975582</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added comprehensive analytics engine for structural and spectral metrics" />
     <MESSAGE value="added comprehensive diagnostics module with structural invariants and spectral metrics computations" />
     <MESSAGE value="updated execution timestamps in validate_structural_metrics.ipynb" />
     <MESSAGE value="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks" />
@@ -771,7 +776,8 @@
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
     <MESSAGE value="reconciled a whole bunch of commits" />
-    <option name="LAST_COMMIT_MESSAGE" value="reconciled a whole bunch of commits" />
+    <MESSAGE value="project updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="project updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

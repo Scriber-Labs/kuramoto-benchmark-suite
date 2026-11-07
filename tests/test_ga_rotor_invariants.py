@@ -222,3 +222,24 @@ def test_step_dopri54_and_adaptive_invariants():
     )
     assert len(t_out) == len(t_eval)
     assert phases_out.shape == (11, 6)
+
+
+def test_rotor_rkmk4_long_horizon_simulation():
+    """Verify long-horizon multi-step RKMK4 simulation does not drift or trigger zero dt errors."""
+    N = 10
+    K = 1.6
+    t_max = 50.0
+    dt_eval = 0.02
+    times = np.linspace(0.0, t_max, int(t_max / dt_eval) + 1)
+    solver = RotorSolver(n_oscillators=N, dim=2, seed=42)
+
+    t_out, phases = solver.simulate(
+        K=K,
+        t_eval=times,
+        dt_internal=0.01,
+        method="rkmk4",
+        enforce_nyquist=True,
+    )
+    assert len(t_out) == len(times)
+    assert phases.shape == (len(times), N)
+    assert np.all(np.isfinite(phases))

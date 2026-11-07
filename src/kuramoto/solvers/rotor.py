@@ -40,11 +40,11 @@ Last updated: 10-2026
 from __future__ import annotations
 
 import warnings
+from enum import IntEnum
+from typing import Callable, Final, NamedTuple
 
 import numpy as np
 from numpy.typing import NDArray
-from enum import IntEnum
-from typing import Final, NamedTuple
 
 # Import RNG utilities from the central utils module
 from kuramoto.utils import resolve_rng
@@ -658,7 +658,7 @@ class RotorSolver:
             Timestep (can be negative for time-reversal integration).
         """
         validate_non_negative_scalar(K, "K")
-        if np.isclose(dt, 0.0):
+        if np.isclose(dt, 0.0, atol=1e-15, rtol=0.0):
             raise ValueError("❌ dt cannot be zero in step_rkmk4.")
 
         if self.dim == 2:
@@ -800,7 +800,11 @@ class RotorSolver:
         K: float,
         dt: float,
         w1_cached: NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None = None,
-    ) -> tuple[NDArray[np.float64], float, NDArray[np.float64] | tuple[NDArray[np.float64], ...]]:
+    ) -> tuple[
+        NDArray[np.float64],
+        float,
+        NDArray[np.float64] | tuple[NDArray[np.float64], ...],
+    ]:
         """
         Take one 5th-order Dormand-Prince (DOPRI54) Lie-group geometric step on Spin(n).
 
@@ -824,21 +828,27 @@ class RotorSolver:
             maximum Lie-algebra error scaled in radians, and ``w7`` is stage 7 velocity for FSAL.
         """
         validate_non_negative_scalar(K, "K")
-        if np.isclose(dt, 0.0):
+        if np.isclose(dt, 0.0, atol=1e-15, rtol=0.0):
             raise ValueError("❌ dt cannot be zero in step_dopri54.")
 
         y0 = self._rotor_array
 
         if self.dim == 2:
             # Stage 1 (FSAL)
-            w1 = self._compute_bivector_omega_2d(y0, K) if w1_cached is None else w1_cached
+            w1 = (
+                self._compute_bivector_omega_2d(y0, K)
+                if w1_cached is None
+                else w1_cached
+            )
 
             # Stage 2 (c2 = 1/5)
             y1 = self._apply_bivector_step_2d(y0, (1.0 / 5.0) * w1, dt)
             w2 = self._compute_bivector_omega_2d(y1, K)
 
             # Stage 3 (c3 = 3/10)
-            y2 = self._apply_bivector_step_2d(y0, (3.0 / 40.0) * w1 + (9.0 / 40.0) * w2, dt)
+            y2 = self._apply_bivector_step_2d(
+                y0, (3.0 / 40.0) * w1 + (9.0 / 40.0) * w2, dt
+            )
             w3 = self._compute_bivector_omega_2d(y2, K)
 
             # Stage 4 (c4 = 4/5)
@@ -935,9 +945,18 @@ class RotorSolver:
             # Stage 5
             y4 = self._apply_bivector_step_3d(
                 y0,
-                (19372.0 / 6561.0) * v12_1 - (25360.0 / 2187.0) * v12_2 + (64448.0 / 6561.0) * v12_3 - (212.0 / 729.0) * v12_4,
-                (19372.0 / 6561.0) * v13_1 - (25360.0 / 2187.0) * v13_2 + (64448.0 / 6561.0) * v13_3 - (212.0 / 729.0) * v13_4,
-                (19372.0 / 6561.0) * v23_1 - (25360.0 / 2187.0) * v23_2 + (64448.0 / 6561.0) * v23_3 - (212.0 / 729.0) * v23_4,
+                (19372.0 / 6561.0) * v12_1
+                - (25360.0 / 2187.0) * v12_2
+                + (64448.0 / 6561.0) * v12_3
+                - (212.0 / 729.0) * v12_4,
+                (19372.0 / 6561.0) * v13_1
+                - (25360.0 / 2187.0) * v13_2
+                + (64448.0 / 6561.0) * v13_3
+                - (212.0 / 729.0) * v13_4,
+                (19372.0 / 6561.0) * v23_1
+                - (25360.0 / 2187.0) * v23_2
+                + (64448.0 / 6561.0) * v23_3
+                - (212.0 / 729.0) * v23_4,
                 dt,
             )
             v12_5, v13_5, v23_5 = self._compute_bivector_omega_3d(y4, K)
@@ -945,24 +964,75 @@ class RotorSolver:
             # Stage 6
             y5_eval = self._apply_bivector_step_3d(
                 y0,
-                (9017.0 / 3168.0) * v12_1 - (355.0 / 33.0) * v12_2 + (46732.0 / 5247.0) * v12_3 + (49.0 / 176.0) * v12_4 - (5103.0 / 18656.0) * v12_5,
-                (9017.0 / 3168.0) * v13_1 - (355.0 / 33.0) * v13_2 + (46732.0 / 5247.0) * v13_3 + (49.0 / 176.0) * v13_4 - (5103.0 / 18656.0) * v13_5,
-                (9017.0 / 3168.0) * v23_1 - (355.0 / 33.0) * v23_2 + (46732.0 / 5247.0) * v23_3 + (49.0 / 176.0) * v23_4 - (5103.0 / 18656.0) * v23_5,
+                (9017.0 / 3168.0) * v12_1
+                - (355.0 / 33.0) * v12_2
+                + (46732.0 / 5247.0) * v12_3
+                + (49.0 / 176.0) * v12_4
+                - (5103.0 / 18656.0) * v12_5,
+                (9017.0 / 3168.0) * v13_1
+                - (355.0 / 33.0) * v13_2
+                + (46732.0 / 5247.0) * v13_3
+                + (49.0 / 176.0) * v13_4
+                - (5103.0 / 18656.0) * v13_5,
+                (9017.0 / 3168.0) * v23_1
+                - (355.0 / 33.0) * v23_2
+                + (46732.0 / 5247.0) * v23_3
+                + (49.0 / 176.0) * v23_4
+                - (5103.0 / 18656.0) * v23_5,
                 dt,
             )
             v12_6, v13_6, v23_6 = self._compute_bivector_omega_3d(y5_eval, K)
 
             # 5th-order Lie bivector update
-            v12_5th = (35.0 / 384.0) * v12_1 + (500.0 / 1113.0) * v12_3 + (125.0 / 192.0) * v12_4 - (2187.0 / 6784.0) * v12_5 + (11.0 / 84.0) * v12_6
-            v13_5th = (35.0 / 384.0) * v13_1 + (500.0 / 1113.0) * v13_3 + (125.0 / 192.0) * v13_4 - (2187.0 / 6784.0) * v13_5 + (11.0 / 84.0) * v13_6
-            v23_5th = (35.0 / 384.0) * v23_1 + (500.0 / 1113.0) * v23_3 + (125.0 / 192.0) * v23_4 - (2187.0 / 6784.0) * v23_5 + (11.0 / 84.0) * v23_6
+            v12_5th = (
+                (35.0 / 384.0) * v12_1
+                + (500.0 / 1113.0) * v12_3
+                + (125.0 / 192.0) * v12_4
+                - (2187.0 / 6784.0) * v12_5
+                + (11.0 / 84.0) * v12_6
+            )
+            v13_5th = (
+                (35.0 / 384.0) * v13_1
+                + (500.0 / 1113.0) * v13_3
+                + (125.0 / 192.0) * v13_4
+                - (2187.0 / 6784.0) * v13_5
+                + (11.0 / 84.0) * v13_6
+            )
+            v23_5th = (
+                (35.0 / 384.0) * v23_1
+                + (500.0 / 1113.0) * v23_3
+                + (125.0 / 192.0) * v23_4
+                - (2187.0 / 6784.0) * v23_5
+                + (11.0 / 84.0) * v23_6
+            )
 
             y5 = self._apply_bivector_step_3d(y0, v12_5th, v13_5th, v23_5th, dt)
             v12_7, v13_7, v23_7 = self._compute_bivector_omega_3d(y5, K)
 
-            v12_err = (71.0 / 57600.0) * v12_1 - (71.0 / 16695.0) * v12_3 + (71.0 / 1920.0) * v12_4 - (17253.0 / 339200.0) * v12_5 + (22.0 / 525.0) * v12_6 - (1.0 / 40.0) * v12_7
-            v13_err = (71.0 / 57600.0) * v13_1 - (71.0 / 16695.0) * v13_3 + (71.0 / 1920.0) * v13_4 - (17253.0 / 339200.0) * v13_5 + (22.0 / 525.0) * v13_6 - (1.0 / 40.0) * v13_7
-            v23_err = (71.0 / 57600.0) * v23_1 - (71.0 / 16695.0) * v23_3 + (71.0 / 1920.0) * v23_4 - (17253.0 / 339200.0) * v23_5 + (22.0 / 525.0) * v23_6 - (1.0 / 40.0) * v23_7
+            v12_err = (
+                (71.0 / 57600.0) * v12_1
+                - (71.0 / 16695.0) * v12_3
+                + (71.0 / 1920.0) * v12_4
+                - (17253.0 / 339200.0) * v12_5
+                + (22.0 / 525.0) * v12_6
+                - (1.0 / 40.0) * v12_7
+            )
+            v13_err = (
+                (71.0 / 57600.0) * v13_1
+                - (71.0 / 16695.0) * v13_3
+                + (71.0 / 1920.0) * v13_4
+                - (17253.0 / 339200.0) * v13_5
+                + (22.0 / 525.0) * v13_6
+                - (1.0 / 40.0) * v13_7
+            )
+            v23_err = (
+                (71.0 / 57600.0) * v23_1
+                - (71.0 / 16695.0) * v23_3
+                + (71.0 / 1920.0) * v23_4
+                - (17253.0 / 339200.0) * v23_5
+                + (22.0 / 525.0) * v23_6
+                - (1.0 / 40.0) * v23_7
+            )
 
             err_stack = np.stack([v12_err, v13_err, v23_err], axis=-1)
             lte = float(np.max(np.linalg.norm(err_stack, axis=-1) * abs(dt)))
@@ -981,7 +1051,9 @@ class RotorSolver:
         dt_min: float = 1e-6,
         dt_max: float = 0.5,
         w1_cached: NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None = None,
-    ) -> tuple[AdaptiveStepResult, NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None]:
+    ) -> tuple[
+        AdaptiveStepResult, NDArray[np.float64] | tuple[NDArray[np.float64], ...] | None
+    ]:
         """
         Attempt a single Dormand-Prince 5(4) adaptive Lie-group step on Spin(n)^N.
 
@@ -1029,7 +1101,9 @@ class RotorSolver:
             self._consecutive_rejections = 0
             abs_dt_next = float(np.clip(abs_dt * s, dt_min, dt_max))
             return (
-                AdaptiveStepResult(dt_current, sign_dt * abs_dt_next, AdaptiveStatus.ACCEPTED),
+                AdaptiveStepResult(
+                    dt_current, sign_dt * abs_dt_next, AdaptiveStatus.ACCEPTED
+                ),
                 w_fsal,
             )
 
@@ -1101,7 +1175,7 @@ class RotorSolver:
             w1 = self._compute_bivector_omega_2d(y0, K)
             y_pred = self._apply_bivector_step_2d(y0, w1, dt)
 
-            #2. Corrector: 2nd-order Lie-algebra average, anchored at y0.
+            # 2. Corrector: 2nd-order Lie-algebra average, anchored at y0.
             w2 = self._compute_bivector_omega_2d(y_pred, K)
             w_eff = 0.5 * (w1 + w2)
             y_corr = self._apply_bivector_step_2d(y0, w_eff, dt)
@@ -1228,7 +1302,6 @@ class RotorSolver:
 
         return AdaptiveStepResult(0.0, dt_proposed, AdaptiveStatus.REJECTED)
 
-
     def simulate(
         self,
         K: float,
@@ -1240,7 +1313,7 @@ class RotorSolver:
         adaptive_rtol: float = 1e-5,
         adaptive_atol: float = 1e-7,
         dt_min: float = 1e-5,
-        dt_max: float | None = None,        # None -> dt_internal
+        dt_max: float | None = None,  # None -> dt_internal
         callback: Callable[[float, PhaseArray], None] | None = None,
     ) -> tuple[TimeArray, PhaseArray]:
         """
@@ -1434,6 +1507,8 @@ class RotorSolver:
                         self.step_euler_fast(K, dt)
                     current_time += dt
 
+            current_time = float(t_out)
+
             # Extract phases once per output point for performance
             current_phases = self.extract_phases()
             times.append(float(t_out))
@@ -1447,6 +1522,7 @@ class RotorSolver:
         self._sync_rotors_from_array()
 
         return np.asarray(times), np.asarray(all_phases)
+
 
 class AdaptiveStatus(IntEnum):
     """Outcome of a single adaptive trial step.
@@ -1484,6 +1560,7 @@ class AdaptiveStepResult(NamedTuple):
     def accepted(self) -> bool:
         """True only when the step size was accepted."""
         return self.status == AdaptiveStatus.ACCEPTED
+
 
 # Controller constants -- single source of truth
 _ADAPTIVE_SAFETY: Final[float] = 0.85
@@ -1881,7 +1958,7 @@ def _run_smoke_test() -> None:
         accepted_count = 0
         rejectred_count = 0
 
-        for _ in range (300):
+        for _ in range(300):
             result = adaptive.step_adaptive_embedded(
                 K=1.5,
                 dt_current=dt_trial,
@@ -1897,9 +1974,9 @@ def _run_smoke_test() -> None:
             dt_trial = result.dt_next
 
             normas = np.sum(adaptive._rotor_array**2, axis=1)
-            assert np.allclose(normas, 1.0, atol=1e-12), (
-                "Rotor norm drifted off the Spin(n) manifold under adaptive sampling."
-            )
+            assert np.allclose(
+                normas, 1.0, atol=1e-12
+            ), "Rotor norm drifted off the Spin(n) manifold under adaptive sampling."
 
         assert accepted_count > 250, "Controller rejected far too many steps."
         assert np.all(np.isfinite(adaptive._rotor_array))
