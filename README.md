@@ -18,9 +18,14 @@ cd kuramoto-benchmark-suite
 
 # Sync environment using uv (recommended)
 uv sync --extra dev
-# ...or via standard pip
-pip install -e ".[dev]"
+# ...or create and activate a virtual environment, then use pip
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
 ```
+
+With `uv`, prefix commands below with `uv run` if the environment is not
+activated (for example, `uv run kuramoto --help`).
 
 ### 🧠 AI-Generated Demos & Research Notebooks
 We maintain a living laboratory of interactive experiments. All proof-of-concepts, including AI-generated Jupyter notebooks, are stored in:
@@ -40,14 +45,14 @@ The `kuramoto` CLI is your gateway to the simulation engine.
 
 ### Quick Commands
 ```bash
-# Generate a mesoscale dataset (RK45)
-kuramoto generate -n 100 -K 0.8 --solver rk45 -o data/mesoscale.npz
+# Generate a dataset from the included JSON configuration (RK45)
+kuramoto generate --config data/benchmark/config.json --solver rk45 -o data/mesoscale.npz
 
 # Run a Geometric Algebra Rotor simulation (RKMK4)
-kuramoto generate -n 50 -K 2.0 --solver rkmk4 -o data/rotor.npz
+kuramoto generate --config data/benchmark/config.json --solver rkmk4 -o data/rotor.npz
 
 # Visualize phase trajectories
-kuramoto time -i data/mesoscale.npz
+kuramoto time data/mesoscale.npz
 ```
 
 For full documentation of flags and advanced usage, see:

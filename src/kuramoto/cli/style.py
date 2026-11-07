@@ -11,6 +11,8 @@ Date: October 2026
 
 from __future__ import annotations
 
+import os
+import sys
 from typing import Final
 
 import click
@@ -103,7 +105,12 @@ def supports_256_color() -> bool:
     bool
         True if the terminal supports 256 colors, False otherwise.
     """
-    return click.get_terminal_size().columns > 0 and click.can_echo()
+    if not sys.stdout.isatty() or os.environ.get("NO_COLOR"):
+        return False
+
+    term = os.environ.get("TERM", "").lower()
+    color_term = os.environ.get("COLORTERM", "").lower()
+    return "256color" in term or color_term in {"truecolor", "24bit"}
 
 
 def ansi_256(color_name: str, text: str, bold: bool = False) -> str:

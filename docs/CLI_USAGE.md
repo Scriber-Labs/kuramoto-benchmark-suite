@@ -10,6 +10,8 @@ All commands follow the pattern:
 ```bash
 kuramoto <command> [OPTIONS]
 ```
+Run the command from an activated project environment, or use `uv run kuramoto`
+when using `uv` without activating the environment.
 Use `--help` with any command to see all available flags:
 ```bash
 kuramoto generate --help
@@ -23,17 +25,19 @@ kuramoto generate --help
 The core command for synthetic Kuramoto datasets. It supports classical, geometric, and quantum-hybrid solvers.
 
 **Examples:**
-- **Mesoscale ZBW Simulation (Classical RK45):**
+- **Mesoscale Simulation (Classical RK45):**
   ```bash
-  kuramoto generate -n 100 -K 0.8 --solver rk45 -o data/zbw_meso.npz
+  kuramoto generate --config data/benchmark/config.json --solver rk45 -o data/zbw_meso.npz
   ```
 - **Geometric Algebra Rotor (RKMK4):**
   ```bash
-  kuramoto generate -n 50 -K 2.0 --solver rkmk4 --track-symmetries -o data/rotor_rkmk4.npz
+  kuramoto generate --config data/benchmark/config.json --solver rkmk4 --track-symmetries -o data/rotor_rkmk4.npz
   ```
+- `generate` reads oscillator count, coupling, topology, and timestep settings from
+  the JSON config. Solver settings can be overridden with CLI options.
 - **Adaptive Rotor (DOPRI54):**
   ```bash
-  kuramoto generate -n 30 -K 1.8 --solver dopri54 --adaptive-rtol 1e-6 -o data/rotor_adaptive.npz
+  kuramoto generate --config data/benchmark/config.json --solver dopri54 --adaptive-rtol 1e-6 -o data/rotor_adaptive.npz
   ```
 
 ### ⚛️ `quantum`
@@ -42,11 +46,11 @@ Dedicated command for running hybrid Quantum Self-Consistent Field (SCF) rotor s
 **Examples:**
 - **Expectation Scheme:**
   ```bash
-  kuramoto quantum -n 10 -K 1.5 -t 200 --scheme expectation
+  kuramoto quantum -n 10 -k 1.5 -t 200 --scheme expectation
   ```
 - **Shot-Sampling (Tomography):**
   ```bash
-  kuramoto quantum -n 8 -K 2.0 -t 150 --scheme shot_sampling --shots 4096 -o data/quantum_shots.npz
+  kuramoto quantum -n 8 -k 2.0 -t 150 --scheme shot_sampling --shots 4096 -o data/quantum_shots.npz
   ```
 
 ---
@@ -54,21 +58,21 @@ Dedicated command for running hybrid Quantum Self-Consistent Field (SCF) rotor s
 ## 2️⃣ Visualization & Diagnostics
 
 ### 🔗 `network`
-Visualize the graph topology used for coupling (e.g., ring, small-world, erdos-renyi).
+Visualize the graph topology from a generated dataset.
 ```bash
-kuramoto network --topology small_world -n 50
+kuramoto network data/mesoscale.npz
 ```
 
 ### 📈 `time`
 Plot phase trajectories $\theta_i(t)$ and the global order parameter $r(t)$.
 ```bash
-kuramoto time -i data/zbw_meso.npz
+kuramoto time data/zbw_meso.npz
 ```
 
 ### 📊 Spectral Analysis
-- `distributions`: Plot frequency and phase initializations (e.g., Uniform, Lorentzian, or **phi-Shield**).
-- `fouriervariability`: Fourier coefficient stability across the ensemble.
-- `psdvariability`: Power Spectral Density analysis for frequency-domain diagnostics.
+- `distributions DATASET_PATH`: Plot frequency and phase initializations from a dataset.
+- `fouriervariability DATASET_PATH --freq FREQUENCY`: Fourier coefficient stability across the ensemble.
+- `psdvariability DATASET_PATH --freq FREQUENCY`: Power Spectral Density analysis for frequency-domain diagnostics.
 
 ---
 
@@ -77,13 +81,13 @@ kuramoto time -i data/zbw_meso.npz
 ### 🏎️ `benchmark`
 Compare performance and conservation accuracy across different solvers.
 ```bash
-kuramoto benchmark -n 20 -K 1.5 -t 500 --dt 0.01
+kuramoto benchmark -n 20 -k 1.5 -t 500 --dt 0.01
 ```
 
 ### 🔌 `qasm`
-Export Quantum SCF circuits to OpenQASM format for execution on real hardware or external simulators.
+Export Quantum SCF circuits to OpenQASM 2.0 format for execution on real hardware or external simulators.
 ```bash
-kuramoto qasm -n 8 -K 1.5 --version 3.0 --include-measurements -o circuits/scf_step.qasm
+kuramoto qasm --dataset data/mesoscale.npz -o circuits/scf_step.qasm
 ```
 
 ---
