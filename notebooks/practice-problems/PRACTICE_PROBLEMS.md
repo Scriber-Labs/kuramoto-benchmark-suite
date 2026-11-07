@@ -45,7 +45,7 @@ You have 3 oscillators with phases $\theta = [0, \pi/4, \pi/2]$.
 In our "Quantum Bridge," we map a rotor step $\Delta \theta$ to an $R_z(\phi)$ gate.
 1. If an oscillator has $\omega = 1.0$, $K=0$, and $\Delta t = 0.1$, what is the required $R_z$ gate angle $\phi$?
 2. Why does the circuit depth remain $O(1)$ regardless of $N$?
-3. **Reference**: See `LEARNING_GUIDE.md` Section 3.2.
+3. **Reference**: See `../../docs/research/LEARNING_GUIDE.md` Section 3.2.
 
 ## Problem 5: Bivector to Matrix
 **Goal**: Bridge GA with standard Linear Algebra.
@@ -76,7 +76,7 @@ In 3D, a rotor is represented by 4 coefficients (like a quaternion).
 **Goal**: Computational complexity.
 Why is $O(N)$ better than $O(N^2)$ for $N=10,000$?
 1. Calculate the number of operations for both for a single step.
-2. **Reference**: See the `BENCHMARK_RUNDOWN.md` results.
+2. **Reference**: See the `../../docs/research/BENCHMARK_RUNDOWN.md` results.
 
 ## Problem 10: Symmetry Invariance
 **Goal**: Proving Noether's Theorem.
@@ -146,7 +146,7 @@ $$ax + by = \gcd(a, b)$$
 1. Use the extended Euclidean algorithm to find $\gcd(7, 11)$ and the Bézout coefficients $(x, y)$.
 2. Verify your answer: does $7x + 11y = 1$?
 3. Now find $\gcd(6, 9)$ and the Bézout coefficients. What do you notice about the result?
-4. **Code reference:** Open `src/kuramoto/solvers/coprime.py` and locate the `extended_gcd` function. Trace through the recursive calls for inputs $(7, 11)$ and verify your hand calculation matches.
+4. **Code reference:** Open `../../src/kuramoto/solvers/coprime.py` and locate the `extended_gcd` function. Trace through the recursive calls for inputs $(7, 11)$ and verify your hand calculation matches.
 
 ## Problem 17: Chinese Remainder Theorem (CRT) Reconstruction
 
@@ -218,7 +218,7 @@ These problems require you to write code, run simulations, and produce plots. Th
 1. Run a simulation with $N=100$ oscillators, natural frequencies drawn uniformly from $[-1, 1]$, coupling $K=2.0$, and $T=20$ seconds.
 2. Compute the order parameter $R(t)$ at each timestep.
 3. **Plotting task:** Use `kuramoto.analysis.viz.plot_order_parameter` to plot $R(t)$.
-4. **Question:** Does $R(t)$ approach a steady state? What is the final synchronization strength? How does it change if you increase $K$ to $4.0$?
+4. **Question:** Does $R(t[PRACTICE_PROBLEMS.md](PRACTICE_PROBLEMS.md))$ approach a steady state? What is the final synchronization strength? How does it change if you increase $K$ to $4.0$?
 
 ## Problem 21: Natural Frequency Distribution
 
@@ -273,17 +273,17 @@ These tasks connect the math to the actual codebase. Complete them to build conf
 **Goal:** Locate and understand the core rotor evolution equation.
 
 **Tasks:**
-1. Open `src/kuramoto/solvers/rotor.py`.
+1. Open `../../src/kuramoto/solvers/rotor.py`.
 2. Find the function that implements the rotor update $R(t+\Delta t) = \exp(-\frac{1}{2}\Omega \Delta t) R(t)$.
 3. Trace through the code: how is the bivector $\Omega$ computed? Where does the coupling term appear?
-4. **Question:** Does the code match the equation in the preprint (`RESEARCH_PREPRINT.md`, Section 2.3)?
+4. **Question:** Does the code match the equation in the preprint (`../../docs/research/RESEARCH_PREPRINT.md`, Section 2.3)?
 
 ## Problem 26: Trace the Order Parameter Calculation
 
 **Goal:** Understand how $R(t)$ is computed from phases.
 
 **Tasks:**
-1. Open `src/kuramoto/order_parameter.py`.
+1. Open `../../src/kuramoto/order_parameter.py`.
 2. Find the `compute_order_parameter` function.
 3. Read the implementation: how does it convert phases $\theta_i$ to the complex order parameter $Z$?
 4. **Question:** Does the code use $e^{i\theta}$ or $\cos(\theta) + i\sin(\theta)$? Are they equivalent?
@@ -293,7 +293,7 @@ These tasks connect the math to the actual codebase. Complete them to build conf
 **Goal:** Locate the $O(N)$ mean-field optimization.
 
 **Tasks:**
-1. Open `src/kuramoto/solvers/rotor.py`.
+1. Open `../../src/kuramoto/solvers/rotor.py`.
 2. Find the method or function that computes the mean field vector $\mathbf{u}_{\text{mean}}$ once per timestep.
 3. Compare it with the pairwise $O(N^2)$ method.
 4. **Question:** How many lines of code save the $O(N^2)$ computation? What's the key insight?
@@ -303,7 +303,7 @@ These tasks connect the math to the actual codebase. Complete them to build conf
 **Goal:** Find how gauge invariance is verified.
 
 **Tasks:**
-1. Open `src/kuramoto/order_parameter.py`.
+1. Open `../../src/kuramoto/order_parameter.py`.
 2. Find the function that checks global phase invariance (shifting all phases by a constant $\phi$).
 3. Read the implementation: what metric is compared before and after the shift?
 4. **Question:** Why is this check important for validating the solver?

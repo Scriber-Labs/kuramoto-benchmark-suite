@@ -17,7 +17,7 @@ Before you dive in, take a breath and answer these questions honestly:
 
 2. **Distraction check:** Are you tempted to update repo infrastructure instead of doing math?
    - If **yes**, remind yourself: **The preprint and understanding come first.** Infrastructure can wait.
-   - Pick **one** concrete problem from `PRACTICE_PROBLEMS.md` and commit to finishing it before touching anything else.
+   - Pick **one** concrete problem from `../../notebooks/practice-problems/PRACTICE_PROBLEMS.md` and commit to finishing it before touching anything else.
 
 3. **Turbulence check:** If your mind feels scattered, try this:
    - Set a timer for **25 minutes** (Pomodoro).
@@ -31,12 +31,12 @@ Before you dive in, take a breath and answer these questions honestly:
 *Before you dive into the code, check the outputs of our session.*
 - [x] **Benchmarks**: Open `BENCHMARK_RUNDOWN.md` and check the scaling results.
 - [ ] **Theory**: Open `LEARNING_GUIDE.md` and read the Bivector Torque derivation.
-- [ ] **Practice**: Work through `PRACTICE_PROBLEMS.md` — start with Section B (Canonical Derivation) for deep math, or Section D (Plotting) for visual learning.
+- [ ] **Practice**: Work through `../../notebooks/practice-problems/PRACTICE_PROBLEMS.md` — start with Section B (Canonical Derivation) for deep math, or Section D (Plotting) for visual learning.
 - [~] **Number Theory**: Complete Section C — wrapping up Problem 16 (Bézout's identity), then CRT (Problem 17), coprime failure (Problem 18), and forward-only Positive Rotor Composition (Problem 18b).
 - [ ] **Quasi-Periodic & Floquet Walkthrough**: Open `QUASI_PERIODIC_FLOQUET_WALKTHROUGH.md` to code up backward reconstruction metrics and monodromy matrix stability analysis.
 - [x] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.
 - [ ] **Quantum**: Inspect `../src/kuramoto/quantum/circuit_gen.py` to see the SCF mapping logic.
-- [ ] **Scavenger Hunt**: Complete Section E of `PRACTICE_PROBLEMS.md` to connect the math to the actual code.
+- [ ] **Scavenger Hunt**: Complete Section E of `../../notebooks/practice-problems/PRACTICE_PROBLEMS.md` to connect the math to the actual code.
 
 ---
 
@@ -96,7 +96,7 @@ Before you dive in, take a breath and answer these questions honestly:
 ### Path D: Code Scavenger Hunt (Lower Energy, Still Productive)
 **Best if:** You're tired but still want to make progress.
 
-1. Complete **Problems 25-28** in Section E of `PRACTICE_PROBLEMS.md`.
+1. Complete **Problems 25-28** in Section E of `../../notebooks/practice-problems/PRACTICE_PROBLEMS.md`.
 2. Just read the code — no writing required.
 3. **Goal:** You can point to the exact lines that implement the math you're learning.
 
