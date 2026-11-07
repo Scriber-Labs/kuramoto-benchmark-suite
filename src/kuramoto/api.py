@@ -20,12 +20,14 @@ from typing import Any, Dict, Optional
 import numpy as np
 from numpy.typing import NDArray
 
+from kuramoto.metrics.analytics_engine import generate_fibonacci_frequencies
 from kuramoto.model import KuramotoModel
 from kuramoto.solver_types import is_rotor_or_euler
 from kuramoto.topologies import load_topology
 
 __all__: list[str] = [
     "generate_kuramoto_dataset",
+    "generate_fibonacci_frequencies",
 ]
 
 # ------------------------------------------------------------------------------ #

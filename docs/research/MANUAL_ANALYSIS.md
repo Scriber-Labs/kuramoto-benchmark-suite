@@ -33,6 +33,7 @@ Before you dive in, take a breath and answer these questions honestly:
 - [ ] **Theory**: Open `LEARNING_GUIDE.md` and read the Bivector Torque derivation.
 - [ ] **Practice**: Work through `PRACTICE_PROBLEMS.md` — start with Section B (Canonical Derivation) for deep math, or Section D (Plotting) for visual learning.
 - [~] **Number Theory**: Complete Section C — wrapping up Problem 16 (Bézout's identity), then CRT (Problem 17), coprime failure (Problem 18), and forward-only Positive Rotor Composition (Problem 18b).
+- [ ] **Quasi-Periodic & Floquet Walkthrough**: Open `QUASI_PERIODIC_FLOQUET_WALKTHROUGH.md` to code up backward reconstruction metrics and monodromy matrix stability analysis.
 - [x] **Visualization**: Look at `../plots/benchmarks/scaling_performance.png` (if you can view images) or from the project root, run `python3 scripts/rigorous_benchmarks.py` again to see the terminal output.
 - [ ] **Quantum**: Inspect `../src/kuramoto/quantum/circuit_gen.py` to see the SCF mapping logic.
 - [ ] **Scavenger Hunt**: Complete Section E of `PRACTICE_PROBLEMS.md` to connect the math to the actual code.

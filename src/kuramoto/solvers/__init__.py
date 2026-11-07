@@ -16,12 +16,23 @@ from .coprime import (
 )
 from .quantum_rotor import QuantumRotorSolver, step_quantum_scf
 from .rk45 import solve_kuramoto
-from .rotor import AdaptiveStatus, AdaptiveStepResult, RotorSolver, step_rkmk4
+from .rotor import (
+    AdaptiveStatus,
+    AdaptiveStepResult,
+    RotorSolver,
+    fibonacci_word_symbol,
+    step_dopri54,
+    step_quasi_periodic,
+    step_rkmk4,
+)
 
 __all__: list[str] = [
     "solve_kuramoto",
     "RotorSolver",
     "step_rkmk4",
+    "step_dopri54",
+    "step_quasi_periodic",
+    "fibonacci_word_symbol",
     "QuantumRotorSolver",
     "step_quantum_scf",
     "CoprimeSampleResult",

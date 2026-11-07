@@ -16,6 +16,12 @@ from numpy.typing import NDArray
 from kuramoto.analysis.graphs import build_adjacency
 from kuramoto.analysis.spectral import compute_psd, compute_spectral_decomposition
 
+__all__: list[str] = [
+    "ComprehensiveMetrics",
+    "compute_comprehensive_diagnostics",
+    "generate_fibonacci_frequencies",
+]
+
 # ------------------------------------------------------------------------------
 # 0️⃣ Definitions, Constants & Types
 # ------------------------------------------------------------------------------
@@ -35,6 +41,65 @@ class ComprehensiveMetrics(NamedTuple):
 # ------------------------------------------------------------------------------
 # 1️⃣ Public API
 # ------------------------------------------------------------------------------
+
+
+def generate_fibonacci_frequencies(
+    N: int,
+    base_frequency: float = 1.0,
+    offset: int = 1,
+) -> NDArray[np.floating]:
+    """
+    Generate initial natural frequencies using consecutive Fibonacci ratios.
+
+    Constructs an irrational frequency spectrum based on successive convergents
+    of the golden ratio phi = (1 + sqrt(5)) / 2:
+
+        r_k = F_{k+1} / F_k,   k >= 1
+
+    where F_k is the k-th Fibonacci number. In accordance with Lagrange's theorem
+    on continued fractions and the Diophantine approximation bound |phi - p/q| > c / q^2,
+    frequencies distributed according to consecutive Fibonacci ratios simulate
+    the absolute worst-case non-resonant spectrum against mode-locking.
+
+    Parameters
+    ----------
+    N : int
+        Number of oscillator frequencies to generate. Must be a positive integer.
+    base_frequency : float, default=1.0
+        Fundamental frequency scaling constant omega_0.
+    offset : int, default=1
+        Starting index for the Fibonacci sequence ratio calculation.
+
+    Returns
+    -------
+    NDArray[np.floating]
+        One-dimensional array of natural frequencies of shape (N,).
+
+    Raises
+    ------
+    ValueError
+        If N <= 0 or offset < 1.
+    """
+    if N <= 0:
+        raise ValueError(f"Number of oscillators N must be positive, got {N}")
+    if offset < 1:
+        raise ValueError(f"Offset must be >= 1, got {offset}")
+
+    # Generate sufficient Fibonacci numbers using exact integer arithmetic
+    fibs: list[int] = [1, 1]
+    total_needed = offset + N + 2
+    while len(fibs) < total_needed:
+        fibs.append(fibs[-1] + fibs[-2])
+
+    ratios = np.zeros(N, dtype=np.float64)
+    for i in range(N):
+        k = offset + i
+        ratios[i] = base_frequency * (fibs[k] / fibs[k - 1])
+
+    assert ratios.ndim == 1, "Frequencies array must be 1-dimensional."
+    assert ratios.shape == (N,), f"Expected shape ({N},), got {ratios.shape}"
+
+    return ratios
 
 
 def compute_comprehensive_diagnostics(
@@ -108,7 +173,7 @@ def compute_comprehensive_diagnostics(
 
         # Non-uniform matrix potential masking
         potential_energy[t] = -(K / N) * np.sum(A * cos_matrix)
-        # Phase-space volume contraction rate tracking diagonal elements of system Jacobian
+        # Phase-space volume contraction rate tracking diagonal entries of system Jacobian
         lambda_trajectory[t] = -(K / N) * np.sum(A * cos_matrix)
 
     total_energy = kinetic_energy + potential_energy
@@ -139,6 +204,7 @@ def compute_comprehensive_diagnostics(
         total_energy_drift=total_drift,
     )
 
+
 # ------------------------------------------------------------------------------
 # 💨 Smoke Tests
 # ------------------------------------------------------------------------------
@@ -147,6 +213,14 @@ def compute_comprehensive_diagnostics(
 def _run_smoke_test() -> None:
     """Sanity check for analytics engine."""
     print("💨 Running analytics engine smoke tests...")
+    fib_freqs = generate_fibonacci_frequencies(5, base_frequency=1.0)
+    assert fib_freqs.shape == (5,)
+    assert np.isclose(fib_freqs[0], 1.0)
+    assert np.isclose(fib_freqs[1], 2.0)
+    assert np.isclose(fib_freqs[2], 1.5)
+    assert np.isclose(fib_freqs[3], 5.0 / 3.0)
+    assert np.isclose(fib_freqs[4], 8.0 / 5.0)
+
     t = np.linspace(0, 10, 200)
     theta = np.outer(t, np.array([1.0, 1.2, 0.8]))
     # Represent as complex rotors exp(-I theta / 2) = cos(theta/2) - I sin(theta/2)

@@ -49,6 +49,8 @@ ROTOR_SOLVER_ALIASES: Final[tuple[str, ...]] = (
     "adaptive",
     "adaptive_embedded",
     "embedded",
+    "quasi_periodic",
+    "fibonacci",
 )
 
 # Quantum SCF Rotor solvers

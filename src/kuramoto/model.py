@@ -247,11 +247,17 @@ class KuramotoModel:
         t_eval = np.linspace(0.0, t_span, points)
 
         if self.solver_type == "rk45":
-            return self._simulate_rk45(t_span, t_eval, points, callback=callback, **kwargs)
+            return self._simulate_rk45(
+                t_span, t_eval, points, callback=callback, **kwargs
+            )
         elif is_quantum_solver(self.solver_type):
-            return self._simulate_quantum(t_span, t_eval, points, callback=callback, **kwargs)
+            return self._simulate_quantum(
+                t_span, t_eval, points, callback=callback, **kwargs
+            )
         else:
-            return self._simulate_rotor(t_span, t_eval, points, callback=callback, **kwargs)
+            return self._simulate_rotor(
+                t_span, t_eval, points, callback=callback, **kwargs
+            )
 
     def _simulate_rk45(
         self,
@@ -358,6 +364,8 @@ class KuramotoModel:
             method = "adaptive"
         elif self.solver_type in ("rotor", "vectorized_geometric"):
             method = "vectorized_geometric"
+        elif self.solver_type in ("quasi_periodic", "fibonacci"):
+            method = "quasi_periodic"
 
         sim_times, sim_phases = self.rotor_solver.simulate(
             K=self.K,
@@ -370,6 +378,7 @@ class KuramotoModel:
             dt_min=dt_min,
             dt_max=dt_max,
             callback=callback,
+            **kwargs,
         )
 
         # Compute derivatives numerically via finite differences

@@ -56,6 +56,11 @@ where $\mathbf{u}_{mean} \wedge \mathbf{u}_i$ is now a bivector in 3D space, nat
 
 **Numerical Verification:** We have implemented the 3D vectorized GA solver and verified that for attractive coupling ($K > 0$), a random distribution of oscillators on $S^2$ successfully collapses onto a synchronized state, with the synchronization strength $R = |\mathbf{u}_{mean}|$ increasing from $\approx 0.1$ to $> 0.95$.
 
+#### 2.5 Fibonacci Frequency Limits and Quasi-Periodic Operator Splitting
+To probe non-resonant invariant tori and phase transitions in the extreme irrational limit, natural frequencies are initialized via consecutive Fibonacci ratios $\omega_k = \omega_0 \frac{F_{k+1}}{F_k}$, representing the golden ratio $\phi = \frac{1+\sqrt{5}}{2}$ continued-fraction convergents.
+
+To break translational discretization resonances, the integration scheme alternates between the intrinsic frequency frame bivector $\Phi_{\text{int}}$ and the coupled interaction torque bivector $\Phi_{\text{cpl}}$ following the binary Fibonacci word sequence $W_\infty \in \{0, 1\}^\infty$ evaluated via $w_n = 2 + \lfloor(n+1)\phi\rfloor - \lfloor(n+2)\phi\rfloor$. This non-repeating geometric rhythm minimizes numerical secular drift while preserving exact Lie-group manifold invariants.
+
 ---
 
 ### 3. Metric Tests and Diagnostics
@@ -65,11 +70,12 @@ To validate the `RotorSolver`, we implement the following metrics:
 1.  **Hamiltonian Energy Drift**: The Kuramoto model on a complete graph is a gradient system in a rotating frame. We track the total energy $H = T + V$:
     $$V = -\frac{K}{2N^2} \sum_{i,j} \cos(\theta_j - \theta_i)$$
     Energy drift $\Delta H$ serves as a proxy for integration accuracy (measured $\Delta H \le 1.25 \times 10^{-13}$ for geometric schemes).
-2.  **Phase-Space Contraction ($\lambda$)**: We track the sum of the diagonal elements of the Jacobian, which indicates the rate of volume contraction in phase space ($|\Lambda| \le 4.07 \times 10^{-13}$ in uncoupled limit).
+2.  **Phase-Space Contraction ($\lambda$)**: We track the sum of the diagonal entries of the Jacobian, which indicates the rate of volume contraction in phase space ($|\Lambda| \le 4.07 \times 10^{-13}$ in uncoupled limit).
 3.  **$U(1)$ / $\operatorname{SO}(2)$ Global Gauge Invariance**: We verify that a global rotation of all initial rotors $R_i \to R_{\phi} R_i$ results in an identical trajectory for the synchronization strength $r(t)$ and interaction potential $V(t)$ ($\Delta V \le 7.09 \times 10^{-13}$).
 4.  **Time-Reversal Roundtrip Reconstruction**: Integrating forward for $T = 50\,\mathrm{s}$ and backward with $-\Delta t$ across 25,000 steps measures exact symmetry preservation. High-order Lie-group schemes (DOPRI54 at $5.29 \times 10^{-13}$ and RKMK4 at $8.81 \times 10^{-13}$) achieve machine precision.
-5.  **Spectral Fidelity**: Comparison of Power Spectral Density (PSD) between the GA rotor solver and a high-order adaptive RK45 solver.
-6.  **Nyquist-Based Anti-Aliasing**: We implement an automatic frequency capping heuristic that prevents "energy allocation" to unresolved frequencies relative to the integration time step $\Delta t$, ensuring stability without requiring extremely small steps for outlier oscillators.
+5.  **Backward Reconstruction Drift Metric**: We compute $\|\mathbf{x}(0) - \mathbf{x}_{\text{reconstructed}}(0)\|$ across multi-cycle horizons to demonstrate that quasi-periodic Fibonacci operator splitting suppresses resonance accumulation and locks drift to machine precision.
+6.  **Spectral Fidelity**: Comparison of Power Spectral Density (PSD) between the GA rotor solver and a high-order adaptive RK45 solver.
+7.  **Nyquist-Based Anti-Aliasing**: We implement an automatic frequency capping heuristic that prevents "energy allocation" to unresolved frequencies relative to the integration time step $\Delta t$, ensuring stability without requiring extremely small steps for outlier oscillators.
 
 ---
 
@@ -140,6 +146,11 @@ where $L$ is the Lipschitz constant of the vector field ($L \approx K + \max|\om
 
 #### 6.3 Convergence
 Numerical convergence is demonstrated by the vanishing of the error relative to the "ground truth" RK45 solver as $\Delta t \to 0$. Our benchmarks show that high-order Lie-group schemes achieve $< 10^{-6}$ RMSE at $\Delta t = 0.01$ while preserving the exact algebraic constraints of the $\operatorname{Spin}(n)$ Lie group.
+
+#### 6.4 Floquet Theory and Linear Stability of Invariant Tori
+To evaluate the long-term structural stability of quasi-periodic orbits, we analyze the time-dependent variational system $\frac{d\delta\boldsymbol{\theta}}{dt} = \mathbf{J}(t)\delta\boldsymbol{\theta}(t)$. Integrating the fundamental solution $\frac{d\boldsymbol{\Phi}}{dt} = \mathbf{J}(t)\boldsymbol{\Phi}(t)$ with $\boldsymbol{\Phi}(0) = \mathbf{I}$ over a characteristic return cycle yields the monodromy matrix $\mathbf{M} = \boldsymbol{\Phi}(T, 0)$.
+
+The eigenvalues $\mu_k$ of $\mathbf{M}$ define the Floquet multipliers. Structural stability is confirmed when all transverse multipliers satisfy $|\mu_k| \le 1$, with the trivial neutral multiplier $\mu_0 = 1.0$ associated with global $U(1)$ phase translation along the invariant manifold. (For a complete derivation and implementation walkthrough, see `QUASI_PERIODIC_FLOQUET_WALKTHROUGH.md`).
 
 ### 7. Conclusion
 The GA rotor formulation provides a robust and mathematically elegant alternative to standard phase-based Kuramoto simulations. It naturally handles the periodic boundary conditions of the $S^1$ manifold and opens the door to simulating synchronization on higher-dimensional spheres ($S^2, S^3$) using the same rotor-based logic in $\operatorname{Cl}_3$ or $\operatorname{Cl}_{3,1}$.
