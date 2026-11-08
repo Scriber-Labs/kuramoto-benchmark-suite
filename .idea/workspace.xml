@@ -9,11 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="190" />
+    <option name="cachedIndexableFilesCount" value="269" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -61,23 +58,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.6472181908969399" />
-      <entry key="MS500" value="3.641783819911057" />
-      <entry key="S2" value="6.41964950378185" />
-      <entry key="S5" value="7.754773429867585" />
-      <entry key="S10" value="8.351194007545796" />
-      <entry key="S30" value="10.274474076396382" />
-      <entry key="S60" value="13.471075479171642" />
-      <entry key="M2" value="16.954547962209894" />
-      <entry key="M5" value="20.565470989672022" />
-      <entry key="M10" value="24.92420494794109" />
-      <entry key="M15" value="31.752438179106896" />
-      <entry key="M30" value="86.40651352344568" />
-      <entry key="H1" value="252.98763101827055" />
-      <entry key="H2" value="553.4559252886504" />
-      <entry key="H4" value="1035.9616053665675" />
-      <entry key="D1" value="4641.539474233637" />
-      <entry key="W1" value="20944.10521648638" />
+      <entry key="MS100" value="1.0660636275350872" />
+      <entry key="MS500" value="1.5818334896528885" />
+      <entry key="S2" value="2.2750062834103546" />
+      <entry key="S5" value="4.129441267486914" />
+      <entry key="S10" value="7.0266972371212155" />
+      <entry key="S30" value="16.66855496089189" />
+      <entry key="S60" value="27.69033892455536" />
+      <entry key="M2" value="40.20537666602048" />
+      <entry key="M5" value="53.50833334795578" />
+      <entry key="M10" value="62.06794129133316" />
+      <entry key="M15" value="70.19229859084635" />
+      <entry key="M30" value="124.70204073256365" />
+      <entry key="H1" value="289.94372174153847" />
+      <entry key="H2" value="590.0919529077609" />
+      <entry key="H4" value="1073.0932414012175" />
+      <entry key="D1" value="4680.21661603054" />
+      <entry key="W1" value="20984.327525779427" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -85,37 +82,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="2.3609E-318" />
-      <entry key="S60" value="1.5365205765067366E-159" />
-      <entry key="M2" value="3.919847671158044E-80" />
-      <entry key="M5" value="1.7270823366499508E-32" />
-      <entry key="M10" value="1.3187965459001905E-16" />
-      <entry key="M15" value="2.644612356857349E-11" />
-      <entry key="M30" value="5.857208306449037E-6" />
-      <entry key="H1" value="0.0031452195460787186" />
-      <entry key="H2" value="0.08939842877496734" />
-      <entry key="H4" value="0.8444025628628324" />
-      <entry key="D1" value="23.6062567311527" />
-      <entry key="W1" value="152.8976360511909" />
+      <entry key="S30" value="1.63313E-319" />
+      <entry key="S60" value="4.0411853295385476E-160" />
+      <entry key="M2" value="2.0102699643437675E-80" />
+      <entry key="M5" value="1.322230345147833E-32" />
+      <entry key="M10" value="1.15391771235628E-16" />
+      <entry key="M15" value="2.4193203693611368E-11" />
+      <entry key="M30" value="5.602170846921848E-6" />
+      <entry key="H1" value="0.003075982113257909" />
+      <entry key="H2" value="0.08840896489148845" />
+      <entry key="H4" value="0.8397166271979251" />
+      <entry key="D1" value="23.58437261024281" />
+      <entry key="W1" value="152.8773789488118" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.607480253933491" />
-      <entry key="MS500" value="3.6026764263337316" />
-      <entry key="S2" value="6.390703592003281" />
-      <entry key="S5" value="7.739638295038347" />
-      <entry key="S10" value="8.342869345604491" />
-      <entry key="S30" value="10.271137861964208" />
-      <entry key="S60" value="13.468989836826205" />
-      <entry key="M2" value="16.95327991195197" />
-      <entry key="M5" value="20.564870380454146" />
-      <entry key="M10" value="24.923848254671377" />
-      <entry key="M15" value="31.752149669760154" />
-      <entry key="M30" value="86.40621103886491" />
-      <entry key="H1" value="252.99038043166553" />
-      <entry key="H2" value="553.5448154547125" />
-      <entry key="H4" value="1036.8044108609001" />
-      <entry key="D1" value="4665.137231219135" />
-      <entry key="W1" value="21096.994773993934" />
+      <entry key="MS100" value="1.0284363289248464" />
+      <entry key="MS500" value="1.5685139205085192" />
+      <entry key="S2" value="2.269662800301005" />
+      <entry key="S5" value="4.124844836348094" />
+      <entry key="S10" value="7.022509696947558" />
+      <entry key="S30" value="16.66497986908907" />
+      <entry key="S60" value="27.687072649070497" />
+      <entry key="M2" value="40.20284496573323" />
+      <entry key="M5" value="53.50693181927439" />
+      <entry key="M10" value="62.0671193499889" />
+      <entry key="M15" value="70.19168544692307" />
+      <entry key="M30" value="124.70157197954293" />
+      <entry key="H1" value="289.9463196687923" />
+      <entry key="H2" value="590.1798134396427" />
+      <entry key="H4" value="1073.9313468455314" />
+      <entry key="D1" value="4703.79249293422" />
+      <entry key="W1" value="21137.196826706" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -132,71 +129,71 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.coprime.executor": "Run",
-    "Python.dash_component_template.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.style.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
-    "llm.figma.connect.mcp.suggestion.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.scopes",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.style.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
+    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
