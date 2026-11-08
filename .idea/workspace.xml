@@ -7,13 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add AI-generated failure mode reports and example dataset (small_demo.npz).">
+      <change afterPath="$PROJECT_DIR$/.aiignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FlexibleTailwindSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FlexibleTailwindSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/failure_modes.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,23 +62,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0040440036087555" />
-      <entry key="MS500" value="1.3321714535241278" />
-      <entry key="S2" value="1.7591731898497107" />
-      <entry key="S5" value="1.9225839193009349" />
-      <entry key="S10" value="3.470343895069967" />
-      <entry key="S30" value="42.62471729166474" />
-      <entry key="S60" value="122.63044697986639" />
-      <entry key="M2" value="243.07062721075954" />
-      <entry key="M5" value="399.20034981890683" />
-      <entry key="M10" value="479.3290274935749" />
-      <entry key="M15" value="510.5518382445732" />
-      <entry key="M30" value="547.54775442006" />
-      <entry key="H1" value="609.4094729859545" />
-      <entry key="H2" value="792.8662630405971" />
-      <entry key="H4" value="1180.7502629936516" />
-      <entry key="D1" value="4652.844848045749" />
-      <entry key="W1" value="20855.405229721346" />
+      <entry key="MS100" value="1.8234026098454192" />
+      <entry key="MS500" value="6.502303523354206" />
+      <entry key="S2" value="17.61306824052157" />
+      <entry key="S5" value="30.119073057830906" />
+      <entry key="S10" value="40.7652243270626" />
+      <entry key="S30" value="70.65301053206684" />
+      <entry key="S60" value="98.1770780590809" />
+      <entry key="M2" value="130.3531533668148" />
+      <entry key="M5" value="221.34719482294594" />
+      <entry key="M10" value="364.2687893574936" />
+      <entry key="M15" value="458.03793647428716" />
+      <entry key="M30" value="596.6824000118281" />
+      <entry key="H1" value="724.5672797267073" />
+      <entry key="H2" value="940.4330246210882" />
+      <entry key="H4" value="1344.6623568957054" />
+      <entry key="D1" value="4833.676224988728" />
+      <entry key="W1" value="21047.850885079875" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -85,38 +86,44 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="1.4356956164468134E-245" />
-      <entry key="S60" value="3.7890574242769015E-123" />
-      <entry key="M2" value="6.15553200323158E-62" />
-      <entry key="M5" value="3.278774915876457E-25" />
-      <entry key="M10" value="5.746151625392794E-13" />
-      <entry key="M15" value="7.05496521224506E-9" />
-      <entry key="M30" value="9.566588565972895E-5" />
-      <entry key="H1" value="0.012711130556110197" />
-      <entry key="H2" value="0.17972003422588873" />
-      <entry key="H4" value="1.1972444876297668" />
-      <entry key="D1" value="25.020693519877963" />
-      <entry key="W1" value="154.1739813242717" />
+      <entry key="S30" value="3.439191464055991E-254" />
+      <entry key="S60" value="1.8545057196072304E-127" />
+      <entry key="M2" value="4.306397240860545E-64" />
+      <entry key="M5" value="4.5045457470085304E-26" />
+      <entry key="M10" value="2.1298390265361643E-13" />
+      <entry key="M15" value="3.6403349277592693E-9" />
+      <entry key="M30" value="6.871955357135627E-5" />
+      <entry key="H1" value="0.010773226628653801" />
+      <entry key="H2" value="0.1654540113502712" />
+      <entry key="H4" value="1.1487439847131156" />
+      <entry key="D1" value="24.84883757174913" />
+      <entry key="W1" value="154.02225523686667" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.763635104931374" />
-      <entry key="MS500" value="1.1665215009282763" />
-      <entry key="S2" value="1.670779802790632" />
-      <entry key="S5" value="1.8806849753863955" />
-      <entry key="S10" value="3.4475412757867616" />
-      <entry key="S30" value="42.61131308187008" />
-      <entry key="S60" value="122.61790640810092" />
-      <entry key="M2" value="243.05986431123407" />
-      <entry key="M5" value="399.1936733485437" />
-      <entry key="M10" value="479.32507515039555" />
-      <entry key="M15" value="510.5490432635359" />
-      <entry key="M30" value="547.5463536057293" />
-      <entry key="H1" value="609.4213241940428" />
-      <entry key="H2" value="793.0452287939047" />
-      <entry key="H4" value="1181.945359945609" />
-      <entry key="D1" value="4677.856550164174" />
-      <entry key="W1" value="21009.571067543253" />
+      <entry key="MS100" value="1.7326239603515357" />
+      <entry key="MS500" value="6.450222604823233" />
+      <entry key="S2" value="17.57844968565382" />
+      <entry key="S5" value="30.094832870492155" />
+      <entry key="S10" value="40.748633247546096" />
+      <entry key="S30" value="70.64320686669082" />
+      <entry key="S60" value="98.16993539286159" />
+      <entry key="M2" value="130.34815960036065" />
+      <entry key="M5" value="221.34364032572162" />
+      <entry key="M10" value="364.26583092114953" />
+      <entry key="M15" value="458.0354526470036" />
+      <entry key="M30" value="596.6808478468117" />
+      <entry key="H1" value="724.5770444613097" />
+      <entry key="H2" value="940.5976426546041" />
+      <entry key="H4" value="1345.808969114733" />
+      <entry key="D1" value="4858.5161209838525" />
+      <entry key="W1" value="21201.865003122337" />
     </decayedShown>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -180,7 +187,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "ml.llm.LLMThirdPartyAiProvidersConfigurable",
+    "settings.editor.selected.configurable": "project.scopes",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -357,14 +364,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00023" summary="updated model.py">
-      <option name="closed" value="true" />
-      <created>1789857191617</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1789857191617</updated>
     </task>
     <task id="LOCAL-00024" summary="demo.ipynb needs to be updated">
       <option name="closed" value="true" />
@@ -750,15 +749,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794099357173</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Add AI-generated failure mode reports and example dataset (small_demo.npz).">
+      <option name="closed" value="true" />
+      <created>1794101039795</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1794101039795</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated house rules and did some repo cleaning" />
-    <MESSAGE value="added a plan of action markdown for viz.py splitting in future work folder" />
     <MESSAGE value="demo notbook added" />
     <MESSAGE value="fixes regarding source code based on @styling_and_visuals_demo.ipynb. still need to continue with the notebook error-fix dance starting at cell 18" />
     <MESSAGE value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
@@ -782,7 +787,9 @@
     <MESSAGE value="made a section c practice problem jupyter notebook" />
     <MESSAGE value="Add CLI styling boilerplate and AI-generated plotting exercises notebook." />
     <MESSAGE value="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility." />
+    <MESSAGE value="Updated references and file paths for AI-generated research notebooks. Fixed typo in `rotor.py` and adjusted output directories in Jupyter notebooks." />
+    <MESSAGE value="Add AI-generated failure mode reports and example dataset (small_demo.npz)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add AI-generated failure mode reports and example dataset (small_demo.npz)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

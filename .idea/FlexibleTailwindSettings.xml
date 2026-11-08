@@ -3,6 +3,7 @@
   <component name="com.ilscipio.tailwind.settings.TailwindSettingsState">
     <option name="expandedSnippetCategories">
       <set>
+        <option value="buttons" />
         <option value="forms" />
       </set>
     </option>

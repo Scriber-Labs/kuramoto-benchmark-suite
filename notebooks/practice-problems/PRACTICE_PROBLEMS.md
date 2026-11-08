@@ -1272,4 +1272,3 @@ $$
 - The Boltzmann entropy $S=k_B\ln W$ and von Neumann entropy are related to different descriptions of statistical structure. Do not treat them as interchangeable.
 
 - These are introductory one-qubit exercises. Multi-qubit entanglement, density matrices, measurement sampling, and hardware noise can be developed in later sections.
-

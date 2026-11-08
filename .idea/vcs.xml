@@ -3,5 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/.scriber-core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../kuramoto-dash-app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../scriber-core" vcs="Git" />
   </component>
 </project>
