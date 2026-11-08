@@ -1,6 +1,11 @@
 import numpy as np
 
+import kuramoto
 from kuramoto.api import generate_kuramoto_dataset
+
+
+def test_version():
+    assert kuramoto.__version__ == "2.1.0"
 
 
 def test_determinism():

@@ -3,7 +3,7 @@ from .api import generate_kuramoto_dataset
 from .dataset import KuramotoDataset
 from .utils import set_global_seed
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 __all__ = [
     "__version__",

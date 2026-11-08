@@ -7,9 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Remove `dash_component_template.py` notebook from `ai_generated`.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generate_kuramoto_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,23 +61,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000001035" />
-      <entry key="S60" value="1.0000037561800714" />
-      <entry key="M2" value="1.0254970357246944" />
-      <entry key="M5" value="8.271454363541917" />
-      <entry key="M10" value="67.0230514322412" />
-      <entry key="M15" value="147.69563888306865" />
-      <entry key="M30" value="338.6767075213905" />
-      <entry key="H1" value="546.0767483485181" />
-      <entry key="H2" value="816.6753552365923" />
-      <entry key="H4" value="1253.2988500867204" />
-      <entry key="D1" value="4777.685841518869" />
-      <entry key="W1" value="21013.21900268137" />
+      <entry key="MS100" value="1.6472181908969399" />
+      <entry key="MS500" value="3.641783819911057" />
+      <entry key="S2" value="6.41964950378185" />
+      <entry key="S5" value="7.754773429867585" />
+      <entry key="S10" value="8.351194007545796" />
+      <entry key="S30" value="10.274474076396382" />
+      <entry key="S60" value="13.471075479171642" />
+      <entry key="M2" value="16.954547962209894" />
+      <entry key="M5" value="20.565470989672022" />
+      <entry key="M10" value="24.92420494794109" />
+      <entry key="M15" value="31.752438179106896" />
+      <entry key="M30" value="86.40651352344568" />
+      <entry key="H1" value="252.98763101827055" />
+      <entry key="H2" value="553.4559252886504" />
+      <entry key="H4" value="1035.9616053665675" />
+      <entry key="D1" value="4641.539474233637" />
+      <entry key="W1" value="20944.10521648638" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -81,37 +85,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="5.0341825224688325E-269" />
-      <entry key="S60" value="7.09519733514773E-135" />
-      <entry key="M2" value="8.42329943380562E-68" />
-      <entry key="M5" value="1.4797837783333796E-27" />
-      <entry key="M10" value="3.860294257968631E-14" />
-      <entry key="M15" value="1.1658887080109222E-9" />
-      <entry key="M30" value="3.889002355667839E-5" />
-      <entry key="H1" value="0.00810447215085834" />
-      <entry key="H2" value="0.14350491310939167" />
-      <entry key="H4" value="1.0698379141224446" />
-      <entry key="D1" value="24.555862884145277" />
-      <entry key="W1" value="153.76151113927125" />
+      <entry key="S30" value="2.3609E-318" />
+      <entry key="S60" value="1.5365205765067366E-159" />
+      <entry key="M2" value="3.919847671158044E-80" />
+      <entry key="M5" value="1.7270823366499508E-32" />
+      <entry key="M10" value="1.3187965459001905E-16" />
+      <entry key="M15" value="2.644612356857349E-11" />
+      <entry key="M30" value="5.857208306449037E-6" />
+      <entry key="H1" value="0.0031452195460787186" />
+      <entry key="H2" value="0.08939842877496734" />
+      <entry key="H4" value="0.8444025628628324" />
+      <entry key="D1" value="23.6062567311527" />
+      <entry key="W1" value="152.8976360511909" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.5664419426478993" />
-      <entry key="MS500" value="0.8925469714729767" />
-      <entry key="S2" value="0.9719809879813525" />
-      <entry key="S5" value="0.9886967534288051" />
-      <entry key="S10" value="0.9943323153899832" />
-      <entry key="S30" value="0.9981071913325835" />
-      <entry key="S60" value="0.9990569033081167" />
-      <entry key="M2" value="1.0250225205268917" />
-      <entry key="M5" value="8.271148152829348" />
-      <entry key="M10" value="67.02242049544007" />
-      <entry key="M15" value="147.69478023721638" />
-      <entry key="M30" value="338.67579753822554" />
-      <entry key="H1" value="546.0840783650685" />
-      <entry key="H2" value="816.8181271783857" />
-      <entry key="H4" value="1254.3666987169208" />
-      <entry key="D1" value="4802.23286759221" />
-      <entry key="W1" value="21166.972390307707" />
+      <entry key="MS100" value="1.607480253933491" />
+      <entry key="MS500" value="3.6026764263337316" />
+      <entry key="S2" value="6.390703592003281" />
+      <entry key="S5" value="7.739638295038347" />
+      <entry key="S10" value="8.342869345604491" />
+      <entry key="S30" value="10.271137861964208" />
+      <entry key="S60" value="13.468989836826205" />
+      <entry key="M2" value="16.95327991195197" />
+      <entry key="M5" value="20.564870380454146" />
+      <entry key="M10" value="24.923848254671377" />
+      <entry key="M15" value="31.752149669760154" />
+      <entry key="M30" value="86.40621103886491" />
+      <entry key="H1" value="252.99038043166553" />
+      <entry key="H2" value="553.5448154547125" />
+      <entry key="H4" value="1036.8044108609001" />
+      <entry key="D1" value="4665.137231219135" />
+      <entry key="W1" value="21096.994773993934" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -359,14 +363,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00026" summary="updated viz.py">
-      <option name="closed" value="true" />
-      <created>1789865152990</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1789865152990</updated>
     </task>
     <task id="LOCAL-00027" summary="edited a bug in the cli">
       <option name="closed" value="true" />
@@ -752,14 +748,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794103574564</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata">
+      <option name="closed" value="true" />
+      <created>1794105699215</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1794105699215</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="audited repo based on chat GPT feedback and critique (based on both this repo and original MATLAB implmentation)" />
     <MESSAGE value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
     <MESSAGE value="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook." />
     <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
@@ -784,7 +787,8 @@
     <MESSAGE value="Add AI-generated failure mode reports and example dataset (small_demo.npz)." />
     <MESSAGE value="Add prototype components and visualization utilities for Kuramoto Dash app, along with writing canvas placeholder behavior." />
     <MESSAGE value="Remove `dash_component_template.py` notebook from `ai_generated`." />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove `dash_component_template.py` notebook from `ai_generated`." />
+    <MESSAGE value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,8 +1,8 @@
-# Kuramoto Benchmark Suite (v2.0) — Architecture & Integration Schemes Specification
+# Kuramoto Benchmark Suite (v2.1) — Architecture & Integration Schemes Specification
 
 ## 1. System Overview & Architecture Diagram
 
-The `kuramoto-benchmark-suite` (v2.0) has evolved from a single classic RK45 integrator into a multi-paradigm simulation, benchmark, and quantum emulation suite for coupled oscillator systems across Riemannian manifolds, Clifford Geometric Algebra multivector spaces, and quantum Hilbert spaces.
+The `kuramoto-benchmark-suite` (v2.1) has evolved from a single classic RK45 integrator into a multi-paradigm simulation, benchmark, and quantum emulation suite for coupled oscillator systems across Riemannian manifolds, Clifford Geometric Algebra multivector spaces, and quantum Hilbert spaces.
 
 ```mermaid
 ---
