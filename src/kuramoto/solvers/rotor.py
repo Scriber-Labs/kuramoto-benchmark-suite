@@ -12,7 +12,7 @@ are adequately resolved. This criterion is supplemented by an explicit maximum p
 numerical instabilities.
 
 The Nyquist-inspired criterion is a resolution heuristic, not a claim that the Nyquist sampling theorem provides an
-Euler stability condition. Explicit Euler accuracy and stability reamin separate numerical concerns.
+Euler stability condition. Explicit Euler accuracy and stability remain separate numerical concerns.
 
 Users should:
     - Choose a sufficiently small ``dt_internal``;

@@ -7,24 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="made a section c practice problem jupyter notebook">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CLI_USAGE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/CLI_USAGE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.mmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/BENCHMARK_RUNDOWN.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/LEARNING_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/LEARNING_GUIDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/MANUAL_ANALYSIS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/MANUAL_ANALYSIS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/QUASI_PERIODIC_FLOQUET_WALKTHROUGH.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/QUASI_PERIODIC_FLOQUET_WALKTHROUGH.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/RESEARCH_PREPRINT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/research/preprint-rough-draft/methods.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/preprint/preprint-rough-draft/methods.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/roadmap/STYLING_AND_VISUALS/cli_color_styling.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/STYLING_AND_VISUALS/cli_color_styling.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/roadmap/STYLING_AND_VISUALS/viz_refactor_plan.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/STYLING_AND_VISUALS/viz_refactor_plan.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/failure_modes.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/failure_modes.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="186" />
+    <option name="cachedIndexableFilesCount" value="190" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -72,23 +61,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.8353459836007824" />
-      <entry key="MS500" value="2.19040983680895" />
-      <entry key="S2" value="4.089609753120358" />
-      <entry key="S5" value="6.563095247662284" />
-      <entry key="S10" value="8.677329433134739" />
-      <entry key="S30" value="16.069077396221466" />
-      <entry key="S60" value="31.870491195174402" />
-      <entry key="M2" value="69.69249179202477" />
-      <entry key="M5" value="144.31544457671646" />
-      <entry key="M10" value="205.05421268146875" />
-      <entry key="M15" value="241.07667861487235" />
-      <entry key="M30" value="322.15368077791106" />
-      <entry key="H1" value="471.7590258590654" />
-      <entry key="H2" value="700.3024906666362" />
-      <entry key="H4" value="1075.3073126521847" />
-      <entry key="D1" value="4482.966410446804" />
-      <entry key="W1" value="20554.466017132865" />
+      <entry key="MS100" value="1.0040440036087555" />
+      <entry key="MS500" value="1.3321714535241278" />
+      <entry key="S2" value="1.7591731898497107" />
+      <entry key="S5" value="1.9225839193009349" />
+      <entry key="S10" value="3.470343895069967" />
+      <entry key="S30" value="42.62471729166474" />
+      <entry key="S60" value="122.63044697986639" />
+      <entry key="M2" value="243.07062721075954" />
+      <entry key="M5" value="399.20034981890683" />
+      <entry key="M10" value="479.3290274935749" />
+      <entry key="M15" value="510.5518382445732" />
+      <entry key="M30" value="547.54775442006" />
+      <entry key="H1" value="609.4094729859545" />
+      <entry key="H2" value="792.8662630405971" />
+      <entry key="H4" value="1180.7502629936516" />
+      <entry key="D1" value="4652.844848045749" />
+      <entry key="W1" value="20855.405229721346" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -96,37 +85,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="1.670343935461098E-125" />
-      <entry key="S60" value="4.086984139265852E-63" />
-      <entry key="M2" value="6.392952478526795E-32" />
-      <entry key="M5" value="3.328786618097667E-13" />
-      <entry key="M10" value="5.7898092819872E-7" />
-      <entry key="M15" value="7.090654552325103E-5" />
-      <entry key="M30" value="0.009590755554368207" />
-      <entry key="H1" value="0.12727175773406013" />
-      <entry key="H2" value="0.5686832333385534" />
-      <entry key="H4" value="2.1297067718296256" />
-      <entry key="D1" value="27.541579134920756" />
-      <entry key="W1" value="156.30278978296423" />
+      <entry key="S30" value="1.4356956164468134E-245" />
+      <entry key="S60" value="3.7890574242769015E-123" />
+      <entry key="M2" value="6.15553200323158E-62" />
+      <entry key="M5" value="3.278774915876457E-25" />
+      <entry key="M10" value="5.746151625392794E-13" />
+      <entry key="M15" value="7.05496521224506E-9" />
+      <entry key="M30" value="9.566588565972895E-5" />
+      <entry key="H1" value="0.012711130556110197" />
+      <entry key="H2" value="0.17972003422588873" />
+      <entry key="H4" value="1.1972444876297668" />
+      <entry key="D1" value="25.020693519877963" />
+      <entry key="W1" value="154.1739813242717" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.745531229609113" />
-      <entry key="MS500" value="2.1690740903028236" />
-      <entry key="S2" value="4.079023214268068" />
-      <entry key="S5" value="6.556034788569038" />
-      <entry key="S10" value="8.672610984450094" />
-      <entry key="S30" value="16.066199928669214" />
-      <entry key="S60" value="31.867593247377048" />
-      <entry key="M2" value="69.68915887836398" />
-      <entry key="M5" value="144.31245393345665" />
-      <entry key="M10" value="205.05195298636008" />
-      <entry key="M15" value="241.07492895345501" />
-      <entry key="M30" value="322.1620386023118" />
-      <entry key="H1" value="471.8853488733684" />
-      <entry key="H2" value="700.8700165815574" />
-      <entry key="H4" value="1077.4335475606597" />
-      <entry key="D1" value="4510.498128428993" />
-      <entry key="W1" value="20710.760555731085" />
+      <entry key="MS100" value="0.763635104931374" />
+      <entry key="MS500" value="1.1665215009282763" />
+      <entry key="S2" value="1.670779802790632" />
+      <entry key="S5" value="1.8806849753863955" />
+      <entry key="S10" value="3.4475412757867616" />
+      <entry key="S30" value="42.61131308187008" />
+      <entry key="S60" value="122.61790640810092" />
+      <entry key="M2" value="243.05986431123407" />
+      <entry key="M5" value="399.1936733485437" />
+      <entry key="M10" value="479.32507515039555" />
+      <entry key="M15" value="510.5490432635359" />
+      <entry key="M30" value="547.5463536057293" />
+      <entry key="H1" value="609.4213241940428" />
+      <entry key="H2" value="793.0452287939047" />
+      <entry key="H4" value="1181.945359945609" />
+      <entry key="D1" value="4677.856550164174" />
+      <entry key="W1" value="21009.571067543253" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -150,6 +139,7 @@
     "Python.commands.executor": "Run",
     "Python.config.executor": "Run",
     "Python.coprime.executor": "Run",
+    "Python.dash_component_template.executor": "Run",
     "Python.dataset.executor": "Run",
     "Python.generate_example_dataset.executor": "Run",
     "Python.graphs.executor": "Run",
@@ -206,14 +196,14 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks" />
+      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\roadmap" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\ai-generated-research-notebook" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\preprint" />
-      <recent name="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS" />
-      <recent name="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.generate_example_dataset">
+  <component name="RunManager" selected="Python.rotor">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -237,6 +227,30 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="dash_component_template" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/notebooks/ai_generated" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/notebooks/ai_generated/dash_component_template.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -317,37 +331,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="zbw_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/models" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/models/zbw_generator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.generate_example_dataset" />
         <item itemvalue="Python.rotor" />
+        <item itemvalue="Python.dash_component_template" />
+        <item itemvalue="Python.generate_example_dataset" />
         <item itemvalue="Python.style" />
         <item itemvalue="Python.coprime" />
-        <item itemvalue="Python.zbw_generator" />
       </list>
     </recent_temporary>
   </component>
@@ -367,14 +357,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00022" summary="updated @solvers.py and minor touch ups on api.py">
-      <option name="closed" value="true" />
-      <created>1789854810315</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1789854810315</updated>
     </task>
     <task id="LOCAL-00023" summary="updated model.py">
       <option name="closed" value="true" />
@@ -760,15 +742,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794078574158</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility.">
+      <option name="closed" value="true" />
+      <created>1794099357172</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1794099357173</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources." />
-    <MESSAGE value="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot." />
     <MESSAGE value="updated house rules and did some repo cleaning" />
     <MESSAGE value="added a plan of action markdown for viz.py splitting in future work folder" />
     <MESSAGE value="demo notbook added" />
@@ -792,7 +780,9 @@
     <MESSAGE value="color cli changes" />
     <MESSAGE value="repo update of mathematical foundational stuff" />
     <MESSAGE value="made a section c practice problem jupyter notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="made a section c practice problem jupyter notebook" />
+    <MESSAGE value="Add CLI styling boilerplate and AI-generated plotting exercises notebook." />
+    <MESSAGE value="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
