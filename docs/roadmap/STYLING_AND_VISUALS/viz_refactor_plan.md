@@ -2,7 +2,7 @@
 
 ## Why this matters
 
-`src/kuramoto/analysis/viz.py` is a single 1,791-line monolithic file that mixes design tokens, colormap factories, plotting functions, font management, and private helpers in one module. This makes it difficult to:
+`../../../src/kuramoto/analysis/viz.py` is a single 1,791-line monolithic file that mixes design tokens, colormap factories, plotting functions, font management, and private helpers in one module. This makes it difficult to:
 
 - Navigate and modify individual components without risking unrelated breakage.
 - Reason about dependencies — constants leak into plot functions and vice versa.
@@ -31,10 +31,10 @@ Only two files import directly from `kuramoto.analysis.viz`:
 
 | File | Imports |
 |---|---|
-| `scripts/rigorous_benchmarks.py` | `set_style`, `SOLVER_COLORS`, `PROJECT_COLORS` |
-| `scripts/viz_3d_sync.py` | `set_style`, `PROJECT_COLORS` |
+| `../../../scripts/rigorous_benchmarks.py` | `set_style`, `SOLVER_COLORS`, `PROJECT_COLORS` |
+| `../../../scripts/viz_3d_sync.py` | `set_style`, `PROJECT_COLORS` |
 
-No code in `src/kuramoto/cli/` imports from `viz` — the CLI uses `click` and `tabulate` for output.
+No code in `../../../src/kuramoto/cli` imports from `viz` — the CLI uses `click` and `tabulate` for output.
 
 The `kuramoto/analysis/__init__.py` is currently empty — no package-level re-exports exist.
 
@@ -310,8 +310,8 @@ __all__ = [
 1. Run existing tests: `uv run pytest tests/ -v`
 2. Run the smoke test: `uv run python -m kuramoto.analysis.viz`
 3. Verify external scripts still work:
-   - `scripts/rigorous_benchmarks.py` — imports `set_style`, `SOLVER_COLORS`, `PROJECT_COLORS`
-   - `scripts/viz_3d_sync.py` — imports `set_style`, `PROJECT_COLORS`
+   - `../../../scripts/rigorous_benchmarks.py` — imports `set_style`, `SOLVER_COLORS`, `PROJECT_COLORS`
+   - `../../../scripts/viz_3d_sync.py` — imports `set_style`, `PROJECT_COLORS`
 4. Confirm no circular imports by importing the package fresh:
    ```python
    python -c "from kuramoto.analysis.viz import set_style, plot_network, PHASE_CMAP; print('OK')"

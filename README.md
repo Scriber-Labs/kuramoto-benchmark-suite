@@ -56,7 +56,7 @@ kuramoto time data/mesoscale.npz
 ```
 
 For full documentation of flags and advanced usage, see:
-📖 [**CLI Usage Guide**](docs/CLI_USAGE.md)
+📖 [**CLI Usage Guide**](docs/ai-generated-research-notebook/CLI_USAGE.md)
 
 ---
 

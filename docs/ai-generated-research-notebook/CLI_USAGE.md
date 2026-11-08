@@ -94,6 +94,6 @@ kuramoto qasm --dataset data/mesoscale.npz -o circuits/scf_step.qasm
 
 ## 📂 AI-Generated Demos
 For interactive research and new mesoscale models (like the **ZBW Coprime Adjacency** generator), please visit:
-👉 `examples/ai_generated_notebooks/`
+👉 `notebooks/ai_generated/`
 
 We store all evolving proof-of-concepts there to maintain a clean production CLI while allowing rapid research iteration.

@@ -17,6 +17,12 @@ from typing import Final
 
 import click
 
+if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 __all__: list[str] = [
     "cli_message",
     "cli_info",
@@ -24,6 +30,7 @@ __all__: list[str] = [
     "cli_quantum",
     "cli_rotor",
     "cli_zbw",
+    "cli_coprime",
     "cli_success",
     "cli_warning",
     "cli_error",
@@ -48,6 +55,7 @@ STYLE_MAP: Final[dict[str, str]] = {
     "quantum": "bright_cyan",
     "rotor": "bright_magenta",
     "zbw": "bright_yellow",
+    "coprime": "bright_cyan",
     "success": "bright_green",
     "warning": "bright_yellow",
     "error": "bright_red",
@@ -105,12 +113,20 @@ def supports_256_color() -> bool:
     bool
         True if the terminal supports 256 colors, False otherwise.
     """
-    if not sys.stdout.isatty() or os.environ.get("NO_COLOR"):
+    if os.environ.get("NO_COLOR") or os.environ.get("TERM") == "dumb":
         return False
-
-    term = os.environ.get("TERM", "").lower()
-    color_term = os.environ.get("COLORTERM", "").lower()
-    return "256color" in term or color_term in {"truecolor", "24bit"}
+    if not bool(getattr(sys.stdout, "isatty", lambda: False)()):
+        return False
+    if sys.platform == "win32":
+        return True
+    term = os.environ.get("TERM", "")
+    colorterm = os.environ.get("COLORTERM", "")
+    return (
+        "256color" in term
+        or "xterm" in term
+        or "truecolor" in colorterm
+        or "24bit" in colorterm
+    )
 
 
 def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
@@ -178,14 +194,31 @@ def cli_banner() -> None:
     """
     click.echo("")
     if supports_256_color():
-        click.echo(ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True)
-        click.echo(ansi_256("eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True), color=True)
-        click.echo(ansi_256("eigen_purple", "     Oscillator Network Simulation & Analysis Framework", bold=False), color=True)
-        click.echo(ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True)
+        click.echo(
+            ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True
+        )
+        click.echo(
+            ansi_256("eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True),
+            color=True,
+        )
+        click.echo(
+            ansi_256(
+                "eigen_purple",
+                "     Oscillator Network Simulation & Analysis Framework",
+                bold=False,
+            ),
+            color=True,
+        )
+        click.echo(
+            ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True), color=True
+        )
     else:
         click.secho("  " + "=" * 56, fg="bright_blue", bold=True)
         click.secho("     KURAMOTO BENCHMARK SUITE", fg="bright_blue", bold=True)
-        click.secho("     Oscillator Network Simulation & Analysis Framework", fg="bright_magenta")
+        click.secho(
+            "     Oscillator Network Simulation & Analysis Framework",
+            fg="bright_magenta",
+        )
         click.secho("  " + "=" * 56, fg="bright_blue", bold=True)
     click.echo("")
 
@@ -315,6 +348,18 @@ def cli_zbw(msg: str) -> None:
     cli_message(f"🌟 {msg}", level="zbw", bold=True)
 
 
+def cli_coprime(msg: str) -> None:
+    """
+    Print a coprime sampling / CRT reconstruction update (Number Theory).
+
+    Parameters
+    ----------
+    msg : str
+        Coprime / number theory message string.
+    """
+    cli_message(f"🔢 {msg}", level="coprime", bold=True)
+
+
 def cli_section(title: str) -> None:
     """
     Print a section header with decorative borders.
@@ -351,6 +396,7 @@ def _run_smoke_test() -> None:
     cli_quantum("Test quantum message")
     cli_rotor("Test rotor message")
     cli_zbw("Test ZBW message")
+    cli_coprime("Test coprime message")
     cli_success("Test success message")
     cli_warning("Test warning message")
     cli_error("Test error message")

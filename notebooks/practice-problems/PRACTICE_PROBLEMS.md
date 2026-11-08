@@ -45,7 +45,7 @@ You have 3 oscillators with phases $\theta = [0, \pi/4, \pi/2]$.
 In our "Quantum Bridge," we map a rotor step $\Delta \theta$ to an $R_z(\phi)$ gate.
 1. If an oscillator has $\omega = 1.0$, $K=0$, and $\Delta t = 0.1$, what is the required $R_z$ gate angle $\phi$?
 2. Why does the circuit depth remain $O(1)$ regardless of $N$?
-3. **Reference**: See `../../docs/research/LEARNING_GUIDE.md` Section 3.2.
+3. **Reference**: See `../../docs/ai-generated-research-notebook` Section 3.2.
 
 ## Problem 5: Bivector to Matrix
 **Goal**: Bridge GA with standard Linear Algebra.
@@ -76,7 +76,7 @@ In 3D, a rotor is represented by 4 coefficients (like a quaternion).
 **Goal**: Computational complexity.
 Why is $O(N)$ better than $O(N^2)$ for $N=10,000$?
 1. Calculate the number of operations for both for a single step.
-2. **Reference**: See the `../../docs/research/BENCHMARK_RUNDOWN.md` results.
+2. **Reference**: See the `../../docs/ai-generated-research-notebook` results.
 
 ## Problem 10: Symmetry Invariance
 **Goal**: Proving Noether's Theorem.
@@ -276,7 +276,7 @@ These tasks connect the math to the actual codebase. Complete them to build conf
 1. Open `../../src/kuramoto/solvers/rotor.py`.
 2. Find the function that implements the rotor update $R(t+\Delta t) = \exp(-\frac{1}{2}\Omega \Delta t) R(t)$.
 3. Trace through the code: how is the bivector $\Omega$ computed? Where does the coupling term appear?
-4. **Question:** Does the code match the equation in the preprint (`../../docs/research/RESEARCH_PREPRINT.md`, Section 2.3)?
+4. **Question:** Does the code match the equation in the preprint (`../../docs/ai-generated-research-notebook`, Section 2.3)?
 
 ## Problem 26: Trace the Order Parameter Calculation
 

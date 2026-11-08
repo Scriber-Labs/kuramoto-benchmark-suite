@@ -78,7 +78,7 @@ Before you dive in, take a breath and answer these questions honestly:
 ### Path B: Visual Learning Through Plotting (Medium Energy, High Satisfaction)
 **Best if:** You want to see what synchronization actually looks like.
 
-1. Open a Jupyter notebook in `examples/notebooks/`.
+1. Open a Jupyter notebook in `notebooks/`.
 2. Complete **Problem 19** (Phase Portrait) — run the simulation and plot it.
 3. Complete **Problem 20** (Order Parameter Dynamics) — watch R(t) emerge.
 4. Complete **Problem 23** (Bifurcation Diagram) — this is the "money plot" for your preprint.
@@ -116,7 +116,7 @@ Before you dive in, take a breath and answer these questions honestly:
 
 - **The preprint and understanding come first.** Infrastructure updates, CLI styling, and repo maintenance can wait.
 - **If you feel yourself drifting toward "updating everything,"** stop and ask: "Does this move me closer to a preprint I understand?" If not, put it down.
-- **AI-generated notebooks go in `examples/notebooks/ai-generated/`.** Anything you code yourself goes in the main notebook folder. This keeps your work honest.
+- **AI-generated notebooks go in `notebooks/ai_generated/`.** Anything you code yourself goes in `notebooks/practice-problems/` or the main notebook folder. This keeps your work honest.
 - **One problem at a time.** Don't try to do everything. Finish one problem, check the solution, feel good about it, then move to the next.
 
 ---
