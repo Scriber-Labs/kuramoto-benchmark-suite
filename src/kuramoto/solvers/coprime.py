@@ -8,18 +8,18 @@ integrators, reducing memory footprints from O(MN) down to O(M + N) snapshots.
 Reconstructs true frequency indices via the Chinese Remainder Theorem (CRT) and
 provides high-sensitivity failure-mode diagnostics for geometric rotor drift.
 
-Author: Eigenscribe & Junie
-Date: 10-2026
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
-from typing import TYPE_CHECKING, Any, Callable, Final
-
 import numpy as np
+from dataclasses import dataclass
 from numpy.typing import NDArray
+from typing import TYPE_CHECKING, Any, Callable, Final
 
 from kuramoto.validation import (
     validate_non_negative_scalar,

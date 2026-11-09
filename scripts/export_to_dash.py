@@ -5,16 +5,19 @@ Export Kuramoto simulation results to a format optimized for the Kuramoto Dash A
 Converts .npz datasets into high-speed JSON or CSV formats, including
 pre-computed macroscopic metrics (order parameter).
 
-Author: Eigenscribe & Junie
-Date: 10-2026
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 
-import json
-import os
+from __future__ import annotations
+
 import argparse
+import json
 import numpy as np
+import os
 import pandas as pd
-from typing import Any, Dict
+
 
 def export_to_dash(input_path: str, output_path: str, format: str = "json"):
     """

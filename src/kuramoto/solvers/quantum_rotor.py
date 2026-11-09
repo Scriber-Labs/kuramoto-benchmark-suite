@@ -10,17 +10,17 @@ Supported numerical schemes:
 2. "expectation": Exact Pauli expectation values <X> = cos(theta), <Y> = sin(theta).
 3. "shot_sampling": Finite-shot projective measurement tomography with statistical sampling noise.
 
-Author: Eigenscribe & Junie
-Date: 10-2026
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 
 from __future__ import annotations
 
-import warnings
-from typing import Final, Literal
-
 import numpy as np
+import warnings
 from numpy.typing import NDArray
+from typing import Final, Literal
 
 from kuramoto.quantum.circuit_gen import export_to_qasm, generate_scf_angles
 from kuramoto.utils import resolve_rng

@@ -5,14 +5,17 @@ Quantum circuit generation for Kuramoto synchronization.
 Implements the Self-Consistent Field (SCF) mapping to translate classical 
 rotor dynamics into parallel quantum rotation gates with O(1) circuit depth.
 
-Author: Eigenscribe & Junie
-Date: 10-2026
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 
 from __future__ import annotations
+
 import numpy as np
 from numpy.typing import NDArray
-from typing import Dict, Any, List, Optional
+from typing import Any
+
 
 def generate_scf_angles(
     phases: NDArray[np.floating],
@@ -89,12 +92,12 @@ def export_to_qasm(angles: NDArray[np.floating]) -> str:
     return "\n".join(qasm)
 
 def synthesize_quantum_bridge(
-    dataset: Dict[str, Any],
+    dataset: dict[str, Any],
     step_idx: int = -1,
     dt: float = 0.05,
     K: float = 1.5,
     adjacency_matrix: NDArray[np.floating] | None = None,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """
     High-level utility to synthesize a quantum circuit from a classical simulation snapshot.
     """

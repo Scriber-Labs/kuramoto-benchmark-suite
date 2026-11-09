@@ -8,9 +8,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/boilerplates/python/gold-standard-boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/boilerplates/python/gold-standard-boilerplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/house-rules/python-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/house-rules/python-rules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/RESEARCH_PREPRINT.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/developer/HOUSE_RULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/HOUSE_RULES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/export_to_dash.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/export_to_dash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dash_export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/python/gold-standard-boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/python/gold-standard-boilerplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/house-rules/python-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/house-rules/python-rules.md" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +221,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\preprint" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.rotor">
+  <component name="RunManager" selected="Python.app">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -214,8 +229,8 @@
       </steps>
       <method v="2" />
     </configuration>
-    <configuration name="coprime" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-dash-app" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -223,13 +238,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/solvers" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../kuramoto-dash-app" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../kuramoto-dash-app/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,11 +351,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.rotor" />
         <item itemvalue="Python.dash_component_template" />
         <item itemvalue="Python.generate_example_dataset" />
         <item itemvalue="Python.style" />
-        <item itemvalue="Python.coprime" />
       </list>
     </recent_temporary>
   </component>

@@ -12,13 +12,9 @@ Date: May 2026
 
 from __future__ import annotations
 
-# --------------------------------------------------------------------------- #
-# Package / direct-script imports
-# --------------------------------------------------------------------------- #
-from typing import Any, Dict, Optional
-
 import numpy as np
 from numpy.typing import NDArray
+from typing import Any
 
 from kuramoto.metrics.analytics_engine import generate_fibonacci_frequencies
 from kuramoto.model import KuramotoModel
@@ -46,15 +42,15 @@ def generate_kuramoto_dataset(
     coupling: float,
     timesteps: int,
     dt: float,
-    adjacency: Optional[AdjacencyMatrix] = None,
-    topology: Optional[str] = None,
-    topology_kwargs: Optional[Dict[str, Any]] = None,
+    adjacency: AdjacencyMatrix | None = None,
+    topology: str | None = None,
+    topology_kwargs: dict[str, Any] | None = None,
     noise_std: float = 0.0,
-    seed: Optional[int] = None,
+    seed: int | None = None,
     solver: str = "rk45",
     symmetry_metrics: bool = False,
     **kwargs: Any,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """
     Generate Kuramoto dataset.
 

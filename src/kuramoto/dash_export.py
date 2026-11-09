@@ -7,19 +7,20 @@ Extends the basic export pipeline with additional synchronization metrics:
   - Frequency locking fraction, the proportion of phase-locked oscillators per timestep.
   - Solver and network topology metadata for dashboard context.
 
-Author: Eigenscribe & Junie
-Date: 10-2026
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
 """
 
 from __future__ import annotations
 
-import json
 from collections import namedtuple
-from typing import Any, Callable, Dict, Optional
 
+import json
 import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
+from typing import Any, Callable
 
 # Import RNG utilities from the central utils module
 try:
@@ -185,12 +186,11 @@ def compute_locking_fraction(
 
 
 def export_for_dash(
-    dataset: Dict[str, Any],
+    dataset: dict[str, Any],
     output_path: str,
     include_locking: bool = True,
     locking_threshold: float = 0.1,
     locking_window: int = 10,
-    **kwargs: Any,
 ) -> None:
     """
     Export a Kuramoto dataset as enriched JSON for the Dash App.
@@ -321,9 +321,9 @@ def export_for_dash(
 
 
 def export_for_dash_stream(
-    dataset: Dict[str, Any],
+    dataset: dict[str, Any],
     output_path: str,
-    callback: Optional[TimestepCallback] = None,
+    callback: TimestepCallback | None = None,
     include_locking: bool = True,
     locking_threshold: float = 0.1,
     locking_window: int = 10,

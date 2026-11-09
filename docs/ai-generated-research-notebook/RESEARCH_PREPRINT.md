@@ -4,7 +4,7 @@
 
 ## A Bivector Torque Implementation in $\operatorname{Cl}_{2,0}(\mathbb{R})$
 
-**Author:** [Your Name]  
+**Author:** L. Shriver  
 **Collaborator:** Junie (AI Assistant)  
 **Date:** October 2026  
 **Status:** Research Preprint for arXiv Submission  
