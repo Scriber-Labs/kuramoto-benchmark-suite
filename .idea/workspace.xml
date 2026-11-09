@@ -7,25 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core">
+      <change afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/TODO.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core/boilerplates/python/gold-standard-boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/boilerplates/python/gold-standard-boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core/house-rules/python-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/house-rules/python-rules.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/RESEARCH_PREPRINT.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/RESEARCH_PREPRINT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/developer/HOUSE_RULES.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/HOUSE_RULES.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/export_to_dash.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/export_to_dash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dash_export.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/python/gold-standard-boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/python/gold-standard-boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/house-rules/python-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/house-rules/python-rules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/BENCHMARK_RUNDOWN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/failure_modes.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,81 +131,82 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
-    &quot;Python.style.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
-    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in order_parameter (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (2).executor": "Run",
+    "Python tests.Doctests in order_parameter.executor": "Run",
+    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
+    "Python.analytics_engine.executor": "Run",
+    "Python.api.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.commands.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.coprime.executor": "Run",
+    "Python.dash_component_template.executor": "Run",
+    "Python.dataset.executor": "Run",
+    "Python.generate_example_dataset.executor": "Run",
+    "Python.graphs.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.order_parameter.executor": "Run",
+    "Python.rk45.executor": "Run",
+    "Python.rotor.executor": "Run",
+    "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
+    "Python.style.executor": "Run",
+    "Python.test_generate_kuramoto_dataset.executor": "Run",
+    "Python.utils.executor": "Run",
+    "Python.validation.executor": "Run",
+    "Python.viz.executor": "Run",
+    "Python.zbw_generator.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
+    "llm.figma.connect.mcp.suggestion.dismissed": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "project.scopes",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;,
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT",
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks\verification-infrastructure" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\roadmap" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs" />
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\ai-generated-research-notebook" />
-      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\preprint" />
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
@@ -375,14 +363,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00027" summary="edited a bug in the cli">
-      <option name="closed" value="true" />
-      <created>1790149703215</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1790149703215</updated>
     </task>
     <task id="LOCAL-00028" summary="evaluating demo.ipynb tests">
       <option name="closed" value="true" />
@@ -768,14 +748,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794105699215</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core">
+      <option name="closed" value="true" />
+      <created>1794196704859</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1794196704860</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file." />
     <MESSAGE value="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook." />
     <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
     <MESSAGE value="Finished sanity checks notebook" />
@@ -800,7 +787,8 @@
     <MESSAGE value="Add prototype components and visualization utilities for Kuramoto Dash app, along with writing canvas placeholder behavior." />
     <MESSAGE value="Remove `dash_component_template.py` notebook from `ai_generated`." />
     <MESSAGE value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
+    <MESSAGE value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
+    <option name="LAST_COMMIT_MESSAGE" value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
