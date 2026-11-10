@@ -1,0 +1,437 @@
+/* docs/developer/css_boilerplate.css */
+/*
+=============================================================================================================
+🏅 Gold Standard CSS Template - Scriber Core Design System
+Narrative Flow: "Tokens & Theme -> Resets & Base -> Public Components -> Overrides & Math -> Responsive"
+Author: Eigenscribe
+Review status: Reviewed and maintained by Eigenscribe.
+Date: May 2026
+=============================================================================================================
+*/
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 0️⃣ 🎨 Design Tokens, Constants & CSS Variables (What exists)                                               */
+/* ----------------------------------------------------------------------------------------------------------- */
+:root {
+    /* 🎨 Color Palette */
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-surface-glass: rgba(22, 27, 34, 0.7);
+    --color-primary: #14b5ff;
+    --color-secondary: #7952f5;
+    --color-accent-purple: #a855f7;
+    --color-accent-green: #31ff48;
+    --color-accent-amber: #feb538;
+    --color-text: #f0f6fc;
+    --color-muted: #8b949e;
+
+    /* 🔗 Link Colors */
+    --color-link: #a855f7;
+    --color-link-hover: #c084fc;
+
+    /* 🔢 Equation & Math Colors */
+    --color-math: #00f5db;
+    --color-variable: #ffd166;
+
+    /* 🌈 Multi-stop Gradients */
+    --gradient-light-to-dark-blue: linear-gradient(135deg, #00e8ff, #14b5ff, #3a98ff, #0070eb);
+    --gradient-cyan-to-blue: linear-gradient(135deg, #00ffee, #0a95eb);
+    --gradient-green-to-blue: linear-gradient(135deg, #22f792, #27aaff);
+    --gradient-blue-to-purple: linear-gradient(135deg, #00e8ff 0%, #14b5ff 40%, #7952f5 100%);
+    --gradient-purple-to-indigo: linear-gradient(135deg, #a855f7 0%, #7952f5 50%, #3a0ca3 100%);
+    --gradient-cyan-to-purple: linear-gradient(135deg, #00ffee 0%, #14b5ff 40%, #7952f5 100%);
+
+    /* #️⃣ Level-specific Heading Gradients (Continuous Color-Changing Spectrum with Pink Accent) */
+    --heading-gradient-1: linear-gradient(135deg, #00ffee 0%, #14b5ff 25%, #7952f5 55%, #f72585 80%, #00ffee 100%);
+    --heading-gradient-2: linear-gradient(135deg, #14b5ff 0%, #5280ff 30%, #a855f7 60%, #f72585 85%, #14b5ff 100%);
+    --heading-gradient-3: linear-gradient(135deg, #00f5db 0%, #22f792 25%, #14b5ff 55%, #9d4edd 80%, #f72585 92%, #00f5db 100%);
+    --heading-gradient-4: linear-gradient(135deg, #7952f5 0%, #a855f7 30%, #f72585 60%, #00ffee 85%, #7952f5 100%);
+
+    /* ✍️ Typography */
+    --font-aclonica: 'Aclonica', sans-serif;
+    --font-sans: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+    --font-math: "Times New Roman", "Computer Modern", serif;
+
+    /* 🔲 Spacing Tokens */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    /* 🔘 Borders & Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-pill: 50px;
+
+    /* 🌗 Elevation & Glass Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --shadow-glow-cyan: 0 0 20px rgba(0, 255, 238, 0.25);
+    --shadow-glow-purple: 0 0 20px rgba(121, 82, 245, 0.25);
+    --shadow-glow-blue: 0 0 20px rgba(20, 181, 255, 0.25);
+
+    /* 🪟 Glassmorphism Tokens */
+    --glass-bg: rgba(13, 17, 23, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-hover: rgba(0, 255, 238, 0.35);
+
+    /* 🏷️ STEM & Tech Icon Aura Gradients */
+    --tech-icon-gradient: linear-gradient(145deg, rgba(34, 247, 147, 0.2), rgba(10, 149, 235, 0.3));
+    --stem-icon-gradient: linear-gradient(145deg, rgba(169, 34, 247, 0.25), rgba(20, 181, 255, 0.25));
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 1️⃣ 🧱 Base Resets, Typography & Global Layout (Structural foundation)                                      */
+/* ----------------------------------------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    background-image: radial-gradient(circle at 15% 15%, rgba(20, 181, 255, 0.14) 0%, transparent 45%),
+                      radial-gradient(circle at 85% 25%, rgba(121, 82, 245, 0.15) 0%, transparent 45%),
+                      radial-gradient(circle at 50% 85%, rgba(20, 181, 255, 0.08) 0%, transparent 50%);
+    background-attachment: fixed;
+    color: var(--color-text);
+    font-family: var(--font-aclonica);
+}
+
+/* Targeted transitions on interactive elements to prevent layout thrashing */
+a, button, .btn, .section, .glass-card, .search-result-item, .tech-icon, .stem-icon, .code-terminal {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease, filter 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+}
+
+/* ==== Emoji Display Normalizer (Preserves Original Vibrant Colors) ==== */
+.emoji {
+    background: none !important;
+    color: initial !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    font-style: normal;
+    text-shadow: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.25em;
+}
+
+/* ==== Headings with Color-Changing Animated Gradients ==== */
+@keyframes header-gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+    margin-top: 0;
+    width: 100%;
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: header-gradient-shift 8s ease-in-out infinite;
+    transition: filter 0.3s ease;
+}
+
+h1 {
+    font-size: 2.6rem;
+    background-image: var(--heading-gradient-1);
+}
+
+h2 {
+    font-size: 2.0rem;
+    background-image: var(--heading-gradient-2);
+}
+
+h3 {
+    font-size: 1.45rem;
+    background-image: var(--heading-gradient-3);
+}
+
+h4 {
+    font-size: 1.2rem;
+    background-image: var(--heading-gradient-4);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover {
+    animation-duration: 4s;
+    filter: brightness(1.25) drop-shadow(0 0 12px rgba(0, 255, 238, 0.3));
+}
+
+a {
+    color: var(--color-link);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+    filter: brightness(1.25);
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 2️⃣ 🧩 Core UI Components (Buttons, Cards, Glass Panels, Icons, Terminals)                                  */
+/* ----------------------------------------------------------------------------------------------------------- */
+
+/* ==== Cards & Layout ==== */
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    flex: 1 1 350px;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(121, 82, 245, 0.2);
+}
+
+/* ==== Buttons with Color-Changing Gradients ==== */
+.btn {
+    background-image: var(--gradient-blue-to-purple);
+    background-size: 200% auto;
+    box-shadow: 0 4px 15px rgba(20, 181, 255, 0.4);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    color: white !important;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-aclonica);
+    transition: background-position 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.btn:hover {
+    background-position: right center;
+    filter: brightness(1.2);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(20, 181, 255, 0.5);
+}
+
+.btn-style-2 {
+    background-image: var(--gradient-purple-to-indigo) !important;
+    box-shadow: 0 4px 15px rgba(121, 82, 245, 0.4);
+}
+
+.btn-style-2:hover {
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+}
+
+/* ==== Interactive STEM & Tech Icons ==== */
+.icon-bar {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.tech-icon, .stem-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+}
+
+.tech-icon { background: var(--tech-icon-gradient); }
+.stem-icon { background: var(--stem-icon-gradient); }
+
+.tech-icon:hover, .stem-icon:hover {
+    transform: scale(1.18);
+    box-shadow: 0 0 15px rgba(0, 255, 238, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3);
+    border-color: rgba(0, 255, 238, 0.6);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 3️⃣ 📐 Glassmorphic Codeblocks, CLI Syntax & Math Overrides                                                 */
+/* ----------------------------------------------------------------------------------------------------------- */
+
+/* ==== Glassmorphic Code Terminal Container ==== */
+.code-terminal {
+    background: rgba(13, 17, 23, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-md);
+}
+
+.code-terminal:hover {
+    border-color: rgba(20, 181, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(20, 181, 255, 0.2);
+}
+
+/* Terminal Header Bar (macOS Traffic Light Dots) */
+.code-header {
+    background: rgba(22, 27, 34, 0.9);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-header-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.code-header-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    letter-spacing: 0.5px;
+}
+
+/* Codeblock Body */
+.code-block {
+    padding: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--color-text);
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
+}
+
+/* ==== Semantic CLI Text Colors (Attention-Optimized Palette) ==== */
+.cli-prompt    { color: #00ffee; font-weight: bold; }          /* Cyan / Blue prompt */
+.cli-keyword   { color: #c084fc; font-weight: 600; }           /* Purple keyword */
+.cli-function  { color: #38bdf8; font-weight: 600; }           /* Electric sky blue function */
+.cli-string    { color: #4ade80; }                             /* Neon green string */
+.cli-number    { color: #fb923c; }                             /* Amber/orange numeric */
+.cli-comment   { color: #8b949e; font-style: italic; }         /* Muted grey comment */
+.cli-accent    { color: #38bdf8; font-weight: bold; }          /* Electric cyan focal point */
+
+/* Semantic Status Badges */
+.cli-badge-info    { color: #00ffee; font-weight: bold; }
+.cli-badge-success { color: #31ff48; font-weight: bold; }
+.cli-badge-warning { color: #feb538; font-weight: bold; }
+.cli-badge-error   { color: #f87171; font-weight: bold; }
+.cli-badge-quantum { color: #c084fc; font-weight: bold; }
+
+/* ==== Mathematical Content Styling & Backdrop ==== */
+.katex, .katex *,
+.MathJax, .MathJax *,
+mjx-container, mjx-container *,
+.mjx-chtml, .mjx-chtml *,
+[class*="katex"], [class*="MathJax"] {
+    font-family: var(--font-math) !important;
+}
+
+.math-container {
+    background: rgba(13, 17, 23, 0.7);
+    border: 1px solid rgba(0, 245, 219, 0.25);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.math-container:hover {
+    border-color: rgba(0, 245, 219, 0.5);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 219, 0.2);
+}
+
+.math-formula {
+    text-align: center;
+    font-family: var(--font-math);
+    font-size: 1.25rem;
+    color: var(--color-math);
+    padding: var(--space-sm) 0;
+}
+
+.variable {
+    font-style: italic;
+    color: var(--color-variable);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 4️⃣ 📱 Responsive Breakpoints & Media Queries (Device adaptations)                                          */
+/* ----------------------------------------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    h1 { font-size: 2.0rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.3rem; }
+
+    .card-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .glass-card {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

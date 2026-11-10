@@ -165,3 +165,171 @@ from typing import Final, Protocol, TypeAlias
 >    - Use `uv` as the virtual environment and package management tool.
 >    - Keep `pyproject.toml` updated with dependencies, tools, and project metadata.
 >    - If `pyproject.toml` does not exist in a project/repository, create one tailored to the needs and requirements of the project.
+
+---
+
+# 🏅 Gold Standard CSS Template
+Overall structure (with numbered emoji sections matching Scriber Core Design System)
+```css
+/*
+=============================================================================================================
+🏅 Gold Standard CSS Template - Scriber Core Design System
+Narrative Flow: "Tokens & Theme -> Resets & Base -> Public Components -> Overrides & Math -> Responsive"
+=============================================================================================================
+*/
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 0️⃣ 🎨 Design Tokens, Constants & CSS Variables (What exists)                                               */
+/* ----------------------------------------------------------------------------------------------------------- */
+:root {
+    /* Color Palette */
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-primary: #14b5ff;
+    --color-secondary: #7952f5;
+    --color-accent-purple: #a855f7;
+    --color-accent-green: #31ff48;
+    --color-text: #f0f6fc;
+    --color-muted: #8b949e;
+    --color-math: #00f5db;
+
+    /* Multi-stop & Level-Specific Gradients (Color-Changing Spectrum with Pink Accent) */
+    --heading-gradient-1: linear-gradient(135deg, #00ffee 0%, #14b5ff 25%, #7952f5 55%, #f72585 80%, #00ffee 100%);
+    --heading-gradient-2: linear-gradient(135deg, #14b5ff 0%, #5280ff 30%, #a855f7 60%, #f72585 85%, #14b5ff 100%);
+    --heading-gradient-3: linear-gradient(135deg, #00f5db 0%, #22f792 25%, #14b5ff 55%, #9d4edd 80%, #f72585 92%, #00f5db 100%);
+    --heading-gradient-4: linear-gradient(135deg, #7952f5 0%, #a855f7 30%, #f72585 60%, #00ffee 85%, #7952f5 100%);
+
+    /* Typography */
+    --font-aclonica: 'Aclonica', sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+    --font-math: "Times New Roman", "Computer Modern", serif;
+
+    /* Spacing & Radii */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-pill: 50px;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(13, 17, 23, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 1️⃣ 🧱 Base Resets, Typography & Global Layout (Structural foundation)                                      */
+/* ----------------------------------------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-aclonica);
+}
+
+.emoji {
+    background: none !important;
+    color: initial !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    display: inline-block;
+}
+
+/* ==== Headings with Color-Changing Animated Gradients ==== */
+@keyframes header-gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1, h2, h3, h4 {
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: header-gradient-shift 8s ease-in-out infinite;
+    transition: filter 0.3s ease;
+}
+
+h1 { background-image: var(--heading-gradient-1); }
+h2 { background-image: var(--heading-gradient-2); }
+h3 { background-image: var(--heading-gradient-3); }
+h4 { background-image: var(--heading-gradient-4); }
+
+h1:hover, h2:hover, h3:hover, h4:hover {
+    animation-duration: 4s;
+    filter: brightness(1.25) drop-shadow(0 0 10px rgba(0, 255, 238, 0.3));
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 2️⃣ 🧩 Core UI Components (Buttons, Cards, Glass Panels, Search)                                            */
+/* ----------------------------------------------------------------------------------------------------------- */
+.btn {
+    background-image: linear-gradient(135deg, #00e8ff 0%, #14b5ff 40%, #7952f5 100%);
+    background-size: 200% auto;
+    border-radius: var(--radius-pill);
+    color: white !important;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-position 0.5s ease, transform 0.3s ease, filter 0.3s ease;
+}
+
+.btn:hover {
+    background-position: right center;
+    filter: brightness(1.2);
+    transform: scale(1.03);
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 3️⃣ 📐 Domain Overrides & Mathematical Typography (KaTeX, MathJax, Terminals)                               */
+/* ----------------------------------------------------------------------------------------------------------- */
+.code-terminal {
+    background: rgba(13, 17, 23, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+}
+
+.cli-prompt { color: #00ffee; font-weight: bold; }
+.cli-keyword { color: #c084fc; font-weight: 600; }
+.cli-function { color: #38bdf8; font-weight: 600; }
+.cli-string { color: #4ade80; }
+
+.katex, .MathJax, mjx-container {
+    font-family: var(--font-math) !important;
+    color: var(--color-math);
+}
+
+/* ----------------------------------------------------------------------------------------------------------- */
+/* 4️⃣ 📱 Responsive Breakpoints & Media Queries (Device adaptations)                                          */
+/* ----------------------------------------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-sm);
+    }
+}
+```
+
+>[!important] 👍 CSS Rule of Thumb
+> Narrative Flow: `0️⃣ Tokens/Variables -> 1️⃣ Resets/Layout -> 2️⃣ Core Components -> 3️⃣ Overrides/Math -> 4️⃣ Responsive`
+> 1. Use numbered emoji section dividers as semantic anchors for scannability.
+> 2. Wrap emojis in `.emoji` to isolate them from gradient text masking and preserve natural colors.
+> 3. Implement level-specific heading gradients infused with cyan, violet, and subtle pink accent stops, paired with continuous animated color-changing gradient flows.
+> 4. Use glassmorphic `.code-terminal` containers with traffic light dot headers and attention-friendly semantic CLI syntax tokens.
+> 5. Preserve mathematical typography isolation (`var(--font-math)`) for KaTeX / MathJax containers.

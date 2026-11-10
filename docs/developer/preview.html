@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuramoto UI & CSS Component Playground</title>
+    
+    <!-- Preconnect & Google Fonts for optimal loading performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet: Gold Standard Scriber Core System -->
+    <link rel="stylesheet" href="css_boilerplate.css">
+</head>
+<body>
+    <div class="container">
+        <h1><span class="emoji">⚡</span>Kuramoto UI Sandbox</h1>
+        <p>Interactive playground to preview glassmorphic code terminals, level-specific animated color-changing gradient headers, hover glow effects, and mathematical typography.</p>
+
+        <h2><span class="emoji">🌌</span>Multidimensional Solver Framework</h2>
+        <p>Demonstrating header level gradients, glass cards, and syntax-highlighted terminal sessions.</p>
+
+        <div class="card-row">
+            <!-- Feature Card 1: Rotor Phase Synchronization -->
+            <div class="glass-card">
+                <div>
+                    <h3><span class="emoji">🌊</span>Rotor Phase Synchronization</h3>
+                    <p>Geometric Algebra \(\operatorname{Cl}_{2,0}(\mathbb{R})\) rotor solver with \(U(1)\) Lie symmetry invariance.</p>
+                    
+                    <div class="math-container">
+                        <div class="math-formula">
+                            \(\frac{d\theta_i}{dt} = \omega_i + \frac{K}{N}\sum_{j=1}^N \sin(\theta_j - \theta_i)\)
+                        </div>
+                    </div>
+
+                    <!-- Glassmorphic CLI Codeblock with Terminal Dots & Syntax Colors -->
+                    <div class="code-terminal">
+                        <div class="code-header">
+                            <div class="code-header-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="code-header-title">kuramoto-cli — rotor</span>
+                        </div>
+                        <pre class="code-block"><span class="cli-prompt">$</span> kuramoto generate <span class="cli-keyword">--solver</span> rotor <span class="cli-keyword">--coupling</span> <span class="cli-number">1.5</span>
+<span class="cli-badge-info">[INFO]</span> Initializing <span class="cli-function">RotorSolver</span> (<span class="cli-number">N=10</span>, <span class="cli-number">seed=42</span>)...
+<span class="cli-badge-success">[SUCCESS]</span> U(1) Lie symmetry conserved: <span class="cli-string">ΔE = 1.2e-15</span>
+<span class="cli-prompt">&gt;&gt;&gt;</span> r_order = <span class="cli-function">compute_order_parameter</span>(phases)  <span class="cli-comment"># r(t) in [0, 1]</span></pre>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn" onclick="alert('Rotor solver preview active!')">Launch Solver</button>
+                    <div class="icon-bar">
+                        <div class="tech-icon" title="Python">🐍</div>
+                        <div class="tech-icon" title="NumPy">🔢</div>
+                        <div class="stem-icon" title="Physics">🌌</div>
+                        <div class="stem-icon" title="Nonlinear Dynamics">🌀</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Card 2: Quantum SCF Solver -->
+            <div class="glass-card">
+                <div>
+                    <h3><span class="emoji">⚛️</span>Quantum SCF Solver</h3>
+                    <p>Self-Consistent Field multiqubit statevector simulation with OpenQASM circuit export.</p>
+                    
+                    <div class="math-container">
+                        <div class="math-formula">
+                            \(|\psi(t)\rangle = \exp\left(-i \hat{H}_{\text{MF}} t\right) |\psi(0)\rangle\)
+                        </div>
+                    </div>
+
+                    <!-- Glassmorphic Python Codeblock with Terminal Dots & Syntax Colors -->
+                    <div class="code-terminal">
+                        <div class="code-header">
+                            <div class="code-header-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="code-header-title">quantum_rotor.py</span>
+                        </div>
+                        <pre class="code-block"><span class="cli-keyword">from</span> kuramoto.solvers.quantum_rotor <span class="cli-keyword">import</span> <span class="cli-function">QuantumRotorSolver</span>
+
+solver = <span class="cli-function">QuantumRotorSolver</span>(n_oscillators=<span class="cli-number">4</span>, seed=<span class="cli-number">42</span>)
+t_out, phases = solver.<span class="cli-function">simulate</span>(K=<span class="cli-number">1.2</span>, scheme=<span class="cli-string">"statevector"</span>)
+<span class="cli-badge-quantum">[QUANTUM]</span> Circuit depth: <span class="cli-number">24</span> gates | Fidelity: <span class="cli-number">0.9998</span></pre>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-style-2" onclick="alert('QASM circuit export preview!')">Export QASM</button>
+                    <div class="icon-bar">
+                        <div class="tech-icon" title="Qiskit">🔮</div>
+                        <div class="stem-icon" title="Quantum">⚛️</div>
+                        <div class="stem-icon" title="Linear Algebra">📐</div>
+                        <div class="stem-icon" title="Calculus">∫</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4><span class="emoji">🧪</span>Sub-Nyquist Coprime Reconstruction Telemetry</h4>
+        <p>Level 4 heading featuring pink-to-purple gradient styling and responsive glassmorphic cards.</p>
+    </div>
+</body>
+</html>
