@@ -7,19 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update problem 16 task with part b extended GCD result">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Repo-wide type harmonization and metadata signature standardization across repo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/graphs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,61 +57,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="8.641064461722563E-11" />
-      <entry key="MS500" value="0.00971210700612103" />
-      <entry key="S2" value="0.3211058384084442" />
-      <entry key="S5" value="0.8869762272491453" />
-      <entry key="S10" value="1.6656604285709498" />
-      <entry key="S30" value="2.909510824844092" />
-      <entry key="S60" value="3.4082858773477875" />
-      <entry key="M2" value="4.110615945520656" />
-      <entry key="M5" value="13.031201668284089" />
-      <entry key="M10" value="50.17443489834564" />
-      <entry key="M15" value="100.22538150388573" />
-      <entry key="M30" value="237.21281610581377" />
-      <entry key="H1" value="391.9679470876715" />
-      <entry key="H2" value="560.9607437836145" />
-      <entry key="H4" value="915.9219707653864" />
-      <entry key="D1" value="4595.712463317174" />
-      <entry key="W1" value="21275.79803048889" />
+      <entry key="MS100" value="1.0000369572009653" />
+      <entry key="MS500" value="1.282057259060808" />
+      <entry key="S2" value="3.4046680513938408" />
+      <entry key="S5" value="5.320180751425483" />
+      <entry key="S10" value="7.868279005699751" />
+      <entry key="S30" value="18.305953080653012" />
+      <entry key="S60" value="28.753637750928508" />
+      <entry key="M2" value="43.57889791686842" />
+      <entry key="M5" value="75.4065826690013" />
+      <entry key="M10" value="108.39701952802875" />
+      <entry key="M15" value="136.32496655944084" />
+      <entry key="M30" value="233.1728624192548" />
+      <entry key="H1" value="397.7786236676577" />
+      <entry key="H2" value="604.0195535726077" />
+      <entry key="H4" value="979.1111966882522" />
+      <entry key="D1" value="4674.932207212629" />
+      <entry key="W1" value="21386.263579086077" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0000000000000175" />
-      <entry key="M2" value="1.0000001328030546" />
-      <entry key="M5" value="1.0017753468985455" />
-      <entry key="M10" value="1.0421348655930625" />
-      <entry key="M15" value="1.121086132661003" />
-      <entry key="M30" value="1.3479743276245069" />
-      <entry key="H1" value="1.5899012344225687" />
-      <entry key="H2" value="1.7724817885879247" />
-      <entry key="H4" value="2.064489915022081" />
-      <entry key="D1" value="20.357877300152648" />
-      <entry key="W1" value="149.52456413270838" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="2.020062087743951E-92" />
+      <entry key="S5" value="2.1209092327607993E-37" />
+      <entry key="S10" value="5.044978679444015E-19" />
+      <entry key="S30" value="1.1948307550535692E-6" />
+      <entry key="S60" value="0.0018563355278601078" />
+      <entry key="M2" value="0.08640586032590884" />
+      <entry key="M5" value="0.9590360449886541" />
+      <entry key="M10" value="2.231073741206997" />
+      <entry key="M15" value="3.027253165537516" />
+      <entry key="M30" value="4.293794201295322" />
+      <entry key="H1" value="5.32693599363167" />
+      <entry key="H2" value="6.053122226857454" />
+      <entry key="H4" value="6.656834058441682" />
+      <entry key="D1" value="24.920912242827093" />
+      <entry key="W1" value="154.08864120921552" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.835312945861267E-7" />
-      <entry key="MS500" value="0.05370767728363966" />
-      <entry key="S2" value="0.7363324911962176" />
-      <entry key="S5" value="1.5282917064459816" />
-      <entry key="S10" value="2.3973625153998346" />
-      <entry key="S30" value="3.7691259714654453" />
-      <entry key="S60" value="4.327657409495127" />
-      <entry key="M2" value="5.0672302519739745" />
-      <entry key="M5" value="14.014261807650572" />
-      <entry key="M10" value="51.20543576204762" />
-      <entry key="M15" value="101.33775516989279" />
-      <entry key="M30" value="238.55506623090068" />
-      <entry key="H1" value="393.55436586469966" />
-      <entry key="H2" value="562.7312316415017" />
-      <entry key="H4" value="917.985032775794" />
-      <entry key="D1" value="4616.063522238473" />
-      <entry key="W1" value="21425.314770345587" />
+      <entry key="MS100" value="0.0025115933092718055" />
+      <entry key="MS500" value="0.5013703638168342" />
+      <entry key="S2" value="2.954000422083403" />
+      <entry key="S5" value="5.047735585622143" />
+      <entry key="S10" value="7.647059116088836" />
+      <entry key="S30" value="18.15683075360845" />
+      <entry key="S60" value="28.652928420165434" />
+      <entry key="M2" value="43.58978834011108" />
+      <entry key="M5" value="76.30516952931835" />
+      <entry key="M10" value="110.58142824176844" />
+      <entry key="M15" value="139.3146525212734" />
+      <entry key="M30" value="237.44271822577844" />
+      <entry key="H1" value="403.0914379703026" />
+      <entry key="H2" value="610.0648209615018" />
+      <entry key="H4" value="985.763541589407" />
+      <entry key="D1" value="4699.845888959952" />
+      <entry key="W1" value="21540.34433993805" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -371,14 +361,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00028" summary="evaluating demo.ipynb tests">
-      <option name="closed" value="true" />
-      <created>1790167161913</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1790167161913</updated>
     </task>
     <task id="LOCAL-00029" summary="split the solver into separate modules (one for each integration scheme)">
       <option name="closed" value="true" />
@@ -764,14 +746,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794196704860</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Repo-wide type harmonization and metadata signature standardization across repo">
+      <option name="closed" value="true" />
+      <created>1794567153952</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1794567153952</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removed audit summary file, updated project module configuration, and refreshed execution timestamps in demo notebook." />
     <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
     <MESSAGE value="Finished sanity checks notebook" />
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
@@ -796,7 +785,8 @@
     <MESSAGE value="Remove `dash_component_template.py` notebook from `ai_generated`." />
     <MESSAGE value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
     <MESSAGE value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
-    <option name="LAST_COMMIT_MESSAGE" value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
+    <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Repo-wide type harmonization and metadata signature standardization across repo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
