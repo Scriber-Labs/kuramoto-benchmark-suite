@@ -15,9 +15,8 @@ from __future__ import annotations
 
 import logging
 import os
-import warnings
 from pathlib import Path
-from typing import Any, Dict, Final, List, Optional, Sequence, Tuple
+from typing import Any, Final, Sequence
 
 import matplotlib as mpl
 import matplotlib.colors as mcolors
@@ -63,7 +62,7 @@ TEXT_PRIMARY: Final[str] = "#e6edf3"  # High-contrast primary text
 TEXT_MUTED: Final[str] = "#8b949e"  # Muted labels, secondary notes, and ticks
 
 # Core Brand Palette
-PROJECT_COLORS: Final[Dict[str, str]] = {
+PROJECT_COLORS: Final[dict[str, str]] = {
     # Core brand palette
     "cyan_light": "#00FFEE",
     "cyan_blue": "#00E8FF",
@@ -94,7 +93,7 @@ PROJECT_COLORS: Final[Dict[str, str]] = {
 }
 
 # Backwards-compatible palette mapping
-SCRIBER_PALETTE: Final[Dict[str, str]] = {
+SCRIBER_PALETTE: Final[dict[str, str]] = {
     "bg_deep": THEME_BG,
     "bg_panel": CARD_BG,
     "accent_cyan": PROJECT_COLORS["blue_light"],
@@ -110,7 +109,7 @@ SCRIBER_PALETTE: Final[Dict[str, str]] = {
 }
 
 # Solver Color Tokens
-SOLVER_COLORS: Final[Dict[str, str]] = {
+SOLVER_COLORS: Final[dict[str, str]] = {
     "rk45": PROJECT_COLORS["orange_warm"],
     "euler": PROJECT_COLORS["purple_light"],
     "rotor": PROJECT_COLORS["cyan_blue"],
@@ -119,7 +118,7 @@ SOLVER_COLORS: Final[Dict[str, str]] = {
 }
 
 # Quantity-Specific Comparison Palette
-COMPARISON_PALETTE: Final[Dict[str, Dict[str, str]]] = {
+COMPARISON_PALETTE: Final[dict[str, dict[str, str]]] = {
     "order_parameter": {
         "ground_truth": PROJECT_COLORS["cyan_light"],
         "euler": PROJECT_COLORS["purple_light"],
@@ -271,7 +270,7 @@ wavefunction_cmap = WAVEFUNCTION_CMAP
 wavefunction_overlap_cmap = WAVEFUNCTION_OVERLAP_CMAP
 hamiltonian_density_cmap = HAMILTONIAN_DENSITY_CMAP
 
-GRADIENTS: Dict[str, List[str]] = {
+GRADIENTS: dict[str, list[str]] = {
     "gradient_0": ["#03E8BD", "#00FFFF", "#00E8FF", "#14B5FF"],
     "gradient_1": ["#00FFEE", "#00E8FF", "#14B5FF", "#0070EB"],
     "gradient_2": ["#00E8FF", "#14B5FF", "#3A98FF", "#0070EB", "#5E17EB"],
@@ -411,7 +410,7 @@ def get_colormap(name: str = "gradient_tse") -> LinearSegmentedColormap:
     LinearSegmentedColormap
         The requested colormap instance.
     """
-    named_colormaps: Dict[str, LinearSegmentedColormap] = {
+    named_colormaps: dict[str, LinearSegmentedColormap] = {
         "phase": PHASE_CMAP,
         "order_parameter": ORDER_PARAMETER_CMAP,
         "spectral_density": SPECTRAL_DENSITY_CMAP,
@@ -431,7 +430,7 @@ def get_colormap(name: str = "gradient_tse") -> LinearSegmentedColormap:
     return LinearSegmentedColormap.from_list(name, colors)
 
 
-def get_comparison_colors(quantity: str) -> Tuple[str, str]:
+def get_comparison_colors(quantity: str) -> tuple[str, str]:
     """
     Return (reference_color, simulated_color) for a given physical quantity or comparison.
 
@@ -443,7 +442,7 @@ def get_comparison_colors(quantity: str) -> Tuple[str, str]:
 
     Returns
     -------
-    Tuple[str, str]
+    tuple[str, str]
         Tuple containing (reference_color, simulated_color) hex codes.
     """
     key = quantity.lower().strip()
@@ -495,7 +494,7 @@ def get_comparison_colors(quantity: str) -> Tuple[str, str]:
 
 def get_node_colors(
     adjacency: NDArray[np.floating],
-    values: Optional[NDArray[np.floating]] = None,
+    values: NDArray[np.floating] | None = None,
     cmap_name: str = "gradient_tse",
 ) -> NDArray[Any]:
     """
@@ -530,12 +529,12 @@ def get_node_colors(
 
 def plot_network(
     adjacency: NDArray[np.floating],
-    node_colors: Optional[NDArray[Any]] = None,
-    node_values: Optional[NDArray[np.floating]] = None,
-    pos: Optional[Dict[Any, NDArray[np.floating]]] = None,
+    node_colors: NDArray[Any] | None = None,
+    node_values: NDArray[np.floating] | None = None,
+    pos: dict[Any, NDArray[np.floating]] | None = None,
     cmap_name: str = "gradient_tse",
     title: str = "Network Topology",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     apply_aclonica: bool = True,
 ) -> None:
     """
@@ -550,7 +549,7 @@ def plot_network(
     node_values : NDArray, optional
         Values to color nodes by (mapped via cmap_name). If both node_colors
         and node_values are None, colors by degree.
-    pos : Dict, optional
+    pos : dict, optional
         Node positions dictionary. If None, uses spring layout.
     cmap_name : str, default='gradient_tse'
         Name of the gradient theme to use.
@@ -612,9 +611,9 @@ def plot_network(
 
 def plot_distributions(
     omega: NDArray[np.floating],
-    theta_0: Optional[NDArray[np.floating]] = None,
+    theta_0: NDArray[np.floating] | None = None,
     cmap_name: str = "gradient_tse",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     apply_aclonica: bool = True,
 ) -> None:
     """
@@ -706,7 +705,7 @@ def plot_order_parameter(
     times: NDArray[np.floating],
     r_values: NDArray[np.floating],
     title: str = "Order Parameter Over Time",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     apply_aclonica: bool = True,
     gradient_fill: bool = True,
 ) -> None:
@@ -788,11 +787,11 @@ def plot_order_parameter(
 
 
 def plot_autocorrelation(
-    series: Dict[str, Tuple[NDArray[np.integer], NDArray[np.floating]]],
+    series: dict[str, tuple[NDArray[np.integer], NDArray[np.floating]]],
     title: str = "Order Parameter Autocorrelation",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     apply_aclonica: bool = True,
-    ax: Optional[plt.Axes] = None,
+    ax: plt.Axes | None = None,
 ) -> plt.Axes:
     """
     Plot normalized autocorrelation curves with The Scriber Experience styling.
@@ -874,7 +873,7 @@ def plot_fluid_vorticity(
     omega: NDArray[np.floating],
     K: float,
     title: str = "Bivector Vorticity Field (Fluid Flow)",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
     grid_res: int = 30,
 ) -> None:
     """
@@ -986,10 +985,10 @@ def plot_time_series(
     times: NDArray[np.floating],
     theta: NDArray[np.floating],
     r_values: NDArray[np.floating],
-    node_colors: Optional[NDArray[Any]] = None,
+    node_colors: NDArray[Any] | None = None,
     n_oscillators: int = 10,
     title: str = "Time Series",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
 ) -> None:
     """
     Plot phase time series and order parameter with The Scriber Experience styling.
@@ -1057,10 +1056,10 @@ def plot_time_series(
 
 def plot_fourier_variability(
     amplitudes: NDArray[np.floating],
-    node_colors: Optional[NDArray[Any]] = None,
+    node_colors: NDArray[Any] | None = None,
     freq: float = 0.0,
     title: str = "Fourier Variability",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
 ) -> None:
     """
     Plot Fourier amplitude bar chart per oscillator with The Scriber Experience styling.
@@ -1121,7 +1120,7 @@ def plot_fourier_convergence(
     amplitudes: Sequence[float],
     freq: float = 0.0,
     title: str = "Fourier Convergence",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
 ) -> None:
     """
     Plot Fourier amplitude convergence over increasing signal duration.
@@ -1172,7 +1171,7 @@ def plot_psd_variability(
     psd_values: NDArray[np.floating],
     target_freq: float,
     title: str = "PSD Variability",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
 ) -> None:
     """
     Plot power spectral density with target frequency marker.
@@ -1219,10 +1218,10 @@ def plot_psd_variability(
 
 def plot_psd_convergence(
     frequencies: NDArray[np.floating],
-    psd_data: Dict[str, NDArray[np.floating]],
+    psd_data: dict[str, NDArray[np.floating]],
     target_freq: float,
     title: str = "PSD Convergence",
-    save_path: Optional[str] = None,
+    save_path: str | None = None,
 ) -> None:
     """
     Plot PSD convergence across different signal windows.
@@ -1286,7 +1285,7 @@ def plot_psd_convergence(
 
 def plot_semantic_colormaps(
     *,
-    out_path: Optional[str | Path] = None,
+    out_path: str | Path | None = None,
 ) -> plt.Figure:
     """
     Render a visual demonstration of the project semantic color gradients and diagnostic colormaps.
@@ -1486,7 +1485,7 @@ def _plot_gradient_bar(
 
 def _add_parameter_row(
     fig: plt.Figure,
-    parameters: Dict[str, float] | None,
+    parameters: dict[str, float] | None,
     *,
     ax: plt.Axes | None = None,
     y: float | None = None,
@@ -1633,7 +1632,7 @@ def detect_transition_spikes(
     method: str = "log_diff",
     direction: str = "both",
     min_epoch_gap: int = 200,
-) -> List[int]:
+) -> list[int]:
     """
     Identify time indices or steps where significant transitions or gradient spikes occur.
 
@@ -1705,7 +1704,7 @@ def detect_transition_spikes(
             f"Unknown spike detection method: {method}. Choose from 'log_diff', 'relative', 'zscore'."
         )
 
-    detected_epochs: List[int] = []
+    detected_epochs: list[int] = []
     last_ep = -1000000
     for idx in spike_indices:
         ep = int(ep_arr[idx])

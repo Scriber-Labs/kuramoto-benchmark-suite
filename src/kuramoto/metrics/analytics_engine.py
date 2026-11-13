@@ -7,7 +7,7 @@ and spectral metrics across non-uniform network topologies.
 
 from __future__ import annotations
 
-from typing import Dict, NamedTuple
+from typing import NamedTuple
 
 import numpy as np
 from numpy.typing import NDArray
@@ -34,7 +34,7 @@ class ComprehensiveMetrics(NamedTuple):
     lambda_trajectory: NDArray[np.floating]
     spectral_frequencies: NDArray[np.floating]
     spectral_psd_mean: NDArray[np.floating]
-    energy_decomposition: Dict[str, float]
+    energy_decomposition: dict[str, float]
     total_energy_drift: float
 
 

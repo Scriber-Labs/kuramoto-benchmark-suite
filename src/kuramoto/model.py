@@ -15,7 +15,7 @@ Date: May 2026
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Final, Optional
+from typing import Any, Callable, Final
 
 import numpy as np
 from numpy.typing import NDArray
@@ -94,12 +94,12 @@ class KuramotoModel:
         self,
         n_oscillators: int,
         *,
-        natural_frequencies: Optional[FrequencyArray] = None,
-        adjacency_matrix: Optional[AdjacencyMatrix] = None,
+        natural_frequencies: FrequencyArray | None = None,
+        adjacency_matrix: AdjacencyMatrix | None = None,
         coupling_strength: float = 1.0,
         noise_std: float = 0.0,
-        random_seed: Optional[int] = None,
-        rng: Optional[np.random.Generator] = None,
+        random_seed: int | None = None,
+        rng: np.random.Generator | None = None,
         solver_type: str = "rk45",
     ) -> None:
         # ---- validation ------------------------------------------------ #
@@ -154,7 +154,7 @@ class KuramotoModel:
 
         # ---- Solver initialization (if applicable) --------------------- #
         if is_quantum_solver(self.solver_type):
-            self.quantum_solver: Optional[QuantumRotorSolver] = QuantumRotorSolver(
+            self.quantum_solver: QuantumRotorSolver | None = QuantumRotorSolver(
                 n_oscillators=n_oscillators,
                 seed=random_seed,
                 adjacency_matrix=self.A,
@@ -162,7 +162,7 @@ class KuramotoModel:
                 initial_phases=self.initial_phases,
                 rng=self.rng,
             )
-            self.rotor_solver: Optional[RotorSolver] = None
+            self.rotor_solver: RotorSolver | None = None
         elif is_rotor_solver(self.solver_type):
             self.rotor_solver = RotorSolver(
                 n_oscillators=n_oscillators,
@@ -213,8 +213,8 @@ class KuramotoModel:
     def simulate(
         self,
         t_span: float,
-        n_points: Optional[int] = None,
-        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
+        n_points: int | None = None,
+        callback: Callable[[float, NDArray[np.floating]], None] | None = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """
@@ -264,7 +264,7 @@ class KuramotoModel:
         t_span: float,
         t_eval: NDArray,
         n_points: int,
-        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
+        callback: Callable[[float, NDArray[np.floating]], None] | None = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """Classic RK45 integration path."""
@@ -299,7 +299,7 @@ class KuramotoModel:
             for t_idx in range(len(t_eval)):
                 callback(float(t_eval[t_idx]), phases[t_idx])
 
-        net_stats: Dict[str, float] = graph_stats(self.A)
+        net_stats: dict[str, float] = graph_stats(self.A)
 
         return KuramotoDataset(
             omega=self.omega,
@@ -326,7 +326,7 @@ class KuramotoModel:
         adaptive_atol: float = 1e-7,
         dt_min: float = 1e-5,
         dt_max: float | None = None,
-        callback: Optional[Callable[[float, NDArray[np.floating]], None]] = None,
+        callback: Callable[[float, NDArray[np.floating]], None] | None = None,
         **kwargs: Any,
     ) -> KuramotoDataset:
         """Geometric Algebra rotor integration path."""
@@ -392,7 +392,7 @@ class KuramotoModel:
         self.derivatives = derivatives
         self.order_param = order_param_computed
 
-        net_stats: Dict[str, float] = graph_stats(self.A)
+        net_stats: dict[str, float] = graph_stats(self.A)
 
         return KuramotoDataset(
             omega=self.omega,
@@ -459,7 +459,7 @@ class KuramotoModel:
         self.derivatives = derivatives
         self.order_param = order_param_computed
 
-        net_stats: Dict[str, float] = graph_stats(self.A)
+        net_stats: dict[str, float] = graph_stats(self.A)
 
         return KuramotoDataset(
             omega=self.omega,

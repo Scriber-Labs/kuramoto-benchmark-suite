@@ -10,11 +10,11 @@ Date: May 2026
 
 from __future__ import annotations
 
+from typing import Any
+
 import networkx as nx
 import numpy as np
-from typing import Dict, Any, Final
 from numpy.typing import NDArray
-
 from sympy import symbols
 
 # -----------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ AdjacencyMatrix = NDArray[np.floating]
 # 1️⃣ Core definitions
 # -----------------------------------------------------------------------------------------------------------
 
-def compute_chromatic_polynomial(G: nx.Graph) -> Dict[int, int]:
+def compute_chromatic_polynomial(G: nx.Graph) -> dict[int, int]:
     """
     Compute the chromatic polynomial of a graph.
     
@@ -64,7 +64,7 @@ def compute_chromatic_polynomial(G: nx.Graph) -> Dict[int, int]:
     return compute_chromatic_polynomial(G_deletion) - compute_chromatic_polynomial(G_contraction)
 
 
-def get_graph_metadata(G: nx.Graph) -> Dict[str, Any]:
+def get_graph_metadata(G: nx.Graph) -> dict[str, Any]:
     """
     Compute a suite of graph metrics for benchmark metadata.
 

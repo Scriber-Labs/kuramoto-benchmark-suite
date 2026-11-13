@@ -6,14 +6,14 @@ This module defines the `KuramotoDataset` dataclass, which serves as the immutab
 
 Author: Eigenscribe
 Development note: LLM assistance was used during construction; implementation has been reviewed and adapted for this project.
-Review status: REviewed and maintained by Eigenscribe.
+Review status: Reviewed and maintained by Eigenscribe.
 Date: 05-2026
 """
 
 from __future__ import annotations
 
-from typing import Final, Dict, Any
 from dataclasses import dataclass
+from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
@@ -75,12 +75,12 @@ class KuramotoDataset:
     initial_conditions: PhaseArray
     coupling: float
     adjacency: AdjacencyMatrix
-    network_stats: Dict[str, Any]
+    network_stats: dict[str, Any]
     noise_std: float
     freq_pdf: str
     phase_pdf: str
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert the dataset to a dictionary for JSON serialization or legacy compatibility.
 

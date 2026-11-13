@@ -10,18 +10,19 @@ Date: May 2026
 from __future__ import annotations
 
 import json
-from typing import Any, Dict
+from typing import Any
 
 import numpy as np
 
 from kuramoto.utils import get_rng
+
 
 # -----------------------------------------------------------------------------------------------------------
 # 1️⃣ Core logic
 # -----------------------------------------------------------------------------------------------------------
 
 
-def parse_simulation_config(json_str: str) -> Dict[str, Any]:
+def parse_simulation_config(json_str: str) -> dict[str, Any]:
     """
     Parse a JSON string containing Kuramoto simulation parameters.
 

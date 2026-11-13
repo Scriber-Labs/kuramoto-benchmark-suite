@@ -10,19 +10,19 @@ Date: May 2026
 from __future__ import annotations
 
 import networkx as nx
-from typing import List, Tuple, Dict, Final
+
 
 # -----------------------------------------------------------------------------------------------------------
 # 1️⃣ Core definitions
 # -----------------------------------------------------------------------------------------------------------
 
-def sefirot_labels() -> List[str]:
+def sefirot_labels() -> list[str]:
     """
     Return an ordered list of the ten sefirot labels.
     
     Returns
     -------
-    List[str]
+    list[str]
         The 10 sefirot names.
     """
     return [
@@ -38,19 +38,19 @@ def sefirot_labels() -> List[str]:
         "Malkhut",
     ]
 
-def sefirot_indices() -> Dict[str, int]:
+def sefirot_indices() -> dict[str, int]:
     """
     Map sefirot names to indices.
     
     Returns
     -------
-    Dict[str, int]
+    dict[str, int]
         Mapping from name to integer index.
     """
-    labels: List[str] = sefirot_labels()
+    labels: list[str] = sefirot_labels()
     return {name: i for i, name in enumerate(labels)}
 
-def etz_hayim_edges() -> List[Tuple[str, str]]:
+def etz_hayim_edges() -> list[tuple[str, str]]:
     """
     Canonical 22 undirected edges of Etz Hayim.
     
@@ -103,7 +103,7 @@ def build_tree_of_life() -> nx.Graph:
 
     return G
 
-def tree_of_life_positions() -> Dict[str, Tuple[float, float]]:
+def tree_of_life_positions() -> dict[str, tuple[float, float]]:
     """
     Canonical positions for the Tree of Life nodes for visualization.
     

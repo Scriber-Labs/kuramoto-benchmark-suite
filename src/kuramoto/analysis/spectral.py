@@ -11,11 +11,11 @@ Last Update: September 2026
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
-import scipy.fft as fft
-from scipy.signal import welch
-from typing import Dict, Any, List, Tuple
 from numpy.typing import NDArray
+from scipy.signal import welch
 
 from kuramoto.utils import get_rng
 
@@ -62,7 +62,7 @@ def compute_psd(
     signals: TimeSeries,
     fs: float,
     **kwargs: Any,
-) -> Tuple[FrequencyArray, TimeSeries]:
+) -> tuple[FrequencyArray, TimeSeries]:
     """
     Compute the Power Spectral Density (PSD) using Welch's method.
 
@@ -92,7 +92,7 @@ def compute_spectral_decomposition(
     pxx: TimeSeries,
     target_freq: float,
     bandwidth: float = 0.1
-) -> Dict[str, float]:
+) -> dict[str, float]:
     """
     Calculate the energy distribution around a target frequency and its harmonics.
 
@@ -188,7 +188,7 @@ def harmonic_analysis(
     order_param_timeseries: np.ndarray,
     dt: float,
     max_harmonic: int = 5,
-) -> Dict[str, float]:
+) -> dict[str, float]:
     """
     Analyze harmonic content of order parameter oscillations.
 

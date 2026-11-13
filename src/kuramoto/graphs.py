@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
-from typing import Dict
+
 
 def build_adjacency(n: int, adjacency: np.ndarray | None) -> np.ndarray:
     """
@@ -26,7 +26,8 @@ def build_adjacency(n: int, adjacency: np.ndarray | None) -> np.ndarray:
         A = adjacency
     return A
 
-def graph_stats(A: np.ndarray) -> Dict[str, float]:
+
+def graph_stats(A: np.ndarray) -> dict[str, float]:
     """
     Computes basic statistics of the graph represented by the adjacency matrix.
     
@@ -55,4 +56,3 @@ def graph_stats(A: np.ndarray) -> Dict[str, float]:
         "is_connected": edges >= n - 1,
         "avg_degree": avg_degree,
     }
-
