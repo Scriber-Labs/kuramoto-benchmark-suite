@@ -27,36 +27,48 @@ python -m pip install -e ".[dev]"
 With `uv`, prefix commands below with `uv run` if the environment is not
 activated (for example, `uv run kuramoto --help`).
 
-### 🧠 AI-Generated Demos & Research Notebooks
-We maintain a living laboratory of interactive experiments. All proof-of-concepts, including AI-generated Jupyter notebooks, are stored in:
+### 🧠 Interactive Research & AI-Generated Demos
+We maintain a living laboratory of interactive experiments, verification notebooks, and proof-of-concepts located in:
 
-👉 [**`examples/ai_generated_notebooks/`**](examples/ai_generated_notebooks/)
+👉 [**`notebooks/ai_generated/`**](notebooks/ai_generated/) & [**`notebooks/verification-infrastructure/`**](notebooks/verification-infrastructure/)
 
 **Key Experiments:**
-- `zbw_mesoscale_ensemble.ipynb`: **[NEW]** Golden-ratio frequency grids and coprime adjacency networks.
-- `sanity_checks.ipynb`: Validating $\operatorname{Cl}_{2,0}(\mathbb{R})$ rotor invariants and energy conservation.
-- `qiskit_hybrid_kuramoto_pipeline.ipynb`: Mapping oscillator phases to Bloch sphere rotations.
+- `zbw_mesoscale_ensemble.ipynb`: Golden-ratio frequency grids, coprime adjacency lattices, and CFF driving.
+- `sanity_checks.ipynb`: 12 automated checks validating $\operatorname{Cl}_{2,0}(\mathbb{R})$ rotor invariants, energy conservation, and time-reversibility.
+- `failure_modes.ipynb`: Stability boundaries, Nyquist under-resolution, and step-size controller limits.
+- `qiskit_hybrid_kuramoto_pipeline.ipynb`: Mapping oscillator phases to Bloch sphere rotations with $\mathcal{O}(1)$ circuit depth.
+- `styling_and_visuals_demo.ipynb`: Scriber Core 4-layer design token visualization showcase.
 
 ---
 
 ## 📟 CLI & Usage Notes
 
-The `kuramoto` CLI is your gateway to the simulation engine.
+The `kuramoto` CLI is your unified gateway to the simulation engine.
 
 ### Quick Commands
 ```bash
-# Generate a dataset from the included JSON configuration (RK45)
-kuramoto generate --config data/benchmark/config.json --solver rk45 -o data/mesoscale.npz
+# 1. Generate beginner starter dataset
+kuramoto datasetforbeginners -o data/demo.npz
 
-# Run a Geometric Algebra Rotor simulation (RKMK4)
-kuramoto generate --config data/benchmark/config.json --solver rkmk4 -o data/rotor.npz
+# 2. Run high-order Geometric Algebra Rotor simulation (RKMK4 with symmetry tracking)
+kuramoto generate --config data/benchmark/config.json --solver rkmk4 --track-symmetries -o data/rotor.npz
 
-# Visualize phase trajectories
-kuramoto time data/mesoscale.npz
+# 3. Execute Quantum SCF simulation on Bloch sphere
+kuramoto quantum -n 10 -k 1.5 -t 200 --scheme expectation --plot
+
+# 4. Run ZBW mesoscale simulation with golden-ratio frequency grid and LED driving
+kuramoto zbw -n 20 -t 500 -k 1.5 --external-drive -o data/zbw.npz --plot
+
+# 5. Export telemetry with mean field phase and frequency locking for Dash App
+kuramoto dash-export -n 50 -k 1.5 -t 200 --topology small_world -o data/dash_export.json
+
+# 6. Visualize phase trajectories & network topology
+kuramoto time data/rotor.npz
+kuramoto network data/rotor.npz
 ```
 
-For full documentation of flags and advanced usage, see:
-📖 [**CLI Usage Guide**](docs/ai-generated-research-notebook/CLI_USAGE.md)
+For complete documentation across all 14 subcommands, flags, quantum schemes, and spectral analysis tools:
+📖 [**Comprehensive CLI User Guide**](docs/user-guide/CLI_USER_GUIDE.md) | [**Research CLI Notes**](docs/ai-generated-research-notebook/CLI_USAGE.md)
 
 ---
 

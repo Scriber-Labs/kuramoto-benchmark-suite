@@ -3,13 +3,25 @@
   <component name="AIDiffSettings">
     <option name="showAIDiff" value="false" />
   </component>
+  <component name="AgentAttachedProjects"><![CDATA[{
+  "attachedProjects": [
+    {
+      "path": "/Users/lshriver/Library/CloudStorage/ProtonDrive-lshriver@protonmail.com-folder/my-vaults/eigenscribe-vault/⚗️ Scriber Labs/🌀  Kuramoto Benchmark Suite/Preprint",
+      "projectDirectory": "/Users/lshriver/Library/CloudStorage/ProtonDrive-lshriver@protonmail.com-folder/my-vaults/eigenscribe-vault/⚗️ Scriber Labs/🌀  Kuramoto Benchmark Suite/Preprint"
+    }
+  ]
+}]]></component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Repo-wide type harmonization and metadata signature standardization across repo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000369572009653" />
-      <entry key="MS500" value="1.282057259060808" />
-      <entry key="S2" value="3.4046680513938408" />
-      <entry key="S5" value="5.320180751425483" />
-      <entry key="S10" value="7.868279005699751" />
-      <entry key="S30" value="18.305953080653012" />
-      <entry key="S60" value="28.753637750928508" />
-      <entry key="M2" value="43.57889791686842" />
-      <entry key="M5" value="75.4065826690013" />
-      <entry key="M10" value="108.39701952802875" />
-      <entry key="M15" value="136.32496655944084" />
-      <entry key="M30" value="233.1728624192548" />
-      <entry key="H1" value="397.7786236676577" />
-      <entry key="H2" value="604.0195535726077" />
-      <entry key="H4" value="979.1111966882522" />
-      <entry key="D1" value="4674.932207212629" />
-      <entry key="W1" value="21386.263579086077" />
+      <entry key="MS100" value="1.0625856400666818" />
+      <entry key="MS500" value="2.235673041915718" />
+      <entry key="S2" value="4.304990282769312" />
+      <entry key="S5" value="6.4457955421569055" />
+      <entry key="S10" value="10.808143002756532" />
+      <entry key="S30" value="32.76771375722429" />
+      <entry key="S60" value="57.686662680504675" />
+      <entry key="M2" value="90.88386419970539" />
+      <entry key="M5" value="142.10121957366098" />
+      <entry key="M10" value="173.61556281373632" />
+      <entry key="M15" value="187.16013717886779" />
+      <entry key="M30" value="212.34295633977914" />
+      <entry key="H1" value="294.2605880389306" />
+      <entry key="H2" value="492.2083398763723" />
+      <entry key="H4" value="880.6123269017039" />
+      <entry key="D1" value="4600.3985942399595" />
+      <entry key="W1" value="21408.267470955747" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="2.020062087743951E-92" />
-      <entry key="S5" value="2.1209092327607993E-37" />
-      <entry key="S10" value="5.044978679444015E-19" />
-      <entry key="S30" value="1.1948307550535692E-6" />
-      <entry key="S60" value="0.0018563355278601078" />
-      <entry key="M2" value="0.08640586032590884" />
-      <entry key="M5" value="0.9590360449886541" />
-      <entry key="M10" value="2.231073741206997" />
-      <entry key="M15" value="3.027253165537516" />
-      <entry key="M30" value="4.293794201295322" />
-      <entry key="H1" value="5.32693599363167" />
-      <entry key="H2" value="6.053122226857454" />
-      <entry key="H4" value="6.656834058441682" />
-      <entry key="D1" value="24.920912242827093" />
-      <entry key="W1" value="154.08864120921552" />
+      <entry key="MS500" value="3.3537522813252426E-170" />
+      <entry key="S2" value="4.279398649491454E-43" />
+      <entry key="S5" value="1.1286966129826646E-17" />
+      <entry key="S10" value="3.3857755392869487E-9" />
+      <entry key="S30" value="0.0019506687701946516" />
+      <entry key="S60" value="0.07637596624794755" />
+      <entry key="M2" value="0.5717753598956303" />
+      <entry key="M5" value="2.06068791613407" />
+      <entry key="M10" value="3.2000905284779644" />
+      <entry key="M15" value="3.7166755512855247" />
+      <entry key="M30" value="4.49766335367633" />
+      <entry key="H1" value="5.765416492986512" />
+      <entry key="H2" value="7.599096653337058" />
+      <entry key="H4" value="9.420814757242923" />
+      <entry key="D1" value="28.342595460901173" />
+      <entry key="W1" value="157.6674399957653" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0025115933092718055" />
-      <entry key="MS500" value="0.5013703638168342" />
-      <entry key="S2" value="2.954000422083403" />
-      <entry key="S5" value="5.047735585622143" />
-      <entry key="S10" value="7.647059116088836" />
-      <entry key="S30" value="18.15683075360845" />
-      <entry key="S60" value="28.652928420165434" />
-      <entry key="M2" value="43.58978834011108" />
-      <entry key="M5" value="76.30516952931835" />
-      <entry key="M10" value="110.58142824176844" />
-      <entry key="M15" value="139.3146525212734" />
-      <entry key="M30" value="237.44271822577844" />
-      <entry key="H1" value="403.0914379703026" />
-      <entry key="H2" value="610.0648209615018" />
-      <entry key="H4" value="985.763541589407" />
-      <entry key="D1" value="4699.845888959952" />
-      <entry key="W1" value="21540.34433993805" />
+      <entry key="MS100" value="1.0264214381555334" />
+      <entry key="MS500" value="2.220390812533936" />
+      <entry key="S2" value="4.295801822563844" />
+      <entry key="S5" value="6.4399918568459515" />
+      <entry key="S10" value="10.802672342626913" />
+      <entry key="S30" value="32.734915805665" />
+      <entry key="S60" value="57.69519792600711" />
+      <entry key="M2" value="91.3638077610935" />
+      <entry key="M5" value="144.0782865296088" />
+      <entry key="M10" value="176.75795205069755" />
+      <entry key="M15" value="190.83367909585607" />
+      <entry key="M30" value="216.81538450333392" />
+      <entry key="H1" value="300.01020561548614" />
+      <entry key="H2" value="499.7972255896" />
+      <entry key="H4" value="890.0267484733654" />
+      <entry key="D1" value="4628.733847399539" />
+      <entry key="W1" value="21565.92702224556" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">

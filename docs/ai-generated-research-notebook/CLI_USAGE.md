@@ -21,6 +21,12 @@ kuramoto generate --help
 
 ## 1️⃣ Simulation & Data Generation
 
+### 🔰 `datasetforbeginners`
+Generate a quick starter dataset for beginners using a small-world topology ($N=50$, $K=2.0$, $T=1000$, $\Delta t=0.05$).
+```bash
+kuramoto datasetforbeginners -o data/starter_demo.npz
+```
+
 ### 🌀 `generate`
 The core command for synthetic Kuramoto datasets. It supports classical, geometric, and quantum-hybrid solvers.
 
@@ -46,12 +52,18 @@ Dedicated command for running hybrid Quantum Self-Consistent Field (SCF) rotor s
 **Examples:**
 - **Expectation Scheme:**
   ```bash
-  kuramoto quantum -n 10 -k 1.5 -t 200 --scheme expectation
+  kuramoto quantum -n 10 -k 1.5 -t 200 --scheme expectation --plot
   ```
 - **Shot-Sampling (Tomography):**
   ```bash
   kuramoto quantum -n 8 -k 2.0 -t 150 --scheme shot_sampling --shots 4096 -o data/quantum_shots.npz
   ```
+
+### 🌌 `zbw`
+Simulate the ZBW (Zitterbewegung) mesoscale ensemble with $\phi$-shield golden-ratio frequency grid and external macroscopic LED driving field.
+```bash
+kuramoto zbw -n 20 -t 500 --dt 0.01 -k 1.5 --base-freq 40.0 --external-drive --drive-strength 0.8 --plot -o data/zbw_demo.npz
+```
 
 ---
 
@@ -69,14 +81,16 @@ Plot phase trajectories $\theta_i(t)$ and the global order parameter $r(t)$.
 kuramoto time data/zbw_meso.npz
 ```
 
-### 📊 Spectral Analysis
+### 📊 Spectral & Distribution Analysis
 - `distributions DATASET_PATH`: Plot frequency and phase initializations from a dataset.
 - `fouriervariability DATASET_PATH --freq FREQUENCY`: Fourier coefficient stability across the ensemble.
+- `fourierconvergence DATASET_PATH --freq FREQUENCY`: Fourier mode convergence as a function of integration time.
 - `psdvariability DATASET_PATH --freq FREQUENCY`: Power Spectral Density analysis for frequency-domain diagnostics.
+- `psdconvergence DATASET_PATH --freq FREQUENCY`: Power Spectral Density convergence over integration windows.
 
 ---
 
-## 3️⃣ Advanced Research Tools
+## 3️⃣ Advanced Research Tools & Telemetry
 
 ### 🏎️ `benchmark`
 Compare performance and conservation accuracy across different solvers.
@@ -88,6 +102,12 @@ kuramoto benchmark -n 20 -k 1.5 -t 500 --dt 0.01
 Export Quantum SCF circuits to OpenQASM 2.0 format for execution on real hardware or external simulators.
 ```bash
 kuramoto qasm --dataset data/mesoscale.npz -o circuits/scf_step.qasm
+```
+
+### 📊 `dash-export`
+Run a simulation and export enriched JSON telemetry (with mean-field phase $\psi(t)$ and dynamic frequency locking fraction) for direct visualization in the `kuramoto-dash-app`.
+```bash
+kuramoto dash-export -n 50 -k 1.5 -t 200 --topology small_world -o data/dash_data.json
 ```
 
 ---
