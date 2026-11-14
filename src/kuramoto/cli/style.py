@@ -13,8 +13,10 @@ Date: October 2026
 from __future__ import annotations
 
 import os
+import re
 import sys
-from typing import Final
+from collections.abc import Sequence
+from typing import Final, TypeAlias
 
 import click
 
@@ -25,7 +27,18 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
         pass
 
 __all__: list[str] = [
+    # Gradients & Colors
+    "multi_gradient",
     "cli_gradient",
+    "PRESETS",
+    "RGB",
+    "Color",
+    "hex_to_rgb",
+    # Domain color helpers
+    "style_coprime_term",
+    "style_coprime_gcd",
+    "style_coprime_coeff",
+    # Semantic messaging
     "cli_message",
     "cli_info",
     "cli_network",
@@ -50,6 +63,24 @@ __all__: list[str] = [
 # -----------------------------------------------------------------------------------------------------------
 # 0️⃣ / 🎭 Definitions, Constants & Types
 # -----------------------------------------------------------------------------------------------------------
+
+RGB: TypeAlias = tuple[int, int, int]
+Color: TypeAlias = str | RGB
+
+PRESETS: Final[dict[str, tuple[str, ...]]] = {
+    # 🌟 Signature Eigenscribe: Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
+    # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
+    "sunset": ("#ff6b35", "#f7c548", "#d7263d"),
+    # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
+    "forest": ("#a7c957", "#2a9d8f", "#264653"),
+    # 🌌 Midnight Cosmic: Sky Cyan (#38bdf8) -> Lavender (#818cf8) -> Rose (#f43f5e)
+    "midnight": ("#38bdf8", "#818cf8", "#f43f5e"),
+    # 🌿 Quantum Aurora: Aqua (#06b6d4) -> Emerald (#10b981) -> Lime (#84cc16)
+    "aurora": ("#06b6d4", "#10b981", "#84cc16"),
+    # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
+    "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
+}
 
 STYLE_MAP: Final[dict[str, str]] = {
     "info": "bright_cyan",
@@ -156,13 +187,125 @@ def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
     parts.append(f"38;5;{color_code}")
     return f"\033[{';'.join(parts)}m{text}\033[0m"
 
-def cli_gradient(
+
+def hex_to_rgb(hex_color: str) -> RGB:
+    """
+    Convert a six-digit hex color string, with or without '#', to an (R, G, B) tuple.
+
+    Parameters
+    ----------
+    hex_color : str
+        Hex color string (e.g. '#00a6ff' or '00a6ff').
+
+    Returns
+    -------
+    RGB
+        Tuple of three integer color channels (0 to 255).
+
+    Raises
+    ------
+    ValueError
+        If hex_color is not a valid 6-digit hexadecimal color string.
+    """
+    value = hex_color.removeprefix("#")
+    if re.fullmatch(r"[0-9a-fA-F]{6}", value) is None:
+        raise ValueError(f"Expected a six-digit hex color, got {hex_color!r}")
+
+    return (
+        int(value[0:2], 16),
+        int(value[2:4], 16),
+        int(value[4:6], 16),
+    )
+
+
+def _normalize_color(color: Color) -> RGB:
+    """Convert a hex string or validate and return an RGB tuple."""
+    if isinstance(color, str):
+        return hex_to_rgb(color)
+
+    if (
+        len(color) != 3
+        or any(not isinstance(ch, int) or isinstance(ch, bool) for ch in color)
+        or any(not 0 <= ch <= 255 for ch in color)
+    ):
+        raise ValueError(
+            f"RGB colors must contain three integers from 0 to 255: {color!r}"
+        )
+
+    return color
+
+
+def multi_gradient(
     text: str,
-    start_rgb: tuple[int, int, int] = (0, 166,  255),
-    end_rgb: tuple[int, int, int] = (168, 85, 247)
+    colors: Sequence[Color] = PRESETS["electric"],
+    *,
     bold: bool = True,
 ) -> str:
-    """App"""
+    """
+    Return text formatted with an ANSI TrueColor gradient across multiple color stops.
+
+    Parameters
+    ----------
+    text : str
+        The input text to colorize.
+    colors : Sequence[Color], default=PRESETS["electric"]
+        A sequence of at least two color stops (hex strings or RGB tuples).
+    bold : bool, default=True
+        Whether to apply bold ANSI formatting.
+
+    Returns
+    -------
+    str
+        ANSI TrueColor-escaped string with color resets.
+    """
+    if not text:
+        return ""
+
+    if len(colors) < 2:
+        raise ValueError("Provide at least two colors for a gradient")
+
+    rgb_colors = [_normalize_color(color) for color in colors]
+    style = "1;" if bold else ""
+    segments = len(rgb_colors) - 1
+    output: list[str] = []
+
+    for index, character in enumerate(text):
+        position = index / (len(text) - 1) if len(text) > 1 else 0.0
+        scaled_position = position * segments
+        segment = min(int(scaled_position), segments - 1)
+        segment_position = scaled_position - segment
+
+        start = rgb_colors[segment]
+        end = rgb_colors[segment + 1]
+
+        red = round(start[0] + segment_position * (end[0] - start[0]))
+        green = round(start[1] + segment_position * (end[1] - start[1]))
+        blue = round(start[2] + segment_position * (end[2] - start[2]))
+
+        output.append(f"\033[{style}38;2;{red};{green};{blue}m{character}")
+
+    output.append("\033[0m")
+    return "".join(output)
+
+
+# Canonical alias
+cli_gradient = multi_gradient
+
+
+def style_coprime_term(val: int | str) -> str:
+    """Color (a, b) coprime terms in cyan (#00a6ff)."""
+    return f"\033[38;2;0;166;255m{val}\033[0m"
+
+
+def style_coprime_gcd(val: int | str) -> str:
+    """Color gcd values in green (#28d728)."""
+    return f"\033[38;2;40;215;40m{val}\033[0m"
+
+
+def style_coprime_coeff(val: int | str) -> str:
+    """Color Bezout coefficients (x, y) in magenta (#ff00c3)."""
+    return f"\033[38;2;255;0;195m{val}\033[0m"
+
 
 def cli_echo(msg: str, **kwargs: str) -> None:
     """
@@ -412,6 +555,19 @@ def _run_smoke_test() -> None:
     cli_highlight("Test highlight message")
     cli_section("Test Section Header")
     cli_divider()
+
+    # Test TrueColor gradient engine
+    assert hex_to_rgb("#00a6ff") == (0, 166, 255)
+    grad = multi_gradient("Test Gradient", PRESETS["electric"])
+    assert "\033[0m" in grad
+    assert cli_gradient("Alias Test") != ""
+
+    # Test coprime domain formatters
+    term = style_coprime_term(7)
+    gcd_str = style_coprime_gcd(1)
+    coeff = style_coprime_coeff(-3)
+    assert "7" in term and "1" in gcd_str and "-3" in coeff
+
     print("✅ Style smoke test passed.")
 
 

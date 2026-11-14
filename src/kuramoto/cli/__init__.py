@@ -28,10 +28,14 @@ from .commands import (
 from .main import cli
 from .style import (
     EIGENSCRIBE_PALETTE,
+    PRESETS,
+    RGB,
+    Color,
     ansi_256,
     cli_banner,
     cli_echo,
     cli_error,
+    cli_gradient,
     cli_highlight,
     cli_info,
     cli_message,
@@ -41,6 +45,11 @@ from .style import (
     cli_rule,
     cli_success,
     cli_warning,
+    hex_to_rgb,
+    multi_gradient,
+    style_coprime_coeff,
+    style_coprime_gcd,
+    style_coprime_term,
     supports_256_color,
 )
 from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
@@ -61,6 +70,16 @@ __all__: list[str] = [
     "psdconvergence",
     "network",
     "distributions",
+    # Style — gradients & tokens
+    "multi_gradient",
+    "cli_gradient",
+    "PRESETS",
+    "Color",
+    "RGB",
+    "hex_to_rgb",
+    "style_coprime_term",
+    "style_coprime_gcd",
+    "style_coprime_coeff",
     # Style — semantic messages
     "cli_info",
     "cli_network",

@@ -296,7 +296,9 @@ class TestExportForDashStream:
 
             # Remaining lines should be JSON objects
             data_lines = [l for l in lines[1:] if l.strip()]
-            assert len(data_lines) == 50, f"Expected 50 data lines, got {len(data_lines)}"
+            assert (
+                len(data_lines) == 50
+            ), f"Expected 50 data lines, got {len(data_lines)}"
 
             # Each line should be valid JSON with expected keys
             for line in data_lines:
@@ -351,7 +353,9 @@ class TestExportForDashStream:
 
         try:
             export_for_dash_stream(dataset, tmp_path, callback=mock_callback)
-            assert len(callback_times) == 50, f"Expected 50 callbacks, got {len(callback_times)}"
+            assert (
+                len(callback_times) == 50
+            ), f"Expected 50 callbacks, got {len(callback_times)}"
             assert len(callback_thetas) == 50
             # Times should be monotonically increasing
             for i in range(1, len(callback_times)):

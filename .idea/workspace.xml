@@ -15,10 +15,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules.">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add color utilities and recursive trace for Bézout's identity; refactor CLI style components.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/.junie/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_style_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_style_boilerplate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/python/cli_style_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/python/cli_style_boilerplate.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +49,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../scriber-core" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -66,61 +72,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0005744804444205" />
-      <entry key="S2" value="1.2020291977569304" />
-      <entry key="S5" value="2.1666588191452867" />
-      <entry key="S10" value="3.832743523552831" />
-      <entry key="S30" value="10.343703337670004" />
-      <entry key="S60" value="17.448906617328902" />
-      <entry key="M2" value="24.586649033840796" />
-      <entry key="M5" value="32.02900048812998" />
-      <entry key="M10" value="49.95712258573494" />
-      <entry key="M15" value="83.68629367932655" />
-      <entry key="M30" value="218.3038592725468" />
-      <entry key="H1" value="471.6003618560364" />
-      <entry key="H2" value="851.4321359539789" />
-      <entry key="H4" value="1399.00872984091" />
-      <entry key="D1" value="5331.087888905312" />
-      <entry key="W1" value="22343.61187952999" />
+      <entry key="MS100" value="1.0000000656896912" />
+      <entry key="MS500" value="1.0434864318537131" />
+      <entry key="S2" value="1.872059043409031" />
+      <entry key="S5" value="3.1174436812565602" />
+      <entry key="S10" value="5.289857263111879" />
+      <entry key="S30" value="13.840057811371926" />
+      <entry key="S60" value="21.498895543035914" />
+      <entry key="M2" value="28.892126412153228" />
+      <entry key="M5" value="37.385750901863716" />
+      <entry key="M10" value="49.953145644671025" />
+      <entry key="M15" value="70.76445832973295" />
+      <entry key="M30" value="173.77382893804048" />
+      <entry key="H1" value="409.4232476383504" />
+      <entry key="H2" value="793.8341223716372" />
+      <entry key="H4" value="1356.7484768738343" />
+      <entry key="D1" value="5318.253426354" />
+      <entry key="W1" value="22352.645915200996" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
-      <entry key="S10" value="1.3780657279458477E-176" />
-      <entry key="S30" value="2.3974892439869904E-59" />
-      <entry key="S60" value="4.897554026789565E-30" />
-      <entry key="M2" value="2.2474873398915654E-15" />
-      <entry key="M5" value="1.6957107913792607E-6" />
-      <entry key="M10" value="0.001966895671368229" />
-      <entry key="M15" value="0.02262592018330845" />
-      <entry key="M30" value="0.30148446847558175" />
-      <entry key="H1" value="1.4257416990011906" />
-      <entry key="H2" value="3.9939771787374516" />
-      <entry key="H4" value="7.635486671061061" />
-      <entry key="D1" value="29.099913028915534" />
-      <entry key="W1" value="159.11659796132673" />
+      <entry key="S10" value="2.2988947244004462E-215" />
+      <entry key="S30" value="2.8434115156957716E-72" />
+      <entry key="S60" value="1.6866336505466963E-36" />
+      <entry key="M2" value="1.3189186720858328E-18" />
+      <entry key="M5" value="8.644902291434123E-8" />
+      <entry key="M10" value="4.4410481014393644E-4" />
+      <entry key="M15" value="0.008389621199995851" />
+      <entry key="M30" value="0.1835832248287978" />
+      <entry key="H1" value="1.1125636773599432" />
+      <entry key="H2" value="3.5281544743032343" />
+      <entry key="H4" value="7.176418047642639" />
+      <entry key="D1" value="28.80073196450963" />
+      <entry key="W1" value="158.8818610083056" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9075191553171609" />
-      <entry key="MS500" value="0.9809763320724246" />
-      <entry key="S2" value="1.1523394872950972" />
-      <entry key="S5" value="2.0607243151577235" />
-      <entry key="S10" value="3.7149617881813852" />
-      <entry key="S30" value="10.240160386640962" />
-      <entry key="S60" value="17.367035706962394" />
-      <entry key="M2" value="24.531616158156993" />
-      <entry key="M5" value="32.00066823264041" />
-      <entry key="M10" value="49.932726842724094" />
-      <entry key="M15" value="83.67709143899651" />
-      <entry key="M30" value="218.5670503759837" />
-      <entry key="H1" value="472.99138849739705" />
-      <entry key="H2" value="855.3999951372125" />
-      <entry key="H4" value="1406.626862591368" />
-      <entry key="D1" value="5360.178474448164" />
-      <entry key="W1" value="22502.7203077199" />
+      <entry key="MS100" value="0.790041368261953" />
+      <entry key="MS500" value="0.9960996712966712" />
+      <entry key="S2" value="1.8534271466788435" />
+      <entry key="S5" value="3.104417195435932" />
+      <entry key="S10" value="5.271988070671231" />
+      <entry key="S30" value="13.806766809533022" />
+      <entry key="S60" value="21.469872219702125" />
+      <entry key="M2" value="28.87256493657827" />
+      <entry key="M5" value="37.37489738099208" />
+      <entry key="M10" value="49.9426237918444" />
+      <entry key="M15" value="70.7576315062384" />
+      <entry key="M30" value="173.93234970746823" />
+      <entry key="H1" value="410.5078400751778" />
+      <entry key="H2" value="797.3387617952549" />
+      <entry key="H4" value="1363.9083621555985" />
+      <entry key="D1" value="5347.044889610319" />
+      <entry key="W1" value="22511.519613185512" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -142,6 +148,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "KEY_CHAT_IN_TOOLWINDOW": "false",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in cli_style_boilerplate.executor": "Run",
     "Python tests.Doctests in order_parameter (1).executor": "Run",
     "Python tests.Doctests in order_parameter (2).executor": "Run",
     "Python tests.Doctests in order_parameter.executor": "Run",
@@ -217,7 +224,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python tests.Doctests in cli_style_boilerplate">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -241,30 +248,6 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/commands.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -345,13 +328,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Doctests in cli_style_boilerplate" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+      <module name="scriber-core" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../scriber-core/boilerplates/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/boilerplates/python/cli_style_boilerplate.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Doctests in cli_style_boilerplate" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.style" />
         <item itemvalue="Python.viz_3d_sync" />
         <item itemvalue="Python.commands" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -371,14 +375,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00030" summary="added benchmark configuration and sample data">
-      <option name="closed" value="true" />
-      <created>1791499360317</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1791499360317</updated>
     </task>
     <task id="LOCAL-00031" summary="updated execution timestamps in demo.ipynb">
       <option name="closed" value="true" />
@@ -764,14 +760,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794628348189</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Add color utilities and recursive trace for Bézout's identity; refactor CLI style components.">
+      <option name="closed" value="true" />
+      <created>1794633114162</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1794633114162</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Finished sanity checks notebook" />
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
@@ -796,7 +799,8 @@
     <MESSAGE value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
     <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
     <MESSAGE value="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules." />
+    <MESSAGE value="Add color utilities and recursive trace for Bézout's identity; refactor CLI style components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add color utilities and recursive trace for Bézout's identity; refactor CLI style components." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

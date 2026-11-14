@@ -40,6 +40,7 @@ PLOT_DIR: Final[str] = "plots"
 # 1️⃣ Public API / Helpers
 # -----------------------------------------------------------------------------------------------------------
 
+
 def ensure_plot_dir() -> None:
     """Ensure the plots directory exists."""
     os.makedirs(PLOT_DIR, exist_ok=True)
