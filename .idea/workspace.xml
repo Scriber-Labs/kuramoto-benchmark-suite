@@ -15,12 +15,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add a gradient engine boilerplate for ANSI TrueColor formatting in terminal output, update CLI tests to validate gradients, and apply consistent formatting across CLI styles and test files.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_gradient_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_gradient_boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_style_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/boilerplates/python/cli_style_boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/python/cli_style_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/python/cli_style_boilerplate.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Added gradient engine integration, improved usage examples with `doctest: +SKIP` for better testing compatibility, and reformatted color palette definitions.">
+      <change beforePath="$PROJECT_DIR$/notebooks/verification-infrastructure/failure_modes.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/failure_modes.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +42,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../scriber-core" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -220,36 +217,12 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Doctests in cli_style_boilerplate">
+  <component name="RunManager" selected="Python.viz">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
         <pdfViewer id="5f42ea7e-fb34-4de0-b8dd-06fa7843c20b" />
       </steps>
-      <method v="2" />
-    </configuration>
-    <configuration name="commands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/commands.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="style" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -292,6 +265,30 @@
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -347,11 +344,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.viz" />
         <item itemvalue="Python tests.Doctests in cli_style_boilerplate" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.style" />
         <item itemvalue="Python.viz_3d_sync" />
-        <item itemvalue="Python.commands" />
       </list>
     </recent_temporary>
   </component>
@@ -371,14 +368,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00032" summary="added rotor_dt_0.01.npz benchmark data">
-      <option name="closed" value="true" />
-      <created>1791508431374</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1791508431374</updated>
     </task>
     <task id="LOCAL-00033" summary="added comprehensive diagnostics module with structural invariants and spectral metrics computations">
       <option name="closed" value="true" />
@@ -764,14 +753,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794635960304</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Added gradient engine integration, improved usage examples with `doctest: +SKIP` for better testing compatibility, and reformatted color palette definitions.">
+      <option name="closed" value="true" />
+      <created>1794639044835</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1794639044835</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
     <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
     <MESSAGE value="sanity check notebook" />
@@ -796,7 +792,8 @@
     <MESSAGE value="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules." />
     <MESSAGE value="Add color utilities and recursive trace for Bézout's identity; refactor CLI style components." />
     <MESSAGE value="Add a gradient engine boilerplate for ANSI TrueColor formatting in terminal output, update CLI tests to validate gradients, and apply consistent formatting across CLI styles and test files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a gradient engine boilerplate for ANSI TrueColor formatting in terminal output, update CLI tests to validate gradients, and apply consistent formatting across CLI styles and test files." />
+    <MESSAGE value="Added gradient engine integration, improved usage examples with `doctest: +SKIP` for better testing compatibility, and reformatted color palette definitions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added gradient engine integration, improved usage examples with `doctest: +SKIP` for better testing compatibility, and reformatted color palette definitions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
