@@ -25,7 +25,7 @@ from .commands import (
     quantum,
     time,
 )
-from .main import cli, main
+from .main import cli
 from .style import (
     EIGENSCRIBE_PALETTE,
     ansi_256,
@@ -48,7 +48,6 @@ from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 __all__: list[str] = [
     # CLI entry
     "cli",
-    "main",
     # Commands
     "datasetforbeginners",
     "generate",

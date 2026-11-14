@@ -1,8 +1,10 @@
 
-import numpy as np
 import matplotlib.pyplot as plt
-from kuramoto.solvers import RotorSolver
+import numpy as np
+
 from kuramoto.analysis.viz import set_style, PROJECT_COLORS
+from kuramoto.solvers import RotorSolver
+
 
 def viz_3d_sync():
     set_style()
@@ -53,7 +55,7 @@ def viz_3d_sync():
         ax.set_zlim([-1.1, 1.1])
 
     plt.tight_layout()
-    plt.savefig("plots/3d_sync_demo.png", dpi=150)
+    plt.savefig("../plots/3d_sync_demo.png", dpi=150)
     print("✅ Visualization saved to plots/3d_sync_demo.png")
 
 if __name__ == "__main__":

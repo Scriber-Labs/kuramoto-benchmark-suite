@@ -1,5 +1,6 @@
+# src/kuramoto/analysis/spectral.py
 """
-src/kuramoto/analysis/spectral.py
+spectral.py
 
 Spectral analysis tools for Kuramoto phase signals.
 Implements Fourier Transform and Power Spectral Density (PSD) metrics.

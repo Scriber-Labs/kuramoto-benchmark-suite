@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import click
 
-from .commands import (
+from kuramoto.cli.commands import (
     benchmark,
     dash_export,
     datasetforbeginners,
@@ -28,7 +28,7 @@ from .commands import (
     time,
     zbw,
 )
-from .utils import print_header
+from kuramoto.cli.utils import print_header
 
 __all__: list[str] = ["cli", "main"]
 
