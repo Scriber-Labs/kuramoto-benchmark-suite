@@ -1,5 +1,6 @@
+# src/kuramoto/cli/style.py
 """
-src/kuramoto/cli/style.py
+style.py
 
 Semantic CLI output styling following Scriber Core and Eigenscribe 4-layer token standards.
 Provides consistent contrast-friendly terminal colors for attention support, focal
@@ -24,6 +25,7 @@ if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
         pass
 
 __all__: list[str] = [
+    "cli_gradient",
     "cli_message",
     "cli_info",
     "cli_network",
@@ -154,6 +156,13 @@ def ansi_256(color_name: str, text: str, bold: bool = False) -> str:
     parts.append(f"38;5;{color_code}")
     return f"\033[{';'.join(parts)}m{text}\033[0m"
 
+def cli_gradient(
+    text: str,
+    start_rgb: tuple[int, int, int] = (0, 166,  255),
+    end_rgb: tuple[int, int, int] = (168, 85, 247)
+    bold: bool = True,
+) -> str:
+    """App"""
 
 def cli_echo(msg: str, **kwargs: str) -> None:
     """

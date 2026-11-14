@@ -15,16 +15,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Repo-wide type harmonization and metadata signature standardization across repo">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/viz_3d_sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/viz_3d_sync.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,61 +66,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.4763189990219687" />
-      <entry key="MS500" value="1.862143545017596" />
-      <entry key="S2" value="1.9635957930100822" />
-      <entry key="S5" value="1.9852761225190012" />
-      <entry key="S10" value="1.9926107608338397" />
-      <entry key="S30" value="2.0014063331238843" />
-      <entry key="S60" value="2.838697961365292" />
-      <entry key="M2" value="14.590730504878053" />
-      <entry key="M5" value="72.4823440529463" />
-      <entry key="M10" value="150.38970658038124" />
-      <entry key="M15" value="208.21865878490323" />
-      <entry key="M30" value="331.6375083905523" />
-      <entry key="H1" value="514.6208550990268" />
-      <entry key="H2" value="800.1251189227692" />
-      <entry key="H4" value="1260.2549227246361" />
-      <entry key="D1" value="5073.13349170304" />
-      <entry key="W1" value="22003.180640015085" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0005744804444205" />
+      <entry key="S2" value="1.2020291977569304" />
+      <entry key="S5" value="2.1666588191452867" />
+      <entry key="S10" value="3.832743523552831" />
+      <entry key="S30" value="10.343703337670004" />
+      <entry key="S60" value="17.448906617328902" />
+      <entry key="M2" value="24.586649033840796" />
+      <entry key="M5" value="32.02900048812998" />
+      <entry key="M10" value="49.95712258573494" />
+      <entry key="M15" value="83.68629367932655" />
+      <entry key="M30" value="218.3038592725468" />
+      <entry key="H1" value="471.6003618560364" />
+      <entry key="H2" value="851.4321359539789" />
+      <entry key="H4" value="1399.00872984091" />
+      <entry key="D1" value="5331.087888905312" />
+      <entry key="W1" value="22343.61187952999" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.2062930502234686E-131" />
-      <entry key="S5" value="4.291223458452509E-53" />
-      <entry key="S10" value="6.55074305590784E-27" />
-      <entry key="S30" value="1.871099481672306E-9" />
-      <entry key="S60" value="4.326625853679865E-5" />
-      <entry key="M2" value="0.00668008989348248" />
-      <entry key="M5" value="0.16541915769678942" />
-      <entry key="M10" value="0.6143252062212842" />
-      <entry key="M15" value="1.0415599157044697" />
-      <entry key="M30" value="2.0455210217832986" />
-      <entry key="H1" value="3.7137302351615316" />
-      <entry key="H2" value="6.446000426292908" />
-      <entry key="H4" value="9.700164488797377" />
-      <entry key="D1" value="30.28415220588303" />
-      <entry key="W1" value="160.02590911356253" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="1.3780657279458477E-176" />
+      <entry key="S30" value="2.3974892439869904E-59" />
+      <entry key="S60" value="4.897554026789565E-30" />
+      <entry key="M2" value="2.2474873398915654E-15" />
+      <entry key="M5" value="1.6957107913792607E-6" />
+      <entry key="M10" value="0.001966895671368229" />
+      <entry key="M15" value="0.02262592018330845" />
+      <entry key="M30" value="0.30148446847558175" />
+      <entry key="H1" value="1.4257416990011906" />
+      <entry key="H2" value="3.9939771787374516" />
+      <entry key="H4" value="7.635486671061061" />
+      <entry key="D1" value="29.099913028915534" />
+      <entry key="W1" value="159.11659796132673" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9522988743128628" />
-      <entry key="MS500" value="1.6804829818151958" />
-      <entry key="S2" value="1.9123791306785383" />
-      <entry key="S5" value="1.9642778053283767" />
-      <entry key="S10" value="1.9820244315153497" />
-      <entry key="S30" value="1.997857480262866" />
-      <entry key="S60" value="2.836895815330218" />
-      <entry key="M2" value="14.595621114536431" />
-      <entry key="M5" value="72.64079541111967" />
-      <entry key="M10" value="150.9906491492174" />
-      <entry key="M15" value="209.24451345204847" />
-      <entry key="M30" value="333.6667025628255" />
-      <entry key="H1" value="518.319962640121" />
-      <entry key="H2" value="806.5593013965065" />
-      <entry key="H4" value="1269.9466528621213" />
-      <entry key="D1" value="5103.410013102852" />
-      <entry key="W1" value="22163.198624845347" />
+      <entry key="MS100" value="0.9075191553171609" />
+      <entry key="MS500" value="0.9809763320724246" />
+      <entry key="S2" value="1.1523394872950972" />
+      <entry key="S5" value="2.0607243151577235" />
+      <entry key="S10" value="3.7149617881813852" />
+      <entry key="S30" value="10.240160386640962" />
+      <entry key="S60" value="17.367035706962394" />
+      <entry key="M2" value="24.531616158156993" />
+      <entry key="M5" value="32.00066823264041" />
+      <entry key="M10" value="49.932726842724094" />
+      <entry key="M15" value="83.67709143899651" />
+      <entry key="M30" value="218.5670503759837" />
+      <entry key="H1" value="472.99138849739705" />
+      <entry key="H2" value="855.3999951372125" />
+      <entry key="H4" value="1406.626862591368" />
+      <entry key="D1" value="5360.178474448164" />
+      <entry key="W1" value="22502.7203077199" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -377,14 +371,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00029" summary="split the solver into separate modules (one for each integration scheme)">
-      <option name="closed" value="true" />
-      <created>1790185276443</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1790185276443</updated>
     </task>
     <task id="LOCAL-00030" summary="added benchmark configuration and sample data">
       <option name="closed" value="true" />
@@ -770,14 +756,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794567153952</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules.">
+      <option name="closed" value="true" />
+      <created>1794628348189</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1794628348189</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb." />
     <MESSAGE value="Finished sanity checks notebook" />
     <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
@@ -802,6 +795,18 @@
     <MESSAGE value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
     <MESSAGE value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
     <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Repo-wide type harmonization and metadata signature standardization across repo" />
+    <MESSAGE value="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add CLI smoke tests and Bézout's identity examples; refactor imports for consistency across Kuramoto modules." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/kuramoto/dash_export.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
