@@ -14,11 +14,11 @@ from __future__ import annotations
 
 import os
 import re
-import sys
 from collections.abc import Sequence
 from typing import Final, TypeAlias
 
 import click
+import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -68,10 +68,13 @@ RGB: TypeAlias = tuple[int, int, int]
 Color: TypeAlias = str | RGB
 
 PRESETS: Final[dict[str, tuple[str, ...]]] = {
-    # 🌟 Signature Eigenscribe: Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    # 🐉 Signature Eigenscribe (without pink): Blue (#0a95eb) -> Periwinkle (#5280ff) -> Purple (#a855f7)
+    "eigenscribe-1": ("#38bdf8", "#0A95EB", "#5280ff", "#5e17eb"),
+    # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    "eigenscribe-2": ("#00a6ff", "#a855f7", "#ff00c3"),
     "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
-    "sunset": ("#ff6b35", "#f7c548", "#d7263d"),
+    "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
     # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
     "forest": ("#a7c957", "#2a9d8f", "#264653"),
     # 🌌 Midnight Cosmic: Sky Cyan (#38bdf8) -> Lavender (#818cf8) -> Rose (#f43f5e)
@@ -80,6 +83,8 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "aurora": ("#06b6d4", "#10b981", "#84cc16"),
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
+    # 💜 Purple Gradient: Purple-1 (#7952f5) -> Warm purple (#a855f7)
+    "purple_gradient": ("#7952f5", "#a855f7")
 }
 
 STYLE_MAP: Final[dict[str, str]] = {
@@ -237,7 +242,7 @@ def _normalize_color(color: Color) -> RGB:
 
 def multi_gradient(
     text: str,
-    colors: Sequence[Color] = PRESETS["electric"],
+    colors: Sequence[Color] = PRESETS["eigenscribe-2"],
     *,
     bold: bool = True,
 ) -> str:
@@ -248,7 +253,7 @@ def multi_gradient(
     ----------
     text : str
         The input text to colorize.
-    colors : Sequence[Color], default=PRESETS["electric"]
+    colors : Sequence[Color], default=PRESETS["eigenscribe-2"]
         A sequence of at least two color stops (hex strings or RGB tuples).
     bold : bool, default=True
         Whether to apply bold ANSI formatting.
