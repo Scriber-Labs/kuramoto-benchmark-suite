@@ -15,10 +15,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Remove Python visualization boilerplate">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="still updating the centralized color maps">
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-colors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-gradients.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_colors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_gradients.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/style/cli/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/style/colors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/.junie/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/.junie/skills/cosmic-visual-styling/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/.junie/skills/cosmic-visual-styling/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/notebooks/visuals-boilerplate.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/notebooks/visuals-boilerplate.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/messaging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/colors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/uv.lock" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,60 +84,60 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000000528246" />
-      <entry key="S2" value="1.0026959323308529" />
-      <entry key="S5" value="1.0938174435946482" />
-      <entry key="S10" value="1.306296332976169" />
-      <entry key="S30" value="1.6740838658685684" />
-      <entry key="S60" value="1.8210264470090467" />
-      <entry key="M2" value="1.9073580559520624" />
-      <entry key="M5" value="2.2365436450716567" />
-      <entry key="M10" value="4.868038708961311" />
-      <entry key="M15" value="10.87593341065578" />
-      <entry key="M30" value="46.367580584523466" />
-      <entry key="H1" value="163.0323446789876" />
-      <entry key="H2" value="476.2048784714698" />
-      <entry key="H4" value="1109.604335933478" />
-      <entry key="D1" value="5436.088104931904" />
-      <entry key="W1" value="22799.09133564368" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000000097159352" />
+      <entry key="S5" value="1.000623725991651" />
+      <entry key="S10" value="1.0249745828275456" />
+      <entry key="S30" value="1.2991425393353329" />
+      <entry key="S60" value="1.7093654835619576" />
+      <entry key="M2" value="2.781575880042678" />
+      <entry key="M5" value="5.338733099410522" />
+      <entry key="M10" value="7.1747389363853475" />
+      <entry key="M15" value="7.984275919881144" />
+      <entry key="M30" value="9.146490939115953" />
+      <entry key="H1" value="18.794784622729885" />
+      <entry key="H2" value="119.06664138593963" />
+      <entry key="H4" value="538.0644445423023" />
+      <entry key="D1" value="4816.394227469542" />
+      <entry key="W1" value="22421.709971096432" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="5.529372024605729E-207" />
-      <entry key="S5" value="3.1410173044506565E-83" />
-      <entry key="S10" value="5.605057650284216E-42" />
-      <entry key="S30" value="1.8596639885002492E-14" />
-      <entry key="S60" value="1.621532923840408E-7" />
-      <entry key="M2" value="5.353105499341747E-4" />
-      <entry key="M5" value="0.08201832290530695" />
-      <entry key="M10" value="0.7077994309125387" />
-      <entry key="M15" value="1.8748864318540872" />
-      <entry key="M30" value="6.212751415687185" />
-      <entry key="H1" value="12.64733105005974" />
-      <entry key="H2" value="19.324434551346076" />
-      <entry key="H4" value="26.126881923563143" />
-      <entry key="D1" value="52.79110026758223" />
-      <entry key="W1" value="184.4466382935881" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="1.6891574623175459E-174" />
+      <entry key="S60" value="1.5454095743629714E-87" />
+      <entry key="M2" value="5.225943574964549E-44" />
+      <entry key="M5" value="8.123336619708657E-18" />
+      <entry key="M10" value="7.0440428934669884E-9" />
+      <entry key="M15" value="8.674600601711956E-6" />
+      <entry key="M30" value="0.013363531383419263" />
+      <entry key="H1" value="0.5865668526718565" />
+      <entry key="H2" value="4.161655342243264" />
+      <entry key="H4" value="12.12459498496922" />
+      <entry key="D1" value="46.45052817174158" />
+      <entry key="W1" value="181.10571894129546" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.7955364837549187" />
-      <entry key="MS500" value="0.9552829364325511" />
-      <entry key="S2" value="0.9912888847910625" />
-      <entry key="S5" value="1.0887601973566017" />
-      <entry key="S10" value="1.3032058508530662" />
-      <entry key="S30" value="1.6727301178203176" />
-      <entry key="S60" value="1.8202850990316957" />
-      <entry key="M2" value="1.9074933706446762" />
-      <entry key="M5" value="2.3176686002057885" />
-      <entry key="M10" value="5.572448815511154" />
-      <entry key="M15" value="12.744683038333214" />
-      <entry key="M30" value="52.5688621790002" />
-      <entry key="H1" value="175.6654280648262" />
-      <entry key="H2" value="495.5140195696665" />
-      <entry key="H4" value="1135.7168119284565" />
-      <entry key="D1" value="5488.869554446127" />
-      <entry key="W1" value="22983.52973322485" />
+      <entry key="MS100" value="0.9592641193252643" />
+      <entry key="MS500" value="0.9917167307382933" />
+      <entry key="S2" value="0.9979227286914432" />
+      <entry key="S5" value="0.999791690231363" />
+      <entry key="S10" value="1.0245466661855458" />
+      <entry key="S30" value="1.2989556016799437" />
+      <entry key="S60" value="1.7092394022926558" />
+      <entry key="M2" value="2.781468761491857" />
+      <entry key="M5" value="5.338645079493119" />
+      <entry key="M10" value="7.174677975238516" />
+      <entry key="M15" value="7.984238842391929" />
+      <entry key="M30" value="9.159803093130739" />
+      <entry key="H1" value="19.380670841940397" />
+      <entry key="H2" value="123.2249846357152" />
+      <entry key="H4" value="550.1823395037521" />
+      <entry key="D1" value="4862.836260171249" />
+      <entry key="W1" value="22602.807597996336" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -211,11 +228,11 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sofia\PycharmProjects\scriber-core\src\frontend\the-scriber-experience" />
+      <recent name="C:\Users\sofia\PycharmProjects\scriber-core\src\frontend" />
       <recent name="C:\Users\sofia\PycharmProjects\scriber-core\src" />
+      <recent name="C:\Users\sofia\PycharmProjects\scriber-core\src\the-scribe-experience" />
       <recent name="C:\Users\sofia\PycharmProjects\scriber-core\boilerplates\python\style\plots" />
-      <recent name="C:\Users\sofia\PycharmProjects\scriber-core\boilerplates\python\style\cli" />
-      <recent name="C:\Users\sofia\PycharmProjects\scriber-core\boilerplates\python\style" />
-      <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
     </key>
   </component>
   <component name="RunManager" selected="Python.viz">
@@ -369,14 +386,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00035" summary="updated execution timestamps in validate_structural_metrics.ipynb">
-      <option name="closed" value="true" />
-      <created>1791517808491</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1791517808491</updated>
     </task>
     <task id="LOCAL-00036" summary="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks">
       <option name="closed" value="true" />
@@ -762,14 +771,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794687570408</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="still updating the centralized color maps">
+      <option name="closed" value="true" />
+      <created>1794697147436</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1794697147436</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sanity check notebook" />
     <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
@@ -794,7 +810,8 @@
     <MESSAGE value="Added gradient engine integration, improved usage examples with `doctest: +SKIP` for better testing compatibility, and reformatted color palette definitions." />
     <MESSAGE value="Add ANSI TrueColor gradient engine, report JSON exporters, and updated notebook execution timestamps" />
     <MESSAGE value="Remove Python visualization boilerplate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove Python visualization boilerplate" />
+    <MESSAGE value="still updating the centralized color maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="still updating the centralized color maps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
