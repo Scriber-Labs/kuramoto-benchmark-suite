@@ -1,0 +1,85 @@
+---
+config:
+  theme: base
+  look: classic
+  themeVariables:
+    background: "#0D1117"
+    primaryColor: "#14B5FF"
+    primaryTextColor: "#F0F6FC"
+    primaryBorderColor: "#14B5FF"
+    lineColor: "#14B5FF"
+    secondaryColor: "#0070EB"
+    tertiaryColor: "#0D1117"
+    fontFamily: "'Aclonica', sans-serif"
+    fontSize: "15px"
+    clusterBkg: "rgba(255, 255, 255, 0.03)"
+    clusterBorder: "#30363D"
+    edgeLabelBackground: "#0D1117"
+    nodeSpacing: 45
+    rankSpacing: 75
+    borderRadius: "10"
+  flowchart:
+    curve: basis
+    useMaxWidth: true
+    htmlLabels: true
+  themeCSS: |
+    .node rect, .node circle, .node ellipse, .node polygon, .node path { fill-opacity: 0.9; stroke-width: 2px; }
+    .cluster rect { rx: 16; ry: 16; }
+    .nodeLabel, .edgeLabel, .cluster-label, .cluster-label text, .label, .label text, text, .katex, .katex *, .MathJax, .MathJax *, mjx-container, mjx-container * { color: #F0F6FC !important; fill: #F0F6FC !important; -webkit-text-fill-color: #F0F6FC !important; }
+---
+flowchart TD
+
+%% Title: Eigenscribe Architectural Blueprint
+
+subgraph Client_API["1️⃣ Client & High-Level API Layer"]
+    CLI["CLI Command Suite<br/>(generate, time, network, psd, qasm)"]:::primary
+    API_Gen["generate_kuramoto_dataset()<br/>Unified Functional API"]:::primary
+    Notebooks["Interactive Research Notebooks<br/>(failure_modes, sanity_checks)"]:::cosmic
+end
+
+subgraph Model_Orchestration["2️⃣ Model Orchestration & Configuration Layer"]
+    Config["SimulationConfig & Solver Types<br/>(N, K, topology, dt, seed)"]:::secondary
+    Topology["Network Topologies (load_topology)<br/>Ring, Erdos-Renyi, Small-World, Tree-of-Life"]:::secondary
+    Temporal_Ctrl["Temporal Resolution Controller<br/>Nyquist Guard & Adaptive Step Selection"]:::secondary
+end
+
+subgraph Physics_Law["3️⃣ Dynamical Physics & Algebra Generators"]
+    Phase_Physics["Phase-Space Vector Field (&Ropf;<sup>N</sup>)<br/>d&theta;<sub>i</sub>/dt = &omega;<sub>i</sub> + (K/N) &sum; A<sub>ij</sub> sin(&theta;<sub>j</sub> - &theta;<sub>i</sub>)"]:::accent
+    GA_Physics["2D/3D Clifford Bivector Torque (Cl<sub>2,0</sub> / Cl<sub>3,0</sub>)<br/>&Omega;<sub>i</sub> = &omega;<sub>i</sub> e<sub>12</sub> - K (v<sub>mean,i</sub> &and; v<sub>i</sub>)"]:::accent
+    Quantum_Physics["Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 &sum;<sub>j</sub> &Omega;<sub>j</sub>(t) &sigma;<sub>j</sub><sup>z</sup>"]:::accent
+end
+
+subgraph Integrator_Ecosystem["4️⃣ Multi-Manifold Numerical Solvers"]
+    RK45_Int["Classical Adaptive RK45<br/>SciPy Dormand-Prince 5(4)"]:::success
+    GA_Rotors["Geometric Algebra Rotor Integrators<br/>Midpoint, Embedded, Lie-RKMK4, Adaptive DOPRI 5(4)"]:::success
+    Quantum_SCF["Quantum SCF Solvers<br/>Statevector, Expectation, Shot Sampling & QASM"]:::success
+    Coprime_Sampler["Dual-Channel Coprime Sub-Nyquist Sampler<br/>M/N Strides & CRT Reconstruction"]:::success
+end
+
+subgraph Diagnostics_Layer["5️⃣ Diagnostics, Symmetries & Data Serialization"]
+    Obs_OP["Order Parameter Engine<br/>r(t) = &lang;exp(i&theta;)&rang; & Synchronization Bounds"]:::warning
+    Obs_Lie["Lie Symmetry & Invariants Tracker<br/>U(1) Invariance, Energy Drift & Symplectic Check"]:::warning
+    Dataset_Out[("KuramotoDataset Output<br/>Serialization (.npz, .h5, JSON Telemetry)")]:::warning
+end
+
+CLI --> Config
+API_Gen --> Config
+Notebooks --> Config
+Config --> Topology
+Topology --> Phase_Physics
+Temporal_Ctrl --> Integrator_Ecosystem
+Phase_Physics --> RK45_Int
+GA_Physics --> GA_Rotors
+Quantum_Physics --> Quantum_SCF
+Integrator_Ecosystem --> Obs_OP
+Integrator_Ecosystem --> Coprime_Sampler
+Obs_OP --> Obs_Lie
+Obs_Lie --> Dataset_Out
+
+classDef primary fill:#002b4d,stroke:#14b5ff,stroke-width:2px,color:#f0f6fc;
+classDef secondary fill:#1f1347,stroke:#7952f5,stroke-width:2px,color:#f0f6fc;
+classDef success fill:#003820,stroke:#22f792,stroke-width:2px,color:#f0f6fc;
+classDef warning fill:#3d2400,stroke:#f78166,stroke-width:2px,color:#f0f6fc;
+classDef accent fill:#38002a,stroke:#ff40a1,stroke-width:2px,color:#f0f6fc;
+classDef cosmic fill:#0a0f1f,stroke:#c8f8ff,stroke-width:2px,color:#f0f6fc;
+classDef subtle fill:#161b22,stroke:#30363d,stroke-width:1.5px,color:#8b949e;

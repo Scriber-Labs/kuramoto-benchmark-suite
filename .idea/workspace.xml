@@ -15,27 +15,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="still updating the centralized color maps">
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-colors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-gradients.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_colors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_gradients.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Package frontend styling modules for v1.0.0">
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/mermaid/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/mermaid/theme.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scriber-core/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/.junie/AGENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/.junie/skills/cosmic-visual-styling/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/.junie/skills/cosmic-visual-styling/SKILL.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/notebooks/visuals-boilerplate.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/notebooks/visuals-boilerplate.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scriber-core/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/messaging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/style/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/colors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/cli/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/cli/gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/cli/messaging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/style/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/style/tse-colors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/style/tse-gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/style/tse_colors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/the-scriber-experience/style/tse_gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scriber-core/tests/test_frontend_styling.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/tests/test_frontend_styling.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,23 +80,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000097159352" />
-      <entry key="S5" value="1.000623725991651" />
-      <entry key="S10" value="1.0249745828275456" />
-      <entry key="S30" value="1.2991425393353329" />
-      <entry key="S60" value="1.7093654835619576" />
-      <entry key="M2" value="2.781575880042678" />
-      <entry key="M5" value="5.338733099410522" />
-      <entry key="M10" value="7.1747389363853475" />
-      <entry key="M15" value="7.984275919881144" />
-      <entry key="M30" value="9.146490939115953" />
-      <entry key="H1" value="18.794784622729885" />
-      <entry key="H2" value="119.06664138593963" />
-      <entry key="H4" value="538.0644445423023" />
-      <entry key="D1" value="4816.394227469542" />
-      <entry key="W1" value="22421.709971096432" />
+      <entry key="MS100" value="1.000047227935594" />
+      <entry key="MS500" value="1.1371862908335226" />
+      <entry key="S2" value="1.9350598997482797" />
+      <entry key="S5" value="3.0350318527102695" />
+      <entry key="S10" value="3.8303534208227097" />
+      <entry key="S30" value="4.823749564591777" />
+      <entry key="S60" value="5.4584317888341465" />
+      <entry key="M2" value="7.508906557020194" />
+      <entry key="M5" value="14.08082807221569" />
+      <entry key="M10" value="19.381381016740292" />
+      <entry key="M15" value="21.80331746140297" />
+      <entry key="M30" value="24.76082076037176" />
+      <entry key="H1" value="28.329026319334517" />
+      <entry key="H2" value="66.64749258206881" />
+      <entry key="H4" value="337.60703409745713" />
+      <entry key="D1" value="4421.550255276051" />
+      <entry key="W1" value="22157.350445679916" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -107,37 +104,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="1.6891574623175459E-174" />
-      <entry key="S60" value="1.5454095743629714E-87" />
-      <entry key="M2" value="5.225943574964549E-44" />
-      <entry key="M5" value="8.123336619708657E-18" />
-      <entry key="M10" value="7.0440428934669884E-9" />
-      <entry key="M15" value="8.674600601711956E-6" />
-      <entry key="M30" value="0.013363531383419263" />
-      <entry key="H1" value="0.5865668526718565" />
-      <entry key="H2" value="4.161655342243264" />
-      <entry key="H4" value="12.12459498496922" />
-      <entry key="D1" value="46.45052817174158" />
-      <entry key="W1" value="181.10571894129546" />
+      <entry key="S30" value="2.0828150459315475E-289" />
+      <entry key="S60" value="5.426675885307078E-145" />
+      <entry key="M2" value="9.792867058061539E-73" />
+      <entry key="M5" value="2.62320666540193E-29" />
+      <entry key="M10" value="1.2658172809475686E-14" />
+      <entry key="M15" value="1.2821795337432905E-9" />
+      <entry key="M30" value="1.6246915214140702E-4" />
+      <entry key="H1" value="0.06467588127259118" />
+      <entry key="H2" value="1.38190608518474" />
+      <entry key="H4" value="6.986721783771121" />
+      <entry key="D1" value="42.373241814442665" />
+      <entry key="W1" value="178.7443457135281" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592641193252643" />
-      <entry key="MS500" value="0.9917167307382933" />
-      <entry key="S2" value="0.9979227286914432" />
-      <entry key="S5" value="0.999791690231363" />
-      <entry key="S10" value="1.0245466661855458" />
-      <entry key="S30" value="1.2989556016799437" />
-      <entry key="S60" value="1.7092394022926558" />
-      <entry key="M2" value="2.781468761491857" />
-      <entry key="M5" value="5.338645079493119" />
-      <entry key="M10" value="7.174677975238516" />
-      <entry key="M15" value="7.984238842391929" />
-      <entry key="M30" value="9.159803093130739" />
-      <entry key="H1" value="19.380670841940397" />
-      <entry key="H2" value="123.2249846357152" />
-      <entry key="H4" value="550.1823395037521" />
-      <entry key="D1" value="4862.836260171249" />
-      <entry key="W1" value="22602.807597996336" />
+      <entry key="MS100" value="0.959310055810476" />
+      <entry key="MS500" value="1.1281443687500734" />
+      <entry key="S2" value="1.931645706016951" />
+      <entry key="S5" value="3.032982268197662" />
+      <entry key="S10" value="3.829072525591939" />
+      <entry key="S30" value="4.823211004833784" />
+      <entry key="S60" value="5.457987470195828" />
+      <entry key="M2" value="7.507794272178171" />
+      <entry key="M5" value="14.078982822119587" />
+      <entry key="M10" value="19.37985960293569" />
+      <entry key="M15" value="21.802117385645662" />
+      <entry key="M30" value="24.76027224189956" />
+      <entry key="H1" value="28.39324061970128" />
+      <entry key="H2" value="68.02809723934938" />
+      <entry key="H4" value="344.58979206420946" />
+      <entry key="D1" value="4463.915729859586" />
+      <entry key="W1" value="22336.086802358397" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -154,75 +151,78 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;KEY_CHAT_IN_TOOLWINDOW&quot;: &quot;false&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Doctests in cli_style_boilerplate.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
-    &quot;Python.style.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz_3d_sync.executor&quot;: &quot;Run&quot;,
-    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
-    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "KEY_CHAT_IN_TOOLWINDOW": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in cli_style_boilerplate.executor": "Run",
+    "Python tests.Doctests in gradients.executor": "Run",
+    "Python tests.Doctests in messaging (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (2).executor": "Run",
+    "Python tests.Doctests in order_parameter.executor": "Run",
+    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
+    "Python.analytics_engine.executor": "Run",
+    "Python.api.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.commands.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.coprime.executor": "Run",
+    "Python.dash_component_template.executor": "Run",
+    "Python.dataset.executor": "Run",
+    "Python.generate_example_dataset.executor": "Run",
+    "Python.graphs.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.order_parameter.executor": "Run",
+    "Python.rk45.executor": "Run",
+    "Python.rotor.executor": "Run",
+    "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
+    "Python.style.executor": "Run",
+    "Python.test_generate_kuramoto_dataset.executor": "Run",
+    "Python.theme.executor": "Run",
+    "Python.utils.executor": "Run",
+    "Python.validation.executor": "Run",
+    "Python.viz.executor": "Run",
+    "Python.viz_3d_sync.executor": "Run",
+    "Python.zbw_generator.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
+    "llm.figma.connect.mcp.suggestion.dismissed": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;,
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT",
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
@@ -235,7 +235,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\scriber-core\boilerplates\python\style\plots" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.viz">
+  <component name="RunManager" selected="Python tests.Doctests in messaging (1)">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -243,8 +243,8 @@
       </steps>
       <method v="2" />
     </configuration>
-    <configuration name="style" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
+    <configuration name="theme" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scriber-core" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -252,37 +252,13 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/plots" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/style.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/utils.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/plots/theme.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -315,28 +291,46 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="viz_3d_sync" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
+    <configuration name="Doctests in gradients" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+      <module name="scriber-core" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/viz_3d_sync.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/gradients.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Doctests in messaging (1)" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+      <module name="scriber-core" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/messaging.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Doctests in messaging" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
@@ -362,11 +356,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Doctests in messaging (1)" />
+        <item itemvalue="Python tests.Doctests in gradients" />
+        <item itemvalue="Python.theme" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python tests.Doctests in messaging" />
-        <item itemvalue="Python.utils" />
-        <item itemvalue="Python.style" />
-        <item itemvalue="Python.viz_3d_sync" />
       </list>
     </recent_temporary>
   </component>
@@ -386,14 +380,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00036" summary="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks">
-      <option name="closed" value="true" />
-      <created>1791528672128</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1791528672128</updated>
     </task>
     <task id="LOCAL-00037" summary="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources.">
       <option name="closed" value="true" />
@@ -779,14 +765,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794697147436</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Package frontend styling modules for v1.0.0">
+      <option name="closed" value="true" />
+      <created>1794721805133</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1794721805133</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
     <MESSAGE value="reconciled a whole bunch of commits" />
@@ -811,7 +804,8 @@
     <MESSAGE value="Add ANSI TrueColor gradient engine, report JSON exporters, and updated notebook execution timestamps" />
     <MESSAGE value="Remove Python visualization boilerplate" />
     <MESSAGE value="still updating the centralized color maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="still updating the centralized color maps" />
+    <MESSAGE value="Package frontend styling modules for v1.0.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Package frontend styling modules for v1.0.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

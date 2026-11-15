@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "the-scriber-experience"
+version = "1.0.0"
+description = "The Scriber Experience (TSE): Design system, ANSI TrueColor CLI styling, Mermaid.js theming, and scientific visualization bootstrap."
+readme = "USER_GUIDE.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Eigenscribe Inc. / Scriber Labs" }
+]
+keywords = [
+    "cli",
+    "ansi",
+    "gradient",
+    "mermaid",
+    "visualization",
+    "matplotlib",
+    "eigenscribe",
+    "tse"
+]
+dependencies = [
+    "click>=8.0.0",
+    "tabulate>=0.9.0",
+    "matplotlib>=3.5.0",
+    "numpy>=1.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "seaborn>=0.12.0",
+    "networkx>=3.0.0",
+]
+
+[project.scripts]
+tse-cli = "the_scriber_experience.cli.baseline:main"
