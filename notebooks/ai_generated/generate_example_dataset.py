@@ -14,9 +14,9 @@ from __future__ import annotations
 # --------------------------------------------------------------------------- #
 # Imports
 # --------------------------------------------------------------------------- #
-
 import os
 from typing import Final
+
 import numpy as np
 
 from kuramoto.api import generate_kuramoto_dataset
@@ -35,6 +35,7 @@ OUTPUT_PATH: Final[str] = "data/examples/small_demo.npz"
 # ------------------------------------------------------------------------------ #
 # 2️⃣ Generation Logic
 # ------------------------------------------------------------------------------ #
+
 
 def run_dataset_generation() -> None:
     """
@@ -71,15 +72,18 @@ def run_dataset_generation() -> None:
 
     print(f"✅ Success: Dataset saved to '{OUTPUT_PATH}'")
 
+
 # ------------------------------------------------------------------------------ #
 # 3️⃣ Entry Point
 # ------------------------------------------------------------------------------ #
+
 
 def main() -> None:
     """
     Main entry point for the example script.
     """
     run_dataset_generation()
+
 
 if __name__ == "__main__":
     main()

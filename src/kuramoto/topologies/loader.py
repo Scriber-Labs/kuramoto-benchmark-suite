@@ -26,10 +26,9 @@ AdjacencyMatrix = NDArray[np.floating]
 # 1️⃣ Core definitions
 # -----------------------------------------------------------------------------------------------------------
 
+
 def load_topology(
-    name: str, 
-    return_graph: bool = False, 
-    **kwargs: Any
+    name: str, return_graph: bool = False, **kwargs: Any
 ) -> nx.Graph | AdjacencyMatrix:
     """
     Load a network topology by name.
@@ -47,7 +46,7 @@ def load_topology(
     -------
     nx.Graph or AdjacencyMatrix
         The generated topology.
-    
+
     Raises
     ------
     ValueError
@@ -61,9 +60,7 @@ def load_topology(
 
     elif name == "small_world":
         G = nx.watts_strogatz_graph(
-           kwargs.get("n", 20),
-           kwargs.get("k", 4),
-           kwargs.get("p", 0.2)
+            kwargs.get("n", 20), kwargs.get("k", 4), kwargs.get("p", 0.2)
         )
 
     elif name in ("random", "erdos_renyi", "erdos-renyi"):
@@ -81,6 +78,7 @@ def load_topology(
 
     elif name == "tree_of_life":
         from .tree_of_life import build_tree_of_life
+
         G = build_tree_of_life()
 
     else:
@@ -90,21 +88,23 @@ def load_topology(
         return G
     return nx.to_numpy_array(G)
 
+
 # -----------------------------------------------------------------------------------------------------------
 # 4️⃣ Smoke tests / example usage
 # -----------------------------------------------------------------------------------------------------------
+
 
 def _run_smoke_test() -> None:
     """
     Quick sanity checks for topology loading.
     """
     print("💨 Running topology loader smoke tests...")
-    
+
     # Test ring
     A_ring = load_topology("ring", n=10)
     assert isinstance(A_ring, np.ndarray)
     assert A_ring.shape == (10, 10)
-    
+
     # Test complete
     G_comp = load_topology("complete", n=5, return_graph=True)
     assert isinstance(G_comp, nx.Graph)
@@ -114,18 +114,21 @@ def _run_smoke_test() -> None:
     A_bip = load_topology("bipartite", n=6)
     assert isinstance(A_bip, np.ndarray)
     assert A_bip.shape == (6, 6)
-    
+
     print("✅ Topology loader smoke tests passed.")
+
 
 # -----------------------------------------------------------------------------------------------------------
 # 5️⃣ Entry point
 # -----------------------------------------------------------------------------------------------------------
+
 
 def main() -> None:
     """
     Main entry point for smoke tests.
     """
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

@@ -15,24 +15,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="add cli user guide and update demo notebook">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add TSE plots theme and style bridge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/boilerplates/python/visualization_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/boilerplates/python/visualization_boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/messaging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/mermaid/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/mermaid/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/mermaid/theme.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/mermaid/theme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/style/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/style/tse-colors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse-gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/style/tse-gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/style/tse_colors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/src/frontend/the_scriber_experience/style/tse_gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/style/tse_gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scriber-core/tests/test_cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/../scriber-core/tests/test_cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rk45.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rk45.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rotor_bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rotor_bridge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/gradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/gradient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/messaging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/theme.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/theme.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/visuals.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/visuals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/generate_example_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/generate_example_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/benchmark_scaling.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/benchmark_scaling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/export_to_dash.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/export_to_dash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/viz_3d_sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/viz_3d_sync.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dash_export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/graphs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_dash_export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_the_scriber_experience.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_the_scriber_experience.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,78 +184,78 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "KEY_CHAT_IN_TOOLWINDOW": "false",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in gradients.executor": "Run",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python tests.Python tests in test_cli.py.executor": "Run",
-    "Python tests.Python tests in test_frontend_styling.py.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.colors.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.coprime.executor": "Run",
-    "Python.dash_component_template.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.gradients.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.style.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto",
-    "llm.figma.connect.mcp.suggestion.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.scopes",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;KEY_CHAT_IN_TOOLWINDOW&quot;: &quot;false&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_cli.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_frontend_styling.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.style.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/src/kuramoto&quot;,
+    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\src\kuramoto" />
@@ -372,14 +405,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00030" summary="added benchmark configuration and sample data">
-      <option name="closed" value="true" />
-      <created>1791499360317</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1791499360317</updated>
     </task>
     <task id="LOCAL-00031" summary="updated execution timestamps in demo.ipynb">
       <option name="closed" value="true" />
@@ -765,14 +790,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794613120863</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Add TSE plots theme and style bridge">
+      <option name="closed" value="true" />
+      <created>1794767331625</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1794767331625</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Revised energy diagnostics in `sanity_checks.ipynb` with algebraic velocity reconstruction. Updated output for phase divergence and energy drift metrics." />
     <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
     <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
@@ -797,14 +829,15 @@
     <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
     <MESSAGE value="add gold standard css template and preview" />
     <MESSAGE value="add cli user guide and update demo notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="add cli user guide and update demo notebook" />
+    <MESSAGE value="Add TSE plots theme and style bridge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add TSE plots theme and style bridge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/kuramoto/cli/utils.py</url>
-          <line>14</line>
+          <line>15</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

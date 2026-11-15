@@ -48,6 +48,7 @@ from numpy.typing import NDArray
 
 # Import RNG utilities from the central utils module
 from kuramoto.utils import resolve_rng
+
 # Validation imports support both package execution and direct script execution.
 from kuramoto.validation import (
     validate_adjacency,

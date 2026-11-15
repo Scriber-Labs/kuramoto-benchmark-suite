@@ -97,6 +97,7 @@ extend-exclude = [
     ".scriber-core",
     "build",
     "dist",
+    "notebooks",
 ]
 
 [tool.ruff.lint]
@@ -115,6 +116,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # Allow unused imports in init files
+"tests/*" = ["E402"]      # Allow late imports in tests for sys.path manipulation
 
 [tool.ruff.lint.isort]
 known-first-party = ["kuramoto"]

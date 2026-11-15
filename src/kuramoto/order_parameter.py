@@ -54,6 +54,7 @@ TimeSeriesArray = NDArray[np.floating]
 # 1️⃣ Lie Symmetry Diagnostics
 # ------------------------------------------------------------------------------
 
+
 class LieSymmetryMetrics(NamedTuple):
     """
     Measures of Lie-group symmetry and synchronization diagnostics.
@@ -75,6 +76,7 @@ class LieSymmetryMetrics(NamedTuple):
     global_phase_invariant: bool
     energy_conserved: NDArray[np.floating]
     synchronization_strength: float
+
 
 def track_lie_symmetries(
     states: dict[str, np.ndarray],
@@ -124,9 +126,7 @@ def track_lie_symmetries(
     phases = np.stack(list(states.values()), axis=-1)
 
     if phases.ndim != 2:
-        raise ValueError(
-            "❌ States must produce a 2D phase array, got {phases.ndim}D"
-        )
+        raise ValueError("❌ States must produce a 2D phase array, got {phases.ndim}D")
 
     if times.size < 2:
 
@@ -172,9 +172,11 @@ def track_lie_symmetries(
         synchronization_strength=float(r_over_time[-1]),
     )
 
+
 # ------------------------------------------------------------------------------
 # 2️⃣ Validation Helpers
 # ------------------------------------------------------------------------------
+
 
 def _validate_phase_array(theta: PhaseArray) -> None:
     """
@@ -194,6 +196,7 @@ def _validate_phase_array(theta: PhaseArray) -> None:
         raise ValueError("Error: Phase array cannot be empty")
     if theta.ndim not in (1, 2):
         raise ValueError(f"Error: Phase array must be 1D or 2D, got {theta.ndim}D")
+
 
 # ------------------------------------------------------------------------------
 # 2️⃣ Core Computation
@@ -251,6 +254,7 @@ def compute_order_parameter(theta: PhaseArray) -> TimeSeriesArray:
         r = np.abs(np.mean(phase_complex))
 
     return r
+
 
 # ------------------------------------------------------------------------------
 # 3️⃣ Temporal Correlation Diagnostics
@@ -323,9 +327,11 @@ def compute_order_parameter_autocorrelation(
 
     return lags, autocorr
 
+
 # ------------------------------------------------------------------------------
 # 💨 Smoke Test
 # ------------------------------------------------------------------------------
+
 
 def _run_smoke_test() -> None:
     """Sanity check for compute_order_parameter."""
@@ -389,9 +395,7 @@ def _run_smoke_test() -> None:
         ]
     )
 
-    states = {
-        f"theta_{i}": base_phases[:, i] for i in range(base_phases.shape[1])
-    }
+    states = {f"theta_{i}": base_phases[:, i] for i in range(base_phases.shape[1])}
 
     metrics = track_lie_symmetries(states, times)
 
@@ -425,13 +429,16 @@ def _run_smoke_test() -> None:
 
     print("\n ✅ All order parameter smoke tests passed.")
 
+
 # -----------------------------------------------------------------------------------------------------------
 # 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
 
+
 def main() -> None:
     """Entry point."""
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

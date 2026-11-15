@@ -931,13 +931,16 @@ def plot_fluid_vorticity(
     # We color by the absolute velocity to highlight high-torque regions
     color_val = np.abs(U)
     strm = ax.streamplot(
-        X, Y, U, V,
+        X,
+        Y,
+        U,
+        V,
         color=color_val,
         cmap=PHASE_CMAP,
         linewidth=1.2,
         density=1.5,
         arrowsize=1.0,
-        zorder=1
+        zorder=1,
     )
 
     # 5. Overlay Oscillator 'Particles'
@@ -949,11 +952,17 @@ def plot_fluid_vorticity(
         s=45,
         zorder=5,
         alpha=0.85,
-        label="Oscillator State"
+        label="Oscillator State",
     )
 
     # Mark the Mean Field (Vortex Center)
-    ax.axvline(psi_wrapped, color=PROJECT_COLORS["pink_vibrant"], linestyle="--", alpha=0.6, label="Mean Phase (Vortex Core)")
+    ax.axvline(
+        psi_wrapped,
+        color=PROJECT_COLORS["pink_vibrant"],
+        linestyle="--",
+        alpha=0.6,
+        label="Mean Phase (Vortex Core)",
+    )
 
     ax.set_title(title, fontsize=15, fontweight="bold", pad=15)
     ax.set_xlabel(r"Phase $\theta$ (radians)", fontsize=12)
@@ -965,7 +974,7 @@ def plot_fluid_vorticity(
     cbar.ax.yaxis.set_tick_params(color=TEXT_MUTED, labelcolor=TEXT_MUTED)
 
     ax.set_xlim(-np.pi, np.pi)
-    ax.set_xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
+    ax.set_xticks([-np.pi, -np.pi / 2, 0, np.pi / 2, np.pi])
     ax.set_xticklabels([r"$-\pi$", r"$-\pi/2$", "0", r"$\pi/2$", r"$\pi$"])
 
     ax.legend(loc="upper right", framealpha=0.9, edgecolor=BORDER_COLOR)
@@ -974,7 +983,10 @@ def plot_fluid_vorticity(
     plt.tight_layout()
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, facecolor=THEME_BG)
         plt.close(fig)
     else:
@@ -1020,7 +1032,11 @@ def plot_time_series(
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), facecolor=THEME_BG)
 
     for i in range(n_plot):
-        c = node_colors[i] if hasattr(node_colors, "__len__") and len(node_colors) > i else None
+        c = (
+            node_colors[i]
+            if hasattr(node_colors, "__len__") and len(node_colors) > i
+            else None
+        )
         ax1.plot(
             times,
             np.sin(theta[:, i]),
@@ -1028,10 +1044,22 @@ def plot_time_series(
             color=c,
             label=f"Node {i}",
         )
-    ax1.set_title(f"Phases (first {n_plot} oscillators)", fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
+    ax1.set_title(
+        f"Phases (first {n_plot} oscillators)",
+        fontsize=13,
+        fontweight="bold",
+        pad=10,
+        color=TEXT_PRIMARY,
+    )
     ax1.set_ylabel(r"$\sin(\theta)$", fontsize=11, color=TEXT_PRIMARY)
 
-    ax2.plot(times, r_values, color=PROJECT_COLORS["cyan_light"], linewidth=2, label=r"$R(t)$")
+    ax2.plot(
+        times,
+        r_values,
+        color=PROJECT_COLORS["cyan_light"],
+        linewidth=2,
+        label=r"$R(t)$",
+    )
     ax2.axhline(
         np.mean(r_values),
         color=PROJECT_COLORS["pink_pink"],
@@ -1047,7 +1075,10 @@ def plot_time_series(
     plt.tight_layout()
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
         plt.close(fig)
     else:
@@ -1081,7 +1112,9 @@ def plot_fourier_variability(
 
     if node_colors is None:
         prop_colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
-        node_colors = [prop_colors[i % len(prop_colors)] for i in range(len(amplitudes))]
+        node_colors = [
+            prop_colors[i % len(prop_colors)] for i in range(len(amplitudes))
+        ]
 
     fig, ax = plt.subplots(figsize=(10, 5), facecolor=THEME_BG)
     ax.set_facecolor(THEME_BG)
@@ -1108,7 +1141,10 @@ def plot_fourier_variability(
     _apply_aclonica_font(ax)
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
         plt.close(fig)
     else:
@@ -1159,7 +1195,10 @@ def plot_fourier_convergence(
     _apply_aclonica_font(ax)
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
         plt.close(fig)
     else:
@@ -1200,7 +1239,9 @@ def plot_psd_variability(
         color=GRADIENTS["gradient_1"][1],
         linewidth=2,
     )
-    ax.axvline(target_freq, color=PROJECT_COLORS["pink_pink"], linestyle="--", label="Target")
+    ax.axvline(
+        target_freq, color=PROJECT_COLORS["pink_pink"], linestyle="--", label="Target"
+    )
     ax.set_xlabel("Frequency (Hz)", fontsize=11, color=TEXT_PRIMARY)
     ax.set_ylabel("PSD", fontsize=11, color=TEXT_PRIMARY)
     ax.set_title(title, fontsize=13, fontweight="bold", pad=10, color=TEXT_PRIMARY)
@@ -1209,7 +1250,10 @@ def plot_psd_variability(
     _apply_aclonica_font(ax)
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
         plt.close(fig)
     else:
@@ -1276,7 +1320,10 @@ def plot_psd_convergence(
     _apply_aclonica_font(ax)
 
     if save_path:
-        os.makedirs(os.path.dirname(save_path) if os.path.dirname(save_path) else ".", exist_ok=True)
+        os.makedirs(
+            os.path.dirname(save_path) if os.path.dirname(save_path) else ".",
+            exist_ok=True,
+        )
         plt.savefig(save_path, dpi=200, bbox_inches="tight", facecolor=THEME_BG)
         plt.close(fig)
     else:

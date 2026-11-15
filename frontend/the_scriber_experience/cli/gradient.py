@@ -186,9 +186,7 @@ def multi_gradient(
     if len(colors) < 2:
         raise ValueError("multi_gradient requires at least two color stops.")
 
-    rgb_stops: list[RGB] = [
-        hex_to_rgb(c) if isinstance(c, str) else c for c in colors
-    ]
+    rgb_stops: list[RGB] = [hex_to_rgb(c) if isinstance(c, str) else c for c in colors]
 
     total_chars = len(text)
     if total_chars == 1:
@@ -253,9 +251,18 @@ def _run_smoke_test() -> None:
 
 def main() -> None:
     """Demonstrate gradient generation via CLI."""
-    parser = argparse.ArgumentParser(description="Eigenscribe TrueColor Gradient Engine")
-    parser.add_argument("text", nargs="?", default="THE SCRIBER EXPERIENCE", help="Text to colorize")
-    parser.add_argument("--preset", choices=list(PRESETS.keys()), default="electric", help="Color preset")
+    parser = argparse.ArgumentParser(
+        description="Eigenscribe TrueColor Gradient Engine"
+    )
+    parser.add_argument(
+        "text", nargs="?", default="THE SCRIBER EXPERIENCE", help="Text to colorize"
+    )
+    parser.add_argument(
+        "--preset",
+        choices=list(PRESETS.keys()),
+        default="electric",
+        help="Color preset",
+    )
     parser.add_argument("--no-bold", action="store_true", help="Disable bold text")
     parser.add_argument("--smoke-test", action="store_true", help="Run self-test suite")
 

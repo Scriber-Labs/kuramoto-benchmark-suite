@@ -16,10 +16,11 @@ Date: May 2026
 from __future__ import annotations
 
 import math
-import numpy as np
 from dataclasses import dataclass
-from numpy.typing import NDArray
 from typing import TYPE_CHECKING, Any, Callable, Final
+
+import numpy as np
+from numpy.typing import NDArray
 
 from kuramoto.validation import (
     validate_non_negative_scalar,

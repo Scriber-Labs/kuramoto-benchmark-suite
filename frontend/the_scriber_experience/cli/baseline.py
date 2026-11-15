@@ -25,7 +25,6 @@ Date: November 2026
 from __future__ import annotations
 
 import argparse
-import sys
 from typing import Any, Final
 
 # Try to import click
@@ -40,15 +39,12 @@ try:
     from the_scriber_experience.cli.gradient import PRESETS, multi_gradient
     from the_scriber_experience.cli.messaging import (
         EIGENSCRIBE_PALETTE,
-        STYLE_MAP,
         ansi_256,
         cli_banner,
-        cli_divider,
         cli_echo,
         cli_error,
         cli_highlight,
         cli_info,
-        cli_message,
         cli_network,
         cli_prompt,
         cli_quantum,
@@ -64,15 +60,12 @@ except ImportError:
     from .gradient import PRESETS, multi_gradient
     from .messaging import (
         EIGENSCRIBE_PALETTE,
-        STYLE_MAP,
         ansi_256,
         cli_banner,
-        cli_divider,
         cli_echo,
         cli_error,
         cli_highlight,
         cli_info,
-        cli_message,
         cli_network,
         cli_prompt,
         cli_quantum,
@@ -150,7 +143,11 @@ class BaselineCLI:
             preset=self.preset,
         )
 
-        status_256 = "Enabled (TrueColor/256-color)" if supports_256_color() else "Fallback (16-color)"
+        status_256 = (
+            "Enabled (TrueColor/256-color)"
+            if supports_256_color()
+            else "Fallback (16-color)"
+        )
         cli_info(f"Terminal Color Mode: {status_256}")
         cli_info("Eigenscribe 4-Layer Semantic Output Engine: Active")
         cli_rule(char="·", width=self.width)
@@ -257,7 +254,9 @@ def run_interactive_menu() -> None:
     cli.render_welcome()
 
     while True:
-        cli_echo("\n📌 Select a demonstration mode:", color="eigen_purple_bright", bold=True)
+        cli_echo(
+            "\n📌 Select a demonstration mode:", color="eigen_purple_bright", bold=True
+        )
         cli_echo("  1. Semantic Messaging Levels", color="eigen_cyan_light")
         cli_echo("  2. ANSI TrueColor Gradients", color="eigen_cyan_light")
         cli_echo("  3. Tabular Summary Matrix", color="eigen_cyan_light")
@@ -324,7 +323,15 @@ def main() -> None:
         "command",
         nargs="?",
         default="showcase",
-        choices=["showcase", "interactive", "palette", "gradient", "semantic", "table", "smoke-test"],
+        choices=[
+            "showcase",
+            "interactive",
+            "palette",
+            "gradient",
+            "semantic",
+            "table",
+            "smoke-test",
+        ],
         help="Command to run (default: showcase)",
     )
 

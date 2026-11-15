@@ -17,10 +17,11 @@ Date: May 2026
 
 from __future__ import annotations
 
-import numpy as np
 import warnings
-from numpy.typing import NDArray
 from typing import Final, Literal
+
+import numpy as np
+from numpy.typing import NDArray
 
 from kuramoto.quantum.circuit_gen import export_to_qasm, generate_scf_angles
 from kuramoto.utils import resolve_rng
@@ -92,9 +93,7 @@ def step_quantum_scf(
         Updated phase array of shape (N,) wrapped to [-pi, pi].
     """
     if scheme not in VALID_SCHEMES:
-        raise ValueError(
-            f"Invalid scheme '{scheme}'. Expected one of {VALID_SCHEMES}."
-        )
+        raise ValueError(f"Invalid scheme '{scheme}'. Expected one of {VALID_SCHEMES}.")
 
     # 1. Compute parallel rotation angles via the Self-Consistent Field (SCF) torque
     # phi_j = (omega_j + K * R * sin(psi - theta_j)) * dt
@@ -366,13 +365,16 @@ def _run_smoke_test() -> None:
     assert np.allclose(traj_sv, traj_exp, atol=1e-5)
 
     # Test with custom adjacency matrix
-    adj = np.array([
-        [0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0],
-        [0, 1, 0, 1, 0],
-        [0, 0, 1, 0, 1],
-        [1, 0, 0, 1, 0],
-    ], dtype=float)
+    adj = np.array(
+        [
+            [0, 1, 0, 0, 1],
+            [1, 0, 1, 0, 0],
+            [0, 1, 0, 1, 0],
+            [0, 0, 1, 0, 1],
+            [1, 0, 0, 1, 0],
+        ],
+        dtype=float,
+    )
     solver_adj = QuantumRotorSolver(n_oscillators=5, seed=42, adjacency_matrix=adj)
     _, traj_adj = solver_adj.simulate(K=1.5, t_eval=t_eval, scheme="statevector")
     assert traj_adj.shape == (10, 5)

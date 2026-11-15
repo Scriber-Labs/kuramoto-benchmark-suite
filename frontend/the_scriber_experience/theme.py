@@ -29,7 +29,6 @@ Last Updated: November 2026
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from typing import Any, Final, Sequence
 
@@ -245,7 +244,7 @@ class MermaidNode:
 
     def render(self) -> str:
         """Render the node definition in Mermaid flowchart syntax."""
-        label_escaped = self.label.replace('"', '&quot;')
+        label_escaped = self.label.replace('"', "&quot;")
         if self.shape == "round":
             s = f'{self.node_id}("{label_escaped}")'
         elif self.shape == "stadium":
@@ -417,7 +416,9 @@ class MermaidDiagram:
 
     def render(self) -> str:
         """Render the complete Mermaid diagram string with YAML frontmatter."""
-        frontmatter = get_mermaid_frontmatter(direction=self.direction, curve=self.curve)
+        frontmatter = get_mermaid_frontmatter(
+            direction=self.direction, curve=self.curve
+        )
         body_lines = [f"flowchart {self.direction}\n"]
 
         if self.title:
@@ -470,34 +471,120 @@ def create_boilerplate_diagram() -> str:
 
     # Layer 1: Client & High-Level API Layer
     l1 = diag.add_subgraph("Client_API", "1️⃣ Client & High-Level API Layer")
-    l1.add_node("CLI", "CLI Command Suite<br/>(generate, time, network, psd, qasm)", shape="rect", style_class="primary")
-    l1.add_node("API_Gen", "generate_kuramoto_dataset()<br/>Unified Functional API", shape="rect", style_class="primary")
-    l1.add_node("Notebooks", "Interactive Research Notebooks<br/>(failure_modes, sanity_checks)", shape="rect", style_class="cosmic")
+    l1.add_node(
+        "CLI",
+        "CLI Command Suite<br/>(generate, time, network, psd, qasm)",
+        shape="rect",
+        style_class="primary",
+    )
+    l1.add_node(
+        "API_Gen",
+        "generate_kuramoto_dataset()<br/>Unified Functional API",
+        shape="rect",
+        style_class="primary",
+    )
+    l1.add_node(
+        "Notebooks",
+        "Interactive Research Notebooks<br/>(failure_modes, sanity_checks)",
+        shape="rect",
+        style_class="cosmic",
+    )
 
     # Layer 2: Model Orchestration & Configuration Layer
-    l2 = diag.add_subgraph("Model_Orchestration", "2️⃣ Model Orchestration & Configuration Layer")
-    l2.add_node("Config", "SimulationConfig & Solver Types<br/>(N, K, topology, dt, seed)", shape="rect", style_class="secondary")
-    l2.add_node("Topology", "Network Topologies (load_topology)<br/>Ring, Erdos-Renyi, Small-World, Tree-of-Life", shape="rect", style_class="secondary")
-    l2.add_node("Temporal_Ctrl", "Temporal Resolution Controller<br/>Nyquist Guard & Adaptive Step Selection", shape="rect", style_class="secondary")
+    l2 = diag.add_subgraph(
+        "Model_Orchestration", "2️⃣ Model Orchestration & Configuration Layer"
+    )
+    l2.add_node(
+        "Config",
+        "SimulationConfig & Solver Types<br/>(N, K, topology, dt, seed)",
+        shape="rect",
+        style_class="secondary",
+    )
+    l2.add_node(
+        "Topology",
+        "Network Topologies (load_topology)<br/>Ring, Erdos-Renyi, Small-World, Tree-of-Life",
+        shape="rect",
+        style_class="secondary",
+    )
+    l2.add_node(
+        "Temporal_Ctrl",
+        "Temporal Resolution Controller<br/>Nyquist Guard & Adaptive Step Selection",
+        shape="rect",
+        style_class="secondary",
+    )
 
     # Layer 3: Dynamical Physics & Algebra Generators
     l3 = diag.add_subgraph("Physics_Law", "3️⃣ Dynamical Physics & Algebra Generators")
-    l3.add_node("Phase_Physics", "Phase-Space Vector Field (&Ropf;<sup>N</sup>)<br/>d&theta;<sub>i</sub>/dt = &omega;<sub>i</sub> + (K/N) &sum; A<sub>ij</sub> sin(&theta;<sub>j</sub> - &theta;<sub>i</sub>)", shape="rect", style_class="accent")
-    l3.add_node("GA_Physics", "2D/3D Clifford Bivector Torque (Cl<sub>2,0</sub> / Cl<sub>3,0</sub>)<br/>&Omega;<sub>i</sub> = &omega;<sub>i</sub> e<sub>12</sub> - K (v<sub>mean,i</sub> &and; v<sub>i</sub>)", shape="rect", style_class="accent")
-    l3.add_node("Quantum_Physics", "Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 &sum;<sub>j</sub> &Omega;<sub>j</sub>(t) &sigma;<sub>j</sub><sup>z</sup>", shape="rect", style_class="accent")
+    l3.add_node(
+        "Phase_Physics",
+        "Phase-Space Vector Field (&Ropf;<sup>N</sup>)<br/>d&theta;<sub>i</sub>/dt = &omega;<sub>i</sub> + (K/N) &sum; A<sub>ij</sub> sin(&theta;<sub>j</sub> - &theta;<sub>i</sub>)",
+        shape="rect",
+        style_class="accent",
+    )
+    l3.add_node(
+        "GA_Physics",
+        "2D/3D Clifford Bivector Torque (Cl<sub>2,0</sub> / Cl<sub>3,0</sub>)<br/>&Omega;<sub>i</sub> = &omega;<sub>i</sub> e<sub>12</sub> - K (v<sub>mean,i</sub> &and; v<sub>i</sub>)",
+        shape="rect",
+        style_class="accent",
+    )
+    l3.add_node(
+        "Quantum_Physics",
+        "Quantum SCF Collective Hamiltonian<br/>H(t) = -1/2 &sum;<sub>j</sub> &Omega;<sub>j</sub>(t) &sigma;<sub>j</sub><sup>z</sup>",
+        shape="rect",
+        style_class="accent",
+    )
 
     # Layer 4: Multi-Manifold Numerical Solvers
-    l4 = diag.add_subgraph("Integrator_Ecosystem", "4️⃣ Multi-Manifold Numerical Solvers")
-    l4.add_node("RK45_Int", "Classical Adaptive RK45<br/>SciPy Dormand-Prince 5(4)", shape="rect", style_class="success")
-    l4.add_node("GA_Rotors", "Geometric Algebra Rotor Integrators<br/>Midpoint, Embedded, Lie-RKMK4, Adaptive DOPRI 5(4)", shape="rect", style_class="success")
-    l4.add_node("Quantum_SCF", "Quantum SCF Solvers<br/>Statevector, Expectation, Shot Sampling & QASM", shape="rect", style_class="success")
-    l4.add_node("Coprime_Sampler", "Dual-Channel Coprime Sub-Nyquist Sampler<br/>M/N Strides & CRT Reconstruction", shape="rect", style_class="success")
+    l4 = diag.add_subgraph(
+        "Integrator_Ecosystem", "4️⃣ Multi-Manifold Numerical Solvers"
+    )
+    l4.add_node(
+        "RK45_Int",
+        "Classical Adaptive RK45<br/>SciPy Dormand-Prince 5(4)",
+        shape="rect",
+        style_class="success",
+    )
+    l4.add_node(
+        "GA_Rotors",
+        "Geometric Algebra Rotor Integrators<br/>Midpoint, Embedded, Lie-RKMK4, Adaptive DOPRI 5(4)",
+        shape="rect",
+        style_class="success",
+    )
+    l4.add_node(
+        "Quantum_SCF",
+        "Quantum SCF Solvers<br/>Statevector, Expectation, Shot Sampling & QASM",
+        shape="rect",
+        style_class="success",
+    )
+    l4.add_node(
+        "Coprime_Sampler",
+        "Dual-Channel Coprime Sub-Nyquist Sampler<br/>M/N Strides & CRT Reconstruction",
+        shape="rect",
+        style_class="success",
+    )
 
     # Layer 5: Diagnostics, Symmetries & Data Serialization
-    l5 = diag.add_subgraph("Diagnostics_Layer", "5️⃣ Diagnostics, Symmetries & Data Serialization")
-    l5.add_node("Obs_OP", "Order Parameter Engine<br/>r(t) = &lang;exp(i&theta;)&rang; & Synchronization Bounds", shape="rect", style_class="warning")
-    l5.add_node("Obs_Lie", "Lie Symmetry & Invariants Tracker<br/>U(1) Invariance, Energy Drift & Symplectic Check", shape="rect", style_class="warning")
-    l5.add_node("Dataset_Out", "KuramotoDataset Output<br/>Serialization (.npz, .h5, JSON Telemetry)", shape="cylinder", style_class="warning")
+    l5 = diag.add_subgraph(
+        "Diagnostics_Layer", "5️⃣ Diagnostics, Symmetries & Data Serialization"
+    )
+    l5.add_node(
+        "Obs_OP",
+        "Order Parameter Engine<br/>r(t) = &lang;exp(i&theta;)&rang; & Synchronization Bounds",
+        shape="rect",
+        style_class="warning",
+    )
+    l5.add_node(
+        "Obs_Lie",
+        "Lie Symmetry & Invariants Tracker<br/>U(1) Invariance, Energy Drift & Symplectic Check",
+        shape="rect",
+        style_class="warning",
+    )
+    l5.add_node(
+        "Dataset_Out",
+        "KuramotoDataset Output<br/>Serialization (.npz, .h5, JSON Telemetry)",
+        shape="cylinder",
+        style_class="warning",
+    )
 
     # Connect layers
     diag.add_link("CLI", "Config")
@@ -534,7 +621,11 @@ def create_pipeline_diagram(stages: Sequence[tuple[str, str]]) -> str:
     diag = MermaidDiagram(title="Pipeline Flow", direction="LR")
     prev_id: str | None = None
     for i, (sid, slabel) in enumerate(stages):
-        style = "primary" if i == 0 else ("success" if i == len(stages) - 1 else "secondary")
+        style = (
+            "primary"
+            if i == 0
+            else ("success" if i == len(stages) - 1 else "secondary")
+        )
         diag.add_node(sid, slabel, shape="round", style_class=style)
         if prev_id:
             diag.add_link(prev_id, sid)
@@ -607,7 +698,11 @@ def export_all_boilerplates(root_dir: str | Path | None = None) -> list[Path]:
     target_paths = [
         base / "boilerplates" / "mermaid" / "boilerplate_diagram.mmd",
         base / ".scriber-core" / "boilerplates" / "mermaid" / "boilerplate_diagram.mmd",
-        base / "frontend" / "the_scriber_experience" / "boilerplates" / "boilerplate_diagram.mmd",
+        base
+        / "frontend"
+        / "the_scriber_experience"
+        / "boilerplates"
+        / "boilerplate_diagram.mmd",
     ]
 
     written: list[Path] = []
@@ -630,8 +725,8 @@ def _run_smoke_test() -> None:
     # Frontmatter validation
     fm = get_mermaid_frontmatter()
     assert "themeVariables:" in fm
-    assert "background: \"#0D1117\"" in fm
-    assert "primaryColor: \"#14B5FF\"" in fm
+    assert 'background: "#0D1117"' in fm
+    assert 'primaryColor: "#14B5FF"' in fm
     assert "fontFamily: \"'Aclonica', sans-serif\"" in fm
 
     # Builder validation
@@ -642,8 +737,8 @@ def _run_smoke_test() -> None:
     diag.add_link("N1", "N2", "Step 1")
     rendered = diag.render()
     assert "flowchart TD" in rendered
-    assert "N1[\"Node 1\"]:::primary" in rendered
-    assert "N1 -->|\"Step 1\"| N2" in rendered
+    assert 'N1["Node 1"]:::primary' in rendered
+    assert 'N1 -->|"Step 1"| N2' in rendered
 
     # Boilerplate factory validation
     bp = create_boilerplate_diagram()

@@ -19,8 +19,8 @@ from the_scriber_experience.cli.baseline import (
 )
 from the_scriber_experience.cli.gradient import (
     PRESETS,
-    Color,
     RGB,
+    Color,
     hex_to_rgb,
     interpolate_rgb,
     multi_gradient,

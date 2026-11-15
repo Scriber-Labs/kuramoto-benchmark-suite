@@ -1,10 +1,10 @@
 # src/kuramoto/solvers/rk45.py
 """
 Classic RK45 solver wrapper around SciPy's solve_ivp.
- 
+
 This module provides the traditional numerical integration path for Kuramoto simulations using adaptive Runge-Kutta
 methods with built-in error control.
- 
+
 Author: Eigenscribe
 Review status: Reviewed and maintained by Eigenscribe
 Date created: 05-2026
@@ -13,16 +13,16 @@ Last updated: 09-2026
 
 from __future__ import annotations
 
-from typing import Callable, Final, Any
+from typing import Any, Callable, Final
 
 import numpy as np
 from numpy.typing import NDArray
 from scipy.integrate import solve_ivp
 
 # Import validation utilities
-from kuramoto.validation import(
-    validate_positive_scalar,
+from kuramoto.validation import (
     validate_non_negative_scalar,
+    validate_positive_scalar,
     validate_time_axis,
 )
 
@@ -40,6 +40,7 @@ TimeArray = NDArray[np.floating]
 # ---------------------------------------------------------------------------- #
 
 _DEFAULT_METHOD: Final[str] = "RK45"
+
 
 def solve_kuramoto(
     rhs: Callable[[float, PhaseArray], PhaseArray],
@@ -94,6 +95,7 @@ def solve_kuramoto(
         max_step=max_step if max_step is not None else np.inf,
     )
 
+
 # --------------------------------------------------------------------------- #
 # 💨 Smoke test
 # --------------------------------------------------------------------------- #
@@ -109,7 +111,9 @@ def _run_smoke_test() -> None:
     # --------------------------------------------------------------
     # Test 1: Basic integration success
     # --------------------------------------------------------------
-    rhs = lambda t, y: -y
+    def rhs(t, y):
+        return -y
+
     y0 = np.array([1.0])
     t_ev = np.linspace(0.0, 1.0, 11)
 
@@ -203,19 +207,12 @@ def _run_smoke_test() -> None:
     # Test 5: Invalid t_eval validation
     # --------------------------------------------------------------
     try:
-        solve_kuramoto(
-            rhs,
-            y0,
-            t_span=1.0,
-            t_eval=np.array([0.0, 0.5, 0.4])
-        )
+        solve_kuramoto(rhs, y0, t_span=1.0, t_eval=np.array([0.0, 0.5, 0.4]))
 
     except ValueError:
         print(" ... ✔️ Non-monotonic t_eval validation passed")
     else:
-        raise AssertionError(
-            " ... ❌ solve_kuramoto accepted a non-monotonic t_eval"
-        )
+        raise AssertionError(" ... ❌ solve_kuramoto accepted a non-monotonic t_eval")
 
     # --------------------------------------------------------------
     # Test 6: Invalid t_span validation
@@ -230,9 +227,7 @@ def _run_smoke_test() -> None:
     except ValueError:
         print(" ... ✔️ Invalid t_span validation passed")
     else:
-        raise AssertionError(
-            " ... ❌ solve_kuramoto accepted a non-positive t_span"
-        )
+        raise AssertionError(" ... ❌ solve_kuramoto accepted a non-positive t_span")
 
     # --------------------------------------------------------------
     # Test 7: Invalid rtol validation
@@ -248,9 +243,7 @@ def _run_smoke_test() -> None:
     except ValueError:
         print(" ... ✔️ Invalid rtol validation passed")
     else:
-        raise AssertionError(
-            " ... ❌ solve_kuramoto accepted a non-positive rtol"
-        )
+        raise AssertionError(" ... ❌ solve_kuramoto accepted a non-positive rtol")
 
     # --------------------------------------------------------------
     # Test 8: Invalid atol validation
@@ -266,9 +259,7 @@ def _run_smoke_test() -> None:
     except ValueError:
         print(" ... ✔️ Invalid atol validation passed")
     else:
-        raise AssertionError(
-            " ... ❌ solve_kuramoto accepted a negative atol"
-        )
+        raise AssertionError(" ... ❌ solve_kuramoto accepted a negative atol")
 
     # --------------------------------------------------------------
     # Test 9: Invalid max_step validation
@@ -284,9 +275,7 @@ def _run_smoke_test() -> None:
     except ValueError:
         print(" ... ✔️ Invalid max_step validation passed")
     else:
-        raise AssertionError(
-            " ... ❌ solve_kuramoto accepted a non-positive max_step"
-        )
+        raise AssertionError(" ... ❌ solve_kuramoto accepted a non-positive max_step")
 
     # --------------------------------------------------------------
     # Test 10: Finite numerical output
@@ -298,12 +287,15 @@ def _run_smoke_test() -> None:
 
     print("✅ All RK45 smoke tests passed")
 
+
 # ------------------------------------------------------------------------------
 # 🔥 Entry point
 # ------------------------------------------------------------------------------
 
+
 def main() -> None:
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

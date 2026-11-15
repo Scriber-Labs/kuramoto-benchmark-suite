@@ -21,7 +21,7 @@ Last Updated: November 2026
 
 from __future__ import annotations
 
-from typing import Any, Final, Sequence
+from typing import Any, Final
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt

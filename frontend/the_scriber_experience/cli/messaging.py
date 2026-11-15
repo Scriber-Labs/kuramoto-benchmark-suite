@@ -40,7 +40,9 @@ elif sys.platform == "win32":
     import io
 
     try:
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+        sys.stdout = io.TextIOWrapper(
+            sys.stdout.buffer, encoding="utf-8", errors="replace"
+        )
     except Exception:
         pass
 
@@ -239,7 +241,9 @@ def supports_256_color() -> bool:
     return bool(term and term != "dumb")
 
 
-def ansi_256(color_key: str, text: str, *, bold: bool = False, underline: bool = False) -> str:
+def ansi_256(
+    color_key: str, text: str, *, bold: bool = False, underline: bool = False
+) -> str:
     """
     Format text with an Eigenscribe 256-color ANSI code.
 
@@ -483,14 +487,18 @@ def cli_banner(
 
     # Gradient title
     colors = PRESETS.get(preset, PRESETS["electric"])
-    gradient_title = multi_gradient(f"  {title.center(width - 4)}  ", colors=colors, bold=True)
+    gradient_title = multi_gradient(
+        f"  {title.center(width - 4)}  ", colors=colors, bold=True
+    )
     if _HAS_CLICK:
         click.echo(gradient_title, color=True)
     else:
         print(gradient_title)
 
     if subtitle:
-        cli_echo(f"  {subtitle.center(width - 4)}  ", color="eigen_cyan_light", bold=False)
+        cli_echo(
+            f"  {subtitle.center(width - 4)}  ", color="eigen_cyan_light", bold=False
+        )
 
     bottom_bar = "═" * width
     cli_echo(bottom_bar, color="eigen_blue_bright", bold=True)

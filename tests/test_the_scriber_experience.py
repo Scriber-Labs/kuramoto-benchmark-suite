@@ -12,6 +12,7 @@ Unit and regression tests for The Scriber Experience (TSE) frontend suite:
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -24,27 +25,24 @@ frontend_dir = Path(__file__).parent.parent / "frontend"
 if str(frontend_dir) not in sys.path:
     sys.path.insert(0, str(frontend_dir))
 
-from the_scriber_experience.cli.baseline import BaselineCLI
-from the_scriber_experience.cli.gradient import (
+from the_scriber_experience.cli.baseline import BaselineCLI  # noqa: E402
+from the_scriber_experience.cli.gradient import (  # noqa: E402
     PRESETS,
     hex_to_rgb,
     interpolate_rgb,
     multi_gradient,
     rgb_to_hex,
 )
-from the_scriber_experience.cli.messaging import (
+from the_scriber_experience.cli.messaging import (  # noqa: E402
     EIGENSCRIBE_PALETTE,
     STYLE_MAP,
-    ansi_256,
     cli_banner,
     cli_info,
     cli_rule,
     cli_success,
     cli_table,
-    supports_256_color,
 )
-from the_scriber_experience.theme import (
-    EIGENSCRIBE_MERMAID_THEME_VARIABLES,
+from the_scriber_experience.theme import (  # noqa: E402
     MermaidDiagram,
     create_boilerplate_diagram,
     create_pipeline_diagram,
@@ -52,8 +50,7 @@ from the_scriber_experience.theme import (
     export_all_boilerplates,
     get_mermaid_frontmatter,
 )
-from the_scriber_experience.visuals import (
-    EIGEN_CYAN,
+from the_scriber_experience.visuals import (  # noqa: E402
     VIBRANT_10_NODES,
     apply_eigenscribe_style,
     create_styled_figure,
@@ -97,8 +94,6 @@ def test_multi_gradient_formatting():
     with pytest.raises(ValueError):
         multi_gradient("Test", ["#ffffff"])
 
-
-import re
 
 def strip_ansi(text: str) -> str:
     """Remove ANSI escape sequences from text for verification."""
@@ -149,8 +144,8 @@ def test_mermaid_diagram_builder():
     """Verify MermaidDiagram fluent API builder."""
     diag = MermaidDiagram(title="Test Architecture", direction="TD")
     sg = diag.add_subgraph("Layer1", "1️⃣ Client Layer")
-    n1 = sg.add_node("CLI", "CLI Suite", shape="rect", style_class="primary")
-    n2 = diag.add_node("Core", "Core Engine", shape="round", style_class="success")
+    sg.add_node("CLI", "CLI Suite", shape="rect", style_class="primary")
+    diag.add_node("Core", "Core Engine", shape="round", style_class="success")
     diag.add_link("CLI", "Core", "Dispatches to")
 
     rendered = diag.render()

@@ -12,9 +12,10 @@ Date: May 2026
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
-from typing import Any
 
 from kuramoto.metrics.analytics_engine import generate_fibonacci_frequencies
 from kuramoto.model import KuramotoModel

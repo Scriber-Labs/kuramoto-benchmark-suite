@@ -35,6 +35,7 @@ AdjacencyMatrix = NDArray[np.floating]
 # 1️⃣ Dataset Container
 # ------------------------------------------------------------------------------
 
+
 @dataclass
 class KuramotoDataset:
     """
@@ -104,9 +105,11 @@ class KuramotoDataset:
             "phase_pdf": self.phase_pdf,
         }
 
+
 # ------------------------------------------------------------------------------
 # 💨 Smoke test
 # ------------------------------------------------------------------------------
+
 
 def _run_smoke_test() -> None:
     print("💨 Running dataset smoke test...")
@@ -135,12 +138,15 @@ def _run_smoke_test() -> None:
     print(" ... ✔️ Dataset conversion test passed.")
     print("\n✅ Dataset smoke test passed.")
 
+
 # ------------------------------------------------------------------------------
 # 🔥 Entry point
 # ------------------------------------------------------------------------------
 
+
 def main() -> None:
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

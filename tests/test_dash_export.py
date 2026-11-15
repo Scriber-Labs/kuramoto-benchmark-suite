@@ -295,7 +295,7 @@ class TestExportForDashStream:
             assert lines[0].startswith("# "), "Header line should start with '# '"
 
             # Remaining lines should be JSON objects
-            data_lines = [l for l in lines[1:] if l.strip()]
+            data_lines = [line for line in lines[1:] if line.strip()]
             assert (
                 len(data_lines) == 50
             ), f"Expected 50 data lines, got {len(data_lines)}"
@@ -402,7 +402,7 @@ class TestExportForDashStream:
             # Load JSONL export
             with open(jsonl_path, "r") as f:
                 lines = f.readlines()
-            data_lines = [l for l in lines[1:] if l.strip()]
+            data_lines = [line for line in lines[1:] if line.strip()]
 
             # Compare order parameter values
             json_df = pd.DataFrame(
@@ -410,7 +410,7 @@ class TestExportForDashStream:
             )
             json_R = json_df["order_parameter"].values
 
-            jsonl_R = [json.loads(l)["R"] for l in data_lines]
+            jsonl_R = [json.loads(line)["R"] for line in data_lines]
 
             assert len(json_R) == len(jsonl_R)
             assert np.allclose(json_R, jsonl_R, atol=1e-10)

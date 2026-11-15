@@ -2,7 +2,7 @@
 """
 Quantum circuit generation for Kuramoto synchronization.
 
-Implements the Self-Consistent Field (SCF) mapping to translate classical 
+Implements the Self-Consistent Field (SCF) mapping to translate classical
 rotor dynamics into parallel quantum rotation gates with O(1) circuit depth.
 
 Author: Eigenscribe
@@ -12,9 +12,10 @@ Date: May 2026
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
-from typing import Any
 
 
 def generate_scf_angles(
@@ -27,7 +28,7 @@ def generate_scf_angles(
     """
     Compute parallel Rz gate angles using the Self-Consistent Field (SCF) mapping.
 
-    This maps the non-linear interaction to a time-dependent mean field, 
+    This maps the non-linear interaction to a time-dependent mean field,
     allowing N oscillators to be updated in parallel.
 
     Parameters
@@ -65,6 +66,7 @@ def generate_scf_angles(
     # 2. Map to gate angles (phi = velocity * dt)
     return dtheta_dt * dt
 
+
 def export_to_qasm(angles: NDArray[np.floating]) -> str:
     """
     Generate an OpenQASM 2.0 representation of the parallel synchronization update.
@@ -90,6 +92,7 @@ def export_to_qasm(angles: NDArray[np.floating]) -> str:
     for i, phi in enumerate(angles):
         qasm.append(f"rz({phi:.6f}) q[{i}];")
     return "\n".join(qasm)
+
 
 def synthesize_quantum_bridge(
     dataset: dict[str, Any],
@@ -119,6 +122,7 @@ def synthesize_quantum_bridge(
         "depth": 1,  # Always 1 for parallel Rz
         "mapping": "SCF-GA",
     }
+
 
 if __name__ == "__main__":
     # Quick Smoke Test

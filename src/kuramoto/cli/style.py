@@ -14,11 +14,11 @@ from __future__ import annotations
 
 import os
 import re
+import sys
 from collections.abc import Sequence
 from typing import Final, TypeAlias
 
 import click
-import sys
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -84,7 +84,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
     # 💜 Purple Gradient: Purple-1 (#7952f5) -> Warm purple (#a855f7)
-    "purple_gradient": ("#7952f5", "#a855f7")
+    "purple_gradient": ("#7952f5", "#a855f7"),
 }
 
 STYLE_MAP: Final[dict[str, str]] = {

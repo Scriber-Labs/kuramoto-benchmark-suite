@@ -26,13 +26,12 @@ from kuramoto.utils import get_rng
 TimeSeries = NDArray[np.floating]
 FrequencyArray = NDArray[np.floating]
 
+
 # ------------------------------------------------------------------------------
 # 1️⃣ Core Definitions
 # -----------------------------------------------------------------------------------------------------------
 def compute_fourier_coefficients(
-    time: TimeSeries,
-    signals: TimeSeries,
-    target_freq: float
+    time: TimeSeries, signals: TimeSeries, target_freq: float
 ) -> NDArray[np.complexfloating]:
     """
     Compute the Fourier coefficient at a specific frequency for multiple signals.
@@ -58,6 +57,7 @@ def compute_fourier_coefficients(
     # Integration using trapezoidal rule (simplified to sum for uniform grid)
     coeffs = np.sum(signals * kernel[:, np.newaxis], axis=0) * dt / (time[-1] - time[0])
     return coeffs
+
 
 def compute_psd(
     signals: TimeSeries,
@@ -88,11 +88,9 @@ def compute_psd(
     f, pxx = welch(fluctuations, fs=fs, axis=0, **kwargs)
     return f, pxx
 
+
 def compute_spectral_decomposition(
-    f: FrequencyArray,
-    pxx: TimeSeries,
-    target_freq: float,
-    bandwidth: float = 0.1
+    f: FrequencyArray, pxx: TimeSeries, target_freq: float, bandwidth: float = 0.1
 ) -> dict[str, float]:
     """
     Calculate the energy distribution around a target frequency and its harmonics.
@@ -132,18 +130,17 @@ def compute_spectral_decomposition(
     return {
         "fundamental": p1 / total_power,
         "harmonics": harmonics_power / total_power,
-        "rest": rest_power / total_power
+        "rest": rest_power / total_power,
     }
+
 
 # # -----------------------------------------------------------------------------------------------------------
 # 2️⃣ Advanced Analysis Functions (Added September 2026)
 # # -----------------------------------------------------------------------------------------------------------
 
+
 def detect_sync_transition(
-    freq: np.ndarray,
-    psd: np.ndarray,
-    K_values: np.ndarray,
-    method: str = "elbow"
+    freq: np.ndarray, psd: np.ndarray, K_values: np.ndarray, method: str = "elbow"
 ) -> float:
     """
     Detect synchronization transition using spectral peak emergence.
@@ -170,10 +167,12 @@ def detect_sync_transition(
         If psd shape doesn't match K_values length.
     """
     if len(K_values) != psd.shape[0]:
-        raise ValueError(f"K_values ({len(K_values)}) must match psd rows ({psd.shape[0]}")
+        raise ValueError(
+            f"K_values ({len(K_values)}) must match psd rows ({psd.shape[0]}"
+        )
 
     peak_heights = []
-    for K_idx, K in enumerate(K_values):
+    for K_idx in range(len(K_values)):
         peak = np.max(psd[K_idx])
         baseline = np.median(psd[K_idx])
         peak_to_baseline = peak / baseline if baseline > 0 else 0
@@ -184,6 +183,7 @@ def detect_sync_transition(
     transition_idx = np.argmax(diffs) + 1
 
     return K_values[transition_idx]
+
 
 def harmonic_analysis(
     order_param_timeseries: np.ndarray,
@@ -208,7 +208,11 @@ def harmonic_analysis(
         Harmonic power ratios (h1_power_ratio, h2_power_ratio, ..., rest_ratio).
     """
     fs = 1.0 / dt
-    freqs, psd = welch(order_param_timeseries, fs=fs, nperseg=min(256, len(order_param_timeseries)//2))
+    freqs, psd = welch(
+        order_param_timeseries,
+        fs=fs,
+        nperseg=min(256, len(order_param_timeseries) // 2),
+    )
 
     # Find dominant frequency
     fundamental_idx = np.argmax(psd)
@@ -223,15 +227,16 @@ def harmonic_analysis(
         harmonics[f"h{n}_power_ratio"] = float(psd[idx] / fundamental_power)
 
     # Calculate remaining power ratio
-    total_power = np.sum(psd)
     harmonic_sum = sum(harmonics.values())
     harmonics["rest_ratio"] = float(1.0 - harmonic_sum)
 
     return harmonics
 
+
 # -----------------------------------------------------------------------------------------------------------
 # 💨 Smoke tests / example usage
 # -----------------------------------------------------------------------------------------------------------
+
 
 def _run_smoke_test() -> None:
     """
@@ -279,15 +284,18 @@ def _run_smoke_test() -> None:
 
     print("✅ All spectral analysis smoke test passed.")
 
+
 # -----------------------------------------------------------------------------------------------------------
 # 🔥 Entry point
 # -----------------------------------------------------------------------------------------------------------
+
 
 def main() -> None:
     """
     Main entry point for smoke tests.
     """
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

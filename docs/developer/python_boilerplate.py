@@ -15,9 +15,10 @@ Date: May 2026
 
 from __future__ import annotations
 
+from typing import Final, Protocol, TypeAlias
+
 import numpy as np
 from numpy.typing import NDArray
-from typing import Final, Protocol, TypeAlias
 
 # ------------------------------------------------------------------------------ #
 # 🎭 Typing helpers / protocols / constants (0️⃣ What exists)

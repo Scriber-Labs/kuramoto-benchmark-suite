@@ -1,8 +1,10 @@
 # src/kuramoto/solvers/quantum_rotor_bridge.py
 from __future__ import annotations
+
 import numpy as np
-from kuramoto.solvers.rotor import RotorSolver
+
 from kuramoto.solvers.quantum_rk45 import QuantumRK45Solver
+from kuramoto.solvers.rotor import RotorSolver
 
 
 class QuantumRotorAdaptiveSolver(RotorSolver):
@@ -12,14 +14,14 @@ class QuantumRotorAdaptiveSolver(RotorSolver):
     """
 
     def simulate_quantum_rk45(
-            self,
-            K: float,
-            t_start: float,
-            t_end: float,
-            initial_dt: float = 0.05,
-            atol: float = 1e-5
+        self,
+        K: float,
+        t_start: float,
+        t_end: float,
+        initial_dt: float = 0.05,
+        atol: float = 1e-5,
     ) -> list[complex]:
-        """ Runs adaptive RK45 simulation natively utilizing Qiskit primitives """
+        """Runs adaptive RK45 simulation natively utilizing Qiskit primitives"""
         # Bind the Qiskit engine backend
         quantum_engine = QuantumRK45Solver(self.omegas, K)
 
@@ -32,7 +34,9 @@ class QuantumRotorAdaptiveSolver(RotorSolver):
 
         while t < t_end:
             # Advance utilizing our hybrid co-processor function
-            next_phases, next_dt, accepted = quantum_engine.adaptive_step(current_phases, dt, atol=atol)
+            next_phases, next_dt, accepted = quantum_engine.adaptive_step(
+                current_phases, dt, atol=atol
+            )
 
             if accepted:
                 current_phases = next_phases
@@ -43,7 +47,9 @@ class QuantumRotorAdaptiveSolver(RotorSolver):
 
             dt = next_dt
             if dt < 1e-6:
-                raise RuntimeError("Simulation halted: Time step shrank below practical threshold.")
+                raise RuntimeError(
+                    "Simulation halted: Time step shrank below practical threshold."
+                )
 
         return order_parameters
 

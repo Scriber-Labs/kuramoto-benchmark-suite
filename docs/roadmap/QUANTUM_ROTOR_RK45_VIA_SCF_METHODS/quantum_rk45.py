@@ -1,5 +1,6 @@
 # src/kuramoto/solvers/quantum_rk45.py
 from __future__ import annotations
+
 import numpy as np
 from numpy.typing import NDArray
 from qiskit import QuantumCircuit
@@ -13,7 +14,7 @@ A_DP = [
     [3 / 40, 9 / 40],
     [44 / 45, -56 / 15, 32 / 9],
     [19372 / 6561, -25360 / 2187, 64448 / 6561, -212 / 729],
-    [9017 / 3168, -355 / 33, 46732 / 5247, 49 / 176, -5103 / 18656]
+    [9017 / 3168, -355 / 33, 46732 / 5247, 49 / 176, -5103 / 18656],
 ]
 B5 = [35 / 384, 0, 500 / 1113, 125 / 192, -2187 / 6784, 11 / 84]
 B4 = [5179 / 57600, 0, 7571 / 16695, 393 / 640, -92097 / 339200, 187 / 2100, 1 / 40]
@@ -28,12 +29,16 @@ class QuantumRK45Solver:
         self.K = K
         self.estimator = Estimator()
 
-    def _get_field_velocities(self, phases: NDArray[np.floating]) -> NDArray[np.floating]:
+    def _get_field_velocities(
+        self, phases: NDArray[np.floating]
+    ) -> NDArray[np.floating]:
         """Calculates instantaneous angular velocities on the classical host."""
         diff_matrix = phases[np.newaxis, :] - phases[:, np.newaxis]
         return self.omegas + (self.K / self.N) * np.sum(np.sin(diff_matrix), axis=1)
 
-    def get_phases_qpu(self, current_phases: NDArray[np.floating]) -> NDArray[np.floating]:
+    def get_phases_qpu(
+        self, current_phases: NDArray[np.floating]
+    ) -> NDArray[np.floating]:
         """
         Uses an O(1) depth parallel Qiskit circuit to measure oscillator coordinates
         without costly multiqubit entangling gates.
@@ -45,8 +50,18 @@ class QuantumRK45Solver:
             qc.p(phase, i)
 
         # 2. Extract state observables in parallel via Qiskit Estimator Primitives
-        obs_x = [SparsePauliOp.from_list([("X" if j == i else "I", 1.0) for j in range(self.N)]) for i in range(self.N)]
-        obs_y = [SparsePauliOp.from_list([("Y" if j == i else "I", 1.0) for j in range(self.N)]) for i in range(self.N)]
+        obs_x = [
+            SparsePauliOp.from_list(
+                [("X" if j == i else "I", 1.0) for j in range(self.N)]
+            )
+            for i in range(self.N)
+        ]
+        obs_y = [
+            SparsePauliOp.from_list(
+                [("Y" if j == i else "I", 1.0) for j in range(self.N)]
+            )
+            for i in range(self.N)
+        ]
 
         # Concurrent evaluation runs efficiently on hardware
         res_x = self.estimator.run([qc] * self.N, obs_x).result().values
@@ -55,8 +70,9 @@ class QuantumRK45Solver:
         # Calculate angles directly from Bloch vectors
         return np.arctan2(res_y, res_x) % (2 * np.pi)
 
-    def adaptive_step(self, phases: NDArray[np.floating], dt: float, atol: float = 1e-5) -> tuple[
-        NDArray[np.floating], float, bool]:
+    def adaptive_step(
+        self, phases: NDArray[np.floating], dt: float, atol: float = 1e-5
+    ) -> tuple[NDArray[np.floating], float, bool]:
         """Computes the Dormand-Prince step and checks local truncation error."""
         k = np.zeros((7, self.N))
         k[0] = self._get_field_velocities(phases)

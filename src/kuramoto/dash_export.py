@@ -14,13 +14,13 @@ Date: May 2026
 
 from __future__ import annotations
 
-from collections import namedtuple
-
 import json
+from collections import namedtuple
+from typing import Any, Callable
+
 import numpy as np
 import pandas as pd
 from numpy.typing import NDArray
-from typing import Any, Callable
 
 # Import RNG utilities from the central utils module
 try:
