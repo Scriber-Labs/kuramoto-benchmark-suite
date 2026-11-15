@@ -976,7 +976,7 @@ wheels = [
 
 [[package]]
 name = "kuramoto-benchmark-suite"
-version = "2.1.0"
+version = "2.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "click" },

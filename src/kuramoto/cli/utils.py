@@ -1,3 +1,4 @@
+# src/kuramoto/cli/utils.py
 """
 utils.py
 
@@ -18,7 +19,7 @@ from typing import Any, Final
 import click
 from tabulate import tabulate
 
-from .style import ansi_256, cli_echo, cli_rule, supports_256_color
+from kuramoto.cli.style import ansi_256, cli_echo, cli_rule, supports_256_color
 
 __all__: list[str] = [
     "DEFAULT_DEMO_PATH",
@@ -83,8 +84,14 @@ def print_header() -> None:
         title_part1 = ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True)
         click.echo(title_part1, color=True)
 
-        title_main = ansi_256("eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True)
-        subtitle = ansi_256("eigen_purple", "     Oscillator Network Simulation & Analysis Framework", bold=False)
+        title_main = ansi_256(
+            "eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True
+        )
+        subtitle = ansi_256(
+            "eigen_purple",
+            "     Oscillator Network Simulation & Analysis Framework",
+            bold=False,
+        )
         click.echo(title_main, color=True)
         click.echo(subtitle, color=True)
 

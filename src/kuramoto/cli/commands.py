@@ -19,12 +19,12 @@ from typing import Final
 import click
 import numpy as np
 
-from ..analysis.spectral import (
+from kuramoto.analysis.spectral import (
     compute_fourier_coefficients,
     compute_psd,
     compute_spectral_decomposition,
 )
-from ..analysis.viz import (
+from kuramoto.analysis.viz import (
     get_node_colors,
     plot_distributions,
     plot_fourier_convergence,
@@ -34,23 +34,10 @@ from ..analysis.viz import (
     plot_psd_variability,
     plot_time_series,
 )
-from ..api import generate_kuramoto_dataset
-from ..config import parse_simulation_config
-from ..order_parameter import compute_order_parameter
-from ..quantum.circuit_gen import export_to_qasm, generate_scf_angles
-from ..solver_types import (
-    SOLVER_ALIASES,
-    is_quantum_solver,
-    is_rotor_or_euler,
-    is_rotor_solver,
-)
-from ..topologies.tree_of_life import tree_of_life_positions
-from ..utils import get_rng
-from .style import (
+from kuramoto.api import generate_kuramoto_dataset
+from kuramoto.cli.style import (
     ansi_256,
-    cli_echo,
     cli_error,
-    cli_highlight,
     cli_info,
     cli_network,
     cli_quantum,
@@ -59,7 +46,18 @@ from .style import (
     cli_warning,
     supports_256_color,
 )
-from .utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
+from kuramoto.cli.utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
+from kuramoto.config import parse_simulation_config
+from kuramoto.order_parameter import compute_order_parameter
+from kuramoto.quantum.circuit_gen import export_to_qasm, generate_scf_angles
+from kuramoto.solver_types import (
+    SOLVER_ALIASES,
+    is_quantum_solver,
+    is_rotor_or_euler,
+    is_rotor_solver,
+)
+from kuramoto.topologies.tree_of_life import tree_of_life_positions
+from kuramoto.utils import get_rng
 
 __all__: list[str] = [
     "datasetforbeginners",
@@ -533,7 +531,10 @@ def qasm(
     else:
         click.echo("", color=True)
         if supports_256_color():
-            click.echo(ansi_256("eigen_cyan", "── OpenQASM 2.0 Circuit ──", bold=True), color=True)
+            click.echo(
+                ansi_256("eigen_cyan", "── OpenQASM 2.0 Circuit ──", bold=True),
+                color=True,
+            )
         else:
             click.secho("--- OpenQASM 2.0 Circuit ---", fg="bright_cyan", bold=True)
         click.echo(qasm_str, color=True)
@@ -876,7 +877,7 @@ def network(dataset_path: str, gradient: str) -> None:
     # Determine if we should use the Tree of Life layout
     pos = None
     if adj.shape == (10, 10):
-        from ..topologies.tree_of_life import sefirot_labels
+        from kuramoto.topologies.tree_of_life import sefirot_labels
 
         pos_dict = tree_of_life_positions()
         labels = sefirot_labels()
@@ -953,7 +954,11 @@ def distributions(dataset_path: str, gradient: str) -> None:
 )
 def dash_export(dataset_path: str, output: str) -> None:
     """Export simulation telemetry for Dash app consumption."""
-    from ..dash_export import compute_locking_fraction, compute_mean_field_phase, export_for_dash
+    from kuramoto.dash_export import (
+        compute_locking_fraction,
+        compute_mean_field_phase,
+        export_for_dash,
+    )
 
     cli_info(f"Loading dataset from '{dataset_path}'...")
     data = np.load(dataset_path, allow_pickle=True)
@@ -1021,11 +1026,9 @@ def zbw(
     seed: int,
 ) -> None:
     """Run the ZBW golden-ratio ensemble Kuramoto simulation."""
-    from ..models.zbw_generator import ZBWKuramotoDataGenerator
+    from kuramoto.models.zbw_generator import ZBWKuramotoDataGenerator
 
-    cli_info(
-        f"Running ZBW ensemble: N={oscillators}, K={coupling}, omega0={omega0}..."
-    )
+    cli_info(f"Running ZBW ensemble: N={oscillators}, K={coupling}, omega0={omega0}...")
     gen = ZBWKuramotoDataGenerator(
         num_oscillators=oscillators,
         omega_0=omega0,

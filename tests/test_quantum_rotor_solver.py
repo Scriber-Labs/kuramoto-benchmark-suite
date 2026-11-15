@@ -184,9 +184,13 @@ def test_quantum_rotor_unitary_time_reversal():
     # 3. K=0 decoupled time-reversal with -dt directly
     phases_k0 = phases_init.copy()
     for _ in range(n_steps):
-        phases_k0 = step_quantum_scf(phases_k0, omegas, K=0.0, dt=dt, scheme="statevector")
+        phases_k0 = step_quantum_scf(
+            phases_k0, omegas, K=0.0, dt=dt, scheme="statevector"
+        )
     for _ in range(n_steps):
-        phases_k0 = step_quantum_scf(phases_k0, omegas, K=0.0, dt=-dt, scheme="statevector")
+        phases_k0 = step_quantum_scf(
+            phases_k0, omegas, K=0.0, dt=-dt, scheme="statevector"
+        )
 
     recon_error_k0 = np.abs(np.exp(1j * phases_k0) - np.exp(1j * phases_init))
     assert np.all(recon_error_k0 < 1e-12)

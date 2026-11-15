@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" filepath="$PROJECT_DIR$/.idea/kuramoto-benchmark-suite.iml" />
       <module fileurl="file://$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" filepath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../scriber-core/.idea/scriber-core.iml" filepath="$PROJECT_DIR$/../scriber-core/.idea/scriber-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/the-scriber-experience.iml" filepath="$PROJECT_DIR$/.idea/the-scriber-experience.iml" />
     </modules>
   </component>
 </project>
