@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test & Health Checks (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout repository (including submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          version: "latest"
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          uv sync --extra dev
+
+      - name: Install scriber-core submodule (eigenscribe CLI)
+        run: |
+          if [ -d ".scriber-core" ] && [ -f ".scriber-core/pyproject.toml" ]; then
+            uv pip install -e .scriber-core
+          fi
+
+      - name: Run Pytest test suite
+        run: |
+          uv run pytest
+
+      - name: Run Eigenscribe Doctor diagnostics
+        run: |
+          if command -v eigenscribe >/dev/null 2>&1 || uv run which eigenscribe >/dev/null 2>&1; then
+            uv run eigenscribe doctor
+          else
+            uv run python -m frontend.the_scriber_experience.cli.main doctor || uv run eigenscribe doctor
+          fi
