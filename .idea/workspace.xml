@@ -16,56 +16,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add TSE plots theme and style bridge">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/the-scriber-experience.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/the-scriber-experience.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer/python_boilerplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rk45.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rk45.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rotor_bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/roadmap/QUANTUM_ROTOR_RK45_VIA_SCF_METHODS/quantum_rotor_bridge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/baseline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/gradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/gradient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/messaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/cli/messaging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/theme.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/theme.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/the_scriber_experience/visuals.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/the_scriber_experience/visuals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/generate_example_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/generate_example_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/quantum_sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/verification-infrastructure/sanity_checks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/benchmark_scaling.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/benchmark_scaling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/export_to_dash.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/export_to_dash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rigorous_benchmarks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/viz_3d_sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/viz_3d_sync.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/spectral.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dash_export.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/graphs.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/graphs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/order_parameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/quantum/circuit_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/quantum_rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rk45.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/rotor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/topologies/tree_of_life.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_dash_export.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_dash_export.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_the_scriber_experience.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_the_scriber_experience.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +30,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="280" />
+    <option name="cachedIndexableFilesCount" value="414" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -90,7 +46,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../scriber-core" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -113,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0170469805713676" />
-      <entry key="MS500" value="1.8662233872792453" />
-      <entry key="S2" value="4.4764716940212175" />
-      <entry key="S5" value="7.487515089651193" />
-      <entry key="S10" value="10.865144510674003" />
-      <entry key="S30" value="17.73241212745582" />
-      <entry key="S60" value="23.18780466701031" />
-      <entry key="M2" value="29.065535044844996" />
-      <entry key="M5" value="41.447306163924544" />
-      <entry key="M10" value="75.0471118747206" />
-      <entry key="M15" value="107.19344063644583" />
-      <entry key="M30" value="172.0758517210501" />
-      <entry key="H1" value="276.19433327023904" />
-      <entry key="H2" value="483.4506233026298" />
-      <entry key="H4" value="877.5545785132728" />
-      <entry key="D1" value="4604.310191974641" />
-      <entry key="W1" value="21429.888733939373" />
+      <entry key="MS100" value="1.0038429081592386" />
+      <entry key="MS500" value="1.5114979100266523" />
+      <entry key="S2" value="3.1673845327792796" />
+      <entry key="S5" value="5.03113529604603" />
+      <entry key="S10" value="6.9989954262499685" />
+      <entry key="S30" value="13.316259974274193" />
+      <entry key="S60" value="23.07379306228153" />
+      <entry key="M2" value="35.83757617359606" />
+      <entry key="M5" value="55.53285107846163" />
+      <entry key="M10" value="90.77756741803154" />
+      <entry key="M15" value="123.61567359995097" />
+      <entry key="M30" value="190.35829411997412" />
+      <entry key="H1" value="295.90128930925465" />
+      <entry key="H2" value="503.8886034243446" />
+      <entry key="H4" value="898.4544972526605" />
+      <entry key="D1" value="4625.761356821195" />
+      <entry key="W1" value="21452.53366701863" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="3.701999424025318E-260" />
-      <entry key="S5" value="1.6881019145692043E-104" />
-      <entry key="S10" value="1.3093895886511684E-52" />
-      <entry key="S30" value="6.596604365335675E-18" />
-      <entry key="S60" value="4.4414540258231426E-9" />
-      <entry key="M2" value="1.378826630143425E-4" />
-      <entry key="M5" value="0.07360815209682708" />
-      <entry key="M10" value="0.6048102040360122" />
-      <entry key="M15" value="1.2240313685654127" />
-      <entry key="M30" value="2.5811063198292037" />
-      <entry key="H1" value="4.367572877466718" />
-      <entry key="H2" value="6.614038300197377" />
-      <entry key="H4" value="8.78902769233064" />
-      <entry key="D1" value="28.016573111064687" />
-      <entry key="W1" value="157.4070629106155" />
+      <entry key="S2" value="1.3926164780031604E-274" />
+      <entry key="S5" value="2.867852002730058E-110" />
+      <entry key="S10" value="1.706663576680381E-55" />
+      <entry key="S30" value="7.205765368574266E-19" />
+      <entry key="S60" value="1.4679288650639118E-9" />
+      <entry key="M2" value="7.926830693284271E-5" />
+      <entry key="M5" value="0.0589877570624178" />
+      <entry key="M10" value="0.541423489625271" />
+      <entry key="M15" value="1.1369408486925983" />
+      <entry key="M30" value="2.4875885863499363" />
+      <entry key="H1" value="4.287720731058421" />
+      <entry key="H2" value="6.553297299824795" />
+      <entry key="H4" value="8.74857693794519" />
+      <entry key="D1" value="27.99504113254821" />
+      <entry key="W1" value="157.38977517185626" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9891218372700245" />
-      <entry key="MS500" value="1.8548637972620374" />
-      <entry key="S2" value="4.466837909537673" />
-      <entry key="S5" value="7.398186253404328" />
-      <entry key="S10" value="10.575724061777912" />
-      <entry key="S30" value="17.126960173868987" />
-      <entry key="S60" value="22.60123299675343" />
-      <entry key="M2" value="28.637259149643707" />
-      <entry key="M5" value="41.29867455653456" />
-      <entry key="M10" value="75.52118098415018" />
-      <entry key="M15" value="108.32081683075214" />
-      <entry key="M30" value="174.59986685315653" />
-      <entry key="H1" value="280.52826249409253" />
-      <entry key="H2" value="490.0448404170002" />
-      <entry key="H4" value="886.3321502734086" />
-      <entry key="D1" value="4632.318588539225" />
-      <entry key="W1" value="21587.287789843223" />
+      <entry key="MS100" value="0.9430595590001827" />
+      <entry key="MS500" value="1.490963117001853" />
+      <entry key="S2" value="3.1558039148802495" />
+      <entry key="S5" value="5.02365617130386" />
+      <entry key="S10" value="6.993430737431135" />
+      <entry key="S30" value="13.247269218017843" />
+      <entry key="S60" value="22.87794791250034" />
+      <entry key="M2" value="35.59011093767671" />
+      <entry key="M5" value="55.413150396140246" />
+      <entry key="M10" value="91.20163829646818" />
+      <entry key="M15" value="124.66262285344978" />
+      <entry key="M30" value="192.79075104625335" />
+      <entry key="H1" value="300.1559264296752" />
+      <entry key="H2" value="510.42223389302853" />
+      <entry key="H4" value="907.1916571088744" />
+      <entry key="D1" value="4653.748225373806" />
+      <entry key="W1" value="21609.915435731917" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -289,8 +245,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/colors.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -313,8 +269,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/gradients.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -334,8 +290,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/gradients.py" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
@@ -355,8 +311,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/../scriber-core/tests/test_cli.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
@@ -372,8 +328,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
       <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/../scriber-core/tests/test_frontend_styling.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
@@ -392,7 +348,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
+        <option value="bundled-python-sdk-34611be1ca5a-e0583fc556d1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-263.7307.206" />
       </set>
     </attachedChunks>
   </component>

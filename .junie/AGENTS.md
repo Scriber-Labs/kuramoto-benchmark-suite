@@ -6,7 +6,7 @@ This document provides technical guidelines, build/configuration instructions, t
 
 ## 0. Agent Guideline Bridge (Scriber Core)
 
-Shared house rules and reusable code templates are maintained in the [`scriber-core`](https://github.com/eigenscribe/scriber-core) submodule, mounted at `.scriber-core/`. Treat the following as canonical references when generating, reviewing, or styling code:
+Shared house rules and reusable code templates are maintained in the [`scriber-core`](https://github.com/The-Scriber-Experience/scriber-core) submodule, mounted at `.scriber-core/`. Treat the following as canonical references when generating, reviewing, or styling code:
 
 - **Python Rules**: `.scriber-core/house-rules/python-rules.md`
 - **CSS / UI System**: `.scriber-core/house-rules/css-rules.md`

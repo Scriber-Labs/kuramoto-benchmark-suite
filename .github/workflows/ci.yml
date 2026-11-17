@@ -49,7 +49,7 @@ jobs:
         run: |
           uv sync --extra dev
 
-      - name: Install scriber-core submodule (eigenscribe CLI)
+      - name: Install scriber-core submodule
         run: |
           if [ -d ".scriber-core" ] && [ -f ".scriber-core/pyproject.toml" ]; then
             uv pip install -e .scriber-core
@@ -58,11 +58,3 @@ jobs:
       - name: Run Pytest test suite
         run: |
           uv run pytest
-
-      - name: Run Eigenscribe Doctor diagnostics
-        run: |
-          if command -v eigenscribe >/dev/null 2>&1 || uv run which eigenscribe >/dev/null 2>&1; then
-            uv run eigenscribe doctor
-          else
-            uv run python -m frontend.the_scriber_experience.cli.main doctor || uv run eigenscribe doctor
-          fi
