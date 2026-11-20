@@ -21,5 +21,25 @@ $\mathcal{O}(M+N)$. The following problems build intuition for the mathematical 
     `../src/kuramoto/solvers/coprime.py` and verify all steps of your hand calculations (written as Bezout identitties) 
     from parts a) and c). Make sure to color-cod output using the color scheme specified below:
     - $(m,n)$ - #00a6ff  (`COLOR_PALLETTE["electric_blue"]`)
-    - $\gcd{(m,n)$ - #28d728
+    - $\gcd{(m,n)}$ - #28d728 (`COLOR_PALETTE["bright_green"]`)
     - Bezout's coefficients, $x$ and $y$ - #ff00c3 (`COLOR_PALLETTE["bright_magenta"]`)
+
+## Problem 17: Chinese Remainder Theorem (CRT) Reconstruction
+**Goal:** Understand how two coprime samplers reconstruct the full signal.
+**Setup:** Suppose you have two samplers:
+  1. Sampler A records every $N=11$-th step.
+  2. Sampler B records every $M=7$-th step.
+
+  - **Lemma:** Since $\gcd{(7,11)}=1$, we can reconstruct any time index $t\in[0,76]$ from the pair of remainders
+  $(t\mod{7}, t\mod{11}$).
+
+**Tasks:**
+  1. Suppose Sampler A observes the signal at local index $k_n=5$ (i.e., $t\equiv 5(\mod{11})$) and Sampler B observes the
+  signal at local index $k_m=3$ (i.e., $t\equiv3(\mod{7})$). Use the Bézout coefficients from Problem 16 to reconstruct 
+  $t$.
+  2. Verify:
+     - $t\mod{11}=5$
+     - $t\mod{7}=3$
+  3. Code reference: Look at `coprime_reconstruct_frequency` in `../solvers/coprime.py`. The formula is 
+    $$k_\text{true} = (k_m\cdot b \cdot N + k_n \cdot a \cdot M)\mod{(M\cdot N)}$$
+    where $(g,a,b) = \operatorname{extended_gcd}(M,N)$.

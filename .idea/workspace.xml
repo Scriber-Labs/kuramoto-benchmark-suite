@@ -15,23 +15,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refine CLI style presets and update practice problem checklist&#10;&#10;- Replace hardcoded hex color values in cli/style.py gradient presets with&#10;  named constants from scriber_core.frontend.colors.COLOR_PALETTE and&#10;  scriber_core.frontend.gradients.GRADIENT_PRESETS&#10;- Mark completed tasks in section-c1.md practice problem checklist&#10;- Fix color name typo in scriber_core/frontend/colors.py (neon_green →&#10;  brigh_green) and adjust neon_green hex value">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/euler.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rk45.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.002.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.01.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/data/benchmark/rotor_dt_0.05.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo-4.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/styling_and_visuals_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/validate_structural_metrics.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/zbw_mesoscale_ensemble.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.scriber-core/src/scriber_core/frontend/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/src/scriber_core/frontend/colors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.scriber-core" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000000000005" />
-      <entry key="MS500" value="1.0017837153625337" />
-      <entry key="S2" value="1.3342263427729408" />
-      <entry key="S5" value="1.9749451632685866" />
-      <entry key="S10" value="2.3957126015861814" />
-      <entry key="S30" value="2.8174722811891835" />
-      <entry key="S60" value="3.4994497902875668" />
-      <entry key="M2" value="5.541250414630112" />
-      <entry key="M5" value="9.764703058447763" />
-      <entry key="M10" value="13.291134377516443" />
-      <entry key="M15" value="18.980069668703173" />
-      <entry key="M30" value="63.38932582964717" />
-      <entry key="H1" value="193.15869728168792" />
-      <entry key="H2" value="442.9805238260414" />
-      <entry key="H4" value="878.5674282610812" />
-      <entry key="D1" value="4663.070629454599" />
-      <entry key="W1" value="21573.371759901933" />
+      <entry key="MS100" value="1.028755878364797" />
+      <entry key="MS500" value="1.5419315327995704" />
+      <entry key="S2" value="3.175716973102912" />
+      <entry key="S5" value="6.021284856228776" />
+      <entry key="S10" value="8.536406529490574" />
+      <entry key="S30" value="12.609038501434087" />
+      <entry key="S60" value="16.104078021049183" />
+      <entry key="M2" value="23.873483083982833" />
+      <entry key="M5" value="65.13340183802146" />
+      <entry key="M10" value="133.47018896445078" />
+      <entry key="M15" value="192.23433216968007" />
+      <entry key="M30" value="333.53511220668753" />
+      <entry key="H1" value="537.5347026115345" />
+      <entry key="H2" value="845.3829108415936" />
+      <entry key="H4" value="1332.5784050612301" />
+      <entry key="D1" value="5194.544979071076" />
+      <entry key="W1" value="22190.32156678064" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.8730439208819E-92" />
-      <entry key="S5" value="2.037132063850863E-37" />
-      <entry key="S10" value="4.513459940944269E-19" />
-      <entry key="S30" value="7.67072707422207E-7" />
-      <entry key="S60" value="8.75826870689754E-4" />
-      <entry key="M2" value="0.02959437237608428" />
-      <entry key="M5" value="0.24490622628328795" />
-      <entry key="M10" value="0.5429286766692645" />
-      <entry key="M15" value="0.9043494252306655" />
-      <entry key="M30" value="2.5556606694876063" />
-      <entry key="H1" value="5.883523610613785" />
-      <entry key="H2" value="10.297709665613967" />
-      <entry key="H4" value="14.642908870957253" />
-      <entry key="D1" value="36.283063048096324" />
-      <entry key="W1" value="166.20832948659614" />
+      <entry key="MS500" value="8.001327840810643E-247" />
+      <entry key="S2" value="3.0081356386866152E-62" />
+      <entry key="S5" value="2.774054894542854E-25" />
+      <entry key="S10" value="6.941789261015771E-13" />
+      <entry key="S30" value="1.6400540920323542E-4" />
+      <entry key="S60" value="0.022593251631056865" />
+      <entry key="M2" value="0.2861270564155997" />
+      <entry key="M5" value="1.7420506726993696" />
+      <entry key="M10" value="5.1375868899612485" />
+      <entry key="M15" value="8.912980362228446" />
+      <entry key="M30" value="18.113695243516474" />
+      <entry key="H1" value="28.7112903731227" />
+      <entry key="H2" value="39.20835407267205" />
+      <entry key="H4" value="48.397873034735866" />
+      <entry key="D1" value="75.77377182314927" />
+      <entry key="W1" value="206.9545615649416" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1309024805001536E-14" />
-      <entry key="MS500" value="0.002502983166818394" />
-      <entry key="S2" value="0.42976247525153755" />
-      <entry key="S5" value="1.3387311414974827" />
-      <entry key="S10" value="1.9925761351302276" />
-      <entry key="S30" value="2.657616472162278" />
-      <entry key="S60" value="3.4163418048633085" />
-      <entry key="M2" value="5.525870523435705" />
-      <entry key="M5" value="9.98666701641732" />
-      <entry key="M10" value="13.819444267356232" />
-      <entry key="M15" value="19.871615864469604" />
-      <entry key="M30" value="65.92897034868622" />
-      <entry key="H1" value="199.0226759196289" />
-      <entry key="H2" value="453.26069754101036" />
-      <entry key="H4" value="893.1978193848329" />
-      <entry key="D1" value="4699.345125458421" />
-      <entry key="W1" value="21739.57202347078" />
+      <entry key="MS100" value="0.5062769072775842" />
+      <entry key="MS500" value="1.3745281151556563" />
+      <entry key="S2" value="2.824989717124911" />
+      <entry key="S5" value="5.680052865545774" />
+      <entry key="S10" value="8.300451449669698" />
+      <entry key="S30" value="12.51053790210331" />
+      <entry key="S60" value="16.072688829736936" />
+      <entry key="M2" value="24.122530227789017" />
+      <entry key="M5" value="66.83873975790941" />
+      <entry key="M10" value="138.568092934923" />
+      <entry key="M15" value="201.1077565864221" />
+      <entry key="M30" value="351.6139373557214" />
+      <entry key="H1" value="566.2168136780743" />
+      <entry key="H2" value="884.5676252715739" />
+      <entry key="H4" value="1380.9593098624168" />
+      <entry key="D1" value="5270.309212902021" />
+      <entry key="W1" value="22397.267918642847" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -237,7 +227,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\ai-generated-research-notebook" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.analytics_engine">
+  <component name="RunManager" selected="Python.viz">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -262,31 +252,6 @@
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/metrics/analytics_engine.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="colors (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="scriber-core" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="RUN_AS_SCRIPT" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend/colors.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -370,13 +335,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="viz" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kuramoto-benchmark-suite" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python.colors_table" />
         <item itemvalue="Python.solver_types" />
         <item itemvalue="Python.style" />
-        <item itemvalue="Python.colors (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -396,14 +386,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00034" summary="expanded structural metrics validation with advanced spectral analysis and themed visualizations">
-      <option name="closed" value="true" />
-      <created>1791514976293</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1791514976293</updated>
     </task>
     <task id="LOCAL-00035" summary="updated execution timestamps in validate_structural_metrics.ipynb">
       <option name="closed" value="true" />
@@ -789,14 +771,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795162867734</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files">
+      <option name="closed" value="true" />
+      <created>1795167095467</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1795167095467</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sanity check notebook" />
     <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
@@ -821,7 +810,8 @@
     <MESSAGE value="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings" />
     <MESSAGE value="Add scriber-core as a core dependency&#10;&#10;- Require scriber-core&gt;=1.0.0 in pyproject.toml&#10;- Sync uv.lock with new dependency and its transitive packages" />
     <MESSAGE value="Refine CLI style presets and update practice problem checklist&#10;&#10;- Replace hardcoded hex color values in cli/style.py gradient presets with&#10;  named constants from scriber_core.frontend.colors.COLOR_PALETTE and&#10;  scriber_core.frontend.gradients.GRADIENT_PRESETS&#10;- Mark completed tasks in section-c1.md practice problem checklist&#10;- Fix color name typo in scriber_core/frontend/colors.py (neon_green →&#10;  brigh_green) and adjust neon_green hex value" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refine CLI style presets and update practice problem checklist&#10;&#10;- Replace hardcoded hex color values in cli/style.py gradient presets with&#10;  named constants from scriber_core.frontend.colors.COLOR_PALETTE and&#10;  scriber_core.frontend.gradients.GRADIENT_PRESETS&#10;- Mark completed tasks in section-c1.md practice problem checklist&#10;- Fix color name typo in scriber_core/frontend/colors.py (neon_green →&#10;  brigh_green) and adjust neon_green hex value" />
+    <MESSAGE value="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -838,6 +828,7 @@
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$style.coverage" NAME="style Coverage Results" MODIFIED="1795162570121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$solver_types.coverage" NAME="solver_types Coverage Results" MODIFIED="1795162902308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors_table.coverage" NAME="colors_table Coverage Results" MODIFIED="1795163696431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/cli" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$viz.coverage" NAME="viz Coverage Results" MODIFIED="1795173631473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/analysis" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$analytics_engine.coverage" NAME="analytics_engine Coverage Results" MODIFIED="1795163855334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/metrics" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors__1_.coverage" NAME="colors (1) Coverage Results" MODIFIED="1795161398688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend" />
   </component>
