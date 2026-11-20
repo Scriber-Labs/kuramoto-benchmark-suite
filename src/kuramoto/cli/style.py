@@ -19,6 +19,8 @@ from collections.abc import Sequence
 from typing import Final, TypeAlias
 
 import click
+from scriber_core.frontend.colors import COLOR_PALETTE
+from scriber_core.frontend.gradients import GRADIENT_PRESETS
 
 if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -69,9 +71,19 @@ Color: TypeAlias = str | RGB
 
 PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # 🐉 Signature Eigenscribe (without pink): Blue (#0a95eb) -> Periwinkle (#5280ff) -> Purple (#a855f7)
-    "eigenscribe-1": ("#38bdf8", "#0A95EB", "#5280ff", "#5e17eb"),
+    "eigenscribe-1": (
+        COLOR_PALETTE["sky_info"],
+        COLOR_PALETTE["skyline_blue"],
+        COLOR_PALETTE["periwinkle_blue"],
+        COLOR_PALETTE["node-7"]
+    ),
     # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
-    "eigenscribe-2": ("#00a6ff", "#a855f7", "#ff00c3"),
+    "eigenscribe-2": (
+        COLOR_PALETTE["node-2"],
+        COLOR_PALETTE["eigen_blue"],
+        COLOR_PALETTE["midwest_indigo"],
+        COLOR_PALETTE["node-7"]
+    ),
     "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
     "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
@@ -84,7 +96,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
     # 💜 Purple Gradient: Purple-1 (#7952f5) -> Warm purple (#a855f7)
-    "purple_gradient": ("#7952f5", "#a855f7"),
+    "purple_gradient": (GRADIENT_PRESETS["purple_gradient"]),
 }
 
 STYLE_MAP: Final[dict[str, str]] = {
