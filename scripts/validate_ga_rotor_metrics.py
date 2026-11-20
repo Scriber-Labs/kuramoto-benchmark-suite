@@ -16,10 +16,10 @@ from typing import Any, Dict, Final
 
 import matplotlib.pyplot as plt
 import numpy as np
+from scriber_core.frontend.colors import COLOR_PALETTE
 
 from kuramoto.metrics.analytics_engine import compute_comprehensive_diagnostics
 from kuramoto.order_parameter import compute_order_parameter
-
 # Local kuramoto imports
 from kuramoto.solvers.rotor import RotorSolver
 
@@ -132,7 +132,7 @@ def analyze_energy_drift(benchmark_results: Dict[str, Any]) -> None:
 
     # Plot Phase-Space Contraction
     plt.figure(figsize=(10, 6))
-    plt.plot(times, metrics.lambda_trajectory, color="red")
+    plt.plot(times, metrics.lambda_trajectory, color=COLOR_PALETTE["vivid_pink"])
     plt.xlabel("Time")
     plt.ylabel(r"Contraction Rate $\lambda(t)$")
     plt.title("Phase-Space Volume Contraction Trajectory")
