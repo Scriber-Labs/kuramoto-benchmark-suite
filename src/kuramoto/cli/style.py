@@ -95,7 +95,9 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "aurora": ("#06b6d4", "#10b981", "#84cc16"),
     # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
     "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
-    # 💜 Purple Gradient: Purple-1 (#7952f5) -> Warm purple (#a855f7)
+    # 💚 Green Gradient
+    "green_gradient": (GRADIENT_PRESETS["green_gradient"]),
+    # 💜 Purple Gradient:
     "purple_gradient": (GRADIENT_PRESETS["purple_gradient"]),
 }
 
