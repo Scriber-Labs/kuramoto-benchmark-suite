@@ -15,8 +15,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems">
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update .idea/workspace.xml and .scriber-core submodule reference">
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" beforeDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
@@ -65,61 +65,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.1462103680861115E-8" />
-      <entry key="MS500" value="0.07803459879589268" />
-      <entry key="S2" value="2.196707437177811" />
-      <entry key="S5" value="7.012511640778806" />
-      <entry key="S10" value="13.187441380939354" />
-      <entry key="S30" value="28.121666890878924" />
-      <entry key="S60" value="38.762646194171886" />
-      <entry key="M2" value="47.664117895106855" />
-      <entry key="M5" value="60.370811752132305" />
-      <entry key="M10" value="94.30942343867646" />
-      <entry key="M15" value="139.19253078072106" />
-      <entry key="M30" value="275.2319752697963" />
-      <entry key="H1" value="492.9125595870717" />
-      <entry key="H2" value="819.9656025240249" />
-      <entry key="H4" value="1324.838268571157" />
-      <entry key="D1" value="5211.973677862553" />
-      <entry key="W1" value="22226.970443674923" />
+      <entry key="MS100" value="1.0000011905007828" />
+      <entry key="MS500" value="1.0653350062628228" />
+      <entry key="S2" value="1.5055760404256522" />
+      <entry key="S5" value="1.76122970722878" />
+      <entry key="S10" value="1.8796252425224065" />
+      <entry key="S30" value="4.331505815894412" />
+      <entry key="S60" value="13.587113168214316" />
+      <entry key="M2" value="29.67169030176692" />
+      <entry key="M5" value="57.4932915986652" />
+      <entry key="M10" value="93.88659911767402" />
+      <entry key="M15" value="134.35990115113992" />
+      <entry key="M30" value="264.0308468650393" />
+      <entry key="H1" value="486.2756714181859" />
+      <entry key="H2" value="824.7762903758278" />
+      <entry key="H4" value="1341.9688063300734" />
+      <entry key="D1" value="5247.99324253123" />
+      <entry key="W1" value="22277.42011926261" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000000000469" />
-      <entry key="S5" value="1.0000046601247288" />
-      <entry key="S10" value="1.0021587322040653" />
-      <entry key="S30" value="1.1292407858639095" />
-      <entry key="S60" value="1.3595007683959368" />
-      <entry key="M2" value="1.5998731666617603" />
-      <entry key="M5" value="1.9253774280077833" />
-      <entry key="M10" value="3.1961587819316537" />
-      <entry key="M15" value="5.48770669687733" />
-      <entry key="M30" value="13.403997660456628" />
-      <entry key="H1" value="24.797816538895997" />
-      <entry key="H2" value="36.94253074435726" />
-      <entry key="H4" value="47.69055857495666" />
-      <entry key="D1" value="77.0507263301096" />
-      <entry key="W1" value="208.67146552026716" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.0381104664102697E-84" />
+      <entry key="S2" value="1.0093944033330449E-21" />
+      <entry key="S5" value="3.995989670969946E-9" />
+      <entry key="S10" value="6.321384081805142E-5" />
+      <entry key="S30" value="0.03983554308313275" />
+      <entry key="S60" value="0.19963770592066948" />
+      <entry key="M2" value="0.4563850858827542" />
+      <entry key="M5" value="0.9735766928419708" />
+      <entry key="M10" value="2.000782189422991" />
+      <entry key="M15" value="3.673634629417418" />
+      <entry key="M30" value="10.48025665165936" />
+      <entry key="H1" value="21.885758399034295" />
+      <entry key="H2" value="34.911703003394464" />
+      <entry key="H4" value="46.694685038771254" />
+      <entry key="D1" value="77.50442125231285" />
+      <entry key="W1" value="209.4597355939654" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0701839382821731E-4" />
-      <entry key="MS500" value="0.23228458834146443" />
-      <entry key="S2" value="2.641596279447504" />
-      <entry key="S5" value="7.588053787846694" />
-      <entry key="S10" value="13.901320772967928" />
-      <entry key="S30" value="29.12504366940078" />
-      <entry key="S60" value="40.05020355475545" />
-      <entry key="M2" value="49.223658746718456" />
-      <entry key="M5" value="62.27603847525908" />
-      <entry key="M10" value="97.48628443561383" />
-      <entry key="M15" value="144.65816048022242" />
-      <entry key="M30" value="288.6107474563386" />
-      <entry key="H1" value="517.6855712922159" />
-      <entry key="H2" value="856.8862476293862" />
-      <entry key="H4" value="1372.5123992310519" />
-      <entry key="D1" value="5289.014889095722" />
-      <entry key="W1" value="22435.63370099695" />
+      <entry key="MS100" value="0.8645379795455685" />
+      <entry key="MS500" value="1.0308473704193795" />
+      <entry key="S2" value="1.486719974010566" />
+      <entry key="S5" value="1.75128504227076" />
+      <entry key="S10" value="1.8741630079420946" />
+      <entry key="S30" value="4.362623673601004" />
+      <entry key="S60" value="13.768026532645058" />
+      <entry key="M2" value="30.106945705970695" />
+      <entry key="M5" value="58.45055746252122" />
+      <entry key="M10" value="95.87233493368372" />
+      <entry key="M15" value="138.01665243155375" />
+      <entry key="M30" value="274.4901379761942" />
+      <entry key="H1" value="508.13895491134735" />
+      <entry key="H2" value="859.6671057958195" />
+      <entry key="H4" value="1388.6473510397116" />
+      <entry key="D1" value="5325.488149344619" />
+      <entry key="W1" value="22486.87164544684" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -223,7 +223,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\ai-generated-research-notebook" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.viz">
+  <component name="RunManager" selected="Python.style">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -358,11 +358,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.style" />
         <item itemvalue="Python.viz" />
         <item itemvalue="Python.analytics_engine" />
         <item itemvalue="Python.colors_table" />
         <item itemvalue="Python.solver_types" />
-        <item itemvalue="Python.style" />
       </list>
     </recent_temporary>
   </component>
@@ -382,14 +382,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00037" summary="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources.">
-      <option name="closed" value="true" />
-      <created>1791669487721</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1791669487721</updated>
     </task>
     <task id="LOCAL-00038" summary="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot.">
       <option name="closed" value="true" />
@@ -775,14 +767,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795174265232</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Update .idea/workspace.xml and .scriber-core submodule reference">
+      <option name="closed" value="true" />
+      <created>1795179967919</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1795179967919</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
     <MESSAGE value="reconciled a whole bunch of commits" />
     <MESSAGE value="project updates" />
@@ -801,13 +800,14 @@
     <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
     <MESSAGE value="add gold standard css template and preview" />
     <MESSAGE value="add cli user guide and update demo notebook" />
-    <MESSAGE value="Add TSE plots theme and style bridge" />
     <MESSAGE value="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings" />
     <MESSAGE value="Add scriber-core as a core dependency&#10;&#10;- Require scriber-core&gt;=1.0.0 in pyproject.toml&#10;- Sync uv.lock with new dependency and its transitive packages" />
     <MESSAGE value="Refine CLI style presets and update practice problem checklist&#10;&#10;- Replace hardcoded hex color values in cli/style.py gradient presets with&#10;  named constants from scriber_core.frontend.colors.COLOR_PALETTE and&#10;  scriber_core.frontend.gradients.GRADIENT_PRESETS&#10;- Mark completed tasks in section-c1.md practice problem checklist&#10;- Fix color name typo in scriber_core/frontend/colors.py (neon_green →&#10;  brigh_green) and adjust neon_green hex value" />
     <MESSAGE value="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files" />
     <MESSAGE value="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems" />
-    <option name="LAST_COMMIT_MESSAGE" value="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems" />
+    <MESSAGE value="Add TSE plots theme and style bridge" />
+    <MESSAGE value="Update .idea/workspace.xml and .scriber-core submodule reference" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .idea/workspace.xml and .scriber-core submodule reference" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
