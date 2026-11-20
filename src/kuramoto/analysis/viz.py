@@ -1804,8 +1804,8 @@ def _run_smoke_test() -> None:
 
     # 2. Test get_comparison_colors
     r_ref, r_sim = get_comparison_colors("order_parameter")
-    assert r_ref == COLOR_REFERENCE
-    assert r_sim == COLOR_SIMULATED
+    assert r_ref == COMPARISON_PALETTE["order_parameter"]["reference"]
+    assert r_sim == COMPARISON_PALETTE["order_parameter"]["simulated"]
 
     # 3. Test Network data & plot
     n = 20

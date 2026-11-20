@@ -15,11 +15,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core/src/scriber_core/frontend/colors.py" beforeDir="false" afterPath="$PROJECT_DIR$/.scriber-core/src/scriber_core/frontend/colors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.scriber-core" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.scriber-core" afterDir="false" />
     </list>
@@ -69,61 +66,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.028755878364797" />
-      <entry key="MS500" value="1.5419315327995704" />
-      <entry key="S2" value="3.175716973102912" />
-      <entry key="S5" value="6.021284856228776" />
-      <entry key="S10" value="8.536406529490574" />
-      <entry key="S30" value="12.609038501434087" />
-      <entry key="S60" value="16.104078021049183" />
-      <entry key="M2" value="23.873483083982833" />
-      <entry key="M5" value="65.13340183802146" />
-      <entry key="M10" value="133.47018896445078" />
-      <entry key="M15" value="192.23433216968007" />
-      <entry key="M30" value="333.53511220668753" />
-      <entry key="H1" value="537.5347026115345" />
-      <entry key="H2" value="845.3829108415936" />
-      <entry key="H4" value="1332.5784050612301" />
-      <entry key="D1" value="5194.544979071076" />
-      <entry key="W1" value="22190.32156678064" />
+      <entry key="MS100" value="1.169548137504378E-5" />
+      <entry key="MS500" value="0.23186928354421607" />
+      <entry key="S2" value="3.297769112138506" />
+      <entry key="S5" value="7.613820765608608" />
+      <entry key="S10" value="10.550889926823661" />
+      <entry key="S30" value="13.484682752066227" />
+      <entry key="S60" value="14.580989370108284" />
+      <entry key="M2" value="15.707568198009977" />
+      <entry key="M5" value="23.081893631767585" />
+      <entry key="M10" value="57.10741261193286" />
+      <entry key="M15" value="102.80566375850127" />
+      <entry key="M30" value="239.68830766358226" />
+      <entry key="H1" value="456.8469946084288" />
+      <entry key="H2" value="782.7157873490668" />
+      <entry key="H4" value="1286.3627943007234" />
+      <entry key="D1" value="5171.655360421389" />
+      <entry key="W1" value="22185.22321109493" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="8.001327840810643E-247" />
-      <entry key="S2" value="3.0081356386866152E-62" />
-      <entry key="S5" value="2.774054894542854E-25" />
-      <entry key="S10" value="6.941789261015771E-13" />
-      <entry key="S30" value="1.6400540920323542E-4" />
-      <entry key="S60" value="0.022593251631056865" />
-      <entry key="M2" value="0.2861270564155997" />
-      <entry key="M5" value="1.7420506726993696" />
-      <entry key="M10" value="5.1375868899612485" />
-      <entry key="M15" value="8.912980362228446" />
-      <entry key="M30" value="18.113695243516474" />
-      <entry key="H1" value="28.7112903731227" />
-      <entry key="H2" value="39.20835407267205" />
-      <entry key="H4" value="48.397873034735866" />
-      <entry key="D1" value="75.77377182314927" />
-      <entry key="W1" value="206.9545615649416" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000000000013" />
+      <entry key="S60" value="1.0000000642728963" />
+      <entry key="M2" value="1.0004825957502603" />
+      <entry key="M5" value="1.135478571912198" />
+      <entry key="M10" value="2.4327291374383657" />
+      <entry key="M15" value="4.804458856921584" />
+      <entry key="M30" value="12.834285100906737" />
+      <entry key="H1" value="24.20706384240199" />
+      <entry key="H2" value="36.25026240124487" />
+      <entry key="H4" value="46.89000946760608" />
+      <entry key="D1" value="76.10477529193004" />
+      <entry key="W1" value="207.6925435754286" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.5062769072775842" />
-      <entry key="MS500" value="1.3745281151556563" />
-      <entry key="S2" value="2.824989717124911" />
-      <entry key="S5" value="5.680052865545774" />
-      <entry key="S10" value="8.300451449669698" />
-      <entry key="S30" value="12.51053790210331" />
-      <entry key="S60" value="16.072688829736936" />
-      <entry key="M2" value="24.122530227789017" />
-      <entry key="M5" value="66.83873975790941" />
-      <entry key="M10" value="138.568092934923" />
-      <entry key="M15" value="201.1077565864221" />
-      <entry key="M30" value="351.6139373557214" />
-      <entry key="H1" value="566.2168136780743" />
-      <entry key="H2" value="884.5676252715739" />
-      <entry key="H4" value="1380.9593098624168" />
-      <entry key="D1" value="5270.309212902021" />
-      <entry key="W1" value="22397.267918642847" />
+      <entry key="MS100" value="6.081460817339864E-4" />
+      <entry key="MS500" value="0.4558599883677253" />
+      <entry key="S2" value="3.9710860679248587" />
+      <entry key="S5" value="8.458305302580609" />
+      <entry key="S10" value="11.466394566471486" />
+      <entry key="S30" value="14.450740439474588" />
+      <entry key="S60" value="15.561019745122277" />
+      <entry key="M2" value="16.69661392449605" />
+      <entry key="M5" value="24.209413740750808" />
+      <entry key="M10" value="59.526385587535756" />
+      <entry key="M15" value="107.59140856370517" />
+      <entry key="M30" value="252.4988757951193" />
+      <entry key="H1" value="481.030000031279" />
+      <entry key="H2" value="818.944558576595" />
+      <entry key="H4" value="1333.2365954455079" />
+      <entry key="D1" value="5247.750661989041" />
+      <entry key="W1" value="22392.907552511544" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -386,22 +383,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00035" summary="updated execution timestamps in validate_structural_metrics.ipynb">
-      <option name="closed" value="true" />
-      <created>1791517808491</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1791517808491</updated>
-    </task>
-    <task id="LOCAL-00036" summary="applied Scriber plotting style in demo.ipynb and updated execution timestamps in notebooks">
-      <option name="closed" value="true" />
-      <created>1791528672128</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1791528672128</updated>
     </task>
     <task id="LOCAL-00037" summary="Added key research deliverables: benchmarking, quantum circuit synthesis, fluid flow visualization, and educational resources.">
       <option name="closed" value="true" />
@@ -779,14 +760,29 @@
       <option name="project" value="LOCAL" />
       <updated>1795167095467</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems">
+      <option name="closed" value="true" />
+      <created>1795173976162</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1795173976162</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems">
+      <option name="closed" value="true" />
+      <created>1795174265231</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1795174265232</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="qiskit implementation" />
     <MESSAGE value="updated rotor integrator" />
     <MESSAGE value="cli update" />
     <MESSAGE value="reconciled a whole bunch of commits" />
@@ -811,7 +807,8 @@
     <MESSAGE value="Add scriber-core as a core dependency&#10;&#10;- Require scriber-core&gt;=1.0.0 in pyproject.toml&#10;- Sync uv.lock with new dependency and its transitive packages" />
     <MESSAGE value="Refine CLI style presets and update practice problem checklist&#10;&#10;- Replace hardcoded hex color values in cli/style.py gradient presets with&#10;  named constants from scriber_core.frontend.colors.COLOR_PALETTE and&#10;  scriber_core.frontend.gradients.GRADIENT_PRESETS&#10;- Mark completed tasks in section-c1.md practice problem checklist&#10;- Fix color name typo in scriber_core/frontend/colors.py (neon_green →&#10;  brigh_green) and adjust neon_green hex value" />
     <MESSAGE value="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refresh coprime coding task notebook and CLI gradient presets&#10;&#10;- Replace hardcoded gradient preset references with named presets&#10;(eigenscribe-1, green_gradient) in problem-16-coding-task.ipynb and&#10;add styled output formatting for Extended GCD trace&#10;- Register green_gradient preset from GRADIENT_PRESETS in&#10;cli/style.py gradient map&#10;- Update notebook execution timestamps and benchmark data files" />
+    <MESSAGE value="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems" />
+    <option name="LAST_COMMIT_MESSAGE" value="Centralize visualization colors from scriber_core palette and extend color registry&#10;&#10;- Replace hardcoded hex literals in analysis/viz.py design tokens and&#10;  PROJECT_COLORS with named lookups from scriber_core.frontend.COLOR_PALETTE&#10;- Add new color entries to COLOR_PALETTE (greens, purples, oranges, neutrals)&#10;- Add Problem 17 on CRT reconstruction to section-c1.md practice problems" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -828,7 +825,7 @@
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$style.coverage" NAME="style Coverage Results" MODIFIED="1795162570121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$solver_types.coverage" NAME="solver_types Coverage Results" MODIFIED="1795162902308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors_table.coverage" NAME="colors_table Coverage Results" MODIFIED="1795163696431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/cli" />
-    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$viz.coverage" NAME="viz Coverage Results" MODIFIED="1795173631473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/analysis" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$viz.coverage" NAME="viz Coverage Results" MODIFIED="1795174622921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/analysis" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$analytics_engine.coverage" NAME="analytics_engine Coverage Results" MODIFIED="1795163855334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/metrics" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors__1_.coverage" NAME="colors (1) Coverage Results" MODIFIED="1795161398688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend" />
   </component>
