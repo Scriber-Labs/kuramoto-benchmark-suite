@@ -15,13 +15,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Add TSE plots theme and style bridge">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/the-scriber-experience.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/the-scriber-experience.iml" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../kuramoto-dash-app/.idea/kuramoto-dash-app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="414" />
+    <option name="cachedIndexableFilesCount" value="422" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExportToHTMLSettings">
@@ -69,61 +66,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0038429081592386" />
-      <entry key="MS500" value="1.5114979100266523" />
-      <entry key="S2" value="3.1673845327792796" />
-      <entry key="S5" value="5.03113529604603" />
-      <entry key="S10" value="6.9989954262499685" />
-      <entry key="S30" value="13.316259974274193" />
-      <entry key="S60" value="23.07379306228153" />
-      <entry key="M2" value="35.83757617359606" />
-      <entry key="M5" value="55.53285107846163" />
-      <entry key="M10" value="90.77756741803154" />
-      <entry key="M15" value="123.61567359995097" />
-      <entry key="M30" value="190.35829411997412" />
-      <entry key="H1" value="295.90128930925465" />
-      <entry key="H2" value="503.8886034243446" />
-      <entry key="H4" value="898.4544972526605" />
-      <entry key="D1" value="4625.761356821195" />
-      <entry key="W1" value="21452.53366701863" />
+      <entry key="MS100" value="1.0104501560477968" />
+      <entry key="MS500" value="2.082243137541318" />
+      <entry key="S2" value="8.482184756586102" />
+      <entry key="S5" value="13.861832438989152" />
+      <entry key="S10" value="16.846472936506004" />
+      <entry key="S30" value="26.291156703430868" />
+      <entry key="S60" value="44.29225031188818" />
+      <entry key="M2" value="78.48870581512713" />
+      <entry key="M5" value="139.17132083880645" />
+      <entry key="M10" value="196.20831541486874" />
+      <entry key="M15" value="238.226241439033" />
+      <entry key="M30" value="318.5767978588689" />
+      <entry key="H1" value="433.0451775023963" />
+      <entry key="H2" value="645.7588331506407" />
+      <entry key="H4" value="1043.0473625704612" />
+      <entry key="D1" value="4773.186880532759" />
+      <entry key="W1" value="21603.965452180488" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.3926164780031604E-274" />
-      <entry key="S5" value="2.867852002730058E-110" />
-      <entry key="S10" value="1.706663576680381E-55" />
-      <entry key="S30" value="7.205765368574266E-19" />
-      <entry key="S60" value="1.4679288650639118E-9" />
-      <entry key="M2" value="7.926830693284271E-5" />
-      <entry key="M5" value="0.0589877570624178" />
-      <entry key="M10" value="0.541423489625271" />
-      <entry key="M15" value="1.1369408486925983" />
-      <entry key="M30" value="2.4875885863499363" />
-      <entry key="H1" value="4.287720731058421" />
-      <entry key="H2" value="6.553297299824795" />
-      <entry key="H4" value="8.74857693794519" />
-      <entry key="D1" value="27.99504113254821" />
-      <entry key="W1" value="157.38977517185626" />
+      <entry key="S2" value="9.68E-321" />
+      <entry key="S5" value="9.869687306600547E-129" />
+      <entry key="S10" value="1.001200940545774E-64" />
+      <entry key="S30" value="6.032137414000501E-22" />
+      <entry key="S60" value="4.2471790027960504E-11" />
+      <entry key="M2" value="1.348333608148314E-5" />
+      <entry key="M5" value="0.02904296783946072" />
+      <entry key="M10" value="0.37990643439060656" />
+      <entry key="M15" value="0.8977682466336083" />
+      <entry key="M30" value="2.210506216862699" />
+      <entry key="H1" value="4.041876910808996" />
+      <entry key="H2" value="6.362651949954461" />
+      <entry key="H4" value="8.620383037257145" />
+      <entry key="D1" value="27.926250839234886" />
+      <entry key="W1" value="157.33446788720974" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9430595590001827" />
-      <entry key="MS500" value="1.490963117001853" />
-      <entry key="S2" value="3.1558039148802495" />
-      <entry key="S5" value="5.02365617130386" />
-      <entry key="S10" value="6.993430737431135" />
-      <entry key="S30" value="13.247269218017843" />
-      <entry key="S60" value="22.87794791250034" />
-      <entry key="M2" value="35.59011093767671" />
-      <entry key="M5" value="55.413150396140246" />
-      <entry key="M10" value="91.20163829646818" />
-      <entry key="M15" value="124.66262285344978" />
-      <entry key="M30" value="192.79075104625335" />
-      <entry key="H1" value="300.1559264296752" />
-      <entry key="H2" value="510.42223389302853" />
-      <entry key="H4" value="907.1916571088744" />
-      <entry key="D1" value="4653.748225373806" />
-      <entry key="W1" value="21609.915435731917" />
+      <entry key="MS100" value="0.9363119250629779" />
+      <entry key="MS500" value="2.0514026752476155" />
+      <entry key="S2" value="8.450414022163958" />
+      <entry key="S5" value="13.840955524383038" />
+      <entry key="S10" value="16.83376736101617" />
+      <entry key="S30" value="26.28451006632222" />
+      <entry key="S60" value="44.28111890794671" />
+      <entry key="M2" value="78.44207281156694" />
+      <entry key="M5" value="139.10957741123994" />
+      <entry key="M10" value="196.50421354925663" />
+      <entry key="M15" value="239.0517717288592" />
+      <entry key="M30" value="320.73768765802595" />
+      <entry key="H1" value="437.05554505576936" />
+      <entry key="H2" value="652.1022265455473" />
+      <entry key="H4" value="1051.65641324686" />
+      <entry key="D1" value="4801.104965021186" />
+      <entry key="W1" value="21761.29191444141" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -245,6 +242,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/colors.py" />
@@ -269,6 +267,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/gradients.py" />
@@ -290,6 +289,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../scriber-core/src/frontend/THE_SCRIBER_EXPERIENCE/cli/gradients.py" />
@@ -311,6 +311,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -328,6 +329,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -348,7 +350,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-34611be1ca5a-e0583fc556d1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-263.7307.206" />
+        <option value="bundled-python-sdk-9e1d95ea72ba-e0583fc556d1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-263.7307.329" />
       </set>
     </attachedChunks>
   </component>
@@ -361,14 +363,6 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00031" summary="updated execution timestamps in demo.ipynb">
-      <option name="closed" value="true" />
-      <created>1791507303669</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1791507303669</updated>
     </task>
     <task id="LOCAL-00032" summary="added rotor_dt_0.01.npz benchmark data">
       <option name="closed" value="true" />
@@ -754,14 +748,21 @@
       <option name="project" value="LOCAL" />
       <updated>1794767331625</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings">
+      <option name="closed" value="true" />
+      <created>1794918019995</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1794918019996</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated `sanity_checks.ipynb`: added `BORDER_COLOR`, revised axis labels, reduced figure size, and updated execution timestamps." />
     <MESSAGE value="Removed `data/failure_modes.ipynb` notebook." />
     <MESSAGE value="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references." />
     <MESSAGE value="sanity check notebook" />
@@ -786,7 +787,8 @@
     <MESSAGE value="add gold standard css template and preview" />
     <MESSAGE value="add cli user guide and update demo notebook" />
     <MESSAGE value="Add TSE plots theme and style bridge" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add TSE plots theme and style bridge" />
+    <MESSAGE value="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -795,11 +797,6 @@
           <url>file://$PROJECT_DIR$/src/kuramoto/cli/utils.py</url>
           <line>15</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../scriber-core/tests/test_frontend_styling.py</url>
-          <line>10</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

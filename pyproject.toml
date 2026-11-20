@@ -22,6 +22,7 @@ dependencies = [
     "click>=8.0",
     "sympy>=1.12",
     "clifford>=1.5.1",
+    "scriber-core>=1.0.0",
 ]
 
 [project.scripts]
