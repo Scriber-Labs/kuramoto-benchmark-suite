@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import click
 
+from kuramoto.cli.style.color_utils import ansi_256, hex_to_rgb, supports_256_color
 from kuramoto.cli.style.palettes import STYLE_MAP
-from kuramoto.cli.style.color_utils import supports_256_color, ansi_256, hex_to_rgb
 
 __all__: list[str] = [
     "cli_echo",
@@ -132,13 +132,13 @@ def cli_divider() -> None:
 def _run_smoke_test() -> None:
     """Quick sanity check for layout functions."""
     print("💨 Running layout.py smoke tests...")
-    
+
     # Test that functions run without error
     cli_echo("Test echo")
     cli_rule()
     cli_section("Test Section")
     cli_divider()
-    
+
     print("✅ layout.py smoke test passed.")
 
 

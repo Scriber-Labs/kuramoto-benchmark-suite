@@ -44,16 +44,16 @@ def style_coprime_coeff(val: int | str) -> str:
 def _run_smoke_test() -> None:
     """Quick sanity check for domain color coders."""
     print("💨 Running domain.py smoke tests...")
-    
+
     term = style_coprime_term(7)
     gcd_str = style_coprime_gcd(1)
     coeff = style_coprime_coeff(-3)
-    
+
     assert "7" in term and "1" in gcd_str and "-3" in coeff
     assert "\033[38;2;0;166;255m" in term
     assert "\033[38;2;40;215;40m" in gcd_str
     assert "\033[38;2;255;0;195m" in coeff
-    
+
     print("✅ domain.py smoke test passed.")
 
 

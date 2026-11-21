@@ -20,6 +20,7 @@ from scriber_core.frontend.colors import COLOR_PALETTE
 
 from kuramoto.metrics.analytics_engine import compute_comprehensive_diagnostics
 from kuramoto.order_parameter import compute_order_parameter
+
 # Local kuramoto imports
 from kuramoto.solvers.rotor import RotorSolver
 

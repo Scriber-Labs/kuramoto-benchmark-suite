@@ -55,5 +55,6 @@ def main() -> None:
     """Run smoke tests for the types module."""
     _run_smoke_test()
 
+
 if __name__ == "__main__":
     main()

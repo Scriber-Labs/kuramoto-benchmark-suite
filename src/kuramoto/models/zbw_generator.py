@@ -15,6 +15,8 @@ from typing import Final
 import numpy as np
 from numpy.typing import NDArray
 
+from kuramoto.utils import get_rng
+
 # 0️⃣ Definitions, Constants & Types
 
 GOLDEN_RATIO: Final[float] = (1.0 + np.sqrt(5.0)) / 2.0
@@ -203,7 +205,8 @@ def _run_smoke_test() -> None:
     assert np.all(np.diag(gen.adjacency_matrix) == 0.0), "Diagonal should be zero"
 
     # Check derivatives shape
-    phases = np.random.uniform(0, 2 * np.pi, 10)
+    rng = get_rng(42)
+    phases = rng.uniform(0, 2 * np.pi, 10)
     dtheta = gen.phase_evolution_derivatives(time=0.0, phases=phases)
     assert dtheta.shape == (10,), f"Expected shape (10,), got {dtheta.shape}"
 

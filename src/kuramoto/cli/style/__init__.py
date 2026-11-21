@@ -13,35 +13,22 @@ from __future__ import annotations
 
 import sys
 
-# Re-exports from submodules (in dependency order)
-from .types import Color, RGB
-
-from .palettes import (
-    ANSI_256_PALETTE,
-    COLOR_PALETTE,
-    EIGENSCRIBE_PALETTE,
-    STYLE_MAP,
-)
-
 from .color_utils import (
     ansi_256,
     hex_to_rgb,
     print_hex_swatches,
     supports_256_color,
 )
-
-from .gradients import (
-    PRESETS,
-    cli_gradient,
-    multi_gradient,
-)
-
 from .domain import (
     style_coprime_coeff,
     style_coprime_gcd,
     style_coprime_term,
 )
-
+from .gradients import (
+    PRESETS,
+    cli_gradient,
+    multi_gradient,
+)
 from .layout import (
     cli_banner,
     cli_divider,
@@ -49,7 +36,6 @@ from .layout import (
     cli_rule,
     cli_section,
 )
-
 from .messages import (
     cli_coprime,
     cli_error,
@@ -63,6 +49,15 @@ from .messages import (
     cli_warning,
     cli_zbw,
 )
+from .palettes import (
+    ANSI_256_PALETTE,
+    COLOR_PALETTE,
+    EIGENSCRIBE_PALETTE,
+    STYLE_MAP,
+)
+
+# Re-exports from submodules (in dependency order)
+from .types import RGB, Color
 
 __all__: list[str] = [
     # Types

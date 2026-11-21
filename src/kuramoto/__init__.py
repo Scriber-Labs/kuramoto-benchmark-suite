@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .api import generate_kuramoto_dataset
 from .dataset import KuramotoDataset
 from .model import KuramotoModel

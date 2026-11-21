@@ -74,9 +74,9 @@ Sanity checks across long-time integration ($T = 50\,\mathrm{s}$, $N = 20$ oscil
 | Diagnostic / Sanity Check | Target Requirement | Measured Value | Solver Evaluation | Status |
 | :--- | :--- | :--- | :--- | :--- |
 | **$K=0$ Hamiltonian Energy Drift ($H(t)$)** | $\Delta H < 10^{-10}$ | **$1.233 \times 10^{-13}$** | Geometric RKMK4 | **PASS** |
-| **$K=0$ Contraction Rate ($\Lambda(t)$)** | $|\Lambda| < 10^{-10}$ | **$4.052 \times 10^{-13}$** | Geometric RKMK4 | **PASS** |
+| **$K=0$ Contraction Rate ($\Lambda(t)$)** | $\Lambda < 10^{-10}$| **$4.052 \times 10^{-13}$**| Geometric RKMK3| **PASS**|
 | **$K=0$ Energy Drift (Adaptive)** | $\Delta H < 10^{-10}$ | **$1.255 \times 10^{-13}$** | Adaptive RotorScheme | **PASS** |
-| **$K=0$ Contraction Rate (Adaptive)** | $|\Lambda| < 10^{-10}$ | **$4.072 \times 10^{-13}$** | Adaptive RotorScheme | **PASS** |
+| **$K=0$ Contraction Rate (Adaptive)** | $\Lambda < 10^{-10}$| **$2.072 \times 10^{-13}$**| Adaptive RotorScheme| **PASS**  |
 | **$\operatorname{SO}(2)$ Gauge Invariance (RKMK4)** | $\Delta V < 10^{-10}$ | **$7.090 \times 10^{-13}$** | Geometric RKMK4 | **PASS** |
 | **$\operatorname{SO}(2)$ Gauge Invariance (Adaptive)** | $\Delta V < 10^{-10}$ | **$2.645 \times 10^{-13}$** | Adaptive RotorScheme | **PASS** |
 | **50s Time-Reversal Error (DOPRI54)** | $\text{Err} < 10^{-10}$ | **$5.289 \times 10^{-13}$** | Fixed-Step DOPRI54 | **PASS** |

@@ -7,6 +7,8 @@ This module exports:
       integration.
 """
 
+from __future__ import annotations
+
 from .coprime import (
     CoprimeSampleResult,
     CoprimeSamplerWrapper,
