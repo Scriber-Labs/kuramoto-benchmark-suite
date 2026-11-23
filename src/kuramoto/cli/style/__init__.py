@@ -40,6 +40,7 @@ from .domain import (
     style_coprime_coeff,
     style_coprime_gcd,
     style_coprime_term,
+    style_crt_channel,
 )
 
 from .layout import (
@@ -86,6 +87,7 @@ __all__: list[str] = [
     "style_coprime_term",
     "style_coprime_gcd",
     "style_coprime_coeff",
+    "style_crt_channel",
     # Layout
     "cli_echo",
     "cli_rule",

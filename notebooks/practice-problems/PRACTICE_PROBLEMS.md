@@ -155,10 +155,10 @@ $$ax + by = \gcd(a, b)$$
 **Setup:** You have two samplers: Sampler A records every $N=11$-th step, Sampler B records every $M=7$-th step. Since $\gcd(7, 11) = 1$, you can reconstruct any time index $t \in [0, 76]$ from the pair of remainders $(t \bmod 7, t \bmod 11)$.
 
 **Tasks:**
-1. Suppose Sampler A observes the signal at local index $k_n = 5$ (meaning $t \equiv 5 \pmod{11}$) and Sampler B observes at local index $k_m = 3$ (meaning $t \equiv 3 \pmod{7}$).
-2. Use the Bézout coefficients from Problem 16 to reconstruct $t$.
-3. Verify: does $t \bmod 11 = 5$ and $t \bmod 7 = 3$?
-4. **Code reference:** Look at `coprime_reconstruct_frequency` in `coprime.py`. The formula is:
+Suppose Sampler A observes the signal at local index $k_n = 5$ (meaning $t \equiv 5 \pmod{11}$) and Sampler B observes at local index $k_m = 3$ (meaning $t \equiv 3 \pmod{7}$).
+1. Use the Bézout coefficients from Problem 16 to reconstruct $t$.
+2. Verify: does $t \bmod 11 = 5$ and $t \bmod 7 = 3$?
+3. **Code reference:** Look at `coprime_reconstruct_frequency` in `coprime.py`. The formula is:
 $$k_{\text{true}} = (k_m \cdot b \cdot N + k_n \cdot a \cdot M) \bmod (M \cdot N)$$
 where $(g, a, b) = \text{extended\_gcd}(M, N)$.
 

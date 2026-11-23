@@ -15,19 +15,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Update Problem 16 notebook gradient presets and clean up IDE workspace&#10;&#10;- Replace hardcoded gradient preset references (purple_gradient,&#10;  green_gradient) with named presets (eigenscribe-1, eigenscribe-2)&#10;  in the Extended GCD trace output in problem-16-coding-task.ipynb&#10;- Remove stale .idea/kuramoto-dash-app.iml module file&#10;- Update .idea/workspace.xml task history and recent run configuration">
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/color_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/layout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/palettes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/types.py" afterDir="false" />
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="Refactor CLI style module into Scriber Core 4-layer token subpackage&#10;&#10;- Split monolithic style.py into kuramoto/cli/style/ package with&#10;  types, palettes, color_utils, gradients, layout, messages, and domain modules&#10;- Migrate color palettes to scriber_core.frontend.colors imports&#10;- Add TrueColor gradient engine with eigenscribe-1/2 presets&#10;- Add benchmark results and validation plot artifacts">
+      <change afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/ai_generated/qiskit_hybrid_kuramoto_pipeline.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/validate_ga_rotor_metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/section-d-plotting-exercises.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,61 +72,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0457627858890395" />
-      <entry key="MS500" value="1.6905596103336225" />
-      <entry key="S2" value="3.8230554982734652" />
-      <entry key="S5" value="6.729186422957492" />
-      <entry key="S10" value="8.790844136703324" />
-      <entry key="S30" value="11.262340624129152" />
-      <entry key="S60" value="13.279408316669366" />
-      <entry key="M2" value="16.453390189548045" />
-      <entry key="M5" value="26.59009019479695" />
-      <entry key="M10" value="56.22958568288472" />
-      <entry key="M15" value="112.49803083703745" />
-      <entry key="M30" value="350.0378037103318" />
-      <entry key="H1" value="770.4616864342825" />
-      <entry key="H2" value="1306.3794493115352" />
-      <entry key="H4" value="2015.6619323588693" />
-      <entry key="D1" value="6335.868117739477" />
-      <entry key="W1" value="23741.55808157601" />
+      <entry key="MS100" value="1.0000228095893857" />
+      <entry key="MS500" value="1.119762263661324" />
+      <entry key="S2" value="1.8128827474181592" />
+      <entry key="S5" value="2.7862789778212314" />
+      <entry key="S10" value="4.145124484121565" />
+      <entry key="S30" value="7.290445341522529" />
+      <entry key="S60" value="9.805523379373989" />
+      <entry key="M2" value="17.00839028168288" />
+      <entry key="M5" value="51.376513979691154" />
+      <entry key="M10" value="102.4031924834541" />
+      <entry key="M15" value="139.84409052216085" />
+      <entry key="M30" value="247.06769825948675" />
+      <entry key="H1" value="535.5971325434675" />
+      <entry key="H2" value="1092.4870446056611" />
+      <entry key="H4" value="1912.637487161785" />
+      <entry key="D1" value="6482.753536885207" />
+      <entry key="W1" value="24030.6898016583" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.199883832355488E-71" />
-      <entry key="S2" value="1.8611646723295384E-18" />
-      <entry key="S5" value="8.089355472707746E-8" />
-      <entry key="S10" value="2.8441792265818317E-4" />
-      <entry key="S30" value="0.06578052850967939" />
-      <entry key="S60" value="0.261572379267743" />
-      <entry key="M2" value="0.6036713906777372" />
-      <entry key="M5" value="1.3917651508365563" />
-      <entry key="M10" value="2.9438607498068143" />
-      <entry key="M15" value="5.59879668605689" />
-      <entry key="M30" value="16.84210469367854" />
-      <entry key="H1" value="37.120481652296334" />
-      <entry key="H2" value="62.550313854911025" />
-      <entry key="H4" value="91.31270150023703" />
-      <entry key="D1" value="159.26227615171456" />
-      <entry key="W1" value="302.51272190538225" />
+      <entry key="MS500" value="6.810572754342437E-170" />
+      <entry key="S2" value="5.108529541661782E-43" />
+      <entry key="S5" value="1.2114860638207354E-17" />
+      <entry key="S10" value="3.4819860649020912E-9" />
+      <entry key="S30" value="0.0016739914036051151" />
+      <entry key="S60" value="0.05932797948699629" />
+      <entry key="M2" value="0.46707620771205255" />
+      <entry key="M5" value="1.9859793464860334" />
+      <entry key="M10" value="3.3993205341587034" />
+      <entry key="M15" value="4.147439518909896" />
+      <entry key="M30" value="6.644695767186341" />
+      <entry key="H1" value="17.23777465548957" />
+      <entry key="H2" value="40.971635749130826" />
+      <entry key="H4" value="74.4103810198468" />
+      <entry key="D1" value="157.8079418017667" />
+      <entry key="W1" value="306.4515843473136" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0101401976969258" />
-      <entry key="MS500" value="1.678620802725457" />
-      <entry key="S2" value="3.815659310528765" />
-      <entry key="S5" value="6.723613148449776" />
-      <entry key="S10" value="8.78731007422283" />
-      <entry key="S30" value="11.321952797269008" />
-      <entry key="S60" value="13.530968002018122" />
-      <entry key="M2" value="17.046881645528707" />
-      <entry key="M5" value="27.973879483288485" />
-      <entry key="M10" value="59.16101527561703" />
-      <entry key="M15" value="118.07531234925723" />
-      <entry key="M30" value="366.83947594460295" />
-      <entry key="H1" value="807.5356680074984" />
-      <entry key="H2" value="1368.8903324033822" />
-      <entry key="H4" value="2106.945225509951" />
-      <entry key="D1" value="6495.117437851343" />
-      <entry key="W1" value="24044.062057270898" />
+      <entry key="MS100" value="0.8010885335997351" />
+      <entry key="MS500" value="1.0716390143117251" />
+      <entry key="S2" value="1.7933156044953078" />
+      <entry key="S5" value="2.773839128741275" />
+      <entry key="S10" value="4.135630800539261" />
+      <entry key="S30" value="7.28616226560633" />
+      <entry key="S60" value="9.854581035614933" />
+      <entry key="M2" value="17.447862723470735" />
+      <entry key="M5" value="53.31896765307838" />
+      <entry key="M10" value="105.7654434112086" />
+      <entry key="M15" value="143.96148091962831" />
+      <entry key="M30" value="253.69014497555057" />
+      <entry key="H1" value="552.8100443551025" />
+      <entry key="H2" value="1133.4311222906658" />
+      <entry key="H4" value="1987.0230448280454" />
+      <entry key="D1" value="6640.5486582038175" />
+      <entry key="W1" value="24337.132632013687" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -217,7 +214,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.scopes",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -386,6 +383,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-PY-263.7307.329" />
         <option value="bundled-python-sdk-9e1d95ea72ba-e0583fc556d1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-263.7307.329" />
       </set>
     </attachedChunks>
@@ -399,14 +397,7 @@
       <updated>1768327245151</updated>
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
-    </task>
-    <task id="LOCAL-00039" summary="Updated `.idea/workspace.xml` with changes to local tasks and cache; added `cli_color_styling.md` for CLI enhancements; included updates to sample dataset and network plot.">
-      <option name="closed" value="true" />
-      <created>1791895674265</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1791895674265</updated>
+      <workItem from="1795458671947" duration="5554000" />
     </task>
     <task id="LOCAL-00040" summary="updated house rules and did some repo cleaning">
       <option name="closed" value="true" />
@@ -792,14 +783,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795180829639</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Refactor CLI style module into Scriber Core 4-layer token subpackage&#10;&#10;- Split monolithic style.py into kuramoto/cli/style/ package with&#10;  types, palettes, color_utils, gradients, layout, messages, and domain modules&#10;- Migrate color palettes to scriber_core.frontend.colors imports&#10;- Add TrueColor gradient engine with eigenscribe-1/2 presets&#10;- Add benchmark results and validation plot artifacts">
+      <option name="closed" value="true" />
+      <created>1795203459492</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1795203459492</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reconciled a whole bunch of commits" />
     <MESSAGE value="project updates" />
     <MESSAGE value="cli updates" />
     <MESSAGE value="color cli changes" />
@@ -824,7 +822,8 @@
     <MESSAGE value="Add TSE plots theme and style bridge" />
     <MESSAGE value="Update .idea/workspace.xml and .scriber-core submodule reference" />
     <MESSAGE value="Update Problem 16 notebook gradient presets and clean up IDE workspace&#10;&#10;- Replace hardcoded gradient preset references (purple_gradient,&#10;  green_gradient) with named presets (eigenscribe-1, eigenscribe-2)&#10;  in the Extended GCD trace output in problem-16-coding-task.ipynb&#10;- Remove stale .idea/kuramoto-dash-app.iml module file&#10;- Update .idea/workspace.xml task history and recent run configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Problem 16 notebook gradient presets and clean up IDE workspace&#10;&#10;- Replace hardcoded gradient preset references (purple_gradient,&#10;  green_gradient) with named presets (eigenscribe-1, eigenscribe-2)&#10;  in the Extended GCD trace output in problem-16-coding-task.ipynb&#10;- Remove stale .idea/kuramoto-dash-app.iml module file&#10;- Update .idea/workspace.xml task history and recent run configuration" />
+    <MESSAGE value="Refactor CLI style module into Scriber Core 4-layer token subpackage&#10;&#10;- Split monolithic style.py into kuramoto/cli/style/ package with&#10;  types, palettes, color_utils, gradients, layout, messages, and domain modules&#10;- Migrate color palettes to scriber_core.frontend.colors imports&#10;- Add TrueColor gradient engine with eigenscribe-1/2 presets&#10;- Add benchmark results and validation plot artifacts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor CLI style module into Scriber Core 4-layer token subpackage&#10;&#10;- Split monolithic style.py into kuramoto/cli/style/ package with&#10;  types, palettes, color_utils, gradients, layout, messages, and domain modules&#10;- Migrate color palettes to scriber_core.frontend.colors imports&#10;- Add TrueColor gradient engine with eigenscribe-1/2 presets&#10;- Add benchmark results and validation plot artifacts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
