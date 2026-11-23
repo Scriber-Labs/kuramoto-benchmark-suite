@@ -55,42 +55,50 @@ for _candidate_dir in [
         break
 
 # Core Design Tokens
-THEME_BG: Final[str] = COLOR_PALETTE["dark_slate"]       # "#0d1117" Dark slate background
-CARD_BG: Final[str] = COLOR_PALETTE["card_black"]        # "#161b22" Glassmorphic card / panel background
-BORDER_COLOR: Final[str] = COLOR_PALETTE["border_gray"]  # "#30363d" Structural borders and spines
-GRID_COLOR: Final[str] = COLOR_PALETTE["grid_gray"]      # "#21262d" Subtle grid lines
-TEXT_PRIMARY: Final[str] = COLOR_PALETTE["text_white"]   # "#e6edf3" High-contrast primary text
-TEXT_MUTED: Final[str] = COLOR_PALETTE["text_muted"]     # "#8b949e" Muted labels, secondary notes, and ticks
+THEME_BG: Final[str] = COLOR_PALETTE["dark_slate"]  # "#0d1117" Dark slate background
+CARD_BG: Final[str] = COLOR_PALETTE[
+    "card_black"
+]  # "#161b22" Glassmorphic card / panel background
+BORDER_COLOR: Final[str] = COLOR_PALETTE[
+    "border_gray"
+]  # "#30363d" Structural borders and spines
+GRID_COLOR: Final[str] = COLOR_PALETTE["grid_gray"]  # "#21262d" Subtle grid lines
+TEXT_PRIMARY: Final[str] = COLOR_PALETTE[
+    "text_white"
+]  # "#e6edf3" High-contrast primary text
+TEXT_MUTED: Final[str] = COLOR_PALETTE[
+    "text_muted"
+]  # "#8b949e" Muted labels, secondary notes, and ticks
 
 # Core Brand Palette
 PROJECT_COLORS: Final[dict[str, str]] = {
     # Core brand palette
-    "cyan_light": COLOR_PALETTE["electric_cyan"],     # "#00ffee"
-    "cyan_blue": COLOR_PALETTE["node-2"],             # "#00e8ff"
-    "blue_light": COLOR_PALETTE["node-3"],            # "#14b5ff"
-    "blue_mid": COLOR_PALETTE["skyline_blue"],        # "#0a95eb"
-    "blue_deep": COLOR_PALETTE["node-4"],             # "#0070eb"
-    "indigo": COLOR_PALETTE["periwinkle_blue"],       # "#5280ff"
+    "cyan_light": COLOR_PALETTE["electric_cyan"],  # "#00ffee"
+    "cyan_blue": COLOR_PALETTE["node-2"],  # "#00e8ff"
+    "blue_light": COLOR_PALETTE["node-3"],  # "#14b5ff"
+    "blue_mid": COLOR_PALETTE["skyline_blue"],  # "#0a95eb"
+    "blue_deep": COLOR_PALETTE["node-4"],  # "#0070eb"
+    "indigo": COLOR_PALETTE["periwinkle_blue"],  # "#5280ff"
     "indigo_blue": COLOR_PALETTE["twilight_indigo"],  # "#1e64f6"
-    "purple_deep": COLOR_PALETTE["bright_purple"],    # "#a855f7"
-    "purple_light": COLOR_PALETTE["node-6"],          # "#7952f5"
-    "node-7": COLOR_PALETTE["node-7"],                # "#5e17eb"
-    "purple_dark": COLOR_PALETTE["deep_purple"],      # "#7c8cff"
-    "purple_lavender": COLOR_PALETTE["pale_lilac"],   # "#d8b4fe"
-    "pink_vibrant": COLOR_PALETTE["node-8"],          # "#ff66b3"
-    "pink_pink": COLOR_PALETTE["ibm_pink"],           # "#fe28a2"
-    "pink_dark": COLOR_PALETTE["deep_rose"],          # "#ad1457"
+    "purple_deep": COLOR_PALETTE["bright_purple"],  # "#a855f7"
+    "purple_light": COLOR_PALETTE["node-6"],  # "#7952f5"
+    "node-7": COLOR_PALETTE["node-7"],  # "#5e17eb"
+    "purple_dark": COLOR_PALETTE["deep_purple"],  # "#7c8cff"
+    "purple_lavender": COLOR_PALETTE["pale_lilac"],  # "#d8b4fe"
+    "pink_vibrant": COLOR_PALETTE["node-8"],  # "#ff66b3"
+    "pink_pink": COLOR_PALETTE["ibm_pink"],  # "#fe28a2"
+    "pink_dark": COLOR_PALETTE["deep_rose"],  # "#ad1457"
     "pink_light": COLOR_PALETTE["pale_orchid_pink"],  # "#ffbbf6"
-    "pink_alt": COLOR_PALETTE["bright_pink"],         # "#ff40a1"
-    "orange_warm": COLOR_PALETTE["apricot"],          # "#ff9d57"
-    "orange_soft": COLOR_PALETTE["orange_soft"],      # "#f78166"
-    "green_neon": COLOR_PALETTE["slime_green"],       # "#31ff48"
-    "green_lime": COLOR_PALETTE["bright_chartreuse"], # "#70e000"
-    "green_light": COLOR_PALETTE["green_light"],      # "#57ffbc"
-    "green_emerald": COLOR_PALETTE["pine"],           # "#059669"
-    "green_dark": COLOR_PALETTE["green_dark"],        # "#035100"
-    "green_jade": COLOR_PALETTE["green_jade"],        # "#00ff7f"
-    "cyan_green": COLOR_PALETTE["cyan_green"],        # "#00f5d4"
+    "pink_alt": COLOR_PALETTE["bright_pink"],  # "#ff40a1"
+    "orange_warm": COLOR_PALETTE["apricot"],  # "#ff9d57"
+    "orange_soft": COLOR_PALETTE["orange_soft"],  # "#f78166"
+    "green_neon": COLOR_PALETTE["slime_green"],  # "#31ff48"
+    "green_lime": COLOR_PALETTE["bright_chartreuse"],  # "#70e000"
+    "green_light": COLOR_PALETTE["green_light"],  # "#57ffbc"
+    "green_emerald": COLOR_PALETTE["pine"],  # "#059669"
+    "green_dark": COLOR_PALETTE["green_dark"],  # "#035100"
+    "green_jade": COLOR_PALETTE["green_jade"],  # "#00ff7f"
+    "cyan_green": COLOR_PALETTE["cyan_green"],  # "#00f5d4"
     "yellow_orange": COLOR_PALETTE["yellow_orange"],  # "#ffd166"
 }
 
@@ -98,16 +106,16 @@ PROJECT_COLORS: Final[dict[str, str]] = {
 SCRIBER_PALETTE: Final[dict[str, str]] = {
     "bg_deep": THEME_BG,
     "bg_panel": CARD_BG,
-    "accent_cyan": PROJECT_COLORS["blue_light"],    # electric_cyan
-    "accent_blue": PROJECT_COLORS["blue_deep"],     # node-4
-    "accent_teal": PROJECT_COLORS["cyan_blue"],     # node-2
-    "accent_pink": PROJECT_COLORS["pink_pink"],     # ibm_pink
+    "accent_cyan": PROJECT_COLORS["blue_light"],  # electric_cyan
+    "accent_blue": PROJECT_COLORS["blue_deep"],  # node-4
+    "accent_teal": PROJECT_COLORS["cyan_blue"],  # node-2
+    "accent_pink": PROJECT_COLORS["pink_pink"],  # ibm_pink
     "accent_purple": PROJECT_COLORS["purple_light"],  # node-6
-    "accent_orange": PROJECT_COLORS["orange_warm"],   # apricot
-    "accent_indigo": PROJECT_COLORS["indigo"],        # periwinkle_blue
+    "accent_orange": PROJECT_COLORS["orange_warm"],  # apricot
+    "accent_indigo": PROJECT_COLORS["indigo"],  # periwinkle_blue
     "text_primary": TEXT_PRIMARY,  # text_white
-    "text_muted": TEXT_MUTED,      # text_muted
-    "grid": GRID_COLOR,            # grid-gray
+    "text_muted": TEXT_MUTED,  # text_muted
+    "grid": GRID_COLOR,  # grid-gray
 }
 
 # Solver Color Tokens

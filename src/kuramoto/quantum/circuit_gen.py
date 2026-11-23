@@ -1,13 +1,13 @@
-# src/kuramoto/quantum/circuit_gen.py
 """
+kuramoto.quantum.circuit_gen
+
 Quantum circuit generation for Kuramoto synchronization.
 
 Implements the Self-Consistent Field (SCF) mapping to translate classical
 rotor dynamics into parallel quantum rotation gates with O(1) circuit depth.
 
 Author: Eigenscribe
-Review status: Reviewed and maintained by Eigenscribe.
-Date: May 2026
+Date: November 2026
 """
 
 from __future__ import annotations
@@ -16,6 +16,10 @@ from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
+
+# -----------------------------------------------------------------------------------------------------------
+# 1️⃣ Core definitions
+# -----------------------------------------------------------------------------------------------------------
 
 
 def generate_scf_angles(
@@ -124,16 +128,54 @@ def synthesize_quantum_bridge(
     }
 
 
-if __name__ == "__main__":
-    # Quick Smoke Test
-    test_phases = np.array([0, 0.1, 0.2])
+# -----------------------------------------------------------------------------------------------------------
+# 💨 Smoke tests
+# -----------------------------------------------------------------------------------------------------------
+
+
+def _run_smoke_test() -> None:
+    """Quick sanity check for quantum circuit generation."""
+    test_phases = np.array([0.0, 0.1, 0.2])
     test_omegas = np.ones(3)
     test_adj = np.array([[0, 1, 1], [1, 0, 1], [1, 1, 0]], dtype=float)
+
+    # Test SCF angle generation
     res = generate_scf_angles(test_phases, test_omegas, K=1.0, dt=0.01)
+    assert res.shape == (3,), f"Expected shape (3,), got {res.shape}"
+
     res_adj = generate_scf_angles(
         test_phases, test_omegas, K=1.0, dt=0.01, adjacency_matrix=test_adj
     )
-    print(f"Generated angles for N=3 (all-to-all): {res}")
-    print(f"Generated angles for N=3 (adjacency): {res_adj}")
-    print("\nSample QASM:")
-    print(export_to_qasm(res))
+    assert res_adj.shape == (3,)
+
+    # Test QASM export
+    qasm = export_to_qasm(res)
+    assert "OPENQASM 2.0;" in qasm
+    assert "qreg q[3];" in qasm
+    assert "rz(" in qasm
+
+    # Test quantum bridge synthesis
+    dataset = {
+        "theta": np.array([[0.0, 0.1, 0.2], [0.05, 0.15, 0.25]]),
+        "omega": np.ones(3),
+    }
+    bridge = synthesize_quantum_bridge(dataset, step_idx=0, dt=0.01, K=1.0)
+    assert bridge["n_qubits"] == 3
+    assert bridge["depth"] == 1
+    assert "qasm" in bridge
+
+    print("✅ Quantum circuit_gen smoke test passed.")
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+
+def main() -> None:
+    """Entry point for module-level smoke testing."""
+    _run_smoke_test()
+
+
+if __name__ == "__main__":
+    main()

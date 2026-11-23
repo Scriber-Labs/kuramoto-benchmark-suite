@@ -15,8 +15,8 @@ from typing import Final
 from scriber_core.frontend.colors import COLOR_PALETTE
 from scriber_core.frontend.gradients import GRADIENT_PRESETS
 
-from kuramoto.cli.style.types import Color
 from kuramoto.cli.style.color_utils import _normalize_color
+from kuramoto.cli.style.types import Color
 
 __all__: list[str] = [
     "PRESETS",
@@ -36,14 +36,14 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["sky_info"],
         COLOR_PALETTE["skyline_blue"],
         COLOR_PALETTE["periwinkle_blue"],
-        COLOR_PALETTE["node-7"]
+        COLOR_PALETTE["node-7"],
     ),
     # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
     "eigenscribe-2": (
         COLOR_PALETTE["node-2"],
         COLOR_PALETTE["eigen_blue"],
         COLOR_PALETTE["midwest_indigo"],
-        COLOR_PALETTE["node-7"]
+        COLOR_PALETTE["node-7"],
     ),
     "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
@@ -133,19 +133,19 @@ cli_gradient = multi_gradient
 def _run_smoke_test() -> None:
     """Quick sanity check for gradient engine."""
     print("💨 Running gradients.py smoke tests...")
-    
+
     # Test multi_gradient
     grad = multi_gradient("Test Gradient", PRESETS["electric"])
     assert "\033[0m" in grad
     assert cli_gradient("Alias Test") != ""
-    
+
     # Test empty text
     assert multi_gradient("") == ""
-    
+
     # Test preset lookup
     assert "eigenscribe-1" in PRESETS
     assert "purple_gradient" in PRESETS
-    
+
     print("✅ gradients.py smoke test passed.")
 
 

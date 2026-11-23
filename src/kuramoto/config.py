@@ -103,3 +103,56 @@ def parse_simulation_config(json_str: str) -> dict[str, Any]:
         config["natural_frequencies"] = rng.normal(0, 1, n)
 
     return config
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 💨 Smoke tests
+# -----------------------------------------------------------------------------------------------------------
+
+
+def _run_smoke_test() -> None:
+    """Quick sanity check for config parsing."""
+    config_str = json.dumps(
+        {
+            "n_oscillators": 5,
+            "coupling_strength": 1.5,
+            "timesteps": 100,
+            "dt": 0.02,
+            "seed": 42,
+            "frequency_distribution": {"type": "normal", "mean": 1.0, "std": 0.5},
+        }
+    )
+    cfg = parse_simulation_config(config_str)
+    assert cfg["n_oscillators"] == 5
+    assert cfg["coupling"] == 1.5
+    assert cfg["timesteps"] == 100
+    assert cfg["dt"] == 0.02
+    assert cfg["seed"] == 42
+    assert cfg["natural_frequencies"].shape == (5,)
+
+    # Test with adjacency matrix
+    config_str2 = json.dumps(
+        {
+            "adjacency_matrix": [[0, 1], [1, 0]],
+            "seed": 99,
+        }
+    )
+    cfg2 = parse_simulation_config(config_str2)
+    assert cfg2["n_oscillators"] == 2
+    assert cfg2["adjacency"].shape == (2, 2)
+
+    print("✅ Config smoke test passed.")
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+
+def main() -> None:
+    """Entry point for module-level smoke testing."""
+    _run_smoke_test()
+
+
+if __name__ == "__main__":
+    main()

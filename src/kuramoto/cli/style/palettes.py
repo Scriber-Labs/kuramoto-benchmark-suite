@@ -36,7 +36,7 @@ STYLE_MAP: Final[dict[str, str]] = {
     "warning": SCRIBER_CORE_COLOR_PALETTE["golden_amber"],
     "error": SCRIBER_CORE_COLOR_PALETTE["ibm_pink"],
     "highlight": SCRIBER_CORE_COLOR_PALETTE["bright_magenta"],
-    "section": SCRIBER_CORE_COLOR_PALETTE["ibm_white"]
+    "section": SCRIBER_CORE_COLOR_PALETTE["ibm_white"],
 }
 
 # Extended color palette for richer output (local copy for backwards compatibility)
@@ -82,6 +82,7 @@ EIGENSCRIBE_PALETTE: Final[dict[str, int]] = ANSI_256_PALETTE
 def _run_smoke_test() -> None:
     """Verify palette definitions and print colored swatches."""
     import click
+
     try:
         from .color_utils import print_hex_swatches
     except ImportError:
@@ -102,7 +103,9 @@ def _run_smoke_test() -> None:
 
     # ANSI_256_PALETTE uses 256-color codes, not hex
     click.echo("")
-    click.secho(" 🎨 ANSI_256_PALETTE Swatches:", fg="bright_white", bold=True, color=True)
+    click.secho(
+        " 🎨 ANSI_256_PALETTE Swatches:", fg="bright_white", bold=True, color=True
+    )
     for name, code in ANSI_256_PALETTE.items():
         click.echo(f"  {name:20s} ", nl=False)
         click.echo(f"\033[38;5;{code}m{'█' * 10}\033[0m", color=True)
@@ -119,6 +122,7 @@ def _run_smoke_test() -> None:
 def main() -> None:
     """Run smoke tests for the palettes module."""
     _run_smoke_test()
+
 
 if __name__ == "__main__":
     main()

@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import click
 
-from kuramoto.cli.style.palettes import STYLE_MAP
 from kuramoto.cli.style.color_utils import hex_to_rgb
+from kuramoto.cli.style.palettes import STYLE_MAP
 
 __all__: list[str] = [
     "cli_message",
@@ -185,7 +185,7 @@ def cli_coprime(msg: str) -> None:
 def _run_smoke_test() -> None:
     """Quick sanity check for message functions."""
     print("💨 Running messages.py smoke tests...")
-    
+
     # Test that all message functions run without error
     cli_info("Test info message")
     cli_network("Test network message")
@@ -197,7 +197,7 @@ def _run_smoke_test() -> None:
     cli_warning("Test warning message")
     cli_error("Test error message")
     cli_highlight("Test highlight message")
-    
+
     print("✅ messages.py smoke test passed.")
 
 

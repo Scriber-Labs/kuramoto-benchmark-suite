@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .analysis import compute_chromatic_polynomial, get_graph_metadata
 from .loader import load_topology
 
