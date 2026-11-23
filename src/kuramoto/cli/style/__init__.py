@@ -22,6 +22,7 @@ from .color_utils import (
 from .domain import (
     style_coprime_coeff,
     style_coprime_gcd,
+    style_coprime_remainder,
     style_coprime_term,
     style_crt_channel,
 )
@@ -82,6 +83,7 @@ __all__: list[str] = [
     "style_coprime_term",
     "style_coprime_gcd",
     "style_coprime_coeff",
+    "style_coprime_remainder",
     "style_crt_channel",
     # Layout
     "cli_echo",
@@ -135,7 +137,8 @@ def _run_smoke_test() -> None:
     term = style_coprime_term(7)
     gcd_str = style_coprime_gcd(1)
     coeff = style_coprime_coeff(-3)
-    assert "7" in term and "1" in gcd_str and "-3" in coeff
+    remainder = style_coprime_remainder(3)
+    assert "7" in term and "1" in gcd_str and "-3" in coeff and "3" in remainder
 
     print("✅ Style smoke test passed.")
 

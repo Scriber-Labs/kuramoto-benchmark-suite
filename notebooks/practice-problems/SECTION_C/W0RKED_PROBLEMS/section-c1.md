@@ -45,22 +45,30 @@ $\mathcal{O}(M+N)$. The following problems build intuition for the mathematical 
     where $(g,a,b) = \operatorname{extended_gcd}(M,N)$.
 
 ### Answers to handwritten problems
-1. 
-    - **Step 1:** Key insight $$\begin{align*} b\cdot N & \equiv 1\mod{M} \\ b\cdot M & \equiv 0 \mod{M}\end{align*}$$ 
+a)
+- **Step 1:** Key insight $$\begin{align*} b\cdot N & \equiv 1\mod{M} \\ b\cdot M & \equiv 0 \mod{M}\end{align*}$$ 
       and $$\begin{align*} a\cdot M & \equiv 1\mod{N} \\ b\cdot N &\equiv 0\mod{N}\end{align*}$$
-    - **Step 2:** "Each term isolates one remainder." $$\begin{align*} \text{term}_1 &= k_m(b\cdot N) = 3(2\cdot11)&=66 
-      \\ \text{term}_2 &= k_n(a\cdot M) = 5(-3\cdot 7)&=-105\end{align*}$$
-    - **Step 3:** $$\begin{align*}k_\text{true}&=(\text{term}_1 + \text{term}_2)\mod{(M\cdot N)} \\ 
-       &= (66+(-105))\mod{77} \\ &= -39 \mod{77} \\ &= 38 \end{align*}$$
+- **Step 2:** "Each term isolates one remainder." $$\begin{align*} \text{term}_1 &= k_m(b\cdot N) = 3(2\cdot11)&=66 
+  \\ \text{term}_2 &= k_n(a\cdot M) = 5(-3\cdot 7)&=-105\end{align*}$$
+- **Step 3:** $$\begin{align*}k_\text{true}&=(\text{term}_1 + \text{term}_2)\mod{(M\cdot N)} \\ 
+   &= (66+(-105))\mod{77} \\ &= -39 \mod{77} \\ &= 38 \end{align*}$$
 
-    $$\boxed{k_\text{true}=38}$$
-2.
-   i. Show that $38\mod{11}=5$:
-    $$k_n=38-(11\cdot q)$$
-    $$q=\left\lfloor\frac{38}{11}\right\rfloor=\lfloor 3.4545 \rfloor=3$$
-    $$k_n=38-(11\cdot 3) = 38 - 33 = 5\, ✅ $$
-   ii. Show that $38\mod{7}=3$:
-    $$k_m=38-(7\cdot q)$$
-    $$q=\left\lfloor\frac{38}{7}\right\rfloor=\lfloor 5.4286\rfloor=5$$
-    $$k_m = 38 - (7\cdot5)=38-35=3 \, ✅$$
-3. 
+  $$\boxed{k_\text{true}=38}$$
+
+b)
+ i. Show that $38\mod{11}=5$:
+  $$k_n=38-(11\cdot q)$$
+  $$q=\left\lfloor\frac{38}{11}\right\rfloor=\lfloor 3.4545 \rfloor=3$$
+  $$k_n=38-(11\cdot 3) = 38 - 33 = 5\, ✅ $$
+ ii. Show that $38\mod{7}=3$:
+  $$k_m=38-(7\cdot q)$$
+  $$q=\left\lfloor\frac{38}{7}\right\rfloor=\lfloor 5.4286\rfloor=5$$
+  $$k_m = 38 - (7\cdot5)=38-35=3 \, ✅$$
+
+c) Exploring `../solvers/coprime.py`:
+    - [ ] Trace through `coprime_reconstruct_frequency` for inputs $M=7$, $N=11$, $k_n=5$, and $k_m=3$ and verify your 
+    hand calculations from parts a) and b). Make sure to color-code output using the color scheme specified below:
+        - $(M,N)$ - #00a6ff (`COLOR_PALETTE["electric_blue"]`)
+        - $(k_m, k_n)$ - `COLOR_PALETTE["coral_orange"]`
+        - $k_\text{true}$ - `COLOR_PALETTE["vivid_pink"]'`
+        - $(a,b)$ - `COLOR_PALETTE["brigh_green"]`

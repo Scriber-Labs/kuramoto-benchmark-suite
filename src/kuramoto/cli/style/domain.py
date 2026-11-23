@@ -15,6 +15,7 @@ __all__: list[str] = [
     "style_coprime_term",
     "style_coprime_gcd",
     "style_coprime_coeff",
+    "style_coprime_remainder",
     "style_crt_channel",
 ]
 
@@ -22,12 +23,17 @@ __all__: list[str] = [
 # 0️⃣ / 🎭 Definitions, Constants & Types
 # -----------------------------------------------------------------------------------------------------------
 
-# CRT channel colors drawn from the Scriber Core palette
-_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["electric_blue"])   # #00a6ff
-_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["coral_orange"])     # #ff783d
-_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["electric_blue"])     # #00a6ff
-_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["brigh_green"])        # #28d728
-_COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_magenta"])   # #ff00c3
+# Color scheme per Problem 17 task specification:
+#   (M, N)       -> electric_blue
+#   (k_m, k_n)   -> coral_orange
+#   k_true       -> vivid_pink
+#   (a, b)       -> brigh_green
+_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["coral_orange"])
+_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["golden_amber"])
+_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["electric_blue"])
+_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["brigh_green"])
+_COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_magenta"])
+_COPRIME_REMAINDER: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -47,13 +53,18 @@ def style_coprime_term(val: int | str) -> str:
 
 
 def style_coprime_gcd(val: int | str) -> str:
-    """Color gcd values in brigh_green from the Scriber Core palette."""
+    """Color k_true (reconstructed frequency) in vivid_pink from the Scriber Core palette."""
     return _ansi_truecolor(_COPRIME_GCD, val)
 
 
 def style_coprime_coeff(val: int | str) -> str:
-    """Color Bezout coefficients (x, y) in bright_magenta from the Scriber Core palette."""
+    """Color Bézout coefficients (a, b) in brigh_green from the Scriber Core palette."""
     return _ansi_truecolor(_COPRIME_COEFF, val)
+
+
+def style_coprime_remainder(val: int | str) -> str:
+    """Color observed remainders (k_m, k_n) in coral_orange from the Scriber Core palette."""
+    return _ansi_truecolor(_COPRIME_REMAINDER, val)
 
 
 def style_crt_channel(val: int | str, channel: str = "A") -> str:
@@ -89,12 +100,14 @@ def _run_smoke_test() -> None:
     print("💨 Running domain.py smoke tests...")
 
     term = style_coprime_term(7)
-    gcd_str = style_coprime_gcd(1)
+    gcd_str = style_coprime_gcd(45)
     coeff = style_coprime_coeff(-3)
+    remainder = style_coprime_remainder(3)
     crt_a = style_crt_channel(110, "A")
     crt_b = style_crt_channel(63, "B")
 
-    assert "7" in term and "1" in gcd_str and "-3" in coeff
+    assert "7" in term and "45" in gcd_str and "-3" in coeff
+    assert "3" in remainder
     assert "110" in crt_a and "63" in crt_b
 
     # Verify Channel A and B use different colors
