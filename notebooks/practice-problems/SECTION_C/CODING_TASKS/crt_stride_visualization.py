@@ -39,8 +39,14 @@ from __future__ import annotations
 from typing import Callable, Final, TypeAlias
 
 import numpy as np
+from numpy.typing import NDArray
+
+import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
-from scriber_core.frontend.colors import COLOR_PALETTE, hex_to_rgb
+
+from eigenscribe.frontend.colors import COLOR_PALETTE, hex_to_rgb
+
+
 
 # -----------------------------------------------------------------------------------------------------------
 # 🎭 Typing helpers / protocols / constants (define once, use Final)
@@ -163,7 +169,7 @@ def load_palette_engine() -> tuple[PaletteLoader, bool]:
         return linear_loader, False
 
 PALETTE_LOADER: Final[PaletteLoader]
-USING_PROJECT_COLORS: Final[bool] = True
+USING_PROJECT_COLORS: Final[bool]
 PALETTE_LOADER, USING_PROJECT_COLORS = load_palette_engine()
 
 def residual_colormap() -> LinearSegmentedColormap:
@@ -180,7 +186,12 @@ def residual_colormap() -> LinearSegmentedColormap:
     grad = PALETTE_LOADER([CALM, WARN, ALERT], 256)
     return LinearSegmentedColormap.from_list("crt_residual", grad)
 
-def crt_cell_to_step(a: int, b: int, m: int, n: int) -> int:
+def crt_cell_to_step(
+        a: int,
+        b: int,
+        m: int,
+        n: int
+) -> int:
     """Resolve the unique t in [0, m*n) for a remainder pair (a mod m, b mod n).
 
     Uses the same Bezout coefficients as the CLI trace: with (g, bez_a, bez_b) = extended_gcd(m, n) and
@@ -256,3 +267,87 @@ def coprime_snapshot_steps(m: int = M, n: int = N) -> tuple[list[int], list[int]
     chan_b = list(range(0, m * n + 1, n))
     union = sorted(set(chan_a) | set(chan_b))
     return chan_a, chan_b, union
+
+def simulate_rotor(
+        drift: float,
+        total: int = TOTAL
+) -> NDArray[np.float64]:
+    """Compute the true phase theta_t of the toy rotor at every dense step.
+
+    drift > 0 adds a quadratic phase term theta += 0.5 * drift * t^2, i.e. the instantaneous frequency creeps upward.
+    Stand-in for bivector torque accumulation error in a geometric-algebra rotor.
+
+    Parameters
+    ----------
+    drift : float
+        Quadratic phase-drift coefficient (0.0 = healthy rotor).
+    total : int, default=TOTAL
+        Number of dense steps; phases returned for t in [0, total].
+
+    Returns
+    -------
+    NDArray[np.float64]
+        Phase values theta_t, shape (total + 1).
+    """
+    t = np.arange(total + 1, dtype=np.float64)
+    return OMEGA * t + 0.5 * drift * t * t
+
+def reconstruct_from_snapshots(
+    theta_true: NDArray[np.float64],
+    union: list[int]
+) -> NDArray[np.float64]:
+    """Rebuild the full phase curve from coprime-stride samples only.
+
+    Pretends knowledge of theta only at the union steps (as the recorder does), linearly interpolates between them, and
+    returns the reconstruction on all dense steps. The truth array is consumed solely at the stored indices.
+
+    Parameters
+    ----------
+    theta_true : NDArray[np.float64]
+        Ground-truth phases at every dense step (source of stored samples).
+    union : list[int]
+        Sorted snapshot steps from coprime_snapshot_steps().
+
+    Returns
+    -------
+    NDArray[np.float64]
+        Reconstructed phases at every dense step.
+    """
+    t_stored = np.asarray(union, dtype=np.float64)
+    theta_stored = theta_true[union]
+    t_dense = np.arange(theta_true.size, dtype=np.float64)
+    return np.inter(t_dense, t_stored, theta_stored)
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 2️⃣ Public API (functions users are meant to call)
+# -----------------------------------------------------------------------------------------------------------
+
+
+def figure1() -> None:
+    """Render the three CRT diagnostic panels plus the memory ledger.
+
+    Answers, in order: is the coprime sampling correct (Panel 1), does the solver drift (Panel 2), and where does the
+    drift manifest (Panel 3)? Saves FIGURES1_PATH with the ink-black background.
+    """
+    step_grid = build_step_grid()
+
+    fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+    fig.patch.set_facecolor(INK)
+
+    _paint_hitmap_panel(axes[0, 0], step_grid)
+    colorbar_image = _paint_residual_panels(
+        [axes[0, 1], axes[0, 2]], step_grid, [HEALTHY_DRIFT, DRIFTED_DRIFT]
+    )
+    fig.colorbar(colorbar_image, ax=axes[0, 2], fraction=0.046)
+    _paint_phase_hue_panels(
+        [axes[1, 1], axes[1, 2]], step_grid, [HEALTHY_DRIFT, DRIFTED_DRIFT]
+    )
+    _paint_memory_ledger_panel(axes[1, 0])
+
+    fig.suptitle(
+        "Coprime-stride CRT diagnostics for the Kuramoto rotor benchmark",
+        color=COLOR_PALETTE["text_white"], fontsize=13, y=0.98,
+    )
+    plt.tight_layout()
+    plt.savefig(FIGURE1_PATH, dpi=150, facecolor=INK)

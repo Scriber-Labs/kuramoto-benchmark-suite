@@ -13,7 +13,8 @@ from collections.abc import Sequence
 from typing import Final
 
 from scriber_core.frontend.colors import COLOR_PALETTE, Color
-from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient as _multi_gradient
+from scriber_core.frontend.gradients import GRADIENT_PRESETS
+from scriber_core.frontend.gradients import multi_gradient as _multi_gradient
 
 __all__: list[str] = [
     "PRESETS",
@@ -29,20 +30,25 @@ __all__: list[str] = [
 
 PRESETS: Final[dict[str, tuple[str, ...]]] = {
     # 🐉 Signature Eigenscribe (without pink): Blue (#0a95eb) -> Periwinkle (#5280ff) -> Purple (#a855f7)
-    "eigenscribe-1": (
-        COLOR_PALETTE["sky_info"],
-        COLOR_PALETTE["skyline_blue"],
-        COLOR_PALETTE["periwinkle_blue"],
-        COLOR_PALETTE["node-7"],
-    ),
-    # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
-    "eigenscribe-2": (
+    "eigenscribe": (
         COLOR_PALETTE["node-2"],
         COLOR_PALETTE["eigen_blue"],
         COLOR_PALETTE["midwest_indigo"],
         COLOR_PALETTE["node-7"],
     ),
-    "electric": ("#00a6ff", "#a855f7", "#ff00c3"),
+    "tse-gradient-1": (
+        COLOR_PALETTE["electric_lagoon"],
+        COLOR_PALETTE["reef_cyan"],
+        COLOR_PALETTE["cerulean_surge"],
+        COLOR_PALETTE["harbor_blue"],
+        COLOR_PALETTE["twilight_indigo"],
+        COLOR_PALETTE["dusk_violet_blue"],
+        COLOR_PALETTE["cosmic_iris"],
+        COLOR_PALETTE["nebula_purple"],
+        COLOR_PALETTE["neon_orchid"],
+    ),
+    # 🌟 Signature Eigenscribe (with pink): Blue (#00a6ff) -> Purple (#a855f7) -> Magenta (#ff00c3)
+    "tse-gradient-2": GRADIENT_PRESETS["tse-gradient-2"],
     # 🌅 Solar Sunset: Orange (#ff6b35) -> Amber (#f7c548) -> Crimson (#d7263d)
     "sunset": ("#ff6b35", "#f7c548", "#ff40a1"),
     # 🌲 Deep Forest: Olive (#a7c957) -> Teal (#2a9d8f) -> Pine (#264653)
@@ -51,8 +57,8 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
     "midnight": ("#38bdf8", "#818cf8", "#f43f5e"),
     # 🌿 Quantum Aurora: Aqua (#06b6d4) -> Emerald (#10b981) -> Lime (#84cc16)
     "aurora": ("#06b6d4", "#10b981", "#84cc16"),
-    # ⚡ Cyberpunk Neon: Electric Cyan (#00f0ff) -> Deep Violet (#7000ff) -> Hot Pink (#ff007b)
-    "cyberpunk": ("#00f0ff", "#7000ff", "#ff007b"),
+    # 🩵💙 Blue Gradient
+    "blue_gradient": (GRADIENT_PRESETS["blue_gradient"]),
     # 💚 Green Gradient
     "green_gradient": (GRADIENT_PRESETS["green_gradient"]),
     # 💜 Purple Gradient:
@@ -67,7 +73,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
 
 def multi_gradient(
     text: str,
-    colors: Sequence[Color] = PRESETS["eigenscribe-2"],
+    colors: Sequence[Color] = GRADIENT_PRESETS["eigenscribe"],
     *,
     bold: bool = True,
 ) -> str:
