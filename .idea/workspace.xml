@@ -15,18 +15,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="feat: visualize CRT reconstruction traces and non-coprime strides&#10;&#10;- Add CRT reconstruction trace and non-coprime stride figures with Bézout verification and library cross-checks in `crt_stride_visualization.py`&#10;- Refresh PyCharm workspace metadata, including task history, commit cache, and coverage timestamp in `.idea/workspace.xml`">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.scriber-core" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" afterDir="false" />
+    21
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="refactor: migrate styling to eigenscribe and expand CRT diagnostics&#10;&#10;- Replace `scriber_core` imports with `eigenscribe` across CLI styling, commands, utilities, analysis, and notebook code; remove the `.scriber-core` entry&#10;- Fix color palette key typos and update the gradient palette selection&#10;- Expand CRT stride visualizations with reconstruction tracing, non-coprime diagnostics, and smoke tests; correct interpolation and add generated figures&#10;- Update Problem 17 notebook execution metadata and color references, and refresh PyCharm workspace metadata">
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,61 +66,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.505442161865651E-13" />
-      <entry key="MS500" value="0.00301840058456245" />
-      <entry key="S2" value="0.2343927741142783" />
-      <entry key="S5" value="0.5597297676726225" />
-      <entry key="S10" value="0.749111412610268" />
-      <entry key="S30" value="1.0114259492819724" />
-      <entry key="S60" value="1.3952804159385106" />
-      <entry key="M2" value="2.449010656490301" />
-      <entry key="M5" value="5.458294608850827" />
-      <entry key="M10" value="14.35007754759764" />
-      <entry key="M15" value="38.58627899540362" />
-      <entry key="M30" value="212.60709724878663" />
-      <entry key="H1" value="766.1262845619574" />
-      <entry key="H2" value="1914.5990692275286" />
-      <entry key="H4" value="3736.59735630952" />
-      <entry key="D1" value="10949.281904656966" />
-      <entry key="W1" value="29776.976951154516" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.000294801998671" />
+      <entry key="S2" value="1.140157554710031" />
+      <entry key="S5" value="1.596347305840332" />
+      <entry key="S10" value="2.056886847069266" />
+      <entry key="S30" value="2.6650069734117627" />
+      <entry key="S60" value="3.4856438035418993" />
+      <entry key="M2" value="5.279285626268018" />
+      <entry key="M5" value="8.784212074141514" />
+      <entry key="M10" value="15.135056938751072" />
+      <entry key="M15" value="31.09623546073574" />
+      <entry key="M30" value="168.3772086531664" />
+      <entry key="H1" value="671.1484557597324" />
+      <entry key="H2" value="1788.521239364627" />
+      <entry key="H4" value="3611.4336636287494" />
+      <entry key="D1" value="10892.777020269747" />
+      <entry key="W1" value="29761.684781175143" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000009851757" />
-      <entry key="S30" value="1.0009950339240965" />
-      <entry key="S60" value="1.0315441942949741" />
-      <entry key="M2" value="1.1778685636129056" />
-      <entry key="M5" value="1.5617824143275385" />
-      <entry key="M10" value="2.26669673404853" />
-      <entry key="M15" value="3.340067558499525" />
-      <entry key="M30" value="8.37925518005321" />
-      <entry key="H1" value="21.558026729805068" />
-      <entry key="H2" value="46.19793594817433" />
-      <entry key="H4" value="86.68556558479791" />
-      <entry key="D1" value="234.35712940831831" />
-      <entry key="W1" value="417.7043100668377" />
+      <entry key="MS100" value="9.157360394654565E-293" />
+      <entry key="MS500" value="3.9115966120424825E-59" />
+      <entry key="S2" value="2.500855019192086E-15" />
+      <entry key="S5" value="1.4428972514380004E-6" />
+      <entry key="S10" value="0.0012012065814996187" />
+      <entry key="S30" value="0.10630147970144636" />
+      <entry key="S60" value="0.3261792338655829" />
+      <entry key="M2" value="0.584729352019791" />
+      <entry key="M5" value="1.0623835371770136" />
+      <entry key="M10" value="1.8244750397768152" />
+      <entry key="M15" value="2.77289319183684" />
+      <entry key="M30" value="7.190814496994704" />
+      <entry key="H1" value="19.56649508333156" />
+      <entry key="H2" value="43.884981784319244" />
+      <entry key="H4" value="84.52393701939786" />
+      <entry key="D1" value="233.9117783859557" />
+      <entry key="W1" value="418.3354061156642" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.0067046438543497E-5" />
-      <entry key="MS500" value="0.1008194987981842" />
-      <entry key="S2" value="0.7243535234593649" />
-      <entry key="S5" value="1.2770688316796606" />
-      <entry key="S10" value="1.5869875959066309" />
-      <entry key="S30" value="1.9525082841774493" />
-      <entry key="S60" value="2.394838274257229" />
-      <entry key="M2" value="3.6068921598550396" />
-      <entry key="M5" value="7.0070930280425525" />
-      <entry key="M10" value="16.604439251936647" />
-      <entry key="M15" value="41.908487843574264" />
-      <entry key="M30" value="220.94491729605576" />
-      <entry key="H1" value="787.6165257720307" />
-      <entry key="H2" value="1960.7193991580043" />
-      <entry key="H4" value="3823.212805384234" />
-      <entry key="D1" value="11183.610675724074" />
-      <entry key="W1" value="30194.669907369753" />
+      <entry key="MS100" value="0.8179020585577811" />
+      <entry key="MS500" value="0.960882799188109" />
+      <entry key="S2" value="1.1291997319886524" />
+      <entry key="S5" value="1.5900266956551312" />
+      <entry key="S10" value="2.0535950273448127" />
+      <entry key="S30" value="2.7669000007601348" />
+      <entry key="S60" value="3.8069495975351675" />
+      <entry key="M2" value="5.859805423930042" />
+      <entry key="M5" value="9.842211431162264" />
+      <entry key="M10" value="16.953239701551784" />
+      <entry key="M15" value="33.85841356510065" />
+      <entry key="M30" value="175.53678643748268" />
+      <entry key="H1" value="690.6562881886828" />
+      <entry key="H2" value="1832.3340510657317" />
+      <entry key="H4" value="3695.8899805372394" />
+      <entry key="D1" value="11126.660605551613" />
+      <entry key="W1" value="30180.008842096453" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -142,91 +134,91 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "KEY_CHAT_IN_TOOLWINDOW": "false",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in gradients.executor": "Run",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python tests.Python tests in test_cli.py.executor": "Run",
-    "Python tests.Python tests in test_frontend_styling.py.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.benchmark_scaling.executor": "Run",
-    "Python.color_utils.executor": "Run",
-    "Python.colors (1).executor": "Run",
-    "Python.colors.executor": "Run",
-    "Python.colors_table.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.coprime.executor": "Run",
-    "Python.crt_stride_visualization.executor": "Run",
-    "Python.dash_component_template.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.domain.executor": "Run",
-    "Python.export_to_dash.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.gradients.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.palettes.executor": "Run",
-    "Python.rigorous_benchmarks.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solver_types.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.style.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.types.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validate_ga_rotor_metrics.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS",
-    "llm.figma.connect.mcp.suggestion.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;KEY_CHAT_IN_TOOLWINDOW&quot;: &quot;false&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_cli.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_frontend_styling.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.benchmark_scaling.executor&quot;: &quot;Run&quot;,
+    &quot;Python.color_utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors.executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors_table.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
+    &quot;Python.crt_stride_visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.domain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.export_to_dash.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.palettes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rigorous_benchmarks.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solver_types.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.style.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.types.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validate_ga_rotor_metrics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS&quot;,
+    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks\practice-problems\SECTION_C\CODING_TASKS" />
@@ -400,14 +392,6 @@
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
       <workItem from="1795458671947" duration="5554000" />
-    </task>
-    <task id="LOCAL-00045" summary="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file.">
-      <option name="closed" value="true" />
-      <created>1792256262543</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1792256262543</updated>
     </task>
     <task id="LOCAL-00046" summary="Enhanced rotor solver with self-consistent field (SCF) optimization for O(N) mean-field interactions, updated benchmarks and results, and removed obsolete `.iml` workspace file.">
       <option name="closed" value="true" />
@@ -793,15 +777,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795524903753</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="refactor: migrate styling to eigenscribe and expand CRT diagnostics&#10;&#10;- Replace `scriber_core` imports with `eigenscribe` across CLI styling, commands, utilities, analysis, and notebook code; remove the `.scriber-core` entry&#10;- Fix color palette key typos and update the gradient palette selection&#10;- Expand CRT stride visualizations with reconstruction tracing, non-coprime diagnostics, and smoke tests; correct interpolation and add generated figures&#10;- Update Problem 17 notebook execution metadata and color references, and refresh PyCharm workspace metadata">
+      <option name="closed" value="true" />
+      <created>1795535391710</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1795535391710</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="made a section c practice problem jupyter notebook" />
-    <MESSAGE value="Add CLI styling boilerplate and AI-generated plotting exercises notebook." />
     <MESSAGE value="Updated references and file paths for AI-generated research notebooks. Enhanced CLI styling with UTF-8 support, added `cli_coprime` message type, and optimized 256-color detection for cross-platform compatibility." />
     <MESSAGE value="Updated references and file paths for AI-generated research notebooks. Fixed typo in `rotor.py` and adjusted output directories in Jupyter notebooks." />
     <MESSAGE value="Add AI-generated failure mode reports and example dataset (small_demo.npz)." />
@@ -825,7 +815,9 @@
     <MESSAGE value="docs: complete Problem 16 coding task notebook with Bézout's Identity exercises&#10;&#10;Add markdown cells with problem statement, hand-calculated answers for  &#10;extended GCD of (7,11) and (6,9), and verification steps with color-coded  &#10;output instructions. Update execution timestamps and cell IDs to reflect  &#10;re-run." />
     <MESSAGE value="refactor: delegate CLI style messaging and gradients to scriber_core&#10;&#10;- Re-export common messaging functions (cli_info, cli_success, etc.),&#10;  palettes, and color utilities from scriber_core in cli/style/__init__.py&#10;- Remove local color_utils.py, layout.py, palettes.py, and types.py modules&#10;  in favor of scriber_core equivalents&#10;- Simplify gradients.py to delegate multi_gradient to scriber_core engine&#10;- Update messages.py to use ansi_256 from scriber_core for domain-specific&#10;  semantic levels (network, quantum, rotor, ZBW, coprime)&#10;- Adjust domain.py coprime color mappings and enable VT mode in main.py&#10;- Add CRT stride visualization module for coprime sampling diagnostics" />
     <MESSAGE value="  &#10;build: add psutil dependency&#10;&#10;- Add psutil&gt;=7.2.2 to project dependencies and lockfile&#10;- Update PyCharm workspace metadata" />
-    <option name="LAST_COMMIT_MESSAGE" value="  &#10;build: add psutil dependency&#10;&#10;- Add psutil&gt;=7.2.2 to project dependencies and lockfile&#10;- Update PyCharm workspace metadata" />
+    <MESSAGE value="feat: visualize CRT reconstruction traces and non-coprime strides&#10;&#10;- Add CRT reconstruction trace and non-coprime stride figures with Bézout verification and library cross-checks in `crt_stride_visualization.py`&#10;- Refresh PyCharm workspace metadata, including task history, commit cache, and coverage timestamp in `.idea/workspace.xml`" />
+    <MESSAGE value="refactor: migrate styling to eigenscribe and expand CRT diagnostics&#10;&#10;- Replace `scriber_core` imports with `eigenscribe` across CLI styling, commands, utilities, analysis, and notebook code; remove the `.scriber-core` entry&#10;- Fix color palette key typos and update the gradient palette selection&#10;- Expand CRT stride visualizations with reconstruction tracing, non-coprime diagnostics, and smoke tests; correct interpolation and add generated figures&#10;- Update Problem 17 notebook execution metadata and color references, and refresh PyCharm workspace metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: migrate styling to eigenscribe and expand CRT diagnostics&#10;&#10;- Replace `scriber_core` imports with `eigenscribe` across CLI styling, commands, utilities, analysis, and notebook code; remove the `.scriber-core` entry&#10;- Fix color palette key typos and update the gradient palette selection&#10;- Expand CRT stride visualizations with reconstruction tracing, non-coprime diagnostics, and smoke tests; correct interpolation and add generated figures&#10;- Update Problem 17 notebook execution metadata and color references, and refresh PyCharm workspace metadata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
