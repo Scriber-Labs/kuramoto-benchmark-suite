@@ -1,7 +1,7 @@
 """
 gradients.py
 
-TrueColor gradient engine and preset definitions.
+Kuramoto-specific gradient presets extending scriber_core's gradient engine.
 
 Author: Eigenscribe
 Date: November 20, 2026
@@ -12,11 +12,8 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Final
 
-from scriber_core.frontend.colors import COLOR_PALETTE
-from scriber_core.frontend.gradients import GRADIENT_PRESETS
-
-from kuramoto.cli.style.color_utils import _normalize_color
-from kuramoto.cli.style.types import Color
+from scriber_core.frontend.colors import COLOR_PALETTE, Color
+from scriber_core.frontend.gradients import GRADIENT_PRESETS, multi_gradient as _multi_gradient
 
 __all__: list[str] = [
     "PRESETS",
@@ -64,7 +61,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 1️⃣ Public API
+# 1️⃣ Public API — delegates to scriber_core gradient engine
 # -----------------------------------------------------------------------------------------------------------
 
 
@@ -76,6 +73,8 @@ def multi_gradient(
 ) -> str:
     """
     Return text formatted with an ANSI TrueColor gradient across multiple color stops.
+
+    Delegates to scriber_core's gradient engine.
 
     Parameters
     ----------
@@ -91,34 +90,7 @@ def multi_gradient(
     str
         ANSI TrueColor-escaped string with color resets.
     """
-    if not text:
-        return ""
-
-    if len(colors) < 2:
-        raise ValueError("Provide at least two colors for a gradient")
-
-    rgb_colors = [_normalize_color(color) for color in colors]
-    style = "1;" if bold else ""
-    segments = len(rgb_colors) - 1
-    output: list[str] = []
-
-    for index, character in enumerate(text):
-        position = index / (len(text) - 1) if len(text) > 1 else 0.0
-        scaled_position = position * segments
-        segment = min(int(scaled_position), segments - 1)
-        segment_position = scaled_position - segment
-
-        start = rgb_colors[segment]
-        end = rgb_colors[segment + 1]
-
-        red = round(start[0] + segment_position * (end[0] - start[0]))
-        green = round(start[1] + segment_position * (end[1] - start[1]))
-        blue = round(start[2] + segment_position * (end[2] - start[2]))
-
-        output.append(f"\033[{style}38;2;{red};{green};{blue}m{character}")
-
-    output.append("\033[0m")
-    return "".join(output)
+    return _multi_gradient(text, colors=colors, bold=bold)
 
 
 # Canonical alias

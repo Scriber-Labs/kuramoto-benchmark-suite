@@ -4,11 +4,11 @@ utils.py
 
 Helper functions and formatting utilities for the Kuramoto CLI.
 Provides table formatting, directory management, and styled header output
-using the Eigenscribe 256-color palette.
+using the Eigenscribe 256-color palette from scriber_core.
 
 Author: Eigenscribe
 Date: May 2026
-Last Updated: October 2026
+Last Updated: November 2026
 """
 
 from __future__ import annotations
@@ -19,7 +19,8 @@ from typing import Any, Final
 import click
 from tabulate import tabulate
 
-from kuramoto.cli.style import ansi_256, cli_echo, cli_rule, supports_256_color
+from scriber_core.cli.branding import print_brand_header
+from scriber_core.cli.messaging import ansi_256, cli_rule, supports_256_color
 
 __all__: list[str] = [
     "DEFAULT_DEMO_PATH",
@@ -77,53 +78,12 @@ def print_table(
 
 def print_header() -> None:
     """Print the Kuramoto Benchmark Suite header with Eigenscribe brand colors."""
-    cli_echo("")
-
-    # Title line with blue + purple gradient effect
-    if supports_256_color():
-        title_part1 = ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True)
-        click.echo(title_part1, color=True)
-
-        title_main = ansi_256(
-            "eigen_blue_bright", "     KURAMOTO BENCHMARK SUITE", bold=True
-        )
-        subtitle = ansi_256(
-            "eigen_purple",
-            "     Oscillator Network Simulation & Analysis Framework",
-            bold=False,
-        )
-        click.echo(title_main, color=True)
-        click.echo(subtitle, color=True)
-
-        title_part2 = ansi_256("eigen_blue_bright", "  " + "=" * 56, bold=True)
-        click.echo(title_part2, color=True)
-
-        click.echo("", color=True)
-
-        desc_lines = [
-            "  You are now using the Command Line Interface of Kuramoto,",
-            "  a benchmark-grade tool for simulating and analyzing",
-            "  oscillator networks.",
-            "",
-            "  Supports classical ODE, Geometric Algebra (GA) rotor,",
-            "  and hybrid Quantum SCF solvers.",
-        ]
-        for line in desc_lines:
-            cli_echo(line, color="eigen_cyan_light")
-
-        click.echo("", color=True)
-        cli_rule(char="·", width=56, level="rule")
-    else:
-        header = """
-  ---------------   KURAMOTO BENCHMARK SUITE   --------------------
-
-  You are now using the Command line interface of Kuramoto, a tool for
-  simulating and analyzing oscillator networks, created as a
-  benchmark-grade suite.
-
-  This is a python package currently installed in your python environment.
-        """
-        click.secho(header, fg="bright_blue", bold=True)
+    print_brand_header(
+        title="🔱 KURAMOTO BENCHMARK SUITE — OSCILLATOR NETWORK SIMULATION",
+        description="Supports classical ODE, Geometric Algebra (GA) rotor, and hybrid Quantum SCF solvers.",
+        width=56,
+    )
+    cli_rule(char="·", width=56, level="rule")
 
 
 # -----------------------------------------------------------------------------------------------------------

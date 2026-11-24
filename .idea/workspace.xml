@@ -16,12 +16,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="docs: complete Problem 16 coding task notebook with Bézout's Identity exercises&#10;&#10;Add markdown cells with problem statement, hand-calculated answers for  &#10;extended GCD of (7,11) and (6,9), and verification steps with color-coded  &#10;output instructions. Update execution timestamps and cell IDs to reflect  &#10;re-run.">
+      <change afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-16-coding-task.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/color_utils.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/layout.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/palettes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/types.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +48,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -69,61 +77,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000729838132378" />
-      <entry key="S2" value="1.1429934988395392" />
-      <entry key="S5" value="1.6909275617849162" />
-      <entry key="S10" value="2.201071092387998" />
-      <entry key="S30" value="3.5689690090276893" />
-      <entry key="S60" value="5.414335085211396" />
-      <entry key="M2" value="7.932146669512694" />
-      <entry key="M5" value="18.404286855630293" />
-      <entry key="M10" value="46.99292208998639" />
-      <entry key="M15" value="79.43307056907241" />
-      <entry key="M30" value="181.9619991473496" />
-      <entry key="H1" value="435.5515592308912" />
-      <entry key="H2" value="973.0031621000311" />
-      <entry key="H4" value="1820.0234535676957" />
-      <entry key="D1" value="6499.39234740429" />
-      <entry key="W1" value="24118.45639056185" />
+      <entry key="MS100" value="1.0016087614163243" />
+      <entry key="MS500" value="1.3424855553347006" />
+      <entry key="S2" value="2.5676914388659924" />
+      <entry key="S5" value="3.2937488368482457" />
+      <entry key="S10" value="3.6426920152983695" />
+      <entry key="S30" value="4.521629385651851" />
+      <entry key="S60" value="7.634495066356813" />
+      <entry key="M2" value="16.443242296438335" />
+      <entry key="M5" value="39.243931513696964" />
+      <entry key="M10" value="93.30146924310137" />
+      <entry key="M15" value="178.3653743608474" />
+      <entry key="M30" value="514.1129935796378" />
+      <entry key="H1" value="1177.069985172687" />
+      <entry key="H2" value="2167.235718436406" />
+      <entry key="H4" value="3475.2951017198093" />
+      <entry key="D1" value="9052.500586766819" />
+      <entry key="W1" value="27089.59707021511" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="5.534411622095654E-147" />
-      <entry key="S5" value="3.1421620761889388E-59" />
-      <entry key="S10" value="5.605499153678412E-30" />
-      <entry key="S30" value="1.7763890895762602E-10" />
-      <entry key="S60" value="1.332812473537339E-5" />
-      <entry key="M2" value="0.003650794055205238" />
-      <entry key="M5" value="0.10831055066722259" />
-      <entry key="M10" value="0.4435277399476161" />
-      <entry key="M15" value="0.9146821048723041" />
-      <entry key="M30" value="2.8559204372746048" />
-      <entry key="H1" value="10.675836049056237" />
-      <entry key="H2" value="31.876544057442977" />
-      <entry key="H4" value="65.64374052103541" />
-      <entry key="D1" value="155.16068119319738" />
-      <entry key="W1" value="306.4306845738837" />
+      <entry key="MS100" value="2.790748924806683E-130" />
+      <entry key="MS500" value="1.2278467166125879E-26" />
+      <entry key="S2" value="3.329183385711034E-7" />
+      <entry key="S5" value="0.0026478821565009054" />
+      <entry key="S10" value="0.0666238880716838" />
+      <entry key="S30" value="1.1326798997078973" />
+      <entry key="S60" value="2.726305476583929" />
+      <entry key="M2" value="4.372668038077135" />
+      <entry key="M5" value="6.200415160145804" />
+      <entry key="M10" value="7.687272553640745" />
+      <entry key="M15" value="8.992323357488628" />
+      <entry key="M30" value="12.714902607252515" />
+      <entry key="H1" value="19.66438263956273" />
+      <entry key="H2" value="35.32996845081436" />
+      <entry key="H4" value="67.59690993000781" />
+      <entry key="D1" value="178.77433306321626" />
+      <entry key="W1" value="341.8506150641597" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8766057213160351" />
-      <entry key="MS500" value="0.9740748444327234" />
-      <entry key="S2" value="1.1350940542603958" />
-      <entry key="S5" value="1.6856278622435044" />
-      <entry key="S10" value="2.1974246543476443" />
-      <entry key="S30" value="3.5670176364757524" />
-      <entry key="S60" value="5.412921581391218" />
-      <entry key="M2" value="7.934705948067006" />
-      <entry key="M5" value="18.51084848945643" />
-      <entry key="M10" value="47.432877616027355" />
-      <entry key="M15" value="80.3422974388456" />
-      <entry key="M30" value="184.80893154093212" />
-      <entry key="H1" value="446.21210847595984" />
-      <entry key="H2" value="1004.858268158304" />
-      <entry key="H4" value="1885.6452899119165" />
-      <entry key="D1" value="6654.540447054073" />
-      <entry key="W1" value="24424.878342098906" />
+      <entry key="MS100" value="0.002246680085313497" />
+      <entry key="MS500" value="0.4152581444057826" />
+      <entry key="S2" value="2.0219645231911954" />
+      <entry key="S5" value="3.017641670497247" />
+      <entry key="S10" value="3.5497058726244957" />
+      <entry key="S30" value="5.540512263683624" />
+      <entry key="S60" value="10.253802409544107" />
+      <entry key="M2" value="20.73304528994161" />
+      <entry key="M5" value="45.38982947312037" />
+      <entry key="M10" value="100.9427973459196" />
+      <entry key="M15" value="187.30839472903688" />
+      <entry key="M30" value="526.7620109777621" />
+      <entry key="H1" value="1196.6574224023004" />
+      <entry key="H2" value="2202.495282265332" />
+      <entry key="H4" value="3542.8371927900425" />
+      <entry key="D1" value="9231.254313342266" />
+      <entry key="W1" value="27431.43769767616" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -140,88 +148,88 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "KEY_CHAT_IN_TOOLWINDOW": "false",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Doctests in gradients.executor": "Run",
-    "Python tests.Doctests in order_parameter (1).executor": "Run",
-    "Python tests.Doctests in order_parameter (2).executor": "Run",
-    "Python tests.Doctests in order_parameter.executor": "Run",
-    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
-    "Python tests.Python tests in test_cli.py.executor": "Run",
-    "Python tests.Python tests in test_frontend_styling.py.executor": "Run",
-    "Python.analytics_engine.executor": "Run",
-    "Python.api.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.benchmark_scaling.executor": "Run",
-    "Python.color_utils.executor": "Run",
-    "Python.colors (1).executor": "Run",
-    "Python.colors.executor": "Run",
-    "Python.colors_table.executor": "Run",
-    "Python.commands.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.coprime.executor": "Run",
-    "Python.dash_component_template.executor": "Run",
-    "Python.dataset.executor": "Run",
-    "Python.export_to_dash.executor": "Run",
-    "Python.generate_example_dataset.executor": "Run",
-    "Python.gradients.executor": "Run",
-    "Python.graphs.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model.executor": "Run",
-    "Python.order_parameter.executor": "Run",
-    "Python.palettes.executor": "Run",
-    "Python.rigorous_benchmarks.executor": "Run",
-    "Python.rk45.executor": "Run",
-    "Python.rotor.executor": "Run",
-    "Python.solver_types.executor": "Run",
-    "Python.solvers.executor": "Run",
-    "Python.spectral.executor": "Run",
-    "Python.style.executor": "Run",
-    "Python.test_generate_kuramoto_dataset.executor": "Run",
-    "Python.types.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validate_ga_rotor_metrics.executor": "Run",
-    "Python.validation.executor": "Run",
-    "Python.viz.executor": "Run",
-    "Python.zbw_generator.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "junie.plugin.stays.banner.dismissed": "true",
-    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS",
-    "llm.figma.connect.mcp.suggestion.dismissed": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;KEY_CHAT_IN_TOOLWINDOW&quot;: &quot;false&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Doctests in gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_cli.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_frontend_styling.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
+    &quot;Python.api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.benchmark_scaling.executor&quot;: &quot;Run&quot;,
+    &quot;Python.color_utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors.executor&quot;: &quot;Run&quot;,
+    &quot;Python.colors_table.executor&quot;: &quot;Run&quot;,
+    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.export_to_dash.executor&quot;: &quot;Run&quot;,
+    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gradients.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.palettes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rigorous_benchmarks.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solver_types.executor&quot;: &quot;Run&quot;,
+    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
+    &quot;Python.style.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.types.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validate_ga_rotor_metrics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS&quot;,
+    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT",
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;,
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks\practice-problems\SECTION_C\CODING_TASKS" />
@@ -381,7 +389,6 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-56aff7b04f6f-JavaScript-PY-263.7307.329" />
         <option value="bundled-python-sdk-9e1d95ea72ba-e0583fc556d1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-263.7307.329" />
       </set>
     </attachedChunks>
@@ -396,14 +403,6 @@
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
       <workItem from="1795458671947" duration="5554000" />
-    </task>
-    <task id="LOCAL-00041" summary="added a plan of action markdown for viz.py splitting in future work folder">
-      <option name="closed" value="true" />
-      <created>1791898233242</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1791898233242</updated>
     </task>
     <task id="LOCAL-00042" summary="demo notbook added">
       <option name="closed" value="true" />
@@ -789,7 +788,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795472138473</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="docs: complete Problem 16 coding task notebook with Bézout's Identity exercises&#10;&#10;Add markdown cells with problem statement, hand-calculated answers for  &#10;extended GCD of (7,11) and (6,9), and verification steps with color-coded  &#10;output instructions. Update execution timestamps and cell IDs to reflect  &#10;re-run.">
+      <option name="closed" value="true" />
+      <created>1795475133807</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1795475133807</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

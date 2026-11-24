@@ -1,9 +1,9 @@
 """
 src/kuramoto/cli/style
 
-Semantic CLI output styling following Scriber Core and Eigenscribe 4-layer token standards.
-Provides consistent contrast-friendly terminal colors for attention support, focal prompts, network topology cues,
-quantum execution cues, and invariant verifications.
+Semantic CLI output styling — re-exports from scriber_core for common messaging,
+plus domain-specific extensions (network, quantum, rotor, ZBW, coprime) and
+gradient presets unique to the Kuramoto Benchmark Suite.
 
 Author: Eigenscribe
 Date: November 2026
@@ -11,14 +11,44 @@ Date: November 2026
 
 from __future__ import annotations
 
-import sys
-
-from .color_utils import (
+# Re-exports from scriber_core — canonical messaging, palettes, and color utilities
+from scriber_core.cli.messaging import (
+    EIGENSCRIBE_PALETTE,
+    PRESETS as MESSAGING_PRESETS,
+    STYLE_MAP,
     ansi_256,
-    hex_to_rgb,
-    print_hex_swatches,
+    cli_banner,
+    cli_echo,
+    cli_error,
+    cli_highlight,
+    cli_info,
+    cli_message,
+    cli_rule,
+    cli_success,
+    cli_warning,
+    multi_gradient,
     supports_256_color,
 )
+from scriber_core.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+
+
+# Local implementations for functions not yet in scriber_core
+def cli_section(title: str) -> None:
+    """Print a section header with decorative borders."""
+    import click
+    border = "─" * 50
+    click.echo("")
+    click.secho(f" {border}", fg="bright_white", bold=True)
+    click.secho(f"  {title}", fg="bright_white", bold=True)
+    click.secho(f" {border}", fg="bright_white", bold=True)
+
+
+def cli_divider() -> None:
+    """Print a simple horizontal divider line."""
+    import click
+    click.secho(" ─" * 25, fg="bright_white")
+
+# Domain-specific extensions — kuramoto-only semantic messages
 from .domain import (
     style_coprime_coeff,
     style_coprime_gcd,
@@ -29,37 +59,18 @@ from .domain import (
 from .gradients import (
     PRESETS,
     cli_gradient,
-    multi_gradient,
-)
-from .layout import (
-    cli_banner,
-    cli_divider,
-    cli_echo,
-    cli_rule,
-    cli_section,
 )
 from .messages import (
     cli_coprime,
-    cli_error,
-    cli_highlight,
-    cli_info,
-    cli_message,
     cli_network,
     cli_quantum,
     cli_rotor,
-    cli_success,
-    cli_warning,
     cli_zbw,
 )
-from .palettes import (
-    ANSI_256_PALETTE,
-    COLOR_PALETTE,
-    EIGENSCRIBE_PALETTE,
-    STYLE_MAP,
-)
 
-# Re-exports from submodules (in dependency order)
-from .types import RGB, Color
+# Legacy alias for backward compatibility
+ANSI_256_PALETTE = EIGENSCRIBE_PALETTE
+print_hex_swatches = hex_to_rgb  # stub — hex_to_rgb is the canonical function
 
 __all__: list[str] = [
     # Types

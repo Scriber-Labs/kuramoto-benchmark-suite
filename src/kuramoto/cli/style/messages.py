@@ -1,7 +1,8 @@
 """
 messages.py
 
-Semantic echo functions — domain-specific CLI messages with emojis.
+Domain-specific CLI messages with emojis — extends scriber_core messaging
+with Kuramoto-specific semantic levels (network, quantum, rotor, ZBW, coprime).
 
 Author: Eigenscribe
 Date: November 20, 2026
@@ -9,64 +10,40 @@ Date: November 20, 2026
 
 from __future__ import annotations
 
-import click
-
-from kuramoto.cli.style.color_utils import hex_to_rgb
-from kuramoto.cli.style.palettes import STYLE_MAP
+from scriber_core.cli.messaging import cli_message as _cli_message
 
 __all__: list[str] = [
-    "cli_message",
-    "cli_info",
     "cli_network",
     "cli_quantum",
     "cli_rotor",
     "cli_zbw",
     "cli_coprime",
-    "cli_success",
-    "cli_warning",
-    "cli_error",
-    "cli_highlight",
 ]
 
 
 # -----------------------------------------------------------------------------------------------------------
-# 1️⃣ Public API
+# 0️⃣ / 🎭 Domain-specific style map extensions
 # -----------------------------------------------------------------------------------------------------------
 
-
-def cli_message(msg: str, level: str = "info", bold: bool = False) -> None:
-    """
-    Print a styled message using the semantic color palette.
-
-    Parameters
-    ----------
-    msg : str
-        Message content to display.
-    level : str, default="info"
-        Semantic level ("info", "network", "quantum", "rotor", "success", "warning", "error", "highlight").
-    bold : bool, default=False
-        Whether to format the text in bold weight.
-    """
-    fg = STYLE_MAP.get(level, "bright_cyan")
-    # Handle hex colors from scriber_core palette
-    if fg.startswith("#"):
-        rgb = hex_to_rgb(fg)
-        style = "1;" if bold else ""
-        click.echo(f"\033[{style}38;2;{rgb[0]};{rgb[1]};{rgb[2]}m{msg}\033[0m")
-    else:
-        click.secho(msg, fg=fg, bold=bold)
+# Domain-specific levels map to Eigenscribe palette keys
+_DOMAIN_STYLE_MAP: dict[str, str] = {
+    "network": "eigen_purple",
+    "quantum": "eigen_cyan",
+    "rotor": "eigen_accent_green",
+    "zbw": "eigen_accent_amber",
+    "coprime": "eigen_accent_magenta",
+}
 
 
-def cli_info(msg: str) -> None:
-    """
-    Print an informational prompt (Electric Cyan).
+def _domain_message(msg: str, level: str, bold: bool = False) -> None:
+    """Print a styled message using the domain-specific color palette."""
+    color_key = _DOMAIN_STYLE_MAP.get(level, "eigen_cyan")
+    _cli_message(msg, level="info", bold=bold)  # fallback to info level; color applied via ansi_256
 
-    Parameters
-    ----------
-    msg : str
-        Informational message string.
-    """
-    cli_message(f"ℹ️ {msg}", level="info")
+
+# -----------------------------------------------------------------------------------------------------------
+# 1️⃣ Public API — Domain-specific semantic messages
+# -----------------------------------------------------------------------------------------------------------
 
 
 def cli_network(msg: str) -> None:
@@ -78,7 +55,11 @@ def cli_network(msg: str) -> None:
     msg : str
         Topology/network message string.
     """
-    cli_message(f"🌐 {msg}", level="network", bold=True)
+    from scriber_core.cli.messaging import ansi_256
+
+    styled = ansi_256("eigen_purple", f"🌐 {msg}", bold=True)
+    import click
+    click.echo(styled, color=True)
 
 
 def cli_quantum(msg: str) -> None:
@@ -90,7 +71,11 @@ def cli_quantum(msg: str) -> None:
     msg : str
         Quantum execution update message string.
     """
-    cli_message(f"⚛️ {msg}", level="quantum", bold=True)
+    from scriber_core.cli.messaging import ansi_256
+
+    styled = ansi_256("eigen_cyan", f"⚛️ {msg}", bold=True)
+    import click
+    click.echo(styled, color=True)
 
 
 def cli_rotor(msg: str) -> None:
@@ -102,55 +87,11 @@ def cli_rotor(msg: str) -> None:
     msg : str
         Geometric Algebra rotor solver message string.
     """
-    cli_message(f"🌀 {msg}", level="rotor", bold=True)
+    from scriber_core.cli.messaging import ansi_256
 
-
-def cli_success(msg: str) -> None:
-    """
-    Print a success confirmation (Tertiary Green).
-
-    Parameters
-    ----------
-    msg : str
-        Success message string.
-    """
-    cli_message(f"✅ {msg}", level="success", bold=True)
-
-
-def cli_warning(msg: str) -> None:
-    """
-    Print a warning notification (Quaternary Amber).
-
-    Parameters
-    ----------
-    msg : str
-        Warning message string.
-    """
-    cli_message(f"⚠️ {msg}", level="warning")
-
-
-def cli_error(msg: str) -> None:
-    """
-    Print an error alert (Pernary Red/Magenta).
-
-    Parameters
-    ----------
-    msg : str
-        Error message string.
-    """
-    cli_message(f"❌ {msg}", level="error", bold=True)
-
-
-def cli_highlight(msg: str) -> None:
-    """
-    Print an emphasized highlight message.
-
-    Parameters
-    ----------
-    msg : str
-        Highlight message string.
-    """
-    cli_message(f"✨ {msg}", level="highlight", bold=True)
+    styled = ansi_256("eigen_accent_green", f"🌀 {msg}", bold=True)
+    import click
+    click.echo(styled, color=True)
 
 
 def cli_zbw(msg: str) -> None:
@@ -162,7 +103,11 @@ def cli_zbw(msg: str) -> None:
     msg : str
         ZBW model message string.
     """
-    cli_message(f"🌟 {msg}", level="zbw", bold=True)
+    from scriber_core.cli.messaging import ansi_256
+
+    styled = ansi_256("eigen_accent_amber", f"🌟 {msg}", bold=True)
+    import click
+    click.echo(styled, color=True)
 
 
 def cli_coprime(msg: str) -> None:
@@ -174,7 +119,11 @@ def cli_coprime(msg: str) -> None:
     msg : str
         Coprime / number theory message string.
     """
-    cli_message(f"🔢 {msg}", level="coprime", bold=True)
+    from scriber_core.cli.messaging import ansi_256
+
+    styled = ansi_256("eigen_accent_magenta", f"🔢 {msg}", bold=True)
+    import click
+    click.echo(styled, color=True)
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -183,20 +132,15 @@ def cli_coprime(msg: str) -> None:
 
 
 def _run_smoke_test() -> None:
-    """Quick sanity check for message functions."""
+    """Quick sanity check for domain-specific message functions."""
     print("💨 Running messages.py smoke tests...")
 
-    # Test that all message functions run without error
-    cli_info("Test info message")
+    # Test that all domain-specific message functions run without error
     cli_network("Test network message")
     cli_quantum("Test quantum message")
     cli_rotor("Test rotor message")
     cli_zbw("Test ZBW message")
     cli_coprime("Test coprime message")
-    cli_success("Test success message")
-    cli_warning("Test warning message")
-    cli_error("Test error message")
-    cli_highlight("Test highlight message")
 
     print("✅ messages.py smoke test passed.")
 

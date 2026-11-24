@@ -5,7 +5,7 @@ Main entry point for the Kuramoto CLI.
 
 Author: Eigenscribe
 Date: May 2026
-Last Updated: October 2026
+Last Updated: November 2026
 """
 
 from __future__ import annotations
@@ -29,6 +29,7 @@ from kuramoto.cli.commands import (
     zbw,
 )
 from kuramoto.cli.utils import print_header
+from scriber_core.cli.vt_mode import enable_vt_mode
 
 __all__: list[str] = ["cli", "main"]
 
@@ -109,6 +110,7 @@ def _run_smoke_test() -> None:
 
 def main() -> None:
     """Entry point for the kuramoto script."""
+    enable_vt_mode()
     cli()
 
 

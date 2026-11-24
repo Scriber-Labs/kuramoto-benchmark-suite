@@ -36,12 +36,14 @@ from kuramoto.analysis.viz import (
 )
 from kuramoto.api import generate_kuramoto_dataset
 from kuramoto.cli.style import (
-    ansi_256,
-    cli_error,
-    cli_info,
     cli_network,
     cli_quantum,
     cli_rotor,
+)
+from scriber_core.cli.messaging import (
+    ansi_256,
+    cli_error,
+    cli_info,
     cli_success,
     cli_warning,
     supports_256_color,

@@ -28,9 +28,9 @@ __all__: list[str] = [
 #   (k_m, k_n)   -> coral_orange
 #   k_true       -> vivid_pink
 #   (a, b)       -> brigh_green
-_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["coral_orange"])
-_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["golden_amber"])
-_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["electric_blue"])
+_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["sky_blue"])
+_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
+_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["eigen_blue"])
 _COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["brigh_green"])
 _COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_magenta"])
 _COPRIME_REMAINDER: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
