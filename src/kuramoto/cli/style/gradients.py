@@ -12,9 +12,9 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Final
 
-from scriber_core.frontend.colors import COLOR_PALETTE, Color
-from scriber_core.frontend.gradients import GRADIENT_PRESETS
-from scriber_core.frontend.gradients import multi_gradient as _multi_gradient
+from eigenscribe.frontend.colors import COLOR_PALETTE, Color
+from eigenscribe.frontend.gradients import GRADIENT_PRESETS
+from eigenscribe.frontend.gradients import multi_gradient as _multi_gradient
 
 __all__: list[str] = [
     "PRESETS",
@@ -40,7 +40,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["electric_lagoon"],
         COLOR_PALETTE["reef_cyan"],
         COLOR_PALETTE["cerulean_surge"],
-        COLOR_PALETTE["harbor_blue"],
+        COLOR_PALETTE["royal_blue"],
         COLOR_PALETTE["twilight_indigo"],
         COLOR_PALETTE["dusk_violet_blue"],
         COLOR_PALETTE["cosmic_iris"],

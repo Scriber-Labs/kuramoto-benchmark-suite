@@ -9,7 +9,7 @@ Date: November 20, 2026
 
 from __future__ import annotations
 
-from scriber_core.frontend.colors import COLOR_PALETTE, hex_to_rgb
+from eigenscribe.frontend.colors import COLOR_PALETTE, hex_to_rgb
 
 __all__: list[str] = [
     "style_coprime_term",
@@ -31,7 +31,7 @@ __all__: list[str] = [
 _CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["sky_blue"])
 _CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
 _COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["eigen_blue"])
-_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["brigh_green"])
+_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_green"])
 _COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_magenta"])
 _COPRIME_REMAINDER: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
 

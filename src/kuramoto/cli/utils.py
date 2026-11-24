@@ -19,8 +19,8 @@ from typing import Any, Final
 import click
 from tabulate import tabulate
 
-from scriber_core.cli.branding import print_brand_header
-from scriber_core.cli.messaging import ansi_256, cli_rule, supports_256_color
+from eigenscribe.cli.branding import print_brand_header
+from eigenscribe.cli.messaging import ansi_256, cli_rule, supports_256_color
 
 __all__: list[str] = [
     "DEFAULT_DEMO_PATH",

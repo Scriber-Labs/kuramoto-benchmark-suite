@@ -12,9 +12,8 @@ Date: November 2026
 from __future__ import annotations
 
 # Re-exports from scriber_core — canonical messaging, palettes, and color utilities
-from scriber_core.cli.messaging import (
+from eigenscribe.cli.messaging import (
     EIGENSCRIBE_PALETTE,
-    PRESETS as MESSAGING_PRESETS,
     STYLE_MAP,
     ansi_256,
     cli_banner,
@@ -29,7 +28,7 @@ from scriber_core.cli.messaging import (
     multi_gradient,
     supports_256_color,
 )
-from scriber_core.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from eigenscribe.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
 
 
 # Local implementations for functions not yet in scriber_core

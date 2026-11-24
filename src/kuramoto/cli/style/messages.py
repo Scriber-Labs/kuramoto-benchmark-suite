@@ -10,7 +10,7 @@ Date: November 20, 2026
 
 from __future__ import annotations
 
-from scriber_core.cli.messaging import cli_message as _cli_message
+from eigenscribe.cli.messaging import cli_message as _cli_message
 
 __all__: list[str] = [
     "cli_network",

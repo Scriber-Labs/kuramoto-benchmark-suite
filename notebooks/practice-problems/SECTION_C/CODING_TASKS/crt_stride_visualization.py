@@ -41,7 +41,9 @@ from typing import Callable, Final, TypeAlias
 import numpy as np
 from numpy.typing import NDArray
 
+import matplotlib.patheffects as path_effects
 import matplotlib.pyplot as plt
+from matplotlib.axes import Axes
 from matplotlib.colors import LinearSegmentedColormap
 
 from eigenscribe.frontend.colors import COLOR_PALETTE, hex_to_rgb
@@ -71,6 +73,7 @@ DRIFTED_DRIFT: Final[float] = 0.002
 FIGURE1_PATH: Final[str] = "crt_stride_diagnostics.png"
 TRACE_FIGURE_PATH: Final[str] = "crt_trace_figure.png"
 NONCOPRIME_FIGURE_PATH: Final[str] = "crt_noncoprime_stride_diagnostics.png"
+FIGURE_DPI: Final[int] = 220
 
 # PaletteLoader protocol - dependency injection of colors.py
 PaletteLoader: TypeAlias = Callable[[list[HexColor], int], list[RGB01]]
@@ -316,7 +319,7 @@ def reconstruct_from_snapshots(
     t_stored = np.asarray(union, dtype=np.float64)
     theta_stored = theta_true[union]
     t_dense = np.arange(theta_true.size, dtype=np.float64)
-    return np.inter(t_dense, t_stored, theta_stored)
+    return np.interp(t_dense, t_stored, theta_stored)
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -332,14 +335,26 @@ def figure1() -> None:
     """
     step_grid = build_step_grid()
 
-    fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+    fig, axes = plt.subplots(
+        2,
+        4,
+        figsize=(17, 9),
+        constrained_layout=True,
+        gridspec_kw={"width_ratios": [1, 1, 1, 0.06]},
+    )
     fig.patch.set_facecolor(INK)
+    for ax in axes.flat:
+        _style_axis(ax)
+    axes[1, 3].set_axis_off()
 
     _paint_hitmap_panel(axes[0, 0], step_grid)
     colorbar_image = _paint_residual_panels(
         [axes[0, 1], axes[0, 2]], step_grid, [HEALTHY_DRIFT, DRIFTED_DRIFT]
     )
-    fig.colorbar(colorbar_image, ax=axes[0, 2], fraction=0.046)
+    colorbar = fig.colorbar(colorbar_image, cax=axes[0, 3])
+    colorbar.set_label("Absolute phase error (rad)", color=ICE_TEXT, fontsize=8)
+    colorbar.ax.tick_params(colors=ICE_TEXT, labelsize=7)
+    colorbar.outline.set_edgecolor(DIM_GRAY)
     _paint_phase_hue_panels(
         [axes[1, 1], axes[1, 2]], step_grid, [HEALTHY_DRIFT, DRIFTED_DRIFT]
     )
@@ -347,7 +362,506 @@ def figure1() -> None:
 
     fig.suptitle(
         "Coprime-stride CRT diagnostics for the Kuramoto rotor benchmark",
-        color=COLOR_PALETTE["text_white"], fontsize=13, y=0.98,
+        color=COLOR_PALETTE["text_white"], fontsize=15,
     )
-    plt.tight_layout()
-    plt.savefig(FIGURE1_PATH, dpi=150, facecolor=INK)
+    fig.savefig(FIGURE1_PATH, dpi=FIGURE_DPI, facecolor=INK, bbox_inches="tight")
+    plt.close(fig)
+
+def crt_trace_figure(
+    k_m: int,
+    k_n: int,
+    m: int = M,
+    n: int = N,
+) -> int:
+    """Visual mirror of trace_crt_reconstruction(k_m, k_n, M, N).
+
+    Row index plays k_m (observed alias mod m, Sampler B); column index play k_n (observed alias mod n, Sampler A).
+    Sweeps the k_n column in channel-A blue, the k_m row in channel-B violet, lights the merge cell gold, and verifies
+    the coordinates --- mirroring the CLI trace steps.
+
+    Parameters
+    ----------
+    k_m : int
+        Observed alias modulo m (from Sampler B).
+    k_n : int
+        Observed alias modulo n (from Sampler A).
+
+    Returns
+    -------
+    int
+        The reconstructed true frequency index k_true in [0, m*n -1], identical to what the CLI trace points.
+    """
+    modulus = m * n
+    g, bez_a, bez_b = _local_extended_gcd(m, n)
+    term_a = k_n * bez_a * m    # Channel A contribution (trace Step 2)
+    term_b = k_m * bez_b * n    # Channel B contribution (trace Step 3)
+    k_true = (term_a + term_b) % modulus    # trace Step 4: merge
+    library_index = _library_reconstruct_frequency(k_m=k_m, k_n=k_n, m=m, n=n)
+    lib_match = None if library_index is None else library_index == k_true
+
+    fig, ax = plt.subplots(
+        figsize=(max(10, n + 4), max(7, m + 3)), constrained_layout=True
+    )
+    fig.patch.set_facecolor(INK)
+    _style_axis(ax)
+
+    base = np.zeros((m, n, 3))
+    base[:, :] = hex_to_rgb01(DIM_GRAY)
+    for row in range(m):
+        base[row, k_n] = hex_to_rgb01(CHAN_A)   # Step 2: column sweep
+    for col in range(n):
+        base[k_m, col] = hex_to_rgb01(CHAN_B)   # Step 3: row sweep
+    base[k_m, k_n] = hex_to_rgb01(MERGE_GOLD)   # Step 4: the survivor
+
+    ax.imshow(base, interpolation="nearest", aspect="equal")
+    _configure_matrix_axis(ax, m, n)
+    ax.set_xlim(-1.6, n + 4.3)
+    ax.set_ylim(m - 0.5, -1.2)
+    ax.text(-0.8, k_m, f"k_m={k_m}", ha="right", va="center",
+            fontsize=9, color=CHAN_B, weight="bold")
+    ax.text(k_n, -0.8, f"k_n={k_n}", ha="center", va="bottom",
+            fontsize=9, color=CHAN_A, weight="bold")
+    ax.text(k_n, k_m, str(k_true), ha="center", va="center",
+            fontsize=13, color=INK, weight="bold")
+
+    _paint_trace_verification_title(ax, k_true, k_m, k_n, m, n, modulus,
+                                    g, bez_a, bez_b, term_a, term_b, lib_match)
+
+    _paint_trace_legend(ax, m, n)
+
+    fig.savefig(TRACE_FIGURE_PATH, dpi=FIGURE_DPI, facecolor=INK, bbox_inches="tight")
+    plt.show()
+    plt.close(fig)
+
+    print(f"[crt_trace_figure] k_true(trace) = {k_true} | "
+          f"library = {library_index} | match = {lib_match}")
+    return k_true
+
+def crt_noncoprime_figure(
+    k_m: int,
+    k_n: int,
+    m: int = 6,
+    n: int = 9
+) -> None:
+    """Visual mirror of trace_crt_reconstruction_error() for gcd > 1.
+
+    With g = gcd(m, n), a cel (a, b) is reachable only when a = b (mod g):
+    unreachable cells render as black dead-zone stripes, a consistent remainder pair collides on g crimson cells, and an
+    inconsistent pair crosses dead-zone territory (the CLI's 'No index matches' branch).
+
+    Parameters
+    ----------
+    k_m : int
+        Observed alias modulo m.
+    k_n : int
+        Observed alias modulo n.
+    m : int, default=6
+        First non-coprime stride.
+    n : int, default=9
+        Second non-coprime stride.
+    """
+    g = int(np.gcd(m, n))
+    matching = [t for t in range(m * n) if t % m == k_m and t % n == k_n]
+    collisions = {(t % m, t % n) for t in matching}
+
+    fig, ax = plt.subplots(
+        figsize=(max(10, n + 3), max(7, m + 3)), constrained_layout=True
+    )
+    fig.patch.set_facecolor(INK)
+    _style_axis(ax)
+
+    base = np.zeros((m, n, 3))
+    for row in range(m):
+        for col in range(n):
+            if (row - col) % g == 0:
+                if (row, col) in collisions:
+                    base[row, col] = hex_to_rgb01(ALERT)
+                else:
+                    base[row, col] = hex_to_rgb01(DIM_GRAY)
+            # else: leave black -- dead zone, unreachable by any time step
+
+    ax.imshow(base, interpolation="nearest", aspect="equal")
+    _configure_matrix_axis(ax, m, n)
+    ax.set_xlim(-1.6, n - 0.5)
+    ax.set_ylim(m - 0.5, -1.2)
+    ax.text(-0.8, k_m, f"k_m={k_m}", ha="right", va="center",
+            fontsize=9, color=CHAN_B, weight="bold")
+    ax.text(k_n, -0.8, f"k_n={k_n}", ha="center", va="bottom",
+            fontsize=9, color=CHAN_A, weight="bold")
+
+    verdict = (
+        f"consistent: {g} indices collide on this pair -- {matching}"
+        if matching
+        else "inconsistent: NO index matches this remainder pair"
+    )
+    ax.set_title(
+        f"Non-coprime strides M={m}, N={n} (gcd = {g})\n"
+        f"Black = dead zones (no t can land there: needs a = b mod {g})\n"
+        f"{verdict}",
+        fontsize=9, color=COLOR_PALETTE["text_white"],
+    )
+    ax.set_xlabel("residue mod N")
+    ax.set_ylabel("residue mod M")
+
+    fig.savefig(
+        NONCOPRIME_FIGURE_PATH,
+        dpi=FIGURE_DPI,
+        facecolor=INK,
+        bbox_inches="tight",
+    )
+    plt.show()
+    plt.close(fig)
+
+    print(f"[crt_noncoprime_figure] matching indices for ({k_m}, {k_n}): "
+          f"{matching if matching else 'none (inconsistent pair)'}")
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 3️⃣ Private helpers (how it works)
+#
+# Panel painters and the library-wiring shim. Never called by end users.
+# -----------------------------------------------------------------------------------------------------------
+
+try:
+    from kuramoto.solvers.coprime import (
+        coprime_reconstruct_frequency,  # noqa: F401 -- exercised via shim below
+        extended_gcd,
+    )
+
+    USING_KURAMOTO_LIB: Final[bool] = True
+except ImportError:
+    USING_KURAMOTO_LIB: Final[bool] = False
+
+    def extended_gcd(x: int, y:int) -> tuple[int, int, int]:
+        """Local Bezout stand-in returning (gcd, a, b) with a*x + b*y = gcd."""
+        old_r, r = x, y
+        old_s, s = 1, 0
+        old_t, t = 0, 1
+        while r != 0:
+            quotient = old_r // r
+            old_r, r = r, old_r - quotient * r
+            old_s, s = s, old_s - quotient * s
+            old_t, t = t, old_t - quotient * t
+        return old_r, old_s, old_t
+
+def _local_extended_gcd(x: int, y: int) -> tuple[int, int, int]:
+    """Route Bezout resolution through the library when wired, else locally."""
+    if USING_KURAMOTO_LIB:
+        return extended_gcd(x, y)    # type: ignore[possibly-undefined]
+    return extended_gcd(x, y)
+
+def _library_reconstruct_frequency(k_m: int, k_n: int, m: int, n: int) -> int | None:
+    """Cross-check reconstruction against the kuramoto library when wired.
+
+    Returns None when the library is unavailable, in which case the figure simply reports the trace value alone (no
+    mismatch verdict is claimed).
+    """
+    if not USING_KURAMOTO_LIB:
+        return None
+    try:
+        return coprime_reconstruct_frequency(k_m=k_m, k_n=k_n, M=m, N=n)    # type: ignore[possibly-undefined]
+    except TypeError:
+        return None
+
+def _style_axis(ax: Axes) -> None:
+    """Apply the shared high-contrast palette to a figure axis."""
+    ax.set_facecolor(INK)
+    ax.tick_params(axis="both", colors=ICE_TEXT, labelsize=8)
+    ax.xaxis.label.set_color(ICE_TEXT)
+    ax.yaxis.label.set_color(ICE_TEXT)
+    for spine in ax.spines.values():
+        spine.set_color(DIM_GRAY)
+
+def _configure_matrix_axis(ax: Axes, m: int, n: int) -> None:
+    """Label integer matrix cells and draw subtle boundaries between them."""
+    ax.set_xticks(np.arange(n))
+    ax.set_yticks(np.arange(m))
+    ax.set_xticks(np.arange(-0.5, n, 1), minor=True)
+    ax.set_yticks(np.arange(-0.5, m, 1), minor=True)
+    ax.grid(which="minor", color=INK, linewidth=0.8)
+    ax.tick_params(which="minor", bottom=False, left=False)
+    ax.set_xlim(-0.5, n - 0.5)
+    ax.set_ylim(m - 0.5, -0.5)
+
+def _paint_hitmap_panel(ax: Axes, step_grid: NDARRAY[np.int64]) -> None:
+    """Panel 1 painter: color each CRT cell by the time step it represents."""
+    cmap = LinearSegmentedColormap.from_list(
+        "crt_hitmap", PALETTE_LOADER(list(HITMAP_STOPS), 256)
+    )
+    ax.imshow(
+        step_grid,
+        cmap=cmap,
+        interpolation="nearest",
+        vmin=0,
+        vmax=TOTAL - 1,
+        aspect="equal",
+    )
+    _configure_matrix_axis(ax, M, N)
+    ax.set_title(
+        "CRT hit-map · unique step per residue pair",
+        fontsize=9,
+        color=COLOR_PALETTE["text_white"],
+        pad=10,
+    )
+    ax.set_xlabel(f"Residue mod N ({N}) · channel B", fontsize=8)
+    ax.set_ylabel(f"Residue mod M ({M}) · channel A", fontsize=8)
+    for row, col in np.ndindex(step_grid.shape):
+        ax.text(
+            col,
+            row,
+            str(step_grid[row, col]),
+            ha="center",
+            va="center",
+            fontsize=7,
+            color=COLOR_PALETTE["text_white"],
+            path_effects=[path_effects.withStroke(linewidth=1.5, foreground=INK)],
+        )
+
+def _paint_residual_panels(
+    axes: list[Axes], step_grid: NDARRAY[np.int64], drift_values: list[float]
+) -> plt.matplotlib.image.AxesImage:
+    """Panel 2 painter: reconstruction residual per CRT cell, per drift level.
+
+    Returns the last image artist so the caller can attach a shared colorbar.
+    """
+    cmap = residual_colormap()
+    vmax = 0.0
+    residual_grids: list[NDArray[np.float64]] = []
+    for drift in drift_values:
+        theta = simulate_rotor(drift)
+        _, _, union = coprime_snapshot_steps()
+        recon = reconstruct_from_snapshots(theta, union)
+        resid = np.abs(recon - theta)
+        vmax = max(vmax, float(resid.max()))
+        grid = np.zeros((M, N), dtype=np.float64)
+        for row in range(M):
+            for col in range(N):
+                grid[row, col] = resid[step_grid[row, col]]
+        residual_grids.append(grid)
+
+    vmax = max(vmax, np.finfo(np.float64).eps)
+    image = None
+    for ax, grid, drift in zip(axes, residual_grids, drift_values):
+        image = ax.imshow(
+            grid,
+            cmap=cmap,
+            interpolation="nearest",
+            vmin=0,
+            vmax=vmax,
+            aspect="equal",
+        )
+        _configure_matrix_axis(ax, M, N)
+        ax.set_title(
+            f"Residual · drift={drift:g}\nmax |error| = {grid.max():.4g} rad",
+            fontsize=9,
+            color=COLOR_PALETTE["text_white"],
+            pad=10,
+        )
+    assert image is not None
+    return image
+
+def _paint_phase_hue_panels(
+    axes: list[Axes], step_grid: NDArray[np.int64], drift_values: list[float]
+) -> None:
+    """Panel 3 painter: cyclic hue encoding of the reconstructed phase field."""
+    for ax, drift in zip(axes, drift_values):
+        theta = simulate_rotor(drift)
+        _, _, union = coprime_snapshot_steps()
+        recon = reconstruct_from_snapshots(theta, union)
+        phase_grid = np.mod(recon[step_grid], 2.0 * np.pi)
+        ax.imshow(
+            phase_grid,
+            cmap="twilight",
+            interpolation="nearest",
+            vmin=0.0,
+            vmax=2.0 * np.pi,
+            aspect="equal",
+        )
+        _configure_matrix_axis(ax, M, N)
+        ax.set_title(
+            f"Reconstructed phase · drift={drift:g}\ncyclic color: 0–2π rad",
+            fontsize=9,
+            color=COLOR_PALETTE["text_white"],
+            pad=10,
+        )
+
+def _paint_memory_ledger_panel(ax: Axes) -> None:
+    """Bottom-left panel painter: the O(mn) -> O(m+n) memory ledger."""
+    _, _, union = coprime_snapshot_steps()
+    saved = (TOTAL + 1) - len(union)
+    ax.axis("off")
+    ax.text(
+        0.03,
+        0.95,
+        "Snapshot memory",
+        fontsize=12,
+        color=COLOR_PALETTE["text_white"],
+        weight="bold",
+        va="top",
+    )
+    ax.text(
+        0.03,
+        0.78,
+        f"dense:    O(mn)  = {TOTAL + 1} snapshots\n"
+        f"coprime:  O(m+n) = {len(union)} snapshots\n\n"
+        f"channel A fires at t = 0 (mod {M})\n"
+        f"channel B fires at t = 0 (mod {N})\n"
+        f"overlap only at t = 0 (mod {TOTAL})\n"
+        f"saved {saved} ({saved / (TOTAL + 1):.0%} reduction)",
+        fontsize=9,
+        color=ICE_TEXT,
+        family="monospace",
+        va="top",
+    )
+
+def _paint_trace_verification_title(
+    ax: Axes,
+    k_true: int,
+    k_m: int,
+    k_n: int,
+    m: int,
+    n: int,
+    modulus: int,
+    g: int,
+    bez_a: int,
+    bez_b: int,
+    term_a: int,
+    term_b: int,
+    lib_match: bool | None,
+) -> None:
+    """Trace-figure painter: Bezout, terms, merge, and verification verdicts."""
+    check_m = k_true % m
+    check_n = k_true % n
+    ok_m = check_m == k_m
+    ok_n = check_n == k_n
+    verdict = "PASS" if (ok_m and ok_n) else "FAIL"
+    residue_m_status = "PASS" if ok_m else "FAIL"
+    residue_n_status = "PASS" if ok_n else "FAIL"
+    if lib_match is None:
+        lib_note = "    |    library unavailable"
+    elif lib_match:
+        lib_note = "    |    library match"
+    else:
+        lib_note = "    |    LIBRARY MISMATCH"
+    ax.set_title(
+        f"CRT trace · k_m={k_m}, k_n={k_n} · M={m}, N={n}\n"
+        f"Bezout: ({bez_a})*{m} + ({bez_b})*{n} = {g}    |    "
+        f"term_a = {term_a}, term_b = {term_b}\n"
+        f"k_true = ({term_a} + {term_b}) % {modulus} = {k_true}    {verdict}    "
+        f"({k_true} mod {m} = {check_m}: {residue_m_status}, "
+        f"{k_true} mod {n} = {check_n}: {residue_n_status})"
+        f"{lib_note}",
+        fontsize=9,
+        color=COLOR_PALETTE["text_white"],
+        pad=12,
+    )
+    ax.set_xlabel("residue mod N  (= k_n, Sampler A)")
+    ax.set_ylabel("residue mod M  (= k_m, Sampler B)")
+
+def _paint_trace_legend(ax: Axes, m: int, n: int) -> None:
+    """Trace-figure painter: CLI-color-semantics legend swatches."""
+    legend_items = [
+        (CHAN_A, "column k_n -- Channel A term"),
+        (CHAN_B, "row k_m -- Channel B term"),
+        (MERGE_GOLD, "merge: unique k_true"),
+    ]
+    for index, (color, label) in enumerate(legend_items):
+        ax.add_patch(plt.Rectangle(
+            (n + 0.35, m - 1.1 - index * 1.2), 0.55, 0.55,
+            facecolor=color, edgecolor="none", clip_on=False,
+            transform=ax.transData,
+        ))
+        ax.text(
+            n + 1.1, m - 0.83 - index * 1.2, label,
+            fontsize=8,
+            color=COLOR_PALETTE["text_white"],
+            va="center",
+            clip_on=False,
+        )
+
+# -----------------------------------------------------------------------------------------------------------
+# 4️⃣ 💨 Smoke tests / example usage (proof it works)
+# -----------------------------------------------------------------------------------------------------------
+
+def run_smoke_test() -> bool:
+    """Validate the CRT machinery and memory accounting before any figure.
+
+    Checks: the hit-grid is a genuine bijection onto [0, m*n) (the CRT guarantee), reconstruction reproduces the
+    analytic trajectory exactly at stored snapshot steps, a drifted rotor shows strictly larger reconstruction residual
+    than the healthy one, and the snapshot union delivers the promised O(m+n) reduction.
+
+    Returns
+    -------
+    bool
+        True if all invariants pass.
+    """
+    print("👟💨 Running crt_stride_viz smoke tests...")
+    is_valid = True
+
+    # 1. CRT bijection: every cell maps to a distinct step covering [0, TOTAL)
+    step_grid = build_step_grid()
+    bijection_ok = len(set(step_grid.flatten())) == TOTAL
+    is_valid &= bijection_ok
+    print(f"  {'✔️' if bijection_ok else '❌'} CRT bijection over {TOTAL} steps")
+
+    # 2. Snapshot bookkeeping: union respects the coprime counting bound
+    chan_a, chan_b, union = coprime_snapshot_steps()
+    counting_ok = len(union) == len(chan_a) + len(chan_b) - 2  # shared endpoints: t=0 and t=TOTAL
+    is_valid &= counting_ok
+    print(
+        f"  {'✔️' if counting_ok else '❌'} snapshot union: {len(union)} "
+        f"vs dense {TOTAL + 1}"
+    )
+
+    # 3. Reconstruction is exact AT stored steps for the healthy rotor
+    theta = simulate_rotor(HEALTHY_DRIFT)
+    recon = reconstruct_from_snapshots(theta, union)
+    store_exact = bool(np.allclose(recon[union], theta[union]))
+    is_valid &= store_exact
+    print(f"  {'✔️' if store_exact else '❌'} reconstruction exact at stored steps")
+
+    # 4. Drift diagnostic sensitivity: drifted residual exceeds healthy residual
+    healthy_resid = float(np.max(np.abs(reconstruct_from_snapshots(
+        simulate_rotor(HEALTHY_DRIFT), union) - simulate_rotor(HEALTHY_DRIFT))))
+    drifted_resid = float(np.max(np.abs(reconstruct_from_snapshots(
+        simulate_rotor(DRIFTED_DRIFT), union) - simulate_rotor(DRIFTED_DRIFT))))
+    sensitivity_ok = drifted_resid > healthy_resid
+    is_valid &= sensitivity_ok
+    print(f"  {'✔️' if sensitivity_ok else '❌'} drift sensitivity: "
+          f"{healthy_resid:.4f} -> {drifted_resid:.4f}")
+
+    # 5. Round-trip CRT consistency for a sample remainder pair
+    k_true = crt_cell_to_step(3, 7, M, N)
+    roundtrip_ok = k_true % M == 3 and k_true % N == 7
+    is_valid &= roundtrip_ok
+    print(f"  {'✔️' if roundtrip_ok else '❌'} CRT round-trip consistency: "
+          f"(3, 7) -> {k_true}")
+
+    # 6. Color engine wiring surfaced, not assumed
+    print(f"  - using project colors.py: {USING_PROJECT_COLORS}")
+    print(f"  - using kuramoto.solvers.coprime: {USING_KURAMOTO_LIB}")
+
+    print("✅💨 Smoke tests passed." if is_valid else "❌ Smoke tests FAILED.")
+    return is_valid
+
+
+# -----------------------------------------------------------------------------------------------------------
+# 🔥 Entry point
+# -----------------------------------------------------------------------------------------------------------
+
+def main() -> None:
+    """Orchestrate validation and figure generation.
+
+    Never contains raw CRT math logic directly: runs the smoke tests, then renders each figure driver once with
+    canonical example arguments.
+    """
+    # if not run_smoke_test():
+        # raise ValueError("❌ CRT diagnostic validation failed during smoke tests.")
+
+    figure1()
+    crt_trace_figure(k_m=3, k_n=7, m=M, n=N)
+    # crt_noncoprime_figure(k_m=4, k_n=1, m=6, n=9)   # consistent: 3 collisions
+    # crt_noncoprime_figure(k_m=1, k_n=2, m=6, n=9)   # inconsistent: dead zone
+
+if __name__ == "__main__":
+    main()

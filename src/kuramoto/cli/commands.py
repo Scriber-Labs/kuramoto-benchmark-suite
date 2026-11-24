@@ -40,7 +40,7 @@ from kuramoto.cli.style import (
     cli_quantum,
     cli_rotor,
 )
-from scriber_core.cli.messaging import (
+from eigenscribe.cli.messaging import (
     ansi_256,
     cli_error,
     cli_info,

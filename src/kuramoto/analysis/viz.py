@@ -29,7 +29,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.font_manager import findSystemFonts
 from matplotlib.text import Text
 from numpy.typing import NDArray
-from scriber_core.frontend import COLOR_PALETTE
+from eigenscribe.frontend import COLOR_PALETTE
 
 from kuramoto.utils import get_rng
 
