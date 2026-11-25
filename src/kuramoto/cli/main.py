@@ -29,7 +29,7 @@ from kuramoto.cli.commands import (
     zbw,
 )
 from kuramoto.cli.utils import print_header
-from scriber_core.cli.vt_mode import enable_vt_mode
+from eigenscribe.cli.vt_mode import enable_vt_mode
 
 __all__: list[str] = ["cli", "main"]
 

@@ -15,10 +15,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    21
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="refactor: migrate styling to eigenscribe and expand CRT diagnostics&#10;&#10;- Replace `scriber_core` imports with `eigenscribe` across CLI styling, commands, utilities, analysis, and notebook code; remove the `.scriber-core` entry&#10;- Fix color palette key typos and update the gradient palette selection&#10;- Expand CRT stride visualizations with reconstruction tracing, non-coprime diagnostics, and smoke tests; correct interpolation and add generated figures&#10;- Update Problem 17 notebook execution metadata and color references, and refresh PyCharm workspace metadata">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,60 +69,60 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.000294801998671" />
-      <entry key="S2" value="1.140157554710031" />
-      <entry key="S5" value="1.596347305840332" />
-      <entry key="S10" value="2.056886847069266" />
-      <entry key="S30" value="2.6650069734117627" />
-      <entry key="S60" value="3.4856438035418993" />
-      <entry key="M2" value="5.279285626268018" />
-      <entry key="M5" value="8.784212074141514" />
-      <entry key="M10" value="15.135056938751072" />
-      <entry key="M15" value="31.09623546073574" />
-      <entry key="M30" value="168.3772086531664" />
-      <entry key="H1" value="671.1484557597324" />
-      <entry key="H2" value="1788.521239364627" />
-      <entry key="H4" value="3611.4336636287494" />
-      <entry key="D1" value="10892.777020269747" />
-      <entry key="W1" value="29761.684781175143" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.000000000000001" />
+      <entry key="S30" value="1.0000357619324354" />
+      <entry key="S60" value="1.0195274022566485" />
+      <entry key="M2" value="1.9110892045154193" />
+      <entry key="M5" value="25.579388981354455" />
+      <entry key="M10" value="96.53711598582319" />
+      <entry key="M15" value="159.34327685809933" />
+      <entry key="M30" value="332.15347634672617" />
+      <entry key="H1" value="796.8808543183645" />
+      <entry key="H2" value="1873.1166587957648" />
+      <entry key="H4" value="3705.096492021149" />
+      <entry key="D1" value="11142.445259662767" />
+      <entry key="W1" value="30104.30767494196" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="9.157360394654565E-293" />
-      <entry key="MS500" value="3.9115966120424825E-59" />
-      <entry key="S2" value="2.500855019192086E-15" />
-      <entry key="S5" value="1.4428972514380004E-6" />
-      <entry key="S10" value="0.0012012065814996187" />
-      <entry key="S30" value="0.10630147970144636" />
-      <entry key="S60" value="0.3261792338655829" />
-      <entry key="M2" value="0.584729352019791" />
-      <entry key="M5" value="1.0623835371770136" />
-      <entry key="M10" value="1.8244750397768152" />
-      <entry key="M15" value="2.77289319183684" />
-      <entry key="M30" value="7.190814496994704" />
-      <entry key="H1" value="19.56649508333156" />
-      <entry key="H2" value="43.884981784319244" />
-      <entry key="H4" value="84.52393701939786" />
-      <entry key="D1" value="233.9117783859557" />
-      <entry key="W1" value="418.3354061156642" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="1.5647568300709659E-279" />
+      <entry key="S2" value="1.9888943497513706E-70" />
+      <entry key="S5" value="1.3165722153264307E-28" />
+      <entry key="S10" value="1.1474198077976651E-14" />
+      <entry key="S30" value="2.255489350782337E-5" />
+      <entry key="S60" value="0.004749200263503668" />
+      <entry key="M2" value="0.06894704256934477" />
+      <entry key="M5" value="0.3641503141854562" />
+      <entry key="M10" value="0.8429661177515189" />
+      <entry key="M15" value="1.451263405460032" />
+      <entry key="M30" value="4.579524445598017" />
+      <entry key="H1" value="15.031146183767794" />
+      <entry key="H2" value="38.23178335968034" />
+      <entry key="H4" value="78.87712570158608" />
+      <entry key="D1" value="231.74765535917868" />
+      <entry key="W1" value="418.52270500967137" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8179020585577811" />
-      <entry key="MS500" value="0.960882799188109" />
-      <entry key="S2" value="1.1291997319886524" />
-      <entry key="S5" value="1.5900266956551312" />
-      <entry key="S10" value="2.0535950273448127" />
-      <entry key="S30" value="2.7669000007601348" />
-      <entry key="S60" value="3.8069495975351675" />
-      <entry key="M2" value="5.859805423930042" />
-      <entry key="M5" value="9.842211431162264" />
-      <entry key="M10" value="16.953239701551784" />
-      <entry key="M15" value="33.85841356510065" />
-      <entry key="M30" value="175.53678643748268" />
-      <entry key="H1" value="690.6562881886828" />
-      <entry key="H2" value="1832.3340510657317" />
-      <entry key="H4" value="3695.8899805372394" />
-      <entry key="D1" value="11126.660605551613" />
-      <entry key="W1" value="30180.008842096453" />
+      <entry key="MS100" value="8.522100373786092E-11" />
+      <entry key="MS500" value="0.00968521640577333" />
+      <entry key="S2" value="0.31370925563513485" />
+      <entry key="S5" value="0.628942485918009" />
+      <entry key="S10" value="0.7930589422722789" />
+      <entry key="S30" value="0.9256820614037976" />
+      <entry key="S60" value="0.9862147955223782" />
+      <entry key="M2" value="1.9596583952747477" />
+      <entry key="M5" value="25.931801822288858" />
+      <entry key="M10" value="97.36988601247725" />
+      <entry key="M15" value="160.7836653040228" />
+      <entry key="M30" value="336.71132899229843" />
+      <entry key="H1" value="811.8664579243032" />
+      <entry key="H2" value="1911.2853770545198" />
+      <entry key="H4" value="3783.9103726054236" />
+      <entry key="D1" value="11374.164942422647" />
+      <entry key="W1" value="30522.81903370826" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -134,91 +136,92 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;KEY_CHAT_IN_TOOLWINDOW&quot;: &quot;false&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Doctests in gradients.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter (2).executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Doctests in order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in test_cli.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in test_frontend_styling.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.analytics_engine.executor&quot;: &quot;Run&quot;,
-    &quot;Python.api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.benchmark_scaling.executor&quot;: &quot;Run&quot;,
-    &quot;Python.color_utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.colors (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.colors.executor&quot;: &quot;Run&quot;,
-    &quot;Python.colors_table.executor&quot;: &quot;Run&quot;,
-    &quot;Python.commands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.coprime.executor&quot;: &quot;Run&quot;,
-    &quot;Python.crt_stride_visualization.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dash_component_template.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.domain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.export_to_dash.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_example_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gradients.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graphs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.order_parameter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.palettes.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rigorous_benchmarks.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rk45.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rotor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solver_types.executor&quot;: &quot;Run&quot;,
-    &quot;Python.solvers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.spectral.executor&quot;: &quot;Run&quot;,
-    &quot;Python.style.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generate_kuramoto_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.types.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validate_ga_rotor_metrics.executor&quot;: &quot;Run&quot;,
-    &quot;Python.validation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.viz.executor&quot;: &quot;Run&quot;,
-    &quot;Python.zbw_generator.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;junie.plugin.stays.banner.dismissed&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS&quot;,
-    &quot;llm.figma.connect.mcp.suggestion.dismissed&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "KEY_CHAT_IN_TOOLWINDOW": "false",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Doctests in gradients.executor": "Run",
+    "Python tests.Doctests in order_parameter (1).executor": "Run",
+    "Python tests.Doctests in order_parameter (2).executor": "Run",
+    "Python tests.Doctests in order_parameter.executor": "Run",
+    "Python tests.Python tests for tests.test_analytics_engine.test_compute_comprehensive_diagnostics_complex.executor": "Run",
+    "Python tests.Python tests in test_cli.py.executor": "Run",
+    "Python tests.Python tests in test_frontend_styling.py.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.analytics_engine.executor": "Run",
+    "Python.api.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.benchmark_scaling.executor": "Run",
+    "Python.color_utils.executor": "Run",
+    "Python.colors (1).executor": "Run",
+    "Python.colors.executor": "Run",
+    "Python.colors_table.executor": "Run",
+    "Python.commands.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.coprime.executor": "Run",
+    "Python.crt_stride_visualization.executor": "Run",
+    "Python.dash_component_template.executor": "Run",
+    "Python.dataset.executor": "Run",
+    "Python.domain.executor": "Run",
+    "Python.dragon_test.executor": "Run",
+    "Python.export_to_dash.executor": "Run",
+    "Python.generate_example_dataset.executor": "Run",
+    "Python.gradients.executor": "Run",
+    "Python.graphs.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.order_parameter.executor": "Run",
+    "Python.palettes.executor": "Run",
+    "Python.rigorous_benchmarks.executor": "Run",
+    "Python.rk45.executor": "Run",
+    "Python.rotor.executor": "Run",
+    "Python.solver_types.executor": "Run",
+    "Python.solvers.executor": "Run",
+    "Python.spectral.executor": "Run",
+    "Python.style.executor": "Run",
+    "Python.test_generate_kuramoto_dataset.executor": "Run",
+    "Python.types.executor": "Run",
+    "Python.utils.executor": "Run",
+    "Python.validate_ga_rotor_metrics.executor": "Run",
+    "Python.validation.executor": "Run",
+    "Python.viz.executor": "Run",
+    "Python.zbw_generator.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "junie.plugin.stays.banner.dismissed": "true",
+    "last_opened_file_path": "C:/Users/sofia/PycharmProjects/kuramoto-benchmark-suite/notebooks/practice-problems/SECTION_C/CODING_TASKS",
+    "llm.figma.connect.mcp.suggestion.dismissed": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;,
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT",
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\notebooks\practice-problems\SECTION_C\CODING_TASKS" />
@@ -232,7 +235,7 @@
       <recent name="C:\Users\sofia\PycharmProjects\kuramoto-benchmark-suite\docs\ai-generated-research-notebook" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.domain">
+  <component name="RunManager" selected="Python.dragon_test">
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="643c9eab-bd04-4807-8c24-850a20c4d70f" />
@@ -290,31 +293,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="crt_stride_visualization" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="kuramoto-benchmark-suite" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="RUN_AS_SCRIPT" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="domain" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
@@ -340,7 +318,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="gradients" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="dragon_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="scriber-core" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="RUN_AS_SCRIPT" value="" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/dragon_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kuramoto-benchmark-suite" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -349,14 +352,14 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli/style" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/kuramoto/cli" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="RUN_AS_SCRIPT" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/kuramoto/cli/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -367,11 +370,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.dragon_test" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.domain" />
         <item itemvalue="Python.commands" />
         <item itemvalue="Python.__init__" />
-        <item itemvalue="Python.crt_stride_visualization" />
-        <item itemvalue="Python.gradients" />
       </list>
     </recent_temporary>
   </component>
@@ -831,10 +834,11 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$style.coverage" NAME="style Coverage Results" MODIFIED="1795192765915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$crt_stride_visualization.coverage" NAME="crt_stride_visualization Coverage Results" MODIFIED="1795533161583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$style.coverage" NAME="style Coverage Results" MODIFIED="1795192765915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$rigorous_benchmarks.coverage" NAME="rigorous_benchmarks Coverage Results" MODIFIED="1795181436507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors_table.coverage" NAME="colors_table Coverage Results" MODIFIED="1795163696431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/cli" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$dragon_test.coverage" NAME="dragon_test Coverage Results" MODIFIED="1795572819356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$palettes.coverage" NAME="palettes Coverage Results" MODIFIED="1795203319490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$analytics_engine.coverage" NAME="analytics_engine Coverage Results" MODIFIED="1795163855334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/metrics" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$gradients.coverage" NAME="gradients Coverage Results" MODIFIED="1795506060649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
@@ -844,12 +848,12 @@
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$benchmark_scaling.coverage" NAME="benchmark_scaling Coverage Results" MODIFIED="1795181401782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1795534627809" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$color_utils.coverage" NAME="color_utils Coverage Results" MODIFIED="1795202427974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
-    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$main.coverage" NAME="main Coverage Results" MODIFIED="1795192894907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$viz.coverage" NAME="viz Coverage Results" MODIFIED="1795174622921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/analysis" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$main.coverage" NAME="main Coverage Results" MODIFIED="1795569527721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$utils.coverage" NAME="utils Coverage Results" MODIFIED="1795192882103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$validate_ga_rotor_metrics.coverage" NAME="validate_ga_rotor_metrics Coverage Results" MODIFIED="1795181963574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$types.coverage" NAME="types Coverage Results" MODIFIED="1795202531337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors__1_.coverage" NAME="colors (1) Coverage Results" MODIFIED="1795161398688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend" />
-    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$domain.coverage" NAME="domain Coverage Results" MODIFIED="1795534878925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$domain.coverage" NAME="domain Coverage Results" MODIFIED="1795569276264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
   </component>
 </project>

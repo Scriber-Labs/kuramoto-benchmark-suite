@@ -28,12 +28,12 @@ __all__: list[str] = [
 #   (k_m, k_n)   -> coral_orange
 #   k_true       -> vivid_pink
 #   (a, b)       -> brigh_green
-_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["orange_yellow"])
-_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["orange_yellow"])
-_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["eigen_blue"])
-_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_green"])
-_COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_magenta"])
-_COPRIME_REMAINDER: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["bright_purple"])
+_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["cerulean_surge"])
+_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["vivid_pink"])
+_COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["green_jade"])
+_COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["coral_orange"])
+_COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["deep_purple"])
+_COPRIME_REMAINDER: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["node-1"])
 
 
 # -----------------------------------------------------------------------------------------------------------
@@ -99,14 +99,16 @@ def _run_smoke_test() -> None:
     """Quick sanity check for domain color coders."""
     print("💨 Running domain.py smoke tests...")
 
-    term = style_coprime_term(7)
-    gcd_str = style_coprime_gcd(45)
-    coeff = style_coprime_coeff(-3)
+    term_m = style_coprime_term(7)
+    term_n = style_coprime_term(11)
+    gcd_str = style_coprime_gcd(1)
+    coeff_a = style_coprime_coeff(-3)
+    coeff_b = style_coprime_coeff(2)
     remainder = style_coprime_remainder(3)
     crt_a = style_crt_channel(110, "A")
     crt_b = style_crt_channel(63, "B")
 
-    assert "7" in term and "45" in gcd_str and "-3" in coeff
+    assert "7" in term_m and "1" in gcd_str and "-3" in coeff_a
     assert "3" in remainder
     assert "110" in crt_a and "63" in crt_b
 
@@ -116,6 +118,12 @@ def _run_smoke_test() -> None:
     assert a_rgb in crt_a
     assert b_rgb in crt_b
     assert a_rgb != b_rgb, "Channel A and B should have different colors"
+
+    print(f"    Coprime terms: {term_m} and {term_n}")
+    print(f"    Bezout terms: {coeff_a} and {coeff_b}")
+    print(f"    gcd: {gcd_str}")
+    print(f"    Channel A: {crt_a}")
+    print(f"    Channel B: {crt_b}")
 
     print("✅ domain.py smoke test passed.")
 
