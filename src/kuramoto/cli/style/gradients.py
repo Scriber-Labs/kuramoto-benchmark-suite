@@ -113,7 +113,7 @@ def _run_smoke_test() -> None:
     print("💨 Running gradients.py smoke tests...")
 
     # Test multi_gradient
-    grad = multi_gradient("Test Gradient", PRESETS["electric"])
+    grad = multi_gradient("Test Gradient", PRESETS["aurora"])
     assert "\033[0m" in grad
     assert cli_gradient("Alias Test") != ""
 
@@ -121,7 +121,7 @@ def _run_smoke_test() -> None:
     assert multi_gradient("") == ""
 
     # Test preset lookup
-    assert "eigenscribe-1" in PRESETS
+    assert "eigenscribe" in PRESETS
     assert "purple_gradient" in PRESETS
 
     print("✅ gradients.py smoke test passed.")

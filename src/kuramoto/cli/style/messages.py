@@ -55,7 +55,7 @@ def cli_network(msg: str) -> None:
     msg : str
         Topology/network message string.
     """
-    from scriber_core.cli.messaging import ansi_256
+    from eigenscribe.cli.messaging import ansi_256
 
     styled = ansi_256("eigen_purple", f"🌐 {msg}", bold=True)
     import click
@@ -71,7 +71,7 @@ def cli_quantum(msg: str) -> None:
     msg : str
         Quantum execution update message string.
     """
-    from scriber_core.cli.messaging import ansi_256
+    from eigenscribe.cli.messaging import ansi_256
 
     styled = ansi_256("eigen_cyan", f"⚛️ {msg}", bold=True)
     import click
@@ -87,7 +87,7 @@ def cli_rotor(msg: str) -> None:
     msg : str
         Geometric Algebra rotor solver message string.
     """
-    from scriber_core.cli.messaging import ansi_256
+    from eigenscribe.cli.messaging import ansi_256
 
     styled = ansi_256("eigen_accent_green", f"🌀 {msg}", bold=True)
     import click
@@ -103,7 +103,7 @@ def cli_zbw(msg: str) -> None:
     msg : str
         ZBW model message string.
     """
-    from scriber_core.cli.messaging import ansi_256
+    from eigenscribe.cli.messaging import ansi_256
 
     styled = ansi_256("eigen_accent_amber", f"🌟 {msg}", bold=True)
     import click
@@ -119,7 +119,7 @@ def cli_coprime(msg: str) -> None:
     msg : str
         Coprime / number theory message string.
     """
-    from scriber_core.cli.messaging import ansi_256
+    from eigenscribe.cli.messaging import ansi_256
 
     styled = ansi_256("eigen_accent_magenta", f"🔢 {msg}", bold=True)
     import click
