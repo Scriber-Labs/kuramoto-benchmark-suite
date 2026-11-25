@@ -2,15 +2,21 @@
 """
 Coprime Time-Domain Sampler Wrapper and CRT Frequency Reconstruction.
 
-Implements dual-channel coprime time-domain sub-Nyquist sampling (Sampler A at step
-interval N, Sampler B at step interval M with gcd(M, N) = 1) around Kuramoto
+Implements dual-channel coprime time-domain sub-Nyquist sampling (Channel M at step
+interval M, Channel N at step interval N with gcd(M, N) = 1) around Kuramoto
 integrators, reducing memory footprints from O(MN) down to O(M + N) snapshots.
 Reconstructs true frequency indices via the Chinese Remainder Theorem (CRT) and
 provides high-sensitivity failure-mode diagnostics for geometric rotor drift.
 
+For a coherent fine-grid tone, ``f_k = k / (M * N * T_S)`` for
+``k = 0, ..., M * N - 1``, where ``T_S`` is the base integration timestep.
+Sampling every ``S`` integration steps measures the index modulo
+``M * N / S``; therefore Channel M observes ``k_n = k mod N`` and Channel N
+observes ``k_m = k mod M``.
+
 Author: Eigenscribe
 Review status: Reviewed and maintained by Eigenscribe.
-Date: May 2026
+Date: November 2026
 """
 
 from __future__ import annotations
@@ -57,43 +63,43 @@ class CoprimeSampleResult:
 
     Attributes
     ----------
-    t_a : TimeArray
-        Time stamps for Sampler A (sampled every N integration steps).
-    order_parameter_a : ComplexArray | NDArray[np.floating]
-        Order parameter trajectory captured by Sampler A.
-    t_b : TimeArray
-        Time stamps for Sampler B (sampled every M integration steps).
-    order_parameter_b : ComplexArray | NDArray[np.floating]
-        Order parameter trajectory captured by Sampler B.
+    t_m : TimeArray
+        Time stamps for Channel M (sampled every M integration steps).
+    order_parameter_m : ComplexArray | NDArray[np.floating]
+        Order parameter trajectory captured by Channel M.
+    t_n : TimeArray
+        Time stamps for Channel N (sampled every N integration steps).
+    order_parameter_n : ComplexArray | NDArray[np.floating]
+        Order parameter trajectory captured by Channel N.
     M : int
-        Subsampling step stride for Sampler B (gcd(M, N) == 1).
+        Subsampling step stride for Channel M (gcd(M, N) == 1).
     N : int
-        Subsampling step stride for Sampler A (gcd(M, N) == 1).
+        Subsampling step stride for Channel N (gcd(M, N) == 1).
     dt : float
         Base integration timestep size.
     total_steps : int
         Total dense integration steps computed during simulation.
-    phases_a : PhaseArray | None
-        Phase trajectory captured by Sampler A (if recorded).
-    phases_b : PhaseArray | None
-        Phase trajectory captured by Sampler B (if recorded).
+    phases_m : PhaseArray | None
+        Phase trajectory captured by Channel M (if recorded).
+    phases_n : PhaseArray | None
+        Phase trajectory captured by Channel N (if recorded).
     """
 
-    t_a: TimeArray
-    order_parameter_a: ComplexArray | NDArray[np.floating]
-    t_b: TimeArray
-    order_parameter_b: ComplexArray | NDArray[np.floating]
+    t_m: TimeArray
+    order_parameter_m: ComplexArray | NDArray[np.floating]
+    t_n: TimeArray
+    order_parameter_n: ComplexArray | NDArray[np.floating]
     M: int
     N: int
     dt: float
     total_steps: int
-    phases_a: PhaseArray | None = None
-    phases_b: PhaseArray | None = None
+    phases_m: PhaseArray | None = None
+    phases_n: PhaseArray | None = None
 
     @property
     def total_snapshots(self) -> int:
         """Total number of snapshots stored across both samplers."""
-        return len(self.t_a) + len(self.t_b)
+        return len(self.t_m) + len(self.t_n)
 
     @property
     def dense_snapshots(self) -> int:
@@ -118,9 +124,9 @@ class CoprimeSampleResult:
         Parameters
         ----------
         k_m : int | NDArray[np.integer]
-            Aliased frequency index observed by Sampler B (stride M).
+            Aliased frequency index modulo M, observed by Channel N's FFT.
         k_n : int | NDArray[np.integer]
-            Aliased frequency index observed by Sampler A (stride N).
+            Aliased frequency index modulo N, observed by Channel M's FFT.
 
         Returns
         -------
@@ -184,8 +190,8 @@ def coprime_reconstruct_frequency(
 
     Given coprime sampling strides M and N (with gcd(M, N) = 1) and observed
     sub-Nyquist frequency aliases:
-        k_m = k_true % M  (observed by Sampler B)
-        k_n = k_true % N  (observed by Sampler A)
+        k_m = k_true % M  (observed by Channel N)
+        k_n = k_true % N  (observed by Channel M)
 
     The Bézout identity yields coefficients a, b such that:
         a * M + b * N = 1
@@ -200,13 +206,13 @@ def coprime_reconstruct_frequency(
     Parameters
     ----------
     k_m : int | NDArray[np.integer]
-        Observed alias modulo M (from Sampler B).
+        Observed alias modulo M (from Channel N's FFT).
     k_n : int | NDArray[np.integer]
-        Observed alias modulo N (from Sampler A).
+        Observed alias modulo N (from Channel M's FFT).
     M : int
-        Subsampling step stride for Sampler B (must be positive and coprime to N).
+        Subsampling step stride for Channel M (must be positive and coprime to N).
     N : int
-        Subsampling step stride for Sampler A (must be positive and coprime to M).
+        Subsampling step stride for Channel N (must be positive and coprime to M).
 
     Returns
     -------
@@ -244,17 +250,17 @@ class CoprimeSamplerWrapper:
 
     Instead of maintaining dense trajectory histories of size O(MN), this wrapper
     evaluates state snapshots across dual asynchronous coprime channels:
-    - Channel A: Samples state or order parameter every N integration steps.
-    - Channel B: Samples state or order parameter every M integration steps.
+    - Channel M: Samples state or order parameter every M integration steps.
+    - Channel N: Samples state or order parameter every N integration steps.
 
     Parameters
     ----------
     solver : RotorSolver | Any
         Underlying integrator instance (e.g., `RotorSolver` or stepping model).
     M : int, default=7
-        Sampling stride for Channel B.
+        Sampling stride for Channel M.
     N : int, default=11
-        Sampling stride for Channel A.
+        Sampling stride for Channel N.
     record_phases : bool, default=False
         Whether to store oscillator phase vectors theta(t) alongside order parameters.
     """
@@ -327,62 +333,62 @@ class CoprimeSamplerWrapper:
         step_fn = self._resolve_stepper(method, custom_stepper)
 
         # Preallocate stream buffers
-        t_a_list: list[float] = []
-        op_a_list: list[complex] = []
-        phases_a_list: list[PhaseArray] | None = [] if self.record_phases else None
+        t_m_list: list[float] = []
+        op_m_list: list[complex] = []
+        phases_m_list: list[PhaseArray] | None = [] if self.record_phases else None
 
-        t_b_list: list[float] = []
-        op_b_list: list[complex] = []
-        phases_b_list: list[PhaseArray] | None = [] if self.record_phases else None
+        t_n_list: list[float] = []
+        op_n_list: list[complex] = []
+        phases_n_list: list[PhaseArray] | None = [] if self.record_phases else None
 
         # Helper to extract current state
         def _record_sample(
             step_idx: int,
             current_t: float,
-            to_a: bool,
-            to_b: bool,
+            to_m: bool,
+            to_n: bool,
         ) -> None:
             op = self._get_order_parameter()
             phases = self._get_phases() if self.record_phases else None
 
-            if to_a:
-                t_a_list.append(current_t)
-                op_a_list.append(op)
-                if phases_a_list is not None and phases is not None:
-                    phases_a_list.append(phases.copy())
+            if to_m:
+                t_m_list.append(current_t)
+                op_m_list.append(op)
+                if phases_m_list is not None and phases is not None:
+                    phases_m_list.append(phases.copy())
 
-            if to_b:
-                t_b_list.append(current_t)
-                op_b_list.append(op)
-                if phases_b_list is not None and phases is not None:
-                    phases_b_list.append(phases.copy())
+            if to_n:
+                t_n_list.append(current_t)
+                op_n_list.append(op)
+                if phases_n_list is not None and phases is not None:
+                    phases_n_list.append(phases.copy())
 
         # Step 0 snapshot
         current_time = 0.0
-        _record_sample(0, current_time, to_a=True, to_b=True)
+        _record_sample(0, current_time, to_m=True, to_n=True)
 
         # Main integration loop with coprime decimation
         for step in range(1, total_steps + 1):
             step_fn(K, dt)
             current_time = step * dt
 
-            to_a = (step % self.N) == 0
-            to_b = (step % self.M) == 0
+            to_m = (step % self.M) == 0
+            to_n = (step % self.N) == 0
 
-            if to_a or to_b:
-                _record_sample(step, current_time, to_a=to_a, to_b=to_b)
+            if to_m or to_n:
+                _record_sample(step, current_time, to_m=to_m, to_n=to_n)
 
         return CoprimeSampleResult(
-            t_a=np.asarray(t_a_list, dtype=np.float64),
-            order_parameter_a=np.asarray(op_a_list),
-            t_b=np.asarray(t_b_list, dtype=np.float64),
-            order_parameter_b=np.asarray(op_b_list),
+            t_m=np.asarray(t_m_list, dtype=np.float64),
+            order_parameter_m=np.asarray(op_m_list),
+            t_n=np.asarray(t_n_list, dtype=np.float64),
+            order_parameter_n=np.asarray(op_n_list),
             M=self.M,
             N=self.N,
             dt=dt,
             total_steps=total_steps,
-            phases_a=np.asarray(phases_a_list) if phases_a_list is not None else None,
-            phases_b=np.asarray(phases_b_list) if phases_b_list is not None else None,
+            phases_m=np.asarray(phases_m_list) if phases_m_list is not None else None,
+            phases_n=np.asarray(phases_n_list) if phases_n_list is not None else None,
         )
 
     # ------------------------------------------------------------------------ #
@@ -461,12 +467,11 @@ def detect_spectral_drift(
     method: str = "fast",
 ) -> dict[str, Any]:
     """
-    Diagnostic tool evaluating structural drift via CRT spectral reconstruction.
+    Estimate dominant channel FFT aliases and reconstruct their CRT index.
 
-    Runs high-resolution geometric integration sampled across dual coprime channels.
-    When numerical drift or non-unitary rotor wandering breaks SO(2) phase tracking,
-    the algebraic structure of the Chinese Remainder Theorem amplifies the tracking
-    error into severe spectral artifacts and aliased frequency mismatch.
+    The drift flag reports the explicitly injected ``drift_perturbation`` used by
+    this diagnostic. The CRT residual only checks modular consistency after
+    reconstruction and is not an independent measure of numerical drift.
 
     Parameters
     ----------
@@ -477,9 +482,9 @@ def detect_spectral_drift(
     dt : float
         Integration time step.
     M : int, default=7
-        Sampling stride for Channel B.
+        Sampling stride for Channel M.
     N : int, default=11
-        Sampling stride for Channel A.
+        Sampling stride for Channel N.
     cycles : int, default=1
         Number of coprime periods (M * N steps).
     drift_perturbation : float, default=0.0
@@ -492,12 +497,28 @@ def detect_spectral_drift(
     dict[str, Any]
         Dictionary containing:
         - ``'reconstructed_peak_index'``: Unaliased reconstructed peak index.
-        - ``'peak_alias_m'``: Dominant peak index observed by Sampler B.
-        - ``'peak_alias_n'``: Dominant peak index observed by Sampler A.
-        - ``'crt_residual'``: Modular consistency residual between channel aliases.
-        - ``'drift_detected'``: Boolean flag indicating if phase/spectral drift exceeds tolerance.
+        - ``'peak_alias_m'``: Channel N's dominant FFT peak, modulo M.
+        - ``'peak_alias_n'``: Channel M's dominant FFT peak, modulo N.
+        - ``'crt_residual'``: Modular consistency residual after CRT reconstruction.
+        - ``'drift_detected'``: Whether ``drift_perturbation`` exceeds its threshold.
         - ``'compression_ratio'``: Ratio of stored coprime samples to full trajectory.
+
+    Notes
+    -----
+    For a coherent single tone on the fine grid, ``f_k = k / (M * N * T_S)``
+    for ``k = 0, ..., M * N - 1``, where ``T_S = dt``. A channel with stride
+    ``S`` observes the residue ``k mod (M * N / S)``. The terminal sample
+    repeats the first sample after each complete observation period, so it is
+    excluded from the FFT; multi-period FFT bins are divided by ``cycles``
+    before interpreting residues.
+
+    This integer-bin interpretation is exact for coherent fine-grid tones.
+    Off-grid or multi-tone spectra are only peak estimates, and CRT consistency
+    alone does not establish that such a signal has no spectral drift.
     """
+    if cycles <= 0:
+        raise ValueError(f"cycles must be positive, got {cycles}.")
+
     total_steps = cycles * (M * N)
 
     # Custom stepper if drift perturbation is applied
@@ -528,15 +549,18 @@ def detect_spectral_drift(
         custom_stepper=custom_stepper,
     )
 
-    # Compute FFT spectra of the sampled order parameter streams
-    op_a = np.asarray(result.order_parameter_a)
-    op_b = np.asarray(result.order_parameter_b)
+    # Exclude the repeated endpoint to obtain exactly `cycles` periods per channel.
+    op_m = np.asarray(result.order_parameter_m)[: cycles * N]
+    op_n = np.asarray(result.order_parameter_n)[: cycles * M]
 
-    fft_a = np.abs(np.fft.fft(op_a - np.mean(op_a)))
-    fft_b = np.abs(np.fft.fft(op_b - np.mean(op_b)))
+    fft_m = np.abs(np.fft.fft(op_m - np.mean(op_m)))
+    fft_n = np.abs(np.fft.fft(op_n - np.mean(op_n)))
 
-    peak_alias_n = int(np.argmax(fft_a)) if len(fft_a) > 0 else 0
-    peak_alias_m = int(np.argmax(fft_b)) if len(fft_b) > 0 else 0
+    # Channel M (stride M) observes k mod N; Channel N (stride N) observes k mod M.
+    peak_bin_m = int(np.argmax(fft_m)) if len(fft_m) > 0 else 0
+    peak_bin_n = int(np.argmax(fft_n)) if len(fft_n) > 0 else 0
+    peak_alias_m = int(np.rint(peak_bin_n / cycles)) % M
+    peak_alias_n = int(np.rint(peak_bin_m / cycles)) % N
 
     reconstructed_k = coprime_reconstruct_frequency(
         k_m=peak_alias_m,
@@ -545,8 +569,7 @@ def detect_spectral_drift(
         N=N,
     )
 
-    # Calculate CRT modular residual check:
-    # If clean, reconstructed_k % M == peak_alias_m and reconstructed_k % N == peak_alias_n
+    # This checks the CRT output against its input residues; it is not a drift metric.
     res_m = abs(int(reconstructed_k % M) - peak_alias_m)
     res_n = abs(int(reconstructed_k % N) - peak_alias_n)
     crt_residual = float(res_m + res_n)
@@ -583,8 +606,8 @@ def _run_smoke_test() -> None:
     # 2. Test CRT Reconstruction with known frequency
     M, N = 7, 11
     for true_k in [0, 1, 13, 45, 76]:
-        k_n = true_k % N  # Sampler A alias (stride N)
-        k_m = true_k % M  # Sampler B alias (stride M)
+        k_n = true_k % N  # Channel M FFT alias (stride M)
+        k_m = true_k % M  # Channel N FFT alias (stride N)
         recon_k = coprime_reconstruct_frequency(k_m=k_m, k_n=k_n, M=M, N=N)
         assert recon_k == true_k, f"Mismatch for true_k={true_k}: got {recon_k}"
 
@@ -612,8 +635,8 @@ def _run_smoke_test() -> None:
     assert res.M == 7
     assert res.N == 11
     assert res.total_steps == 77
-    assert len(res.t_a) == (77 // 11) + 1  # 8 samples
-    assert len(res.t_b) == (77 // 7) + 1  # 12 samples
+    assert len(res.t_m) == (77 // 7) + 1  # 12 samples
+    assert len(res.t_n) == (77 // 11) + 1  # 8 samples
     assert res.total_snapshots == 20
     assert res.dense_snapshots == 78
     assert res.compression_ratio < 0.3  # > 70% data reduction

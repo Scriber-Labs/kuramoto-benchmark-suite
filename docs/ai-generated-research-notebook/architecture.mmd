@@ -85,8 +85,8 @@ subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schem
     end
 
     subgraph SubNyquist_Schemes["E. Dual-Channel Coprime Sub-Nyquist Sampling"]
-        Coprime_Sampler["CoprimeSamplerWrapper (Dual-rate decimation)<br/>Channels A (stride M) & B (stride N), gcd(M,N)=1"]
-        CRT_Recon["CRT Frequency Reconstruction<br/>coprime_reconstruct_frequency() & Bézout identity"]
+        Coprime_Sampler["CoprimeSamplerWrapper (Dual-rate decimation)<br/>Channels M (stride M) & N (stride N), gcd(M,N)=1"]
+        CRT_Recon["CRT Frequency Reconstruction<br/>Channel M -> k_n = k mod N; Channel N -> k_m = k mod M<br/>f_k = k / (MN T_S), k = 0,...,MN-1"]
     end
 end
 

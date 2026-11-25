@@ -19,7 +19,7 @@ figure1(): "Is my sampling correct? Does my solver drift? Where?"
 
 crt_trace_figure(k_m, k_n, M, N): the algebra-geometry bridge.
     Visual mirror of trace_crt_reconstruction(): Step 1 (Bezout) becomes the guarantee that the highlighted row and
-    column meet exactly once; Step 2 sweeps column k_n in channel-A blue; Step 3 sweeps row k_m in channel-B violet;
+    column meet exactly once; Step 2 marks column k_n from Channel M; Step 3 marks row k_m from Channel N;
     Step 4 lights the intersection gold with k_true; Step 5 verifies the cell coordinates against the remainder pair.
     Consumes kuramoto.solvers.coprime primitives when importable, so figure and CLI trace print identical numbers by
     construction.
@@ -85,8 +85,8 @@ ALERT: Final[HexColor] = COLOR_PALETTE["error_crimson"]
 INK: Final[HexColor] = COLOR_PALETTE["ibm_black"]
 DIM_GRAY: Final[HexColor] = COLOR_PALETTE["ibm_gray"]
 ICE_TEXT: Final[HexColor] = COLOR_PALETTE["ice_blue"]
-CHAN_A: Final[HexColor] = COLOR_PALETTE["hot_pink"]
-CHAN_B: Final[HexColor] = COLOR_PALETTE["eigen_blue"]
+CHAN_M: Final[HexColor] = COLOR_PALETTE["eigen_blue"]
+CHAN_N: Final[HexColor] = COLOR_PALETTE["hot_pink"]
 MERGE_GOLD: Final[HexColor] = COLOR_PALETTE["golden_amber"]
 HITMAP_STOPS: Final[tuple[HexColor, ...]] = (
     COLOR_PALETTE["midnight_navy"],
@@ -204,9 +204,9 @@ def crt_cell_to_step(
     Parameters
     ----------
     a : int
-        Row residue, corresponding to the observed alias k_m mod m.
+        Row residue modulo m.
     b : int
-        Column residue, corresponding to the observed alias k_n mod n.
+        Column residue modulo n.
     m : int
         First stride (coprime to n for a unique answer).
     n : int
@@ -251,25 +251,25 @@ def build_step_grid(m: int = M, n: int = N) -> NDArray[np.int64]:
 def coprime_snapshot_steps(m: int = M, n: int = N) -> tuple[list[int], list[int], list[int]]:
     """Enumerate the steps recorded by each channel and their sorted union.
 
-    Channel A records every m-th step, channel B every n-th step; both include the boundary step m*n. Memory: len(union)
+    Channel M records every m-th step, Channel N every n-th step; both include the boundary step m*n. Memory: len(union)
     snapshots instead of dense m*n + 1.
 
     Parameters
     ----------
     m : int, default=M
-        Channel A stride.
+        Channel M stride.
     n : int, default=N
-        Channel B stride.
+        Channel N stride.
 
     Returns
     -------
     tuple[list[int], list[int], list[int]]
-        Channel A steps, channel B steps, and their sorted union.
+        Channel M steps, Channel N steps, and their sorted union.
     """
-    chan_a = list(range(0, m * n + 1, m))
-    chan_b = list(range(0, m * n + 1, n))
-    union = sorted(set(chan_a) | set(chan_b))
-    return chan_a, chan_b, union
+    chan_m = list(range(0, m * n + 1, m))
+    chan_n = list(range(0, m * n + 1, n))
+    union = sorted(set(chan_m) | set(chan_n))
+    return chan_m, chan_n, union
 
 def simulate_rotor(
         drift: float,
@@ -375,16 +375,16 @@ def crt_trace_figure(
 ) -> int:
     """Visual mirror of trace_crt_reconstruction(k_m, k_n, M, N).
 
-    Row index plays k_m (observed alias mod m, Sampler B); column index play k_n (observed alias mod n, Sampler A).
-    Sweeps the k_n column in channel-A blue, the k_m row in channel-B violet, lights the merge cell gold, and verifies
+    Row index plays k_m (observed modulo m by Channel N); column index plays k_n (observed modulo n by Channel M).
+    Sweeps the k_n column in Channel M blue, the k_m row in Channel N violet, lights the merge cell gold, and verifies
     the coordinates --- mirroring the CLI trace steps.
 
     Parameters
     ----------
     k_m : int
-        Observed alias modulo m (from Sampler B).
+        Observed alias modulo m (from Channel N's FFT).
     k_n : int
-        Observed alias modulo n (from Sampler A).
+        Observed alias modulo n (from Channel M's FFT).
 
     Returns
     -------
@@ -393,9 +393,9 @@ def crt_trace_figure(
     """
     modulus = m * n
     g, bez_a, bez_b = _local_extended_gcd(m, n)
-    term_a = k_n * bez_a * m    # Channel A contribution (trace Step 2)
-    term_b = k_m * bez_b * n    # Channel B contribution (trace Step 3)
-    k_true = (term_a + term_b) % modulus    # trace Step 4: merge
+    term_n = k_n * bez_a * m    # k_n contribution (Channel M FFT peak)
+    term_m = k_m * bez_b * n    # k_m contribution (Channel N FFT peak)
+    k_true = (term_m + term_n) % modulus    # trace Step 4: merge
     library_index = _library_reconstruct_frequency(k_m=k_m, k_n=k_n, m=m, n=n)
     lib_match = None if library_index is None else library_index == k_true
 
@@ -408,9 +408,9 @@ def crt_trace_figure(
     base = np.zeros((m, n, 3))
     base[:, :] = hex_to_rgb01(DIM_GRAY)
     for row in range(m):
-        base[row, k_n] = hex_to_rgb01(CHAN_A)   # Step 2: column sweep
+        base[row, k_n] = hex_to_rgb01(CHAN_M)   # Step 2: Channel M column sweep
     for col in range(n):
-        base[k_m, col] = hex_to_rgb01(CHAN_B)   # Step 3: row sweep
+        base[k_m, col] = hex_to_rgb01(CHAN_N)   # Step 3: Channel N row sweep
     base[k_m, k_n] = hex_to_rgb01(MERGE_GOLD)   # Step 4: the survivor
 
     ax.imshow(base, interpolation="nearest", aspect="equal")
@@ -418,14 +418,14 @@ def crt_trace_figure(
     ax.set_xlim(-1.6, n + 4.3)
     ax.set_ylim(m - 0.5, -1.2)
     ax.text(-0.8, k_m, f"k_m={k_m}", ha="right", va="center",
-            fontsize=9, color=CHAN_B, weight="bold")
+            fontsize=9, color=CHAN_N, weight="bold")
     ax.text(k_n, -0.8, f"k_n={k_n}", ha="center", va="bottom",
-            fontsize=9, color=CHAN_A, weight="bold")
+            fontsize=9, color=CHAN_M, weight="bold")
     ax.text(k_n, k_m, str(k_true), ha="center", va="center",
             fontsize=13, color=INK, weight="bold")
 
     _paint_trace_verification_title(ax, k_true, k_m, k_n, m, n, modulus,
-                                    g, bez_a, bez_b, term_a, term_b, lib_match)
+                                    g, bez_a, bez_b, term_m, term_n, lib_match)
 
     _paint_trace_legend(ax, m, n)
 
@@ -485,9 +485,9 @@ def crt_noncoprime_figure(
     ax.set_xlim(-1.6, n - 0.5)
     ax.set_ylim(m - 0.5, -1.2)
     ax.text(-0.8, k_m, f"k_m={k_m}", ha="right", va="center",
-            fontsize=9, color=CHAN_B, weight="bold")
+            fontsize=9, color=CHAN_N, weight="bold")
     ax.text(k_n, -0.8, f"k_n={k_n}", ha="center", va="bottom",
-            fontsize=9, color=CHAN_A, weight="bold")
+            fontsize=9, color=CHAN_M, weight="bold")
 
     verdict = (
         f"consistent: {g} indices collide on this pair -- {matching}"
@@ -500,8 +500,8 @@ def crt_noncoprime_figure(
         f"{verdict}",
         fontsize=9, color=COLOR_PALETTE["text_white"],
     )
-    ax.set_xlabel("residue mod N")
-    ax.set_ylabel("residue mod M")
+    ax.set_xlabel("residue mod N · Channel M FFT peak")
+    ax.set_ylabel("residue mod M · Channel N FFT peak")
 
     fig.savefig(
         NONCOPRIME_FIGURE_PATH,
@@ -603,8 +603,8 @@ def _paint_hitmap_panel(ax: Axes, step_grid: NDARRAY[np.int64]) -> None:
         color=COLOR_PALETTE["text_white"],
         pad=10,
     )
-    ax.set_xlabel(f"Residue mod N ({N}) · channel B", fontsize=8)
-    ax.set_ylabel(f"Residue mod M ({M}) · channel A", fontsize=8)
+    ax.set_xlabel(f"Time residue mod N ({N})", fontsize=8)
+    ax.set_ylabel(f"Time residue mod M ({M})", fontsize=8)
     for row, col in np.ndindex(step_grid.shape):
         ax.text(
             col,
@@ -704,8 +704,8 @@ def _paint_memory_ledger_panel(ax: Axes) -> None:
         0.78,
         f"dense:    O(mn)  = {TOTAL + 1} snapshots\n"
         f"coprime:  O(m+n) = {len(union)} snapshots\n\n"
-        f"channel A fires at t = 0 (mod {M})\n"
-        f"channel B fires at t = 0 (mod {N})\n"
+        f"Channel M fires at t = 0 (mod {M})\n"
+        f"Channel N fires at t = 0 (mod {N})\n"
         f"overlap only at t = 0 (mod {TOTAL})\n"
         f"saved {saved} ({saved / (TOTAL + 1):.0%} reduction)",
         fontsize=9,
@@ -725,8 +725,8 @@ def _paint_trace_verification_title(
     g: int,
     bez_a: int,
     bez_b: int,
-    term_a: int,
-    term_b: int,
+    term_m: int,
+    term_n: int,
     lib_match: bool | None,
 ) -> None:
     """Trace-figure painter: Bezout, terms, merge, and verification verdicts."""
@@ -746,8 +746,8 @@ def _paint_trace_verification_title(
     ax.set_title(
         f"CRT trace · k_m={k_m}, k_n={k_n} · M={m}, N={n}\n"
         f"Bezout: ({bez_a})*{m} + ({bez_b})*{n} = {g}    |    "
-        f"term_a = {term_a}, term_b = {term_b}\n"
-        f"k_true = ({term_a} + {term_b}) % {modulus} = {k_true}    {verdict}    "
+        f"term_m = {term_m}, term_n = {term_n}\n"
+        f"k_true = ({term_m} + {term_n}) % {modulus} = {k_true}    {verdict}    "
         f"({k_true} mod {m} = {check_m}: {residue_m_status}, "
         f"{k_true} mod {n} = {check_n}: {residue_n_status})"
         f"{lib_note}",
@@ -755,14 +755,14 @@ def _paint_trace_verification_title(
         color=COLOR_PALETTE["text_white"],
         pad=12,
     )
-    ax.set_xlabel("residue mod N  (= k_n, Sampler A)")
-    ax.set_ylabel("residue mod M  (= k_m, Sampler B)")
+    ax.set_xlabel("residue mod N  (= k_n, Channel M FFT peak)")
+    ax.set_ylabel("residue mod M  (= k_m, Channel N FFT peak)")
 
 def _paint_trace_legend(ax: Axes, m: int, n: int) -> None:
     """Trace-figure painter: CLI-color-semantics legend swatches."""
     legend_items = [
-        (CHAN_A, "column k_n -- Channel A term"),
-        (CHAN_B, "row k_m -- Channel B term"),
+        (CHAN_M, "column k_n -- Channel M FFT peak"),
+        (CHAN_N, "row k_m -- Channel N FFT peak"),
         (MERGE_GOLD, "merge: unique k_true"),
     ]
     for index, (color, label) in enumerate(legend_items):
@@ -805,8 +805,8 @@ def run_smoke_test() -> bool:
     print(f"  {'✔️' if bijection_ok else '❌'} CRT bijection over {TOTAL} steps")
 
     # 2. Snapshot bookkeeping: union respects the coprime counting bound
-    chan_a, chan_b, union = coprime_snapshot_steps()
-    counting_ok = len(union) == len(chan_a) + len(chan_b) - 2  # shared endpoints: t=0 and t=TOTAL
+    chan_m, chan_n, union = coprime_snapshot_steps()
+    counting_ok = len(union) == len(chan_m) + len(chan_n) - 2  # shared endpoints: t=0 and t=TOTAL
     is_valid &= counting_ok
     print(
         f"  {'✔️' if counting_ok else '❌'} snapshot union: {len(union)} "

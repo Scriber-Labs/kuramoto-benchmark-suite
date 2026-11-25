@@ -15,11 +15,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="refactor: refresh CRT styling and migrate CLI VT mode to eigenscribe&#10;&#10;- Assign distinct palette colors to CRT channels and coprime terms, and expand domain styling smoke checks&#10;- Update the Problem 17 coding-task notebook and PyCharm workspace metadata&#10;- Upgrade scriber-core and related packages in uv.lock">
+    <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="refactor: align coprime sampling channels with stride labels&#10;&#10;- Rename sampler streams and CRT styling from channels A/B to stride-based M/N labels, and clarify the alias mapping and fine-grid frequency reconstruction&#10;- Correct FFT alias estimation and document CRT residual and drift diagnostic semantics&#10;- Update CRT visualizations, tests, and usage examples for the channel naming and reconstruction behavior&#10;- Refresh the Problem 17 notebook, practice-problem guides, research architecture docs, and PyCharm workspace metadata">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.junie/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/.junie/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/USER_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/USER_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ai-generated-research-notebook/architecture.mmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/PRACTICE_PROBLEMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/crt_stride_visualization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS/problem-17-coding-task.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/W0RKED_PROBLEMS/section-c1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/compare_quasi_vs_rkmk4.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/compare_quasi_vs_rkmk4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/domain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/solvers/coprime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cli_style.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cli_style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_coprime_sampler.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_coprime_sampler.py" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,61 +78,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="4.567393663170653E-8" />
-      <entry key="MS500" value="0.05405076918828189" />
-      <entry key="S2" value="1.2083090454724932" />
-      <entry key="S5" value="3.9355632604066946" />
-      <entry key="S10" value="8.762081743008352" />
-      <entry key="S30" value="22.34468337112702" />
-      <entry key="S60" value="30.748777517661217" />
-      <entry key="M2" value="37.08866631974243" />
-      <entry key="M5" value="48.13895598256323" />
-      <entry key="M10" value="65.11767420134142" />
-      <entry key="M15" value="79.41256680810203" />
-      <entry key="M30" value="136.22821130317283" />
-      <entry key="H1" value="385.97020258753497" />
-      <entry key="H2" value="1220.3265805786546" />
-      <entry key="H4" value="2964.70905572401" />
-      <entry key="D1" value="10787.571562886571" />
-      <entry key="W1" value="30042.591172180622" />
+      <entry key="MS100" value="1.0781595710771814" />
+      <entry key="MS500" value="2.173320449989027" />
+      <entry key="S2" value="4.357878118960233" />
+      <entry key="S5" value="7.2738190336655935" />
+      <entry key="S10" value="11.597686398468849" />
+      <entry key="S30" value="27.665938782522694" />
+      <entry key="S60" value="44.51785364219285" />
+      <entry key="M2" value="61.06252827684768" />
+      <entry key="M5" value="76.44255264699618" />
+      <entry key="M10" value="88.04066746438869" />
+      <entry key="M15" value="102.37611422925046" />
+      <entry key="M30" value="158.8611467225331" />
+      <entry key="H1" value="250.06892842183592" />
+      <entry key="H2" value="419.2240631149915" />
+      <entry key="H4" value="1173.3662734151192" />
+      <entry key="D1" value="9109.208640206332" />
+      <entry key="W1" value="29619.5060312443" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.000002821772173" />
-      <entry key="S5" value="1.0090701177964732" />
-      <entry key="S10" value="1.1551420413300773" />
-      <entry key="S30" value="2.101036087532407" />
-      <entry key="S60" value="2.8139476819126816" />
-      <entry key="M2" value="3.3316481701532386" />
-      <entry key="M5" value="3.7119873786393143" />
-      <entry key="M10" value="3.853750472020242" />
-      <entry key="M15" value="3.9214895530649256" />
-      <entry key="M30" value="4.498063505197354" />
-      <entry key="H1" value="9.175140199605282" />
-      <entry key="H2" value="26.47494710837304" />
-      <entry key="H4" value="64.48734976695314" />
-      <entry key="D1" value="225.72078854445098" />
-      <entry key="W1" value="419.88669578663206" />
+      <entry key="MS100" value="1.8732200512228244E-257" />
+      <entry key="MS500" value="4.513544821744944E-52" />
+      <entry key="S2" value="1.4575700634658075E-13" />
+      <entry key="S5" value="7.3358725239589776E-6" />
+      <entry key="S10" value="0.002708481590108929" />
+      <entry key="S30" value="0.13939332020487596" />
+      <entry key="S60" value="0.37335414850363724" />
+      <entry key="M2" value="0.6110271258329186" />
+      <entry key="M5" value="0.8211532125089755" />
+      <entry key="M10" value="0.9061750451831442" />
+      <entry key="M15" value="0.9364287527550607" />
+      <entry key="M30" value="0.9679016973772283" />
+      <entry key="H1" value="1.0343410300845264" />
+      <entry key="H2" value="2.832486572026882" />
+      <entry key="H4" value="17.82829281995068" />
+      <entry key="D1" value="181.6894308724234" />
+      <entry key="W1" value="408.4555726516723" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.592167532625542E-6" />
-      <entry key="MS500" value="0.12226641910194017" />
-      <entry key="S2" value="1.7167289463601512" />
-      <entry key="S5" value="4.701995075773234" />
-      <entry key="S10" value="9.76875644618798" />
-      <entry key="S30" value="24.357758493469184" />
-      <entry key="S60" value="33.50482038742672" />
-      <entry key="M2" value="40.386233110384346" />
-      <entry key="M5" value="51.83366042736715" />
-      <entry key="M10" value="68.95710956557211" />
-      <entry key="M15" value="83.32062253864527" />
-      <entry key="M30" value="140.7135249009246" />
-      <entry key="H1" value="395.1231068268922" />
-      <entry key="H2" value="1246.7607488656713" />
-      <entry key="H4" value="3029.1459328916762" />
-      <entry key="D1" value="11013.26524227265" />
-      <entry key="W1" value="30462.466543175804" />
+      <entry key="MS100" value="1.0271394431796592" />
+      <entry key="MS500" value="2.1492918181075855" />
+      <entry key="S2" value="4.3286266891745" />
+      <entry key="S5" value="7.239016749123109" />
+      <entry key="S10" value="11.566765178978173" />
+      <entry key="S30" value="27.769332814188903" />
+      <entry key="S60" value="44.85733679806024" />
+      <entry key="M2" value="61.64870214570685" />
+      <entry key="M5" value="77.25091679755324" />
+      <entry key="M10" value="88.93970731940917" />
+      <entry key="M15" value="103.30737134696857" />
+      <entry key="M30" value="159.82568468180838" />
+      <entry key="H1" value="251.10084349735266" />
+      <entry key="H2" value="422.05235131307074" />
+      <entry key="H4" value="1191.1807145004475" />
+      <entry key="D1" value="9290.876272867337" />
+      <entry key="W1" value="30027.95061107915" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -394,14 +405,6 @@
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
       <workItem from="1795458671947" duration="5554000" />
-    </task>
-    <task id="LOCAL-00047" summary="Updated execution timestamps, reduced figure size, and adjusted phase divergence output in sanity_checks.ipynb.">
-      <option name="closed" value="true" />
-      <created>1792696414969</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1792696414969</updated>
     </task>
     <task id="LOCAL-00048" summary="Finished sanity checks notebook">
       <option name="closed" value="true" />
@@ -787,15 +790,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795575044112</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="refactor: expose CRT channel palette colors&#10;&#10;- Export CRT channel color constants from the CLI styling package&#10;- Update the Problem 17 coding-task notebook&#10;- Refresh PyCharm workspace metadata">
+      <option name="closed" value="true" />
+      <created>1795580488726</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1795580488727</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add prototype components and visualization utilities for Kuramoto Dash app, along with writing canvas placeholder behavior." />
-    <MESSAGE value="Remove `dash_component_template.py` notebook from `ai_generated`." />
     <MESSAGE value="Update workspace.xml: Remove `dash_component_template.py` notebook and refine task metadata" />
     <MESSAGE value="conistency update for kurmamoto-benchmark-suite, kuramoto-dash-app, and scriber-core" />
     <MESSAGE value="Repo-wide type harmonization and metadata signature standardization across repo" />
@@ -819,7 +828,9 @@
     <MESSAGE value="fix: update CRT channel colors and refresh Problem 17 notebook&#10;&#10;- Map both CRT channels to the orange-yellow palette color&#10;- Update the notebook’s CRT styling imports and execution metadata, refresh reconstruction outputs, and clear stale error outputs" />
     <MESSAGE value="chore: refresh CRT styling and dependency lockfile&#10;&#10;- Assign distinct palette colors to CRT channels and the coprime remainder&#10;- Switch CLI VT-mode import to eigenscribe&#10;- Update the Problem 17 notebook and PyCharm workspace metadata&#10;- Refresh locked versions of scriber-core and related dependencies" />
     <MESSAGE value="  &#10;refactor: refresh CRT styling and migrate CLI VT mode to eigenscribe&#10;&#10;- Assign distinct palette colors to CRT channels and coprime terms, and expand domain styling smoke checks&#10;- Update the Problem 17 coding-task notebook and PyCharm workspace metadata&#10;- Upgrade scriber-core and related packages in uv.lock" />
-    <option name="LAST_COMMIT_MESSAGE" value="  &#10;refactor: refresh CRT styling and migrate CLI VT mode to eigenscribe&#10;&#10;- Assign distinct palette colors to CRT channels and coprime terms, and expand domain styling smoke checks&#10;- Update the Problem 17 coding-task notebook and PyCharm workspace metadata&#10;- Upgrade scriber-core and related packages in uv.lock" />
+    <MESSAGE value="refactor: refresh CRT styling and migrate CLI VT mode to eigenscribe&#10;&#10;- Assign distinct palette colors to CRT channels and coprime terms, and expand domain styling smoke checks&#10;- Update the Problem 17 coding-task notebook and PyCharm workspace metadata&#10;- Upgrade scriber-core and related packages in uv.lock" />
+    <MESSAGE value="refactor: expose CRT channel palette colors&#10;&#10;- Export CRT channel color constants from the CLI styling package&#10;- Update the Problem 17 coding-task notebook&#10;- Refresh PyCharm workspace metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: expose CRT channel palette colors&#10;&#10;- Export CRT channel color constants from the CLI styling package&#10;- Update the Problem 17 coding-task notebook&#10;- Refresh PyCharm workspace metadata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -853,6 +864,6 @@
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$validate_ga_rotor_metrics.coverage" NAME="validate_ga_rotor_metrics Coverage Results" MODIFIED="1795181963574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$types.coverage" NAME="types Coverage Results" MODIFIED="1795202531337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$colors__1_.coverage" NAME="colors (1) Coverage Results" MODIFIED="1795161398688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../scriber-core/src/scriber_core/frontend" />
-    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$domain.coverage" NAME="domain Coverage Results" MODIFIED="1795574993733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
+    <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$domain.coverage" NAME="domain Coverage Results" MODIFIED="1795601939996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/kuramoto/cli/style" />
   </component>
 </project>

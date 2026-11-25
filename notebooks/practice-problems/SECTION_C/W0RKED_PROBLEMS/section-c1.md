@@ -25,35 +25,36 @@ $\mathcal{O}(M+N)$. The following problems build intuition for the mathematical 
     - Bezout's coefficients, $x$ and $y$ - #ff00c3 (`COLOR_PALLETTE["bright_magenta"]`)
 
 ## Problem 17: Chinese Remainder Theorem (CRT) Reconstruction
-**Goal:** Understand how two coprime samplers reconstruct the full signal.
+**Goal:** Understand how two coprime channels reconstruct a frequency index from crossed FFT aliases.
 **Setup:** Suppose you have two samplers:
-  1. Sampler A records every $N=11$-th step.
-  2. Sampler B records every $M=7$-th step.
+  1. Channel M is fast and samples every $M=7$ steps.
+  2. Channel N records every $N=11$-th step.
 
-  - **Lemma:** Since $\gcd{(7,11)}=1$, we can reconstruct any time index $t\in[0,76]$ from the pair of remainders
-  $(t\mod{7}, t\mod{11}$).
+  - **Lemma:** Channel M observes $k\mod{N}$ as $k_n$; Channel N observes $k\mod{M}$ as $k_m$. Since $\gcd{(7,11)}=1$, these residues reconstruct any frequency index $k\in[0,76]$.
+
+  For a coherent fine-grid tone, $f_k=\frac{k}{MN T_S}$ for $k=0,\ldots,MN-1$, where $T_S$ is the base integration timestep. A channel with stride $S$ observes $k\mod{(MN/S)}$.
 
 **Tasks:**
-  1. Suppose Sampler A observes the signal at local index $k_n=5$ (i.e., $t\equiv 5(\mod{11})$) and Sampler B observes the
-  signal at local index $k_m=3$ (i.e., $t\equiv3(\mod{7})$). Use the Bézout coefficients from Problem 16 to reconstruct 
-  $t$.
+  1. Suppose Channel M's FFT peak is $k_n=5$ (i.e., $k\equiv 5(\mod{11})$) and Channel N's FFT peak is $k_m=3$ (i.e., $k\equiv3(\mod{7})$). Use the Bézout coefficients from Problem 16 to reconstruct $k$.
   2. Verify:
-     - $t\mod{11}=5$
-     - $t\mod{7}=3$
+     - $k\mod{11}=5$
+     - $k\mod{7}=3$
   3. Code reference: Look at `coprime_reconstruct_frequency` in `../solvers/coprime.py`. The formula is 
     $$k_\text{true} = (k_m\cdot b \cdot N + k_n \cdot a \cdot M)\mod{(M\cdot N)}$$
     where $(g,a,b) = \operatorname{extended_gcd}(M,N)$.
 
 ### Answers to handwritten problems
 a)
-- **Step 1:** Key insight $$\begin{align*} b\cdot N & \equiv 1\mod{M} \\ b\cdot M & \equiv 0 \mod{M}\end{align*}$$ 
-      and $$\begin{align*} a\cdot M & \equiv 1\mod{N} \\ b\cdot N &\equiv 0\mod{N}\end{align*}$$
+- **Step 1:** Key insight $$\begin{align*} b\cdot N & \equiv 1\mod{M} \\ b\cdot N & \equiv 0 \mod{N}\end{align*}$$
+      and $$\begin{align*} a\cdot M & \equiv 1\mod{N} \\ a\cdot M &\equiv 0\mod{M}\end{align*}$$
 - **Step 2:** "Each term isolates one remainder." $$\begin{align*} \text{term}_1 &= k_m(b\cdot N) = 3(2\cdot11)&=66 
   \\ \text{term}_2 &= k_n(a\cdot M) = 5(-3\cdot 7)&=-105\end{align*}$$
 - **Step 3:** $$\begin{align*}k_\text{true}&=(\text{term}_1 + \text{term}_2)\mod{(M\cdot N)} \\ 
    &= (66+(-105))\mod{77} \\ &= -39 \mod{77} \\ &= 38 \end{align*}$$
 
   $$\boxed{k_\text{true}=38}$$
+
+Here $k_m=3$ is Channel N's FFT peak, and $k_n=5$ is Channel M's FFT peak.
 
 b)
  i. Show that $38\mod{11}=5$:

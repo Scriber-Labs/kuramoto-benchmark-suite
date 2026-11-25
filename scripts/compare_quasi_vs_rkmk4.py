@@ -138,17 +138,17 @@ def benchmark_coprime_drift(method: str) -> dict:
     
     # Compare order parameters from both channels at overlapping points
     # (only at t=0 and t=M*N*dt for coprime M, N)
-    op_a = result.order_parameter_a
-    op_b = result.order_parameter_b
-    
+    op_m = result.order_parameter_m
+    op_n = result.order_parameter_n
+
     # Compute mean order parameter from each channel
-    mean_r_a = float(np.mean(np.abs(op_a)))
-    mean_r_b = float(np.mean(np.abs(op_b)))
-    
+    mean_r_m = float(np.mean(np.abs(op_m)))
+    mean_r_n = float(np.mean(np.abs(op_n)))
+
     return {
-        "mean_r_channel_a": mean_r_a,
-        "mean_r_channel_b": mean_r_b,
-        "channel_discrepancy": abs(mean_r_a - mean_r_b),
+        "mean_r_channel_m": mean_r_m,
+        "mean_r_channel_n": mean_r_n,
+        "channel_discrepancy": abs(mean_r_m - mean_r_n),
         "compression_ratio": result.compression_ratio,
         "total_snapshots": result.total_snapshots,
         "dense_snapshots": result.dense_snapshots,
@@ -233,8 +233,8 @@ def main() -> None:
     for method in methods:
         result = benchmark_coprime_drift(method)
         print(f"\n  {method_labels[method]}:")
-        print(f"    Mean R (Channel A): {result['mean_r_channel_a']:.6f}")
-        print(f"    Mean R (Channel B): {result['mean_r_channel_b']:.6f}")
+        print(f"    Mean R (Channel M): {result['mean_r_channel_m']:.6f}")
+        print(f"    Mean R (Channel N): {result['mean_r_channel_n']:.6f}")
         print(f"    Channel discrepancy: {result['channel_discrepancy']:.2e}")
         print(f"    Compression ratio:   {result['compression_ratio']:.2%}")
         print(f"    Snapshots saved:     {result['total_snapshots']} / {result['dense_snapshots']}")

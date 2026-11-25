@@ -150,14 +150,16 @@ $$ax + by = \gcd(a, b)$$
 
 ## Problem 17: Chinese Remainder Theorem (CRT) Reconstruction
 
-**Goal:** Understand how two coprime samplers reconstruct the full signal.
+**Goal:** Understand how two coprime channels reconstruct a frequency index from crossed FFT aliases.
 
-**Setup:** You have two samplers: Sampler A records every $N=11$-th step, Sampler B records every $M=7$-th step. Since $\gcd(7, 11) = 1$, you can reconstruct any time index $t \in [0, 76]$ from the pair of remainders $(t \bmod 7, t \bmod 11)$.
+**Setup:** Channel M is the fast channel and samples every $M=7$ steps; Channel N samples every $N=11$ steps. A channel sampling every $S$ steps observes $k \bmod (MN/S)$. Thus their FFT aliases are crossed: Channel M observes $k \bmod N$ as $k_n$, while Channel N observes $k \bmod M$ as $k_m$. Since $\gcd(7, 11) = 1$, these residues reconstruct the fine-grid frequency index $k \in [0, 76]$.
+
+For coherent tones, the fine-grid frequency family is $f_k = \frac{k}{MN T_S}$, $k=0,1,\dots,MN-1$, where $T_S$ is the base integration timestep. For $k=38$, Channel M measures $k_n=38\bmod 11=5$ and Channel N measures $k_m=38\bmod 7=3$.
 
 **Tasks:**
-Suppose Sampler A observes the signal at local index $k_n = 5$ (meaning $t \equiv 5 \pmod{11}$) and Sampler B observes at local index $k_m = 3$ (meaning $t \equiv 3 \pmod{7}$).
-1. Use the Bézout coefficients from Problem 16 to reconstruct $t$.
-2. Verify: does $t \bmod 11 = 5$ and $t \bmod 7 = 3$?
+Suppose Channel M's FFT peak is $k_n = 5$ (meaning $k \equiv 5 \pmod{11}$) and Channel N's FFT peak is $k_m = 3$ (meaning $k \equiv 3 \pmod{7}$).
+1. Use the Bézout coefficients from Problem 16 to reconstruct $k$.
+2. Verify: does $k \bmod 11 = 5$ and $k \bmod 7 = 3$?
 3. **Code reference:** Look at `coprime_reconstruct_frequency` in `coprime.py`. The formula is:
 $$k_{\text{true}} = (k_m \cdot b \cdot N + k_n \cdot a \cdot M) \bmod (M \cdot N)$$
 where $(g, a, b) = \text{extended\_gcd}(M, N)$.
@@ -412,7 +414,7 @@ In the Dormand-Prince 5(4) integrator (DOPRI54):
 
 ### Solution 17 (CRT Reconstruction)
 1. From Problem 16: $a = -3$, $b = 2$ for $\gcd(7, 11) = 1$.
-2. $k_{\text{true}} = (k_m \cdot b \cdot N + k_n \cdot a \cdot M) \bmod (M \cdot N) = (3 \cdot 2 \cdot 11 + 5 \cdot (-3) \cdot 7) \bmod 77 = (66 - 105) \bmod 77 = (-39) \bmod 77 = 38$.
+2. $k_{\text{true}} = (k_m \cdot b \cdot N + k_n \cdot a \cdot M) \bmod (M \cdot N) = (3 \cdot 2 \cdot 11 + 5 \cdot (-3) \cdot 7) \bmod 77 = (66 - 105) \bmod 77 = (-39) \bmod 77 = 38$. Here $k_m=3$ is Channel N's FFT peak, and $k_n=5$ is Channel M's FFT peak.
 3. Verification: $38 \bmod 11 = 5$ ✓, $38 \bmod 7 = 3$ ✓.
 
 ### Solution 18 (Why Coprime Matters)

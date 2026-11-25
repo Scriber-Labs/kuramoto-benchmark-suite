@@ -279,24 +279,34 @@ print(qasm_str[:150])
 
 ### 4.4 Sub-Nyquist Coprime Sampling & CRT Reconstruction
 
-Enables exact frequency reconstruction above Nyquist limit via dual $M, N$ stride decimation with $\gcd(M,N)=1$:
+For coherent single tones on the fine grid, dual-stride sampling with $\gcd(M,N)=1$ recovers the frequency index via CRT. The fine-grid family is $f_k = \frac{k}{MN T_S}$ for $k=0,1,\dots,MN-1$, where $T_S$ is the base integration timestep. A channel sampling every $S$ steps observes $k \bmod (MN/S)$: Channel M (stride $M$) yields $k_n=k\bmod N$, and Channel N (stride $N$) yields $k_m=k\bmod M$.
 
 ```python
-from kuramoto.solvers.coprime import CoprimeSamplerWrapper, coprime_reconstruct_frequency
+from kuramoto.solvers.coprime import (
+    CoprimeSamplerWrapper,
+    coprime_reconstruct_frequency,
+    extended_gcd,
+)
 from kuramoto.solvers.rotor import RotorSolver
 
-# Verify CRT reconstruction
-k_true = 45
-k_reconstructed = coprime_reconstruct_frequency(k_m=k_true % 7, k_n=k_true % 11, M=7, N=11)
+# Verify the checked M=7, N=11 example: a=-3, b=2 and k=38.
+M, N = 7, 11
+k_true = 38
+g, a, b = extended_gcd(M, N)
+k_m = k_true % M  # Channel N's FFT peak: k mod M = 3
+k_n = k_true % N  # Channel M's FFT peak: k mod N = 5
+k_reconstructed = coprime_reconstruct_frequency(k_m=k_m, k_n=k_n, M=M, N=N)
+assert (g, a, b) == (1, -3, 2)
 assert k_reconstructed == k_true
+f_k = k_true / (M * N * 0.01)  # T_S = 0.01
 
 # Simulate dual-channel coprime sampling on GA rotor solver
 solver = RotorSolver(n_oscillators=6, seed=42)
-wrapper = CoprimeSamplerWrapper(solver=solver, M=7, N=11, record_phases=True)
+wrapper = CoprimeSamplerWrapper(solver=solver, M=M, N=N, record_phases=True)
 res = wrapper.simulate(K=1.0, dt=0.01, cycles=1)
 
 print(f"Total steps: {res.total_steps}")  # 77
-print(f"Channel A samples: {len(res.t_a)}, Channel B samples: {len(res.t_b)}")
+print(f"Channel M samples: {len(res.t_m)}, Channel N samples: {len(res.t_n)}")
 ```
 
 ---

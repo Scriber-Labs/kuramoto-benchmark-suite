@@ -49,8 +49,8 @@ def cli_divider() -> None:
 
 # Domain-specific extensions — kuramoto-only semantic messages
 from .domain import (
-    CRT_CHANNEL_A_COLOR,
-    CRT_CHANNEL_B_COLOR,
+    CRT_CHANNEL_M_COLOR,
+    CRT_CHANNEL_N_COLOR,
     style_coprime_coeff,
     style_coprime_gcd,
     style_coprime_remainder,
@@ -92,8 +92,8 @@ __all__: list[str] = [
     "cli_gradient",
     "PRESETS",
     # Domain color helpers
-    "CRT_CHANNEL_A_COLOR",
-    "CRT_CHANNEL_B_COLOR",
+    "CRT_CHANNEL_M_COLOR",
+    "CRT_CHANNEL_N_COLOR",
     "style_coprime_term",
     "style_coprime_gcd",
     "style_coprime_coeff",

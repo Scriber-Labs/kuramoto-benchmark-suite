@@ -54,3 +54,20 @@ def test_style_coprime_helpers() -> None:
     assert "7" in style_coprime_term(7)
     assert "1" in style_coprime_gcd(1)
     assert "-3" in style_coprime_coeff(-3)
+
+
+def test_crt_channel_colors_follow_stride_labels() -> None:
+    from kuramoto.cli.style import (
+        CRT_CHANNEL_M_COLOR,
+        CRT_CHANNEL_N_COLOR,
+        hex_to_rgb,
+        style_crt_channel,
+    )
+
+    m_rgb = hex_to_rgb(CRT_CHANNEL_M_COLOR)
+    n_rgb = hex_to_rgb(CRT_CHANNEL_N_COLOR)
+    channel_m = f"\033[38;2;{m_rgb[0]};{m_rgb[1]};{m_rgb[2]}m7\033[0m"
+    channel_n = f"\033[38;2;{n_rgb[0]};{n_rgb[1]};{n_rgb[2]}m11\033[0m"
+
+    assert style_crt_channel(7, "M") == channel_m
+    assert style_crt_channel(11, "N") == channel_n

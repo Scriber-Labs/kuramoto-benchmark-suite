@@ -179,8 +179,8 @@ def test_coprime_sampling_and_reconstruction():
     wrapper = CoprimeSamplerWrapper(solver=solver, M=M, N=N, record_phases=True)
     res = wrapper.simulate(K=1.0, dt=0.01, cycles=1)
     assert res.total_steps == M * N
-    assert len(res.t_a) == (M * N // N) + 1
-    assert len(res.t_b) == (M * N // M) + 1
+    assert len(res.t_m) == (M * N // M) + 1
+    assert len(res.t_n) == (M * N // N) + 1
 
 
 def test_dash_export_pipeline(tmp_path):

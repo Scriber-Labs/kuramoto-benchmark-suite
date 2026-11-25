@@ -92,8 +92,8 @@ subgraph Integrator_Ecosystem["5️⃣ Comprehensive Numerical Integration Schem
     end
 
     subgraph SubNyquist_Schemes["E. Dual-Channel Coprime Sub-Nyquist Sampling"]
-        Coprime_Sampler["CoprimeSamplerWrapper (Dual-rate decimation)<br/>Channels A (stride M) & B (stride N), gcd(M,N)=1"]
-        CRT_Recon["CRT Frequency Reconstruction<br/>coprime_reconstruct_frequency() & Bézout identity"]
+        Coprime_Sampler["CoprimeSamplerWrapper (Dual-rate decimation)<br/>Channels M (stride M) & N (stride N), gcd(M,N)=1"]
+        CRT_Recon["CRT Frequency Reconstruction<br/>Channel M -> k_n = k mod N; Channel N -> k_m = k mod M<br/>f_k = k / (MN T_S), k = 0,...,MN-1"]
     end
 end
 
@@ -214,8 +214,9 @@ The suite organizes numerical integrators into four distinct operational paradig
 
 ### Paradigm E: Dual-Channel Coprime Sub-Nyquist Sampling
 - **Module**: `kuramoto.solvers.coprime` (`CoprimeSamplerWrapper`, `CoprimeSampleResult`)
-- **Sampling Scheme**: Dual sub-Nyquist channels with coprime strides $M$ and $N$ ($\gcd(M, N) = 1$).
-- **Frequency Reconstruction**: Chinese Remainder Theorem (CRT) via extended Euclidean algorithm / Bézout identity (`coprime_reconstruct_frequency`) resolving true unaliased frequency indices $k \in [0, MN-1]$ at reduced sampling storage.
+- **Sampling Scheme**: Dual sub-Nyquist channels named by stride, with coprime $M,N$ ($\gcd(M,N)=1$); Channel M observes $k_n=k\bmod N$, and Channel N observes $k_m=k\bmod M$.
+- **Fine-Grid Frequencies**: For coherent tones, $f_k = k/(MN T_S)$, $k=0,\ldots,MN-1$, where $T_S$ is the base integration timestep. Stride $S$ observes $k\bmod(MN/S)$.
+- **Frequency Reconstruction**: The Chinese Remainder Theorem (CRT) and Bézout coefficients $a,b$ with $aM+bN=1$ give $k=(k_m bN+k_n aM)\bmod(MN)$ via `coprime_reconstruct_frequency`.
 - **Diagnostics**: Spectral drift detection (`detect_spectral_drift`) and phase correlation monitoring.
 
 ---
