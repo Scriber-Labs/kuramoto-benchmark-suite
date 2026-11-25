@@ -156,6 +156,8 @@ $$ax + by = \gcd(a, b)$$
 
 For coherent tones, the fine-grid frequency family is $f_k = \frac{k}{MN T_S}$, $k=0,1,\dots,MN-1$, where $T_S$ is the base integration timestep. For $k=38$, Channel M measures $k_n=38\bmod 11=5$ and Channel N measures $k_m=38\bmod 7=3$.
 
+For $(M,N)=(7,11)$, $(g,a,b)=(1,-3,2)$ satisfies $aM+bN=1$. The verified pairing reconstructs $k=(k_m bN+k_n aM)\bmod(MN)=38$; swapping the aliases gives $47$, not $38$.
+
 **Tasks:**
 Suppose Channel M's FFT peak is $k_n = 5$ (meaning $k \equiv 5 \pmod{11}$) and Channel N's FFT peak is $k_m = 3$ (meaning $k \equiv 3 \pmod{7}$).
 1. Use the Bézout coefficients from Problem 16 to reconstruct $k$.

@@ -50,6 +50,12 @@ def test_coprime_reconstruct_frequency_all_bins():
     g, a, b = extended_gcd(7, 11)
     assert (g, a, b) == (1, -3, 2)
     assert (3 * b * 11 + 5 * a * 7) % 77 == 38
+    assert coprime_reconstruct_frequency(k_m=3, k_n=5, M=7, N=11) == 38
+    swapped_pairing = coprime_reconstruct_frequency(
+        k_m=5, k_n=3, M=7, N=11
+    )
+    assert swapped_pairing == 47
+    assert swapped_pairing != 38
 
     for M, N in [(7, 11), (3, 5), (5, 9), (13, 17)]:
         for true_k in range(M * N):

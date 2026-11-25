@@ -293,12 +293,16 @@ from kuramoto.solvers.rotor import RotorSolver
 M, N = 7, 11
 k_true = 38
 g, a, b = extended_gcd(M, N)
+assert a * M + b * N == 1
 k_m = k_true % M  # Channel N's FFT peak: k mod M = 3
 k_n = k_true % N  # Channel M's FFT peak: k mod N = 5
+assert (k_m, k_n) == (3, 5)
 k_reconstructed = coprime_reconstruct_frequency(k_m=k_m, k_n=k_n, M=M, N=N)
 assert (g, a, b) == (1, -3, 2)
 assert k_reconstructed == k_true
-f_k = k_true / (M * N * 0.01)  # T_S = 0.01
+swapped_pairing = coprime_reconstruct_frequency(k_m=k_n, k_n=k_m, M=M, N=N)
+assert swapped_pairing == 47 and swapped_pairing != k_true
+f_38 = k_true / (M * N * 0.01)  # Evaluate the family at k=38; T_S = 0.01
 
 # Simulate dual-channel coprime sampling on GA rotor solver
 solver = RotorSolver(n_oscillators=6, seed=42)

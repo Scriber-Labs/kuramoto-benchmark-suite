@@ -43,6 +43,8 @@ $\mathcal{O}(M+N)$. The following problems build intuition for the mathematical 
     $$k_\text{true} = (k_m\cdot b \cdot N + k_n \cdot a \cdot M)\mod{(M\cdot N)}$$
     where $(g,a,b) = \operatorname{extended_gcd}(M,N)$.
 
+For $(M,N)=(7,11)$, $(g,a,b)=(1,-3,2)$ satisfies $aM+bN=1$. The pairing $(k_m,k_n)=(3,5)$ reconstructs $38$; swapping the aliases reconstructs $47$, not $38$.
+
 ### Answers to handwritten problems
 a)
 - **Step 1:** Key insight $$\begin{align*} b\cdot N & \equiv 1\mod{M} \\ b\cdot N & \equiv 0 \mod{N}\end{align*}$$
