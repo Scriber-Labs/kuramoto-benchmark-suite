@@ -9,9 +9,13 @@ Date: November 20, 2026
 
 from __future__ import annotations
 
+from typing import Final
+
 from eigenscribe.frontend.colors import COLOR_PALETTE, hex_to_rgb
 
 __all__: list[str] = [
+    "CRT_CHANNEL_A_COLOR",
+    "CRT_CHANNEL_B_COLOR",
     "style_coprime_term",
     "style_coprime_gcd",
     "style_coprime_coeff",
@@ -28,8 +32,10 @@ __all__: list[str] = [
 #   (k_m, k_n)   -> coral_orange
 #   k_true       -> vivid_pink
 #   (a, b)       -> brigh_green
-_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["cerulean_surge"])
-_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["vivid_pink"])
+CRT_CHANNEL_A_COLOR: Final[str] = COLOR_PALETTE["cerulean_surge"]
+CRT_CHANNEL_B_COLOR: Final[str] = COLOR_PALETTE["vivid_pink"]
+_CRT_CHANNEL_A: tuple[int, int, int] = hex_to_rgb(CRT_CHANNEL_A_COLOR)
+_CRT_CHANNEL_B: tuple[int, int, int] = hex_to_rgb(CRT_CHANNEL_B_COLOR)
 _COPRIME_TERM: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["green_jade"])
 _COPRIME_GCD: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["coral_orange"])
 _COPRIME_COEFF: tuple[int, int, int] = hex_to_rgb(COLOR_PALETTE["deep_purple"])
