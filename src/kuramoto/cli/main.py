@@ -11,6 +11,7 @@ Last Updated: November 2026
 from __future__ import annotations
 
 import click
+from eigenscribe.cli.vt_mode import enable_vt_mode
 
 from kuramoto.cli.commands import (
     benchmark,
@@ -29,7 +30,6 @@ from kuramoto.cli.commands import (
     zbw,
 )
 from kuramoto.cli.utils import print_header
-from eigenscribe.cli.vt_mode import enable_vt_mode
 
 __all__: list[str] = ["cli", "main"]
 

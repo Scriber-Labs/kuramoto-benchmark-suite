@@ -24,6 +24,7 @@ dependencies = [
     "clifford>=1.5.1",
     "scriber-core>=1.0.0",
     "psutil>=7.2.2",
+    "ruff>=0.17.6",
 ]
 
 [project.scripts]

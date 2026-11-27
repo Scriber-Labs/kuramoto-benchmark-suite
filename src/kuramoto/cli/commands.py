@@ -18,6 +18,14 @@ from typing import Final
 
 import click
 import numpy as np
+from eigenscribe.cli.messaging import (
+    ansi_256,
+    cli_error,
+    cli_info,
+    cli_success,
+    cli_warning,
+    supports_256_color,
+)
 
 from kuramoto.analysis.spectral import (
     compute_fourier_coefficients,
@@ -39,14 +47,6 @@ from kuramoto.cli.style import (
     cli_network,
     cli_quantum,
     cli_rotor,
-)
-from eigenscribe.cli.messaging import (
-    ansi_256,
-    cli_error,
-    cli_info,
-    cli_success,
-    cli_warning,
-    supports_256_color,
 )
 from kuramoto.cli.utils import DEFAULT_DEMO_PATH, PLOT_DIR, ensure_plot_dir, print_table
 from kuramoto.config import parse_simulation_config

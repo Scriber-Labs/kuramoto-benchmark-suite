@@ -11,6 +11,9 @@ Date: November 2026
 
 from __future__ import annotations
 
+import os
+import sys
+
 # Re-exports from scriber_core — canonical messaging, palettes, and color utilities
 from eigenscribe.cli.messaging import (
     EIGENSCRIBE_PALETTE,
@@ -26,9 +29,20 @@ from eigenscribe.cli.messaging import (
     cli_success,
     cli_warning,
     multi_gradient,
-    supports_256_color,
 )
-from eigenscribe.frontend.colors import COLOR_PALETTE, Color, RGB, hex_to_rgb
+from eigenscribe.frontend.colors import COLOR_PALETTE, RGB, Color, hex_to_rgb
+
+from .domain import (
+    CRT_CHANNEL_M_COLOR,
+    CRT_CHANNEL_N_COLOR,
+    style_coprime_coeff,
+    style_coprime_gcd,
+    style_coprime_remainder,
+    style_coprime_term,
+    style_crt_channel,
+)
+from .gradients import PRESETS, cli_gradient
+from .messages import cli_coprime, cli_network, cli_quantum, cli_rotor, cli_zbw
 
 
 # Local implementations for functions not yet in scriber_core
@@ -47,27 +61,23 @@ def cli_divider() -> None:
     import click
     click.secho(" ─" * 25, fg="bright_white")
 
-# Domain-specific extensions — kuramoto-only semantic messages
-from .domain import (
-    CRT_CHANNEL_M_COLOR,
-    CRT_CHANNEL_N_COLOR,
-    style_coprime_coeff,
-    style_coprime_gcd,
-    style_coprime_remainder,
-    style_coprime_term,
-    style_crt_channel,
-)
-from .gradients import (
-    PRESETS,
-    cli_gradient,
-)
-from .messages import (
-    cli_coprime,
-    cli_network,
-    cli_quantum,
-    cli_rotor,
-    cli_zbw,
-)
+def supports_256_color() -> bool:
+    """Check whether the current terminal supports 256-color ANSI output."""
+    if os.environ.get("NO_COLOR") or os.environ.get("TERM") == "dumb":
+        return False
+    if not bool(getattr(sys.stdout, "isatty", lambda: False)()):
+        return False
+    if sys.platform == "win32":
+        return True
+    term = os.environ.get("TERM", "")
+    colorterm = os.environ.get("COLORTERM", "")
+    return (
+        "256color" in term
+        or "xterm" in term
+        or "truecolor" in colorterm
+        or "24bit" in colorterm
+    )
+
 
 # Legacy alias for backward compatibility
 ANSI_256_PALETTE = EIGENSCRIBE_PALETTE

@@ -36,6 +36,7 @@ PRESETS: Final[dict[str, tuple[str, ...]]] = {
         COLOR_PALETTE["midwest_indigo"],
         COLOR_PALETTE["node-7"],
     ),
+    "electric": GRADIENT_PRESETS["electric"],
     "tse-gradient-1": (
         COLOR_PALETTE["electric_lagoon"],
         COLOR_PALETTE["reef_cyan"],

@@ -10,8 +10,6 @@ Date: November 20, 2026
 
 from __future__ import annotations
 
-from eigenscribe.cli.messaging import cli_message as _cli_message
-
 __all__: list[str] = [
     "cli_network",
     "cli_quantum",
@@ -19,26 +17,6 @@ __all__: list[str] = [
     "cli_zbw",
     "cli_coprime",
 ]
-
-
-# -----------------------------------------------------------------------------------------------------------
-# 0️⃣ / 🎭 Domain-specific style map extensions
-# -----------------------------------------------------------------------------------------------------------
-
-# Domain-specific levels map to Eigenscribe palette keys
-_DOMAIN_STYLE_MAP: dict[str, str] = {
-    "network": "eigen_purple",
-    "quantum": "eigen_cyan",
-    "rotor": "eigen_accent_green",
-    "zbw": "eigen_accent_amber",
-    "coprime": "eigen_accent_magenta",
-}
-
-
-def _domain_message(msg: str, level: str, bold: bool = False) -> None:
-    """Print a styled message using the domain-specific color palette."""
-    color_key = _DOMAIN_STYLE_MAP.get(level, "eigen_cyan")
-    _cli_message(msg, level="info", bold=bold)  # fallback to info level; color applied via ansi_256
 
 
 # -----------------------------------------------------------------------------------------------------------

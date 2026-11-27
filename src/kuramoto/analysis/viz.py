@@ -25,11 +25,11 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 import seaborn as sns
+from eigenscribe.frontend import COLOR_PALETTE
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.font_manager import findSystemFonts
 from matplotlib.text import Text
 from numpy.typing import NDArray
-from eigenscribe.frontend import COLOR_PALETTE
 
 from kuramoto.utils import get_rng
 
