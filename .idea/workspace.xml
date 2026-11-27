@@ -16,17 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3075e-b2ac-4913-8de3-e75bf968c6d6" name="Changes" comment="build: add Ruff dependency and refine CLI styling&#10;&#10;- Add Ruff to project dependencies and lockfile&#10;- Restore local terminal 256-color detection, add the electric gradient preset, and remove unused domain messaging code&#10;- Clean up imports and formatting, and refresh PyCharm workspace metadata">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/compare_quasi_vs_rkmk4.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/compare_quasi_vs_rkmk4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/analysis/viz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/commands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/gradients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/style/messages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/kuramoto/cli/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
     </list>
     <list id="72ccbe0a-df50-4b75-9fa9-163f6ffa9b4f" name="77777777777" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,61 +64,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.568673728189847" />
-      <entry key="MS500" value="3.810822528814968" />
-      <entry key="S2" value="6.400946639594846" />
-      <entry key="S5" value="7.295198489740164" />
-      <entry key="S10" value="7.70763917118118" />
-      <entry key="S30" value="9.937262683320377" />
-      <entry key="S60" value="14.843797685025143" />
-      <entry key="M2" value="27.939508189232015" />
-      <entry key="M5" value="60.615877506687276" />
-      <entry key="M10" value="98.78361564624407" />
-      <entry key="M15" value="128.39586075594897" />
-      <entry key="M30" value="201.9601363650247" />
-      <entry key="H1" value="311.75094329838555" />
-      <entry key="H2" value="494.4812045687826" />
-      <entry key="H4" value="1220.9036755843686" />
-      <entry key="D1" value="9125.889159296552" />
-      <entry key="W1" value="29707.929600492742" />
+      <entry key="MS100" value="1.0098344985487835" />
+      <entry key="MS500" value="1.9185581040651836" />
+      <entry key="S2" value="5.0707867867804906" />
+      <entry key="S5" value="8.211504133494623" />
+      <entry key="S10" value="10.382002385357417" />
+      <entry key="S30" value="14.39521086372552" />
+      <entry key="S60" value="20.199286170156043" />
+      <entry key="M2" value="33.76709828840368" />
+      <entry key="M5" value="71.12292956897647" />
+      <entry key="M10" value="120.55107512723774" />
+      <entry key="M15" value="159.93205181599978" />
+      <entry key="M30" value="250.69929994671256" />
+      <entry key="H1" value="377.2712736282991" />
+      <entry key="H2" value="572.6096535466784" />
+      <entry key="H4" value="1289.6915344245429" />
+      <entry key="D1" value="9181.709228230995" />
+      <entry key="W1" value="29800.76071575254" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="7.673829055446999E-112" />
-      <entry key="S5" value="3.581004346942203E-45" />
-      <entry key="S10" value="5.984149352198864E-23" />
-      <entry key="S30" value="3.9114172016166984E-8" />
-      <entry key="S60" value="1.977732442021448E-4" />
-      <entry key="M2" value="0.014077761929563047" />
-      <entry key="M5" value="0.19327773170529486" />
-      <entry key="M10" value="0.5340390170353131" />
-      <entry key="M15" value="0.7928966328769278" />
-      <entry key="M30" value="1.228637919103581" />
-      <entry key="H1" value="1.5929189045337113" />
-      <entry key="H2" value="3.3034828039432376" />
-      <entry key="H4" value="17.280238104307035" />
-      <entry key="D1" value="180.01752731419745" />
-      <entry key="W1" value="408.5930896293151" />
+      <entry key="MS100" value="1.4480877211740944E-137" />
+      <entry key="MS500" value="4.287054199985788E-28" />
+      <entry key="S2" value="1.4389302529234243E-7" />
+      <entry key="S5" value="0.001833225532962887" />
+      <entry key="S10" value="0.04281618533628511" />
+      <entry key="S30" value="0.35115355620448796" />
+      <entry key="S60" value="0.6285902912805604" />
+      <entry key="M2" value="0.9892131071282335" />
+      <entry key="M5" value="1.6822028463433174" />
+      <entry key="M10" value="2.340989128096938" />
+      <entry key="M15" value="2.7762053167399325" />
+      <entry key="M30" value="3.52321889114638" />
+      <entry key="H1" value="4.1551053194614775" />
+      <entry key="H2" value="5.927975216983934" />
+      <entry key="H4" value="19.467869286252427" />
+      <entry key="D1" value="181.65191362919003" />
+      <entry key="W1" value="411.1502261301681" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.476589079673445" />
-      <entry key="MS500" value="3.762788927552865" />
-      <entry key="S2" value="6.37954037838498" />
-      <entry key="S5" value="7.285304194335778" />
-      <entry key="S10" value="7.70237792642314" />
-      <entry key="S30" value="9.934872591802444" />
-      <entry key="S60" value="14.841770120563444" />
-      <entry key="M2" value="27.95068362689282" />
-      <entry key="M5" value="60.805626135868955" />
-      <entry key="M10" value="99.31393729947335" />
-      <entry key="M15" value="129.18514179442116" />
-      <entry key="M30" value="203.18563057727192" />
-      <entry key="H1" value="313.3413190207319" />
-      <entry key="H2" value="497.7807230741407" />
-      <entry key="H4" value="1238.1710061217836" />
-      <entry key="D1" value="9305.885168620123" />
-      <entry key="W1" value="30116.51171480641" />
+      <entry key="MS100" value="0.9684509021477736" />
+      <entry key="MS500" value="1.8638284997460361" />
+      <entry key="S2" value="5.016839872748314" />
+      <entry key="S5" value="8.179864769105535" />
+      <entry key="S10" value="10.386955300679137" />
+      <entry key="S30" value="14.590843799157534" />
+      <entry key="S60" value="20.609649096750072" />
+      <entry key="M2" value="34.5470253140633" />
+      <entry key="M5" value="72.66990920780422" />
+      <entry key="M10" value="122.80982759410439" />
+      <entry key="M15" value="162.6488925459542" />
+      <entry key="M30" value="254.18952190650597" />
+      <entry key="H1" value="381.4083118924184" />
+      <entry key="H2" value="578.5258948839382" />
+      <entry key="H4" value="1309.1429766354856" />
+      <entry key="D1" value="9363.33909901503" />
+      <entry key="W1" value="30211.8998801397" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -401,14 +391,6 @@
       <workItem from="1768327246371" duration="1009000" />
       <workItem from="1768328567233" duration="420000" />
       <workItem from="1795458671947" duration="5554000" />
-    </task>
-    <task id="LOCAL-00051" summary="Removed `data/failure_modes.ipynb` notebook.">
-      <option name="closed" value="true" />
-      <created>1792769953718</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1792769953718</updated>
     </task>
     <task id="LOCAL-00052" summary="Removed `agent-workspace` submodule, replaced with `.scriber-core`. Removed `utils.py` and updated RNG utilities in `model.py`, `commands.py`, `rotor.py`, and `spectral.py`. Updated notebook execution timestamps and adjusted CLI styling references.">
       <option name="closed" value="true" />
@@ -794,14 +776,21 @@
       <option name="project" value="LOCAL" />
       <updated>1795612717831</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="build: add Ruff dependency and refine CLI styling&#10;&#10;- Add Ruff to project dependencies and lockfile&#10;- Restore local terminal 256-color detection, add the electric gradient preset, and remove unused domain messaging code&#10;- Clean up imports and formatting, and refresh PyCharm workspace metadata">
+      <option name="closed" value="true" />
+      <created>1795757696564</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1795757696565</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add gold standard css template and preview" />
     <MESSAGE value="add cli user guide and update demo notebook" />
     <MESSAGE value="Update scriber-core submodule URL and clean up CI&#10;&#10;- Change scriber-core submodule URL from eigenscribe to The-Scriber-Experience&#10;- Remove Eigenscribe Doctor diagnostics step from CI pipeline&#10;- Fix TSE module source folder configuration in IDE settings" />
     <MESSAGE value="Add scriber-core as a core dependency&#10;&#10;- Require scriber-core&gt;=1.0.0 in pyproject.toml&#10;- Sync uv.lock with new dependency and its transitive packages" />
@@ -826,7 +815,8 @@
     <MESSAGE value="refactor: align coprime sampling channels with stride labels&#10;&#10;- Rename sampler streams and CRT styling from channels A/B to stride-based M/N labels, and clarify the alias mapping and fine-grid frequency reconstruction&#10;- Correct FFT alias estimation and document CRT residual and drift diagnostic semantics&#10;- Update CRT visualizations, tests, and usage examples for the channel naming and reconstruction behavior&#10;- Refresh the Problem 17 notebook, practice-problem guides, research architecture docs, and PyCharm workspace metadata" />
     <MESSAGE value="docs: clarify coprime CRT alias pairing&#10;&#10;- Explain the Bézout coefficients and correct alias ordering in the practice-problem guides and user guide&#10;- Add a regression assertion that swapped aliases reconstruct 47 rather than 38&#10;- Update the Problem 17 notebook explanation and execution metadata" />
     <MESSAGE value="refactor: update eigenscribe styling references&#10;&#10;- Use the `aurora` gradient and `eigenscribe` preset in gradient smoke checks&#10;- Import semantic CLI colors from `eigenscribe`&#10;- Refresh Problem 17 notebook execution metadata and PyCharm workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update eigenscribe styling references&#10;&#10;- Use the `aurora` gradient and `eigenscribe` preset in gradient smoke checks&#10;- Import semantic CLI colors from `eigenscribe`&#10;- Refresh Problem 17 notebook execution metadata and PyCharm workspace settings" />
+    <MESSAGE value="build: add Ruff dependency and refine CLI styling&#10;&#10;- Add Ruff to project dependencies and lockfile&#10;- Restore local terminal 256-color detection, add the electric gradient preset, and remove unused domain messaging code&#10;- Clean up imports and formatting, and refresh PyCharm workspace metadata" />
+    <option name="LAST_COMMIT_MESSAGE" value="build: add Ruff dependency and refine CLI styling&#10;&#10;- Add Ruff to project dependencies and lockfile&#10;- Restore local terminal 256-color detection, add the electric gradient preset, and remove unused domain messaging code&#10;- Clean up imports and formatting, and refresh PyCharm workspace metadata" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kuramoto_benchmark_suite$crt_stride_visualization.coverage" NAME="crt_stride_visualization Coverage Results" MODIFIED="1795533161583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notebooks/practice-problems/SECTION_C/CODING_TASKS" />
